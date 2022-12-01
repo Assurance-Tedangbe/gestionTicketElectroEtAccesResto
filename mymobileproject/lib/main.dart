@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/home.dart';
 import 'package:mymobileproject/UI/pages/login.dart';
 import 'package:mymobileproject/UI/pages/settings.dart';
+import 'package:mymobileproject/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +24,11 @@ class RootView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.lightBlue),
+      theme: ThemeData(
+        // primarySwatch: Colors.lightBlue,
+        primaryColor: kPrimaryColor,
+        // scaffoldBackgroundColor: secondColor
+      ),
       routes: {
         "/home": (context) => const HomePage(),
         "/login": (context) => const LoginPage(),
