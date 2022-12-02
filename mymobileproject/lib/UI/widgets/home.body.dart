@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mymobileproject/UI/pages/login.dart';
 import 'package:mymobileproject/UI/widgets/home.body.background.dart';
 import 'package:mymobileproject/UI/widgets/home.body.roundedButton.dart';
-import 'package:mymobileproject/constants.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -29,7 +28,12 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.03),
             RoundedButton(
               text: "Se connecter",
-              press: () {},
+              press: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const LoginPage();
+                }));
+              },
+              // Navigator.pushNamed(context, "/login");
               textColor: Colors.black,
               color: Colors.white,
             ),
