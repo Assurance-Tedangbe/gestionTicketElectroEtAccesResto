@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/home.body.roundedButton.dart';
 import 'package:mymobileproject/UI/widgets/login.body.background.dart';
+import 'package:mymobileproject/UI/widgets/login.body.checkaccount.dart';
 import 'package:mymobileproject/UI/widgets/login.body.roundedinputfield.dart';
 import 'package:mymobileproject/UI/widgets/login.body.roundedpasswordfield.dart';
+import 'package:mymobileproject/constants.dart';
 
 class Body extends StatelessWidget {
   const Body({
@@ -14,7 +17,6 @@ class Body extends StatelessWidget {
     return Background(
       child: Column(
         children: <Widget>[
-          //  SizedBox(height: size.height * 0.03),
           const Image(
             image: AssetImage("images/login.jpg"),
             fit: BoxFit.cover,
@@ -28,6 +30,11 @@ class Body extends StatelessWidget {
           RoundedPasswordField(
             onChanged: (value) {},
           ),
+          RoundedButton(text: "Se connecter", press: () {}),
+          SizedBox(height: size.height * 0.02),
+          CheckAccount(
+            press: () {},
+          )
         ],
       ),
     );
