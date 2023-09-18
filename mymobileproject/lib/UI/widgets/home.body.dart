@@ -15,10 +15,20 @@ class Body extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            /* const Text(
-              "BIENVENUE AU RESTAURANT mon plat preferé",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-            ),*/
+            Container(
+              alignment: Alignment.center,
+              height: size.height * 0.1,
+              width: size.width * 0.5,
+              child: const Text(
+                "Restaurant My favorite food",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+              color: Colors.blue,
+            ),
             SizedBox(height: size.height * 0.03),
             const Image(
               image: AssetImage("images/restaurantlogo.png"),
