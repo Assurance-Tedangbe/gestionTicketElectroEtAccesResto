@@ -20,7 +20,7 @@ class CheckAccount extends StatelessWidget {
           style: const TextStyle(color: kPrimaryColor, fontSize: 15),
         ),
         GestureDetector(
-          onTap: (() {}),
+          onTap: () {},
           child: Text(
             login ? " S'inscrire" : "Se connecter",
             style: const TextStyle(
