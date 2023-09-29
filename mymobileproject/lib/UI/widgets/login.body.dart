@@ -40,23 +40,29 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Background(
-        child: SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 130),
+      //  child: SingleChildScrollView(
+      // physics: const AlwaysScrollableScrollPhysics(),
+      //  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 130),
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 120),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
+            Icon(
+              Icons.lock_open,
+              color: Colors.blue,
+              size: 70,
+            ),
+            /*   const Text(
               "Se Connecter",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 35,
                   color: Color.fromRGBO(30, 144, 255, 0.9)),
-            ),
-            SizedBox(height: size.height * 0.07),
+            ),*/
+            //    SizedBox(height: size.height * 0.07),
+            SizedBox(height: 15),
             manageEmail(),
             SizedBox(height: 20),
             managePassword(),
@@ -71,7 +77,8 @@ class _BodyState extends State<Body> {
       /* CheckAccount(
             press: () {},
           )*/
-    ));
+    );
+    // );
   }
 }
 
