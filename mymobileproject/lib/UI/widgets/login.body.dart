@@ -28,8 +28,7 @@ class _BodyState extends State<Body> {
         ),
         const Text(
           'Se souvenir',
-          style: TextStyle(
-              color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 20),
+          style: TextStyle(color: Colors.black, fontSize: 20),
         )
       ]),
     );
@@ -39,9 +38,6 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Background(
-      //  child: SingleChildScrollView(
-      // physics: const AlwaysScrollableScrollPhysics(),
-      //  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 130),
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 120),
@@ -53,14 +49,6 @@ class _BodyState extends State<Body> {
               color: Colors.blue,
               size: 70,
             ),
-            /*   const Text(
-              "Se Connecter",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 35,
-                  color: Color.fromRGBO(30, 144, 255, 0.9)),
-            ),*/
-            //    SizedBox(height: size.height * 0.07),
             const SizedBox(height: 15),
             manageEmail(),
             const SizedBox(height: 15),
@@ -85,21 +73,22 @@ Widget manageEmail() {
       const Text(
         'Email',
         style: TextStyle(
-          color: Colors.blue,
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
+          color: Colors.black,
+          fontSize: 20,
+          //   fontWeight: FontWeight.bold,
         ),
       ),
       const SizedBox(height: 10),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
-            color: Colors.blue,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               const BoxShadow(
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
-            ]),
+            ],
+            border: Border.all(color: Colors.blue, width: 3)),
         height: 60,
         child: const TextField(
           keyboardType: TextInputType.emailAddress,
@@ -127,21 +116,22 @@ Widget managePassword() {
       const Text(
         'Mot de passe',
         style: TextStyle(
-          color: Colors.blue,
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
+          color: Colors.black,
+          fontSize: 20,
+          //    fontWeight: FontWeight.bold,
         ),
       ),
       const SizedBox(height: 10),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
-            color: Colors.blue,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               const BoxShadow(
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
-            ]),
+            ],
+            border: Border.all(color: Colors.blue, width: 3)),
         height: 60,
         child: const TextField(
           //  keyboardType: TextInputType.emailAddress,
@@ -171,7 +161,7 @@ Widget manageForgotPasswordBtn() {
       child: const Text(
         'Mot de passe oublié?',
         style: TextStyle(
-            color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 18),
+            color: Colors.blue, fontWeight: FontWeight.w800, fontSize: 17),
       ),
     ),
   );
@@ -204,7 +194,9 @@ Widget checkSignUpBtn() {
         TextSpan(
             text: "N'avez vous pas de compte?",
             style: TextStyle(
-                color: Colors.blue, fontSize: 15, fontWeight: FontWeight.w500)),
+                color: Colors.black,
+                fontSize: 15,
+                fontWeight: FontWeight.w500)),
         TextSpan(
             text: "  S'inscrire",
             style: TextStyle(
