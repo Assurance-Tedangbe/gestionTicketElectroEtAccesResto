@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/constants.dart';
 
+//CheckAccount(    press: () {},  )
 class CheckAccount extends StatelessWidget {
   final bool login;
   final Function press;

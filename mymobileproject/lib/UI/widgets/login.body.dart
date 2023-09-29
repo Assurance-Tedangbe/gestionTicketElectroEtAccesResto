@@ -69,9 +69,7 @@ class _BodyState extends State<Body> {
             rememberMe(),
             const SizedBox(height: 15),
             manageLoginBtn(),
-            CheckAccount(
-              press: () {},
-            )
+            checkSignUpBtn(),
           ],
         ),
       ),
@@ -196,4 +194,22 @@ Widget manageLoginBtn() {
               color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ));
+}
+
+Widget checkSignUpBtn() {
+  return GestureDetector(
+    onTap: () => print("Sign up pressed"),
+    child: RichText(
+      text: const TextSpan(children: [
+        TextSpan(
+            text: "N'avez vous pas de compte?",
+            style: TextStyle(
+                color: Colors.blue, fontSize: 15, fontWeight: FontWeight.w500)),
+        TextSpan(
+            text: "  S'inscrire",
+            style: TextStyle(
+                color: Colors.blue, fontSize: 15, fontWeight: FontWeight.bold))
+      ]),
+    ),
+  );
 }
