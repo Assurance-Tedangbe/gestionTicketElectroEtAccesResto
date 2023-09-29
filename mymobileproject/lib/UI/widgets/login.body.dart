@@ -27,7 +27,7 @@ class _BodyState extends State<Body> {
                 });
               }),
         ),
-        Text(
+        const Text(
           'Se souvenir',
           style: TextStyle(
               color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 20),
@@ -49,7 +49,7 @@ class _BodyState extends State<Body> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(
+            const Icon(
               Icons.lock_open,
               color: Colors.blue,
               size: 70,
@@ -62,13 +62,14 @@ class _BodyState extends State<Body> {
                   color: Color.fromRGBO(30, 144, 255, 0.9)),
             ),*/
             //    SizedBox(height: size.height * 0.07),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             manageEmail(),
-            SizedBox(height: 20),
+            const SizedBox(height: 15),
             managePassword(),
             manageForgotPasswordBtn(),
             rememberMe(),
-            SizedBox(height: 20),
+            const SizedBox(height: 15),
+            manageLoginBtn()
             // RoundedButton(text: "Se connecter", press: () {}),
           ],
         ),
@@ -86,7 +87,7 @@ Widget manageEmail() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      Text(
+      const Text(
         'Email',
         style: TextStyle(
           color: Colors.blue,
@@ -94,18 +95,18 @@ Widget manageEmail() {
           fontWeight: FontWeight.bold,
         ),
       ),
-      SizedBox(height: 10),
+      const SizedBox(height: 10),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
             color: Colors.blue,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
-              BoxShadow(
+              const BoxShadow(
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: TextField(
+        child: const TextField(
           keyboardType: TextInputType.emailAddress,
           style: TextStyle(
             color: Colors.black87,
@@ -128,7 +129,7 @@ Widget managePassword() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      Text(
+      const Text(
         'Mot de passe',
         style: TextStyle(
           color: Colors.blue,
@@ -136,18 +137,18 @@ Widget managePassword() {
           fontWeight: FontWeight.bold,
         ),
       ),
-      SizedBox(height: 10),
+      const SizedBox(height: 10),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
             color: Colors.blue,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
-              BoxShadow(
+              const BoxShadow(
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ]),
         height: 60,
-        child: TextField(
+        child: const TextField(
           //  keyboardType: TextInputType.emailAddress,
           obscureText: true,
           style: TextStyle(
@@ -172,11 +173,29 @@ Widget manageForgotPasswordBtn() {
     alignment: Alignment.centerRight,
     child: TextButton(
       onPressed: () => print("Forgot password pressed"),
-      child: Text(
+      child: const Text(
         'Mot de passe oublié?',
         style: TextStyle(
             color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 18),
       ),
     ),
   );
+}
+
+Widget manageLoginBtn() {
+  return Container(
+      padding: const EdgeInsets.symmetric(vertical: 25),
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () => print('Login pressed'),
+        child: const Text('Se connecter'),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.blue,
+          side: const BorderSide(color: Colors.cyanAccent, width: 5),
+          shape: const BeveledRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15))),
+          textStyle: const TextStyle(
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+      ));
 }
