@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/constants.dart';
 
+// RoundedButton(text: "Se connecter", press: () {}), // à placer là où on veut l'appeler
+
 class RoundedButton extends StatelessWidget {
   final String text;
   final Function press;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/home.body.roundedButton.dart';
 import 'package:mymobileproject/UI/widgets/login.body.background.dart';
 import 'package:mymobileproject/UI/widgets/login.body.checkaccount.dart';
 
@@ -69,15 +68,13 @@ class _BodyState extends State<Body> {
             manageForgotPasswordBtn(),
             rememberMe(),
             const SizedBox(height: 15),
-            manageLoginBtn()
-            // RoundedButton(text: "Se connecter", press: () {}),
+            manageLoginBtn(),
+            CheckAccount(
+              press: () {},
+            )
           ],
         ),
       ),
-
-      /* CheckAccount(
-            press: () {},
-          )*/
     );
     // );
   }
@@ -186,14 +183,15 @@ Widget manageLoginBtn() {
   return Container(
       padding: const EdgeInsets.symmetric(vertical: 25),
       width: double.infinity,
+      height: 100,
       child: ElevatedButton(
         onPressed: () => print('Login pressed'),
         child: const Text('Se connecter'),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blue,
-          side: const BorderSide(color: Colors.cyanAccent, width: 5),
+          //side: const BorderSide(color: Colors.cyanAccent, width: 1),
           shape: const BeveledRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15))),
+              borderRadius: BorderRadius.all(Radius.circular(5))),
           textStyle: const TextStyle(
               color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
         ),
