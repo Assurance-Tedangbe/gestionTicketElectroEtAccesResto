@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/login.body.background.dart';
-import 'package:mymobileproject/UI/widgets/login.body.checkaccount.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -84,8 +83,8 @@ Widget manageEmail() {
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              const BoxShadow(
+            boxShadow: const [
+              BoxShadow(
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ],
             border: Border.all(color: Colors.blue, width: 3)),
