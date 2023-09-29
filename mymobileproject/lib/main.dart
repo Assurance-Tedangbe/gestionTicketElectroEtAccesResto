@@ -31,7 +31,7 @@ class RootView extends StatelessWidget {
       ),
       routes: {
         "/home": (context) => const HomePage(),
-        "/login": (context) => const LoginPage(),
+        "/login": (context) => LoginPage(),
         "/settings": (context) => const SettingsPage(),
       },
       initialRoute: "/home",

@@ -20,7 +20,7 @@ class Body extends StatelessWidget {
               height: size.height * 0.1,
               width: size.width * 0.5,
               child: const Text(
-                "Restaurant My favorite food",
+                "My favorite food",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25,
@@ -40,7 +40,7 @@ class Body extends StatelessWidget {
               text: "Se connecter",
               press: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const LoginPage();
+                  return LoginPage();
                 }));
               },
               // Navigator.pushNamed(context, "/login");
