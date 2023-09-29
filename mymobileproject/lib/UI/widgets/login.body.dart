@@ -97,10 +97,10 @@ Widget manageEmail() {
           decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.email, color: Colors.black),
+              prefixIcon: Icon(Icons.email, color: Colors.blue),
               hintText: 'Email',
               hintStyle: TextStyle(
-                color: Colors.black,
+                color: Colors.blue,
               )),
         ),
       )
@@ -141,10 +141,10 @@ Widget managePassword() {
           decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.lock, color: Colors.black),
+              prefixIcon: Icon(Icons.lock, color: Colors.blue),
               hintText: 'Mot de passe',
               hintStyle: TextStyle(
-                color: Colors.black,
+                color: Colors.blue,
               )),
         ),
       )
