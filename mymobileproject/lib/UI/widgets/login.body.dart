@@ -139,13 +139,18 @@ Widget managePassword() {
             color: Colors.black87,
           ),
           decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.lock, color: Colors.blue),
-              hintText: 'Mot de passe',
-              hintStyle: TextStyle(
-                color: Colors.blue,
-              )),
+            contentPadding: EdgeInsets.only(top: 14),
+            prefixIcon: Icon(Icons.lock, color: Colors.blue),
+            hintText: 'Mot de passe',
+            hintStyle: TextStyle(
+              color: Colors.blue,
+            ),
+            suffixIcon: Icon(
+              Icons.visibility,
+              color: Colors.blue,
+            ),
+            border: InputBorder.none,
+          ),
         ),
       )
     ],
