@@ -46,7 +46,7 @@ class MyDrawer extends StatelessWidget {
       },
       {
         "title": "Créer compte",
-        "route": "/addAccount",
+        "route": "/sign up",
         "leadingIcon": Icons.person_add,
         "trailingIcon": Icons.arrow_forward
       },
