@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/login.body.background.dart';
+import 'package:mymobileproject/UI/widgets/background.dart';
 
 class Body extends StatefulWidget {
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/home.dart';
 import 'package:mymobileproject/UI/pages/login.dart';
+import 'package:mymobileproject/UI/pages/loginout.dart';
 import 'package:mymobileproject/UI/pages/settings.dart';
 import 'package:mymobileproject/UI/pages/signup.dart';
 import 'package:mymobileproject/constants.dart';
@@ -35,6 +36,7 @@ class RootView extends StatelessWidget {
         "/login": (context) => LoginPage(),
         "/sign up": (context) => SignUpPage(),
         "/settings": (context) => const SettingsPage(),
+        "/log out": (context) => LogOut(),
       },
       initialRoute: "/home",
     );

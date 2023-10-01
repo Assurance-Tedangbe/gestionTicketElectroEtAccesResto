@@ -12,7 +12,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: AppBar(title: Text('Créer un compte')),
+        appBar: AppBar(title: const Text('Se Connecter')),
         body: Body());
   }
 }

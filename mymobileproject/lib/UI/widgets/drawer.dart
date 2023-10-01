@@ -64,7 +64,7 @@ class MyDrawer extends StatelessWidget {
       },
       {
         "title": "Deconnexion",
-        "route": "/logout",
+        "route": "/log out",
         "leadingIcon": Icons.logout,
         "trailingIcon": Icons.arrow_forward
       }

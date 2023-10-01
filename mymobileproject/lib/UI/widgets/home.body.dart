@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/login.dart';
-import 'package:mymobileproject/UI/widgets/home.body.background.dart';
+import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/home.body.roundedButton.dart';
 
 class Body extends StatelessWidget {
