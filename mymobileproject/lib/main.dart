@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/activateAccount.dart';
+import 'package:mymobileproject/UI/pages/agentInterface.dart';
+import 'package:mymobileproject/UI/pages/deactivateAccount.dart';
 import 'package:mymobileproject/UI/pages/home.dart';
 import 'package:mymobileproject/UI/pages/login.dart';
 import 'package:mymobileproject/UI/pages/loginout.dart';
+import 'package:mymobileproject/UI/pages/porterInterface.dart';
 import 'package:mymobileproject/UI/pages/settings.dart';
 import 'package:mymobileproject/UI/pages/signup.dart';
+import 'package:mymobileproject/UI/pages/studentInterface.dart';
+import 'package:mymobileproject/UI/pages/updateProfile.dart';
 import 'package:mymobileproject/constants.dart';
 
 void main() {
@@ -32,10 +38,16 @@ class RootView extends StatelessWidget {
         // scaffoldBackgroundColor: secondColor
       ),
       routes: {
-        "/home": (context) => const HomePage(),
+        "/home": (context) => HomePage(),
         "/login": (context) => LoginPage(),
         "/sign up": (context) => SignUpPage(),
-        "/settings": (context) => const SettingsPage(),
+        "/activateAccount": (context) => ActivateAccount(),
+        "/etudiant": (context) => StudentInterface(),
+        "/updateProfile": (context) => UpdateProfile(),
+        "/portier": (context) => PorterInterface(),
+        "/vendeur": (context) => AgentInterface(),
+        "/deactivateAccount": (context) => DeactivateAccount(),
+        "/settings": (context) => SettingsPage(),
         "/log out": (context) => LogOut(),
       },
       initialRoute: "/home",

@@ -9,11 +9,12 @@ class StudentInterface extends StatefulWidget {
 }
 
 class _StudentInterfaceState extends State<StudentInterface> {
+  static const String _title = 'Interface Etudiant';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: AppBar(title: const Text('Interface Etudiant')),
+        appBar: AppBar(title: const Text(_title)),
         body: Body());
   }
 }

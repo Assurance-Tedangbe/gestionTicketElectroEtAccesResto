@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/drawer.header.dart';
 import 'package:mymobileproject/UI/widgets/drawer.item.widget.dart';
 
-class MyDrawer extends StatelessWidget {
-  const MyDrawer({Key? key}) : super(key: key);
+class MyDrawer extends StatefulWidget {
+  const MyDrawer({super.key});
 
+  @override
+  State<MyDrawer> createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     List<dynamic> menus = [
@@ -18,6 +23,18 @@ class MyDrawer extends StatelessWidget {
         "title": "Connexion",
         "route": "/login",
         "leadingIcon": Icons.login,
+        "trailingIcon": Icons.arrow_forward
+      },
+      {
+        "title": "Créer compte",
+        "route": "/sign up",
+        "leadingIcon": Icons.person_add,
+        "trailingIcon": Icons.arrow_forward
+      },
+      {
+        "title": "Activer compte",
+        "route": "/activateAccount",
+        "leadingIcon": Icons.account_box,
         "trailingIcon": Icons.arrow_forward
       },
       {
@@ -42,12 +59,6 @@ class MyDrawer extends StatelessWidget {
         "title": "Interface vendeur",
         "route": "/vendeur",
         "leadingIcon": Icons.person,
-        "trailingIcon": Icons.arrow_forward
-      },
-      {
-        "title": "Créer compte",
-        "route": "/sign up",
-        "leadingIcon": Icons.person_add,
         "trailingIcon": Icons.arrow_forward
       },
       {
