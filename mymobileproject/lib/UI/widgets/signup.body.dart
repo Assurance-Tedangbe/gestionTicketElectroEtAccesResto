@@ -78,7 +78,7 @@ Widget manageName() {
           decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.email, color: Colors.blue),
+              prefixIcon: Icon(Icons.person, color: Colors.blue),
               hintText: 'Nom & prénom',
               hintStyle: TextStyle(
                 color: Colors.blue,
@@ -119,7 +119,7 @@ Widget manageUsername() {
           decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.email, color: Colors.blue),
+              prefixIcon: Icon(Icons.person, color: Colors.blue),
               hintText: 'Nom d\'utilisateur',
               hintStyle: TextStyle(
                 color: Colors.blue,
