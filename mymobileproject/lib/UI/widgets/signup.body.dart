@@ -36,6 +36,12 @@ class _BodyState extends State<Body> {
           const SizedBox(height: 12),
           manageSignupBtn(),
           checkSignInBtn(),
+          //const SizedBox(height: 12),
+          // manageFields(label: "Nom complet"),
+          // manageFields(label: "Nom d'utilisateur"),
+          // manageFields(label: "Email"),
+          //  manageFields(label: "Mot de passe", obscureText: true),
+          // manageFields(label: "Confirmer mot de passe", obscureText: true),
         ],
       ),
     ));
@@ -232,8 +238,8 @@ Widget confirmPassword() {
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              const BoxShadow(
+            boxShadow: const [
+              BoxShadow(
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ],
             border: Border.all(color: Colors.blue, width: 3)),
@@ -297,5 +303,39 @@ Widget checkSignInBtn() {
                 color: Colors.blue, fontSize: 15, fontWeight: FontWeight.bold))
       ]),
     ),
+  );
+}
+
+Widget manageFields({label, obscureText = false}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      Text(
+        label,
+        style: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          color: Colors.black87,
+        ),
+      ),
+      const SizedBox(
+        height: 5,
+      ),
+      TextField(
+        obscureText: obscureText,
+        decoration: const InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey,
+            ),
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
+          ),
+        ),
+      ),
+      const SizedBox(height: 10)
+    ],
   );
 }
