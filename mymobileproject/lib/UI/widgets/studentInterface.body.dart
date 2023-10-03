@@ -11,6 +11,15 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    return const Background(child: SingleChildScrollView());
+    return const Background(
+        child: MenuBar(children: <Widget>[
+      Column(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
+        Icon(
+          Icons.menu,
+          color: Colors.blue,
+          size: 70,
+        ),
+      ])
+    ]));
   }
 }
