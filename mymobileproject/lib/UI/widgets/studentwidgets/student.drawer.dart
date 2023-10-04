@@ -28,13 +28,13 @@ class _StudentDrawerState extends State<StudentDrawer> {
       {
         "title": "Créditer compte",
         "route": "/crediter-compte",
-        "leadingIcon": Icons.account_balance_wallet,
+        "leadingIcon": Icons.attach_money,
         "trailingIcon": Icons.arrow_forward
       },
       {
         "title": "Acheter ticket",
         "route": "/ticket",
-        "leadingIcon": Icons.airplane_ticket,
+        "leadingIcon": Icons.money,
         "trailingIcon": Icons.arrow_forward
       },
       {
