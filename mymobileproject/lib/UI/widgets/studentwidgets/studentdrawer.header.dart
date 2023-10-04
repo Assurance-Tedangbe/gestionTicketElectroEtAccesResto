@@ -27,7 +27,7 @@ class _StudentDrawerHeaderState extends State<StudentDrawerHeader> {
             Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text("Déconnexion"),
+                  const Text("Déconnexion"),
                   IconButton(onPressed: () {}, icon: const Icon(Icons.logout))
                 ])
           ],

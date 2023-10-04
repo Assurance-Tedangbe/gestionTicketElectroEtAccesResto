@@ -21,31 +21,31 @@ class _StudentDrawerState extends State<StudentDrawer> {
       },
       {
         "title": "Activer compte",
-        "route": "/activercompte",
+        "route": "/activate-account",
         "leadingIcon": Icons.accessible,
         "trailingIcon": Icons.arrow_forward
       },
       {
         "title": "Créditer compte",
-        "route": "/rechargecompte",
+        "route": "/crediter-compte",
         "leadingIcon": Icons.account_balance_wallet,
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Achéter ticket",
+        "title": "Acheter ticket",
         "route": "/ticket",
         "leadingIcon": Icons.airplane_ticket,
         "trailingIcon": Icons.arrow_forward
       },
       {
         "title": "Consulter compte",
-        "route": "/consultercompte",
+        "route": "/consulter-compte",
         "leadingIcon": Icons.account_balance,
         "trailingIcon": Icons.arrow_forward
       },
       {
         "title": "Mise à jour profil",
-        "route": "/updateProfile",
+        "route": "/update-profile",
         "leadingIcon": Icons.update,
         "trailingIcon": Icons.arrow_forward
       },
@@ -56,23 +56,23 @@ class _StudentDrawerState extends State<StudentDrawer> {
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "annuler transfert",
-        "route": "/vendeur",
+        "title": "Annuler recharge",
+        "route": "/annuler-recharge",
+        "leadingIcon": Icons.cancel,
+        "trailingIcon": Icons.arrow_forward
+      },
+      {
+        "title": "Annuler transfert",
+        "route": "/annuler-transfert",
         "leadingIcon": Icons.cancel,
         "trailingIcon": Icons.arrow_forward
       },
       {
         "title": "Désactiver compte",
-        "route": "/deactivateAccount",
+        "route": "/deactivate-account",
         "leadingIcon": Icons.disabled_by_default,
         "trailingIcon": Icons.arrow_forward
       },
-      {
-        "title": "Deconnexion",
-        "route": "/log out",
-        "leadingIcon": Icons.logout,
-        "trailingIcon": Icons.arrow_forward
-      }
     ];
 
     return Drawer(
