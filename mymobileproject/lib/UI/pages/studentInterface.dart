@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/drawer.dart';
-import 'package:mymobileproject/UI/widgets/student.drawer.dart';
-import 'package:mymobileproject/UI/widgets/studentInterface.body.dart';
+import 'package:mymobileproject/UI/widgets/studentwidgets/student.drawer.dart';
+import 'package:mymobileproject/UI/widgets/studentwidgets/studentInterface.body.dart';
 
 class StudentInterface extends StatefulWidget {
-  // const studentInterface({super.key});
+  const StudentInterface({super.key});
 
   @override
   State<StudentInterface> createState() => _StudentInterfaceState();
@@ -16,7 +15,7 @@ class _StudentInterfaceState extends State<StudentInterface> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        drawer: MyDrawer(),
+        drawer: const StudentDrawer(),
         appBar: AppBar(title: const Text(_title)),
         body: Body());
   }
