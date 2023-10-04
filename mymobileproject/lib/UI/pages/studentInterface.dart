@@ -16,7 +16,16 @@ class _StudentInterfaceState extends State<StudentInterface> {
     return Scaffold(
         resizeToAvoidBottomInset: true,
         drawer: const StudentDrawer(),
-        appBar: AppBar(title: const Text(_title)),
+        appBar: AppBar(
+          title: const Text(_title),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.logout),
+              tooltip: 'Se déconnecter',
+              onPressed: () {},
+            ),
+          ],
+        ),
         body: Body());
   }
 }
