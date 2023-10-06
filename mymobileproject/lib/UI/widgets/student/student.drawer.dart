@@ -1,46 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/drawer/drawer.header.dart';
-import 'package:mymobileproject/UI/widgets/drawer/drawer.item.widget.dart';
+import 'package:mymobileproject/UI/widgets/student/studentdrawer.item.dart';
 
-class MyDrawer extends StatefulWidget {
-  const MyDrawer({super.key});
+class StudentDrawer extends StatefulWidget {
+  const StudentDrawer({super.key});
 
   @override
-  State<MyDrawer> createState() => _MyDrawerState();
+  State<StudentDrawer> createState() => _StudentDrawerState();
 }
 
-class _MyDrawerState extends State<MyDrawer> {
+class _StudentDrawerState extends State<StudentDrawer> {
   @override
   Widget build(BuildContext context) {
     List<dynamic> menus = [
       {
-        "title": "Accueil",
-        "route": "/home",
-        "leadingIcon": Icons.home,
-        "trailingIcon": Icons.arrow_forward
-      },
-      {
-        "title": "Connexion",
-        "route": "/login",
-        "leadingIcon": Icons.login,
-        "trailingIcon": Icons.arrow_forward
-      },
-      {
-        "title": "Créer compte",
-        "route": "/sign-up",
-        "leadingIcon": Icons.person_add,
-        "trailingIcon": Icons.arrow_forward
-      },
-      {
         "title": "Activer compte",
         "route": "/activate-account",
-        "leadingIcon": Icons.account_box,
+        "leadingIcon": Icons.accessible,
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Interface étudiant",
-        "route": "/student",
-        "leadingIcon": Icons.person,
+        "title": "Créditer compte",
+        "route": "/crediter-compte",
+        "leadingIcon": Icons.attach_money,
+        "trailingIcon": Icons.arrow_forward
+      },
+      {
+        "title": "Acheter ticket",
+        "route": "/ticket",
+        "leadingIcon": Icons.money,
+        "trailingIcon": Icons.arrow_forward
+      },
+      {
+        "title": "Consulter compte",
+        "route": "/consulter-compte",
+        "leadingIcon": Icons.account_balance,
         "trailingIcon": Icons.arrow_forward
       },
       {
@@ -50,15 +43,21 @@ class _MyDrawerState extends State<MyDrawer> {
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Interface portier",
-        "route": "/porter",
-        "leadingIcon": Icons.person,
+        "title": "Transfert",
+        "route": "/transfert",
+        "leadingIcon": Icons.transfer_within_a_station,
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Interface vendeur",
-        "route": "/agent",
-        "leadingIcon": Icons.person,
+        "title": "Annuler recharge",
+        "route": "/annuler-recharge",
+        "leadingIcon": Icons.cancel,
+        "trailingIcon": Icons.arrow_forward
+      },
+      {
+        "title": "Annuler transfert",
+        "route": "/annuler-transfert",
+        "leadingIcon": Icons.cancel,
         "trailingIcon": Icons.arrow_forward
       },
       {
@@ -67,27 +66,15 @@ class _MyDrawerState extends State<MyDrawer> {
         "leadingIcon": Icons.disabled_by_default,
         "trailingIcon": Icons.arrow_forward
       },
-      {
-        "title": "Paramètres",
-        "route": "/settings",
-        "leadingIcon": Icons.person,
-        "trailingIcon": Icons.arrow_forward
-      },
-      {
-        "title": "Deconnexion",
-        "route": "/log-out",
-        "leadingIcon": Icons.logout,
-        "trailingIcon": Icons.arrow_forward
-      }
     ];
+
     return Drawer(
       child: Column(
         children: [
-          const MyDrawerHeader(),
           Expanded(
             child: ListView.separated(
                 itemBuilder: (context, index) {
-                  return DrawerItemWidget(
+                  return StudentDrawerItem(
                       title: menus[index]['title'],
                       leadingIcon: menus[index]['leadingIcon'],
                       trailingIcon: menus[index]['trailingIcon'],

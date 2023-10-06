@@ -12,39 +12,40 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Background(
-        child: SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 120),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Icon(
-            Icons.person_add,
-            color: Colors.blue,
-            size: 70,
-          ),
-          const SizedBox(height: 12),
-          manageName(),
-          const SizedBox(height: 12),
-          manageUsername(),
-          const SizedBox(height: 12),
-          manageEmail(),
-          const SizedBox(height: 12),
-          managePassword(),
-          const SizedBox(height: 12),
-          confirmPassword(),
-          const SizedBox(height: 12),
-          manageSignupBtn(),
-          checkSignInBtn(),
-          //const SizedBox(height: 12),
-          // manageFields(label: "Nom complet"),
-          // manageFields(label: "Nom d'utilisateur"),
-          // manageFields(label: "Email"),
-          //  manageFields(label: "Mot de passe", obscureText: true),
-          // manageFields(label: "Confirmer mot de passe", obscureText: true),
-        ],
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 120),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Icon(
+              Icons.person_add,
+              color: Colors.blue,
+              size: 70,
+            ),
+            const SizedBox(height: 12),
+            manageName(),
+            const SizedBox(height: 12),
+            manageUsername(),
+            const SizedBox(height: 12),
+            manageEmail(),
+            const SizedBox(height: 12),
+            managePassword(),
+            const SizedBox(height: 12),
+            confirmPassword(),
+            const SizedBox(height: 12),
+            manageSignupBtn(),
+            checkSignInBtn(),
+            //const SizedBox(height: 12),
+            // manageFields(label: "Nom complet"),
+            // manageFields(label: "Nom d'utilisateur"),
+            // manageFields(label: "Email"),
+            //  manageFields(label: "Mot de passe", obscureText: true),
+            // manageFields(label: "Confirmer mot de passe", obscureText: true),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
 

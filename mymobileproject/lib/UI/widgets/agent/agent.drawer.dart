@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/studentwidgets/studentdrawer.header.dart';
-import 'package:mymobileproject/UI/widgets/studentwidgets/studentdrawer.item.dart';
+import 'package:mymobileproject/UI/widgets/agent/agentdrawer.item.dart';
 
-class StudentDrawer extends StatefulWidget {
-  const StudentDrawer({super.key});
+class AgentDrawer extends StatefulWidget {
+  const AgentDrawer({super.key});
 
   @override
-  State<StudentDrawer> createState() => _StudentDrawerState();
+  State<AgentDrawer> createState() => _AgentDrawerState();
 }
 
-class _StudentDrawerState extends State<StudentDrawer> {
+class _AgentDrawerState extends State<AgentDrawer> {
   @override
   Widget build(BuildContext context) {
     List<dynamic> menus = [
-      {
-        "title": "Accueil",
-        "route": "/home",
-        "leadingIcon": Icons.home,
-        "trailingIcon": Icons.arrow_forward
-      },
       {
         "title": "Activer compte",
         "route": "/activate-account",
@@ -32,27 +25,9 @@ class _StudentDrawerState extends State<StudentDrawer> {
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Acheter ticket",
-        "route": "/ticket",
-        "leadingIcon": Icons.money,
-        "trailingIcon": Icons.arrow_forward
-      },
-      {
         "title": "Consulter compte",
         "route": "/consulter-compte",
         "leadingIcon": Icons.account_balance,
-        "trailingIcon": Icons.arrow_forward
-      },
-      {
-        "title": "Mise à jour profil",
-        "route": "/update-profile",
-        "leadingIcon": Icons.update,
-        "trailingIcon": Icons.arrow_forward
-      },
-      {
-        "title": "Transfert",
-        "route": "/transfert",
-        "leadingIcon": Icons.transfer_within_a_station,
         "trailingIcon": Icons.arrow_forward
       },
       {
@@ -60,29 +35,16 @@ class _StudentDrawerState extends State<StudentDrawer> {
         "route": "/annuler-recharge",
         "leadingIcon": Icons.cancel,
         "trailingIcon": Icons.arrow_forward
-      },
-      {
-        "title": "Annuler transfert",
-        "route": "/annuler-transfert",
-        "leadingIcon": Icons.cancel,
-        "trailingIcon": Icons.arrow_forward
-      },
-      {
-        "title": "Désactiver compte",
-        "route": "/deactivate-account",
-        "leadingIcon": Icons.disabled_by_default,
-        "trailingIcon": Icons.arrow_forward
-      },
+      }
     ];
 
     return Drawer(
       child: Column(
         children: [
-          const StudentDrawerHeader(),
           Expanded(
             child: ListView.separated(
                 itemBuilder: (context, index) {
-                  return StudentDrawerItem(
+                  return AgentDrawerItem(
                       title: menus[index]['title'],
                       leadingIcon: menus[index]['leadingIcon'],
                       trailingIcon: menus[index]['trailingIcon'],

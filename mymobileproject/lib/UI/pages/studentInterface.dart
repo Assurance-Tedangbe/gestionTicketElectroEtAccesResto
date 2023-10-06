@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/studentwidgets/student.drawer.dart';
-import 'package:mymobileproject/UI/widgets/studentwidgets/studentInterface.body.dart';
+import 'package:mymobileproject/UI/widgets/student/student.drawer.dart';
+import 'package:mymobileproject/UI/widgets/student/studentInterface.body.dart';
 
 class StudentInterface extends StatefulWidget {
   const StudentInterface({super.key});
