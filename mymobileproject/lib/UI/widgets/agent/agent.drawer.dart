@@ -20,19 +20,19 @@ class _AgentDrawerState extends State<AgentDrawer> {
       },
       {
         "title": "Créditer compte",
-        "route": "/crediter-compte",
+        "route": "/credit-account",
         "leadingIcon": Icons.attach_money,
         "trailingIcon": Icons.arrow_forward
       },
       {
         "title": "Consulter compte",
-        "route": "/consulter-compte",
+        "route": "/consult-account",
         "leadingIcon": Icons.account_balance,
         "trailingIcon": Icons.arrow_forward
       },
       {
         "title": "Annuler recharge",
-        "route": "/annuler-recharge",
+        "route": "/cancel-recharge",
         "leadingIcon": Icons.cancel,
         "trailingIcon": Icons.arrow_forward
       }

@@ -81,9 +81,7 @@ Widget manageName() {
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(Icons.person, color: Colors.blue),
               hintText: 'Nom & prénom',
-              hintStyle: TextStyle(
-                color: Colors.blue,
-              )),
+              hintStyle: TextStyle(color: Colors.blue, fontSize: 12)),
         ),
       )
     ],
@@ -122,9 +120,7 @@ Widget manageUsername() {
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(Icons.person, color: Colors.blue),
               hintText: 'Nom d\'utilisateur',
-              hintStyle: TextStyle(
-                color: Colors.blue,
-              )),
+              hintStyle: TextStyle(color: Colors.blue, fontSize: 12)),
         ),
       )
     ],

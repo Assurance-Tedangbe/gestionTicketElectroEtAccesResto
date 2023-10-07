@@ -19,9 +19,9 @@ class _PortierDrawerState extends State<PortierDrawer> {
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Créditer compte",
-        "route": "/crediter-compte",
-        "leadingIcon": Icons.attach_money,
+        "title": "Débiter compte",
+        "route": "/debit-account",
+        "leadingIcon": Icons.money_off,
         "trailingIcon": Icons.arrow_forward
       },
     ];

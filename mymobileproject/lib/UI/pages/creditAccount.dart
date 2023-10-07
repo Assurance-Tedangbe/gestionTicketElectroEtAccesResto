@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/creditAccount.body.dart';
 
 class CreditAccount extends StatefulWidget {
   const CreditAccount({super.key});
@@ -8,8 +9,13 @@ class CreditAccount extends StatefulWidget {
 }
 
 class _CreditAccountState extends State<CreditAccount> {
+  static const String _title = 'Créditer(Recharger) un compte';
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(title: const Text(_title)),
+      body: const CreditBody(),
+    );
   }
 }

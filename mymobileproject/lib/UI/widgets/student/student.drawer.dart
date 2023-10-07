@@ -20,7 +20,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
       },
       {
         "title": "Créditer compte",
-        "route": "/crediter-compte",
+        "route": "/credit-account",
         "leadingIcon": Icons.attach_money,
         "trailingIcon": Icons.arrow_forward
       },
@@ -32,7 +32,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
       },
       {
         "title": "Consulter compte",
-        "route": "/consulter-compte",
+        "route": "/consult-account",
         "leadingIcon": Icons.account_balance,
         "trailingIcon": Icons.arrow_forward
       },
@@ -44,19 +44,19 @@ class _StudentDrawerState extends State<StudentDrawer> {
       },
       {
         "title": "Transfert",
-        "route": "/transfert",
+        "route": "/transfert-credit",
         "leadingIcon": Icons.transfer_within_a_station,
         "trailingIcon": Icons.arrow_forward
       },
       {
         "title": "Annuler recharge",
-        "route": "/annuler-recharge",
+        "route": "/cancel-recharge",
         "leadingIcon": Icons.cancel,
         "trailingIcon": Icons.arrow_forward
       },
       {
         "title": "Annuler transfert",
-        "route": "/annuler-transfert",
+        "route": "/cancel-transfert",
         "leadingIcon": Icons.cancel,
         "trailingIcon": Icons.arrow_forward
       },
