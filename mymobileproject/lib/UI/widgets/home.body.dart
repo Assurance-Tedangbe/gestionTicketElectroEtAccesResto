@@ -17,6 +17,8 @@ class _BodyState extends State<Body> {
     //This size provides us total height and width of our screen
     return Background(
       child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 100),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

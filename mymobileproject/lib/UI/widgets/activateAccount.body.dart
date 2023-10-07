@@ -23,10 +23,27 @@ class _BodyState extends State<Body> {
               color: Colors.blue,
               size: 70,
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 20),
             manageNumberAccount(),
             const SizedBox(height: 12),
             manageActivateBtn(),
+            Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+              // Creating a icon button
+              IconButton(
+                iconSize: 60,
+                icon: const Icon(
+                  Icons.cancel,
+                  color: Colors.blue,
+                ),
+                tooltip: 'désactiver compte',
+                // the method which is called when button is pressed
+                onPressed: () {
+                  setState(
+                    () {},
+                  );
+                },
+              ),
+            ]),
           ],
         ),
       ),
@@ -39,14 +56,16 @@ Widget manageNumberAccount() {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
       const Text(
-        'Numéro de compte etudiant',
+        'Numéro compte etudiant',
         style: TextStyle(
           color: Colors.black,
-          fontSize: 20,
+          fontSize: 15,
         ),
       ),
       const SizedBox(height: 10),
       Container(
+        width: 300,
+        height: 50,
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -56,7 +75,6 @@ Widget manageNumberAccount() {
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ],
             border: Border.all(color: Colors.blue, width: 3)),
-        height: 60,
         child: const TextField(
           style: TextStyle(
             color: Colors.black87,
@@ -65,9 +83,10 @@ Widget manageNumberAccount() {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(Icons.person, color: Colors.blue),
-              hintText: 'Numéro de compte etudiant',
+              hintText: 'N° compte etudiant',
               hintStyle: TextStyle(
                 color: Colors.blue,
+                fontSize: 12,
               )),
         ),
       )
@@ -77,9 +96,10 @@ Widget manageNumberAccount() {
 
 Widget manageActivateBtn() {
   return Container(
-      padding: const EdgeInsets.symmetric(vertical: 25),
-      width: double.infinity,
-      height: 100,
+      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
+      //  width: double.infinity,
+      width: 320,
+      height: 95,
       child: ElevatedButton(
         onPressed: () => print('Activate pressed'),
         // ignore: sort_child_properties_last
@@ -89,7 +109,7 @@ Widget manageActivateBtn() {
           shape: const BeveledRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
           textStyle: const TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+              color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
         ),
       ));
 }

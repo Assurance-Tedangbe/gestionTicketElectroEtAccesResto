@@ -166,6 +166,7 @@ Widget manageEmail() {
               hintText: 'Email',
               hintStyle: TextStyle(
                 color: Colors.blue,
+                fontSize: 12,
               )),
         ),
       )
@@ -208,6 +209,7 @@ Widget managePassword() {
             hintText: 'Mot de passe',
             hintStyle: TextStyle(
               color: Colors.blue,
+              fontSize: 12,
             ),
             suffixIcon: Icon(
               Icons.visibility,
@@ -256,6 +258,7 @@ Widget confirmPassword() {
             hintText: 'Confirmer mot de passe',
             hintStyle: TextStyle(
               color: Colors.blue,
+              fontSize: 12,
             ),
             suffixIcon: Icon(
               Icons.visibility,
