@@ -196,7 +196,7 @@ Widget managePassword() {
           ),
           decoration: InputDecoration(
             contentPadding: EdgeInsets.only(top: 14),
-            prefixIcon: Icon(Icons.lock, color: Colors.blue),
+            prefixIcon: Icon(Icons.password, color: Colors.blue),
             hintText: 'Mot de passe',
             hintStyle: TextStyle(
               color: Colors.blue,
@@ -245,7 +245,7 @@ Widget confirmPassword() {
           ),
           decoration: InputDecoration(
             contentPadding: EdgeInsets.only(top: 14),
-            prefixIcon: Icon(Icons.lock, color: Colors.blue),
+            prefixIcon: Icon(Icons.password, color: Colors.blue),
             hintText: 'Confirmer mot de passe',
             hintStyle: TextStyle(
               color: Colors.blue,

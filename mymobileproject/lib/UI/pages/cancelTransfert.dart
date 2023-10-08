@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/cancelTrsf.body.dart';
 
 class CancelTrsf extends StatefulWidget {
   const CancelTrsf({super.key});
@@ -8,8 +9,13 @@ class CancelTrsf extends StatefulWidget {
 }
 
 class _CancelTrsfState extends State<CancelTrsf> {
+  static const String _title = 'Annuler transfert';
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(title: const Text(_title)),
+      body: CancelTrsfBody(),
+    );
   }
 }

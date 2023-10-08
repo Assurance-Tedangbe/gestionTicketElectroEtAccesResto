@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/transfert.body.dart';
 
 class Transfert extends StatefulWidget {
   const Transfert({super.key});
@@ -8,8 +9,12 @@ class Transfert extends StatefulWidget {
 }
 
 class _TransfertState extends State<Transfert> {
+  static const String _title = 'Transfert crédit';
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(title: const Text(_title)),
+        body: TransfertBody());
   }
 }
