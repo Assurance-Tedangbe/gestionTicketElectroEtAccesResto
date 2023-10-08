@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
-class CreditBody extends StatefulWidget {
-  const CreditBody({super.key});
+class CancelBody extends StatefulWidget {
+  const CancelBody({super.key});
 
   @override
-  State<CreditBody> createState() => _CreditBodyState();
+  State<CancelBody> createState() => _CancelBodyState();
 }
 
-class _CreditBodyState extends State<CreditBody> {
+class _CancelBodyState extends State<CancelBody> {
   @override
   Widget build(BuildContext context) {
     return Background(
@@ -19,7 +19,7 @@ class _CreditBodyState extends State<CreditBody> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Icon(
-              Icons.attach_money,
+              Icons.cancel,
               color: Colors.blue,
               size: 70,
             ),
@@ -28,23 +28,7 @@ class _CreditBodyState extends State<CreditBody> {
             const SizedBox(height: 12),
             manageAmount(),
             const SizedBox(height: 12),
-            manageRechargeBtn(),
-            Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
-              IconButton(
-                iconSize: 60,
-                icon: const Icon(
-                  Icons.cancel,
-                  color: Colors.blue,
-                ),
-                tooltip: 'Annuler recharge',
-                // the method which is called when button is pressed
-                onPressed: () {
-                  setState(
-                    () {},
-                  );
-                },
-              ),
-            ]),
+            manageCancelBtn(),
           ],
         ),
       ),
@@ -81,14 +65,12 @@ Widget manageNumberAccount() {
             color: Colors.black87,
           ),
           decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.person, color: Colors.blue),
-              hintText: 'N° compte etudiant',
-              hintStyle: TextStyle(
-                color: Colors.blue,
-                fontSize: 12,
-              )),
+            border: InputBorder.none,
+            contentPadding: EdgeInsets.only(top: 14),
+            //    prefixIcon: Icon(Icons.person, color: Colors.blue),
+            //   hintText: 'N° compte etudiant',
+            //   hintStyle: TextStyle( color: Colors.blue, fontSize: 12,)
+          ),
         ),
       )
     ],
@@ -100,7 +82,7 @@ Widget manageAmount() {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
       const Text(
-        'Montant',
+        'Montant deposé',
         style: TextStyle(
           color: Colors.black,
           fontSize: 15,
@@ -124,29 +106,27 @@ Widget manageAmount() {
             color: Colors.black87,
           ),
           decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.attach_money, color: Colors.blue),
-              hintText: 'Montant',
-              hintStyle: TextStyle(
-                color: Colors.blue,
-                fontSize: 12,
-              )),
+            border: InputBorder.none,
+            contentPadding: EdgeInsets.only(top: 14),
+            //   prefixIcon: Icon(Icons.money, color: Colors.blue),
+            // hintText: 'Montant deposé',
+            //  hintStyle: TextStyle( color: Colors.blue, fontSize: 12,)
+          ),
         ),
       )
     ],
   );
 }
 
-Widget manageRechargeBtn() {
+Widget manageCancelBtn() {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
     //  width: double.infinity,
     width: 320,
     height: 95,
     child: ElevatedButton(
-      onPressed: () => print('Credit pressed'),
-      child: const Text('Créditer compte'),
+      onPressed: () => print('cancel pressed'),
+      child: const Text('Annuler recharge'),
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.blue,
         shape: const BeveledRectangleBorder(

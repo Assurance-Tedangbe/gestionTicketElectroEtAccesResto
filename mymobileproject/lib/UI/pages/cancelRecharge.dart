@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/cancelRecharge.body.dart';
 
 class CancelRecharge extends StatefulWidget {
   const CancelRecharge({super.key});
@@ -8,8 +9,13 @@ class CancelRecharge extends StatefulWidget {
 }
 
 class _CancelRechargeState extends State<CancelRecharge> {
+  static const String _title = 'Annuler la recharge';
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(title: const Text(_title)),
+      body: CancelBody(),
+    );
   }
 }
