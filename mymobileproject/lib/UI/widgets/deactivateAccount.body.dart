@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/activateAccount.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
 class Body extends StatefulWidget {
@@ -35,11 +36,8 @@ class _BodyState extends State<Body> {
                   color: Colors.blue,
                 ),
                 tooltip: 'Réactiver compte',
-                onPressed: () {
-                  setState(
-                    () {},
-                  );
-                },
+                onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ActivateAccount())),
               ),
             ]),
           ],

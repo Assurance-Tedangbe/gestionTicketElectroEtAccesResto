@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/deactivateAccount.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
 class Body extends StatefulWidget {
@@ -37,11 +38,8 @@ class _BodyState extends State<Body> {
                 ),
                 tooltip: 'désactiver compte',
                 // the method which is called when button is pressed
-                onPressed: () {
-                  setState(
-                    () {},
-                  );
-                },
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => DeactivateAccount())),
               ),
             ]),
           ],
