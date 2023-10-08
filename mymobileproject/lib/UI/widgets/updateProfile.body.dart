@@ -67,9 +67,6 @@ Widget updateName() {
           decoration: InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.only(top: 14),
-            // prefixIcon: Icon(Icons.person, color: Colors.blue),
-            // hintText: 'Nom & prénom',
-            //  hintStyle: TextStyle(color: Colors.blue, fontSize: 12)
           ),
         ),
       )
@@ -107,9 +104,6 @@ Widget updateUsername() {
           decoration: InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.only(top: 14),
-            //    prefixIcon: Icon(Icons.person, color: Colors.blue),
-            //    hintText: 'Nom d\'utilisateur',
-            //    hintStyle: TextStyle(color: Colors.blue, fontSize: 12)
           ),
         ),
       )
@@ -148,9 +142,6 @@ Widget updateEmail() {
           decoration: InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.only(top: 14),
-            //  prefixIcon: Icon(Icons.email, color: Colors.blue),
-            //   hintText: 'Email',
-            //  hintStyle: TextStyle(color: Colors.blue,fontSize: 12,)
           ),
         ),
       )

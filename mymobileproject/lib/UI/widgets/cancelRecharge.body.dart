@@ -67,9 +67,6 @@ Widget manageNumberAccount() {
           decoration: InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.only(top: 14),
-            //    prefixIcon: Icon(Icons.person, color: Colors.blue),
-            //   hintText: 'N° compte etudiant',
-            //   hintStyle: TextStyle( color: Colors.blue, fontSize: 12,)
           ),
         ),
       )
@@ -108,9 +105,6 @@ Widget manageAmount() {
           decoration: InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.only(top: 14),
-            //   prefixIcon: Icon(Icons.money, color: Colors.blue),
-            // hintText: 'Montant deposé',
-            //  hintStyle: TextStyle( color: Colors.blue, fontSize: 12,)
           ),
         ),
       )
@@ -121,7 +115,6 @@ Widget manageAmount() {
 Widget manageCancelBtn() {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
-    //  width: double.infinity,
     width: 320,
     height: 95,
     child: ElevatedButton(
