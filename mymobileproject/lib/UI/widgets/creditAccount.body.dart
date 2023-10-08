@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/cancelRecharge.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
 class CreditBody extends StatefulWidget {
@@ -38,11 +39,8 @@ class _CreditBodyState extends State<CreditBody> {
                 ),
                 tooltip: 'Annuler recharge',
                 // the method which is called when button is pressed
-                onPressed: () {
-                  setState(
-                    () {},
-                  );
-                },
+                onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => CancelRecharge())),
               ),
             ]),
           ],
