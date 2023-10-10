@@ -8,7 +8,7 @@ import 'package:mymobileproject/UI/pages/deactivateAccount.dart';
 import 'package:mymobileproject/UI/pages/debitAccount.dart';
 import 'package:mymobileproject/UI/pages/home.dart';
 import 'package:mymobileproject/UI/pages/login.dart';
-import 'package:mymobileproject/UI/pages/loginout.dart';
+import 'package:mymobileproject/UI/pages/logout.dart';
 import 'package:mymobileproject/UI/pages/porterInterface.dart';
 import 'package:mymobileproject/UI/pages/settings.dart';
 import 'package:mymobileproject/UI/pages/signup.dart';
