@@ -13,9 +13,9 @@ class _PortierDrawerState extends State<PortierDrawer> {
   Widget build(BuildContext context) {
     List<dynamic> menus = [
       {
-        "title": "Activer compte",
-        "route": "/activate-account",
-        "leadingIcon": Icons.accessible,
+        "title": "Accueil",
+        "route": "/home",
+        "leadingIcon": Icons.home,
         "trailingIcon": Icons.arrow_forward
       },
       {

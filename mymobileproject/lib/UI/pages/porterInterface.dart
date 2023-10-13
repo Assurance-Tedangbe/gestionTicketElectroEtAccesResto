@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/debitAccount.dart';
+import 'package:mymobileproject/UI/pages/home.dart';
+import 'package:mymobileproject/UI/pages/logout.dart';
 import 'package:mymobileproject/UI/widgets/porter/porterInterface.body.dart';
 import 'package:mymobileproject/UI/widgets/porter/porter.drawer.dart';
 
@@ -22,7 +25,8 @@ class _PorterInterfaceState extends State<PorterInterface> {
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'Se déconnecter',
-            onPressed: () {},
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => LogOut())),
           ),
         ],
       ),
@@ -46,9 +50,8 @@ class _PorterInterfaceState extends State<PorterInterface> {
         children: [
           IconButton(
             enableFeedback: false,
-            onPressed: () {
-              setState(() {});
-            },
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => HomePage())),
             tooltip: 'Accueil',
             icon: const Icon(
               Icons.home,
@@ -58,9 +61,8 @@ class _PorterInterfaceState extends State<PorterInterface> {
           ),
           IconButton(
             enableFeedback: false,
-            onPressed: () {
-              setState(() {});
-            },
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => DebitAccount())),
             tooltip: 'Débiter un compte',
             icon: const Icon(
               Icons.money_off,

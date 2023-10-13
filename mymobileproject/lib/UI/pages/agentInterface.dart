@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/activateAccount.dart';
+import 'package:mymobileproject/UI/pages/consultAccount.dart';
+import 'package:mymobileproject/UI/pages/creditAccount.dart';
+import 'package:mymobileproject/UI/pages/home.dart';
 import 'package:mymobileproject/UI/widgets/agent/agent.drawer.dart';
 import 'package:mymobileproject/UI/widgets/agent/agentInterface.body.dart';
 
@@ -46,9 +50,8 @@ class _AgentInterfaceState extends State<AgentInterface> {
         children: [
           IconButton(
             enableFeedback: false,
-            onPressed: () {
-              setState(() {});
-            },
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => HomePage())),
             tooltip: 'Accueil',
             icon: const Icon(
               Icons.home,
@@ -58,9 +61,8 @@ class _AgentInterfaceState extends State<AgentInterface> {
           ),
           IconButton(
             enableFeedback: false,
-            onPressed: () {
-              setState(() {});
-            },
+            onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ActivateAccount())),
             tooltip: 'Activer compte',
             icon: const Icon(
               Icons.accessible,
@@ -70,9 +72,8 @@ class _AgentInterfaceState extends State<AgentInterface> {
           ),
           IconButton(
             enableFeedback: false,
-            onPressed: () {
-              setState(() {});
-            },
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => CreditAccount())),
             tooltip: 'Crediter un compte',
             icon: const Icon(
               Icons.attach_money,
@@ -82,9 +83,8 @@ class _AgentInterfaceState extends State<AgentInterface> {
           ),
           IconButton(
               enableFeedback: false,
-              onPressed: () {
-                setState(() {});
-              },
+              onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => ConsultAccount())),
               tooltip: 'Consulter un compte',
               icon: const Icon(
                 Icons.account_balance,

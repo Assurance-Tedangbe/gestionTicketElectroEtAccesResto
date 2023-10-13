@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/consultAccount.dart';
+import 'package:mymobileproject/UI/pages/home.dart';
+import 'package:mymobileproject/UI/pages/logout.dart';
+import 'package:mymobileproject/UI/pages/ticket.dart';
+import 'package:mymobileproject/UI/pages/transfertCredit.dart';
 import 'package:mymobileproject/UI/widgets/student/student.drawer.dart';
 import 'package:mymobileproject/UI/widgets/student/studentInterface.body.dart';
 
@@ -25,7 +30,8 @@ class _StudentInterfaceState extends State<StudentInterface> {
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'Se déconnecter',
-            onPressed: () {},
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => LogOut())),
           ),
         ],
       ),
@@ -50,9 +56,8 @@ class _StudentInterfaceState extends State<StudentInterface> {
         children: [
           IconButton(
             enableFeedback: false,
-            onPressed: () {
-              setState(() {});
-            },
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => HomePage())),
             tooltip: 'Accueil',
             icon: const Icon(
               Icons.home,
@@ -62,9 +67,8 @@ class _StudentInterfaceState extends State<StudentInterface> {
           ),
           IconButton(
             enableFeedback: false,
-            onPressed: () {
-              setState(() {});
-            },
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => Ticket())),
             tooltip: 'Achat ticket',
             icon: const Icon(
               Icons.money,
@@ -74,9 +78,8 @@ class _StudentInterfaceState extends State<StudentInterface> {
           ),
           IconButton(
             enableFeedback: false,
-            onPressed: () {
-              setState(() {});
-            },
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => Transfert())),
             tooltip: 'Transfert credit',
             icon: const Icon(
               Icons.transfer_within_a_station,
@@ -86,9 +89,8 @@ class _StudentInterfaceState extends State<StudentInterface> {
           ),
           IconButton(
               enableFeedback: false,
-              onPressed: () {
-                setState(() {});
-              },
+              onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => ConsultAccount())),
               tooltip: 'Solde',
               icon: const Icon(
                 Icons.account_balance,

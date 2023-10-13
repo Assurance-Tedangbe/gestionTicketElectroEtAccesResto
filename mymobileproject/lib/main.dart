@@ -3,6 +3,7 @@ import 'package:mymobileproject/UI/pages/activateAccount.dart';
 import 'package:mymobileproject/UI/pages/agentInterface.dart';
 import 'package:mymobileproject/UI/pages/cancelRecharge.dart';
 import 'package:mymobileproject/UI/pages/cancelTransfert.dart';
+import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/pages/creditAccount.dart';
 import 'package:mymobileproject/UI/pages/deactivateAccount.dart';
 import 'package:mymobileproject/UI/pages/debitAccount.dart';
@@ -51,6 +52,7 @@ class RootView extends StatelessWidget {
         "/student": (context) => StudentInterface(),
         "/ticket": (context) => Ticket(),
         "/transfert-credit": (context) => Transfert(),
+        "/consult-account": (context) => ConsultAccount(),
         "/update-profile": (context) => UpdateProfile(),
         "/porter": (context) => PorterInterface(),
         "/agent": (context) => AgentInterface(),

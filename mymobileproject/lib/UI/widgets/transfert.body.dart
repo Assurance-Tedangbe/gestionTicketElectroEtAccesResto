@@ -57,7 +57,7 @@ Widget recipientNumber() {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
       const Text(
-        'Numéro destinataire',
+        'Numéro compte destinataire',
         style: TextStyle(
           color: Colors.black,
           fontSize: 15,
