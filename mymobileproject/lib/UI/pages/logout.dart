@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/logout.body.dart';
 
 class LogOut extends StatefulWidget {
-  //const LogOut({super.key});
+  const LogOut({super.key});
 
   @override
   State<LogOut> createState() => _LogOutState();
