@@ -1,5 +1,7 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/deactivateAccount.dart';
+import 'package:mymobileproject/UI/pages/home.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
 class Body extends StatefulWidget {
@@ -12,6 +14,46 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
+    Widget animated() {
+      return AnimatedButton(
+        text: "Activer compte",
+        color: Colors.blue,
+        width: 290,
+        height: 90,
+        pressEvent: () {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.success,
+            animType: AnimType.bottomSlide,
+            showCloseIcon: true,
+            title: "Succès",
+            desc: "compte active",
+            btnOkOnPress: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => HomePage())),
+          ).show();
+        },
+      );
+    }
+
+    Widget manageActivateBtn() {
+      return Container(
+        padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
+        width: 320,
+        height: 95,
+        child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            shape: const BeveledRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5))),
+            textStyle: const TextStyle(
+                color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+          ),
+          child: const Text('Activer compte'),
+        ),
+      );
+    }
+
     return Background(
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -26,10 +68,10 @@ class _BodyState extends State<Body> {
             ),
             const SizedBox(height: 20),
             manageNumberAccount(),
-            const SizedBox(height: 12),
-            manageActivateBtn(),
+            const SizedBox(height: 20),
+            //  manageActivateBtn(),
+            animated(),
             Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
-              // Creating a icon button
               IconButton(
                 iconSize: 60,
                 icon: const Icon(
@@ -54,7 +96,7 @@ Widget manageNumberAccount() {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
       const Text(
-        'Numéro compte etudiant',
+        'N° compte etudiant',
         style: TextStyle(
           color: Colors.black,
           fontSize: 15,
@@ -90,24 +132,4 @@ Widget manageNumberAccount() {
       )
     ],
   );
-}
-
-Widget manageActivateBtn() {
-  return Container(
-      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
-      //  width: double.infinity,
-      width: 320,
-      height: 95,
-      child: ElevatedButton(
-        onPressed: () => print('Activate pressed'),
-        // ignore: sort_child_properties_last
-        child: const Text('Activer compte'),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue,
-          shape: const BeveledRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5))),
-          textStyle: const TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
-        ),
-      ));
 }

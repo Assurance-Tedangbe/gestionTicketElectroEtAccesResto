@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
@@ -60,6 +61,24 @@ class _BodyState extends State<Body> {
         ));
   }
 
+  Widget animated() {
+    return AnimatedButton(
+      text: "success",
+      color: Colors.green,
+      pressEvent: () {
+        AwesomeDialog(
+                context: context,
+                dialogType: DialogType.success,
+                animType: AnimType.bottomSlide,
+                showCloseIcon: true,
+                title: "Succès",
+                desc: "active",
+                btnOkOnPress: () {})
+            .show();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Background(
@@ -76,6 +95,8 @@ class _BodyState extends State<Body> {
             ),
             const SizedBox(height: 12),
             logoutBtn(),
+            const SizedBox(height: 12),
+            animated(),
           ],
         ),
       ),
