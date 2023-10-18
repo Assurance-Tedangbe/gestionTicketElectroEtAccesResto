@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/home.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
 class Body extends StatefulWidget {
@@ -20,22 +21,21 @@ class _BodyState extends State<Body> {
           content: const SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Etes-vous sûr de vouloir vous déconnecteer'),
+                Text('Etes-vous sûr de vouloir vous déconnecter'),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Annuler'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              child: const Text('ANNULER'),
+              onPressed: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => HomePage())),
+              //() {  Navigator.of(context).pop();},
             ),
             TextButton(
-              child: const Text('Oui'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              child: const Text('OUI'),
+              onPressed: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => HomePage())),
             ),
           ],
         );
@@ -45,37 +45,20 @@ class _BodyState extends State<Body> {
 
   Widget logoutBtn() {
     return Container(
-        padding: const EdgeInsets.symmetric(vertical: 25),
-        height: 100,
-        width: 170,
-        child: ElevatedButton(
-          onPressed: _showAlertDialog,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
-            shape: const BeveledRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8))),
-            textStyle: const TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          child: const Text('Se déconnecter'),
-        ));
-  }
-
-  Widget animated() {
-    return AnimatedButton(
-      text: "success",
-      color: Colors.green,
-      pressEvent: () {
-        AwesomeDialog(
-                context: context,
-                dialogType: DialogType.success,
-                animType: AnimType.bottomSlide,
-                showCloseIcon: true,
-                title: "Succès",
-                desc: "active",
-                btnOkOnPress: () {})
-            .show();
-      },
+      padding: const EdgeInsets.symmetric(vertical: 25),
+      height: 100,
+      width: 170,
+      child: ElevatedButton(
+        onPressed: _showAlertDialog,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.blue,
+          shape: const BeveledRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8))),
+          textStyle: const TextStyle(
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        child: const Text('Se déconnecter'),
+      ),
     );
   }
 
@@ -95,8 +78,6 @@ class _BodyState extends State<Body> {
             ),
             const SizedBox(height: 12),
             logoutBtn(),
-            const SizedBox(height: 12),
-            animated(),
           ],
         ),
       ),
