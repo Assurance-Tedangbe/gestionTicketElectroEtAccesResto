@@ -68,12 +68,6 @@ class _MyDrawerState extends State<MyDrawer> {
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Paramètres",
-        "route": "/settings",
-        "leadingIcon": Icons.person,
-        "trailingIcon": Icons.arrow_forward
-      },
-      {
         "title": "Deconnexion",
         "route": "/log-out",
         "leadingIcon": Icons.logout,

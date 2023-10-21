@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/debitAccount.body.dart';
 
 class DebitAccount extends StatefulWidget {
   const DebitAccount({super.key});
@@ -8,8 +9,12 @@ class DebitAccount extends StatefulWidget {
 }
 
 class _DebitAccountState extends State<DebitAccount> {
+  static const String _title = 'Débiter un compte';
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(title: const Text(_title)),
+        body: DebitBody());
   }
 }
