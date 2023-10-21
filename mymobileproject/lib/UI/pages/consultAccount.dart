@@ -9,7 +9,7 @@ class ConsultAccount extends StatefulWidget {
 }
 
 class _ConsultAccountState extends State<ConsultAccount> {
-  static const String _title = 'Désactiver son compte';
+  static const String _title = 'Consulter son compte';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

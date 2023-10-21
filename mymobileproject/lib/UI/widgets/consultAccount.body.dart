@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/consult.data.dart';
+import 'package:mymobileproject/UI/pages/home.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
 class ConsultBody extends StatefulWidget {
@@ -11,6 +13,27 @@ class ConsultBody extends StatefulWidget {
 class _ConsultBodyState extends State<ConsultBody> {
   @override
   Widget build(BuildContext context) {
+    Widget validateBtn() {
+      return Container(
+        padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
+        //  width: double.infinity,
+        width: 320,
+        height: 95,
+        child: ElevatedButton(
+          onPressed: () => Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => ConsultData())),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            shape: const BeveledRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5))),
+            textStyle: const TextStyle(
+                color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+          ),
+          child: const Text('Consulter'),
+        ),
+      );
+    }
+
     Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
@@ -99,25 +122,5 @@ Widget studentAccountNumber() {
         ),
       )
     ],
-  );
-}
-
-Widget validateBtn() {
-  return Container(
-    padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
-    //  width: double.infinity,
-    width: 320,
-    height: 95,
-    child: ElevatedButton(
-      onPressed: () => print('validate pressed'),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue,
-        shape: const BeveledRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(5))),
-        textStyle: const TextStyle(
-            color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
-      ),
-      child: const Text('Consulter'),
-    ),
   );
 }
