@@ -25,7 +25,7 @@ class _ConsultDataState extends State<ConsultData> {
               children: <Widget>[
                 Container(
                   alignment: Alignment.center,
-                  height: size.height * 0.4,
+                  height: size.height * 0.5,
                   width: size.width * 5,
                   decoration: BoxDecoration(
                     color: Colors.white70,
@@ -37,8 +37,8 @@ class _ConsultDataState extends State<ConsultData> {
                           offset: Offset(0, 2))
                     ],
                   ),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[]),
                 ),
               ]),
