@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ConsultData extends StatefulWidget {
   const ConsultData({super.key});
@@ -10,6 +12,24 @@ class ConsultData extends StatefulWidget {
 
 class _ConsultDataState extends State<ConsultData> {
   static const String _title = 'Mon compte';
+
+  /* Future<StudentModel> consulterCpt() async {
+    var data =
+        await http.get('http://localhost:8080/api/etudiants/consultAccount');
+    var jsonData = jsonDecode(data.body);
+
+    for (var etu in jsonData) {
+      StudentModel etudiant;
+      etudiant.solde = etu["solde"];
+      etudiant.nom = etu["nom"];
+      etudiant.prenom = etu["prenom"];
+      etudiant.filiere = etu["filiere"];
+      etudiant.tel = etu["tel"];
+      etudiant. = etu["id"];
+      etudiant.idCpt = etu["idCpt"];
+    }
+  }*/
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -39,7 +59,35 @@ class _ConsultDataState extends State<ConsultData> {
                   ),
                   child: const Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[]),
+                      children: <Widget>[
+                        /*  FutureBuilder(
+                         future: consulterCpt,
+                         builder: (BuildContext context, AsyncSnapshot snapshot){
+                          if (snapshot.data == null){
+                            return Container(child: Center(child: Icon(Icons.error)));
+                          }
+                          return ListView.builder(
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index){
+                              return ListTile(
+                                title: Text(
+                                  'Solde' + ' ' + ' Nom' +  ' ' + 'Prénom' + ' ' + 'N° compte' + ' '
+                                ),
+                                subtitle: 
+                                Text(
+                                  '$(snapshot.data[index].solde}' +
+                                  '$(snapshot.data[index].nom}' +
+                                   '$(snapshot.data[index].prenom}' +
+                                   '$(snapshot.data[index].numeroCompte}'
+                                  )',
+                                  onTap:() {
+                                    
+                                  },
+                                  );
+                              )} );
+                         } ),
+                         */
+                      ]),
                 ),
               ]),
         )));
