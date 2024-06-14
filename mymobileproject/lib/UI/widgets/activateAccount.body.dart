@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/deactivateAccount.dart';
-import 'package:mymobileproject/UI/pages/home.dart';
+import 'package:mymobileproject/UI/pages/coverPage.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
 class Body extends StatefulWidget {
@@ -29,7 +29,7 @@ class _BodyState extends State<Body> {
             title: "Succès",
             desc: "compte active",
             btnOkOnPress: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => HomePage())),
+                .push(MaterialPageRoute(builder: (context) => CoverPage())),
           ).show();
         },
       );

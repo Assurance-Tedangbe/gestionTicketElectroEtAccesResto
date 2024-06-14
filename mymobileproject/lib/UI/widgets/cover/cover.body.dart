@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/login.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
-import 'package:mymobileproject/UI/widgets/home.body.roundedButton.dart';
+import 'package:mymobileproject/UI/widgets/cover/cover.body.roundedButton.dart';
 
-class Body extends StatefulWidget {
+class CoverBody extends StatefulWidget {
   // const Body({super.key});
 
   @override
-  State<Body> createState() => _BodyState();
+  State<CoverBody> createState() => _CoverBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _CoverBodyState extends State<CoverBody> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

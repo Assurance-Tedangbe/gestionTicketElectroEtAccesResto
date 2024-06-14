@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/drawer/drawer.header.dart';
-import 'package:mymobileproject/UI/widgets/drawer/drawer.item.widget.dart';
+import 'package:mymobileproject/UI/widgets/cover/cover.drawer.header.dart';
+import 'package:mymobileproject/UI/widgets/cover/cover.drawer.item.widget.dart';
 
-class MyDrawer extends StatefulWidget {
-  const MyDrawer({super.key});
+class CoverDrawer extends StatefulWidget {
+  const CoverDrawer({super.key});
 
   @override
-  State<MyDrawer> createState() => _MyDrawerState();
+  State<CoverDrawer> createState() => _CoverDrawerState();
 }
 
-class _MyDrawerState extends State<MyDrawer> {
+class _CoverDrawerState extends State<CoverDrawer> {
   @override
   Widget build(BuildContext context) {
     List<dynamic> menus = [
@@ -77,11 +77,11 @@ class _MyDrawerState extends State<MyDrawer> {
     return Drawer(
       child: Column(
         children: [
-          const MyDrawerHeader(),
+          const CoverDrawerHeader(),
           Expanded(
             child: ListView.separated(
                 itemBuilder: (context, index) {
-                  return DrawerItemWidget(
+                  return CoverDrawerItemWidget(
                       title: menus[index]['title'],
                       leadingIcon: menus[index]['leadingIcon'],
                       trailingIcon: menus[index]['trailingIcon'],

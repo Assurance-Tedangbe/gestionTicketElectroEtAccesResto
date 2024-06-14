@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class MyDrawerHeader extends StatefulWidget {
-  const MyDrawerHeader({super.key});
+class HomeDrawerHeader extends StatefulWidget {
+  const HomeDrawerHeader({super.key});
 
   @override
-  State<MyDrawerHeader> createState() => _MyDrawerHeaderState();
+  State<HomeDrawerHeader> createState() => _HomeDrawerHeaderState();
 }
 
-class _MyDrawerHeaderState extends State<MyDrawerHeader> {
-  @override
+class _HomeDrawerHeaderState extends State<HomeDrawerHeader> {
+    @override
   Widget build(BuildContext context) {
     return DrawerHeader(
         decoration: BoxDecoration(

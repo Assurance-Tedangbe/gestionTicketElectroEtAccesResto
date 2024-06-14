@@ -7,7 +7,8 @@ import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/pages/creditAccount.dart';
 import 'package:mymobileproject/UI/pages/deactivateAccount.dart';
 import 'package:mymobileproject/UI/pages/debitAccount.dart';
-import 'package:mymobileproject/UI/pages/home.dart';
+import 'package:mymobileproject/UI/pages/coverPage.dart';
+import 'package:mymobileproject/UI/pages/rootView.dart';
 import 'package:mymobileproject/UI/pages/login.dart';
 import 'package:mymobileproject/UI/pages/logout.dart';
 import 'package:mymobileproject/UI/pages/porterInterface.dart';
@@ -45,7 +46,8 @@ class RootView extends StatelessWidget {
         // scaffoldBackgroundColor: secondColor
       ),
       routes: {
-        "/home": (context) => HomePage(),
+        "/cover": (context) => CoverPage(),
+        "/home": (context) => Home(),
         "/login": (context) => LoginPage(),
         "/sign-up": (context) => SignUpPage(),
         "/activate-account": (context) => ActivateAccount(),
@@ -64,7 +66,7 @@ class RootView extends StatelessWidget {
         "/cancel-transfert": (context) => CancelTrsf(),
         "/log-out": (context) => LogOut(),
       },
-      initialRoute: "/home",
+      initialRoute: "/cover",
     );
   }
 }

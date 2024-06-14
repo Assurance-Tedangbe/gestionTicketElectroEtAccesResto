@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/consult.data.dart';
-import 'package:mymobileproject/UI/pages/home.dart';
+import 'package:mymobileproject/UI/pages/coverPage.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
 class ConsultBody extends StatefulWidget {

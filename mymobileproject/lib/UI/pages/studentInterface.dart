@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/consultAccount.dart';
-import 'package:mymobileproject/UI/pages/home.dart';
+import 'package:mymobileproject/UI/pages/coverPage.dart';
 import 'package:mymobileproject/UI/pages/logout.dart';
 import 'package:mymobileproject/UI/pages/ticket.dart';
 import 'package:mymobileproject/UI/pages/transfertCredit.dart';
@@ -35,7 +35,7 @@ class _StudentInterfaceState extends State<StudentInterface> {
           ),
         ],
       ),
-      body: Body(),
+      body: StudentBody(),
       bottomNavigationBar: buildMyNavBar(context),
       //backgroundColor: Colors.blueGrey,
     );
@@ -57,7 +57,7 @@ class _StudentInterfaceState extends State<StudentInterface> {
           IconButton(
             enableFeedback: false,
             onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => HomePage())),
+                .push(MaterialPageRoute(builder: (context) => CoverPage())),
             tooltip: 'Accueil',
             icon: const Icon(
               Icons.home,

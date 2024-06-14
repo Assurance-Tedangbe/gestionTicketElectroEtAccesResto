@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/debitAccount.dart';
-import 'package:mymobileproject/UI/pages/home.dart';
+import 'package:mymobileproject/UI/pages/coverPage.dart';
 import 'package:mymobileproject/UI/pages/logout.dart';
 import 'package:mymobileproject/UI/widgets/porter/porterInterface.body.dart';
 import 'package:mymobileproject/UI/widgets/porter/porter.drawer.dart';
@@ -51,7 +51,7 @@ class _PorterInterfaceState extends State<PorterInterface> {
           IconButton(
             enableFeedback: false,
             onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => HomePage())),
+                .push(MaterialPageRoute(builder: (context) => CoverPage())),
             tooltip: 'Accueil',
             icon: const Icon(
               Icons.home,

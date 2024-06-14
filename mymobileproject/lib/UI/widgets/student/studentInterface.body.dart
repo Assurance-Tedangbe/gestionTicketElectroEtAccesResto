@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
-class Body extends StatefulWidget {
+class StudentBody extends StatefulWidget {
 //  const Body({super.key});
 
   @override
-  State<Body> createState() => _BodyState();
+  State<StudentBody> createState() => _StudentBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _StudentBodyState extends State<StudentBody> {
   @override
   Widget build(BuildContext context) {
     return const Background(child: SingleChildScrollView());

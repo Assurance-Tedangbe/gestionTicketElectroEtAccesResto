@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class DrawerItemWidget extends StatelessWidget {
+class CoverDrawerItemWidget extends StatelessWidget {
   final String title;
   final IconData leadingIcon;
   final IconData trailingIcon;
   final Function onAction;
 
-  const DrawerItemWidget(
+  const CoverDrawerItemWidget(
       {Key? key,
       required this.title,
       required this.leadingIcon,

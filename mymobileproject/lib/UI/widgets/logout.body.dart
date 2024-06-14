@@ -1,6 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/pages/home.dart';
+import 'package:mymobileproject/UI/pages/coverPage.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
 class Body extends StatefulWidget {
@@ -29,13 +29,13 @@ class _BodyState extends State<Body> {
             TextButton(
               child: const Text('ANNULER'),
               onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => HomePage())),
+                  .push(MaterialPageRoute(builder: (context) => CoverPage())),
               //() {  Navigator.of(context).pop();},
             ),
             TextButton(
               child: const Text('OUI'),
               onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => HomePage())),
+                  .push(MaterialPageRoute(builder: (context) => CoverPage())),
             ),
           ],
         );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/activateAccount.dart';
 import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/pages/creditAccount.dart';
-import 'package:mymobileproject/UI/pages/home.dart';
+import 'package:mymobileproject/UI/pages/coverPage.dart';
 import 'package:mymobileproject/UI/widgets/agent/agent.drawer.dart';
 import 'package:mymobileproject/UI/widgets/agent/agentInterface.body.dart';
 
@@ -14,7 +14,7 @@ class AgentInterface extends StatefulWidget {
 }
 
 class _AgentInterfaceState extends State<AgentInterface> {
-  static const String _title = 'Interface Vendeur';
+  static const String _title = 'Interface Agent';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +51,7 @@ class _AgentInterfaceState extends State<AgentInterface> {
           IconButton(
             enableFeedback: false,
             onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => HomePage())),
+                .push(MaterialPageRoute(builder: (context) => CoverPage())),
             tooltip: 'Accueil',
             icon: const Icon(
               Icons.home,
