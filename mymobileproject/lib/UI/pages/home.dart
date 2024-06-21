@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/logout.dart';
 import 'package:mymobileproject/UI/pages/rootView.dart';
-import 'package:mymobileproject/UI/widgets/agent/agent.drawer.dart';
-import 'package:mymobileproject/UI/widgets/agent/agentInterface.body.dart';
+import 'package:mymobileproject/UI/widgets/home/home.drawer.dart';
+import 'package:mymobileproject/UI/widgets/home/myhome.body.dart';
 
-class AgentInterface extends StatefulWidget {
-  const AgentInterface({super.key});
+class Home extends StatelessWidget {
+  static const String _title = 'Bienvenue';
 
-  @override
-  State<AgentInterface> createState() => _AgentInterfaceState();
-}
+  const Home({super.key});
 
-class _AgentInterfaceState extends State<AgentInterface> {
-  static const String _title = 'Interface Agent';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      drawer: const AgentDrawer(),
+      drawer: const HomeDrawer(),
       appBar: AppBar(
         title: const Text(_title),
         actions: <Widget>[
@@ -29,12 +26,14 @@ class _AgentInterfaceState extends State<AgentInterface> {
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'Se déconnecter',
-            onPressed: () {},
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => LogOut())),
           ),
         ],
       ),
-      body: AgentBody(),
-      //  bottomNavigationBar: NavigationBarAgent(),
+      body: const HomeBody(),
+      // bottomNavigationBar: buildMyNavBar(context),
+      //backgroundColor: Colors.blueGrey,
     );
   }
 }

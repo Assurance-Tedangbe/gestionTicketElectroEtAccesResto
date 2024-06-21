@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/agent/agentdrawer.item.dart';
 
-class AgentDrawer extends StatefulWidget {
+class AgentDrawer extends StatelessWidget {
   const AgentDrawer({super.key});
 
   @override
-  State<AgentDrawer> createState() => _AgentDrawerState();
-}
-
-class _AgentDrawerState extends State<AgentDrawer> {
-  @override
   Widget build(BuildContext context) {
     List<dynamic> menus = [
+      {
+        "title": "Accueil",
+        "route": "/home",
+        "leadingIcon": Icons.home,
+        "trailingIcon": Icons.arrow_forward
+      },
       {
         "title": "Activer compte",
         "route": "/activate-account",
@@ -33,6 +34,12 @@ class _AgentDrawerState extends State<AgentDrawer> {
       {
         "title": "Annuler recharge",
         "route": "/cancel-recharge",
+        "leadingIcon": Icons.cancel,
+        "trailingIcon": Icons.arrow_forward
+      },
+      {
+        "title": "Se déconnecter",
+        "route": "/log-out",
         "leadingIcon": Icons.cancel,
         "trailingIcon": Icons.arrow_forward
       }

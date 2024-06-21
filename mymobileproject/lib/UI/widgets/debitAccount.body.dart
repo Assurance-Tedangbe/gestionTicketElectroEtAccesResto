@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/scanqr.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
 class DebitBody extends StatefulWidget {
@@ -50,7 +51,7 @@ class _DebitBodyState extends State<DebitBody> {
                 size: 70,
               ),
               const SizedBox(height: 15),
-              scanQR(),
+              const ScanQR(),
               const SizedBox(height: 10),
               Container(
                 alignment: Alignment.center,
@@ -101,25 +102,6 @@ class _DebitBodyState extends State<DebitBody> {
       ),
     );
   }
-}
-
-Widget scanQR() {
-  return Container(
-    padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
-    width: 250,
-    height: 90,
-    child: ElevatedButton(
-      onPressed: () => print('scan'),
-      child: const Text('Scanner code QR'),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue,
-        shape: const BeveledRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(5))),
-        textStyle: const TextStyle(
-            color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
-      ),
-    ),
-  );
 }
 
 Widget studentAccountNumber() {

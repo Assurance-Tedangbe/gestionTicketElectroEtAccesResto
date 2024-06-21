@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/consult.data.dart';
 import 'package:mymobileproject/UI/pages/coverPage.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
+import 'package:mymobileproject/constants.dart';
 
 class ConsultBody extends StatefulWidget {
   const ConsultBody({super.key});
@@ -23,7 +24,7 @@ class _ConsultBodyState extends State<ConsultBody> {
           onPressed: () => Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => ConsultData())),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
+            backgroundColor: kPrimaryColor,
             shape: const BeveledRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5))),
             textStyle: const TextStyle(
@@ -68,7 +69,7 @@ class _ConsultBodyState extends State<ConsultBody> {
             const SizedBox(height: 12),
             const Icon(
               Icons.account_balance,
-              color: Colors.blue,
+              color: kPrimaryColor,
               size: 70,
             ),
             const SizedBox(height: 20),
@@ -113,10 +114,10 @@ Widget studentAccountNumber() {
           decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.person, color: Colors.blue),
+              prefixIcon: Icon(Icons.person, color: kPrimaryColor),
               hintText: 'N° compte etudiant',
               hintStyle: TextStyle(
-                color: Colors.blue,
+                color: kPrimaryColor,
                 fontSize: 12,
               )),
         ),

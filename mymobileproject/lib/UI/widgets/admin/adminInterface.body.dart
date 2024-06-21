@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/admin/admin.services.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
-import 'package:mymobileproject/UI/widgets/home/sizebox.height.dart';
-import 'package:mymobileproject/UI/widgets/porter/porter.services.dart';
 
-class PorterBody extends StatefulWidget {
-//  const Body({super.key});
+class AdminBody extends StatefulWidget {
+  const AdminBody({super.key});
 
   @override
-  State<PorterBody> createState() => _PorterBodyState();
+  State<AdminBody> createState() => _AdminBodyState();
 }
 
-class _PorterBodyState extends State<PorterBody> {
+class _AdminBodyState extends State<AdminBody> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
+            height: size.height,
+            width: size.width,
             child: const Column(children: [
-              PorterServices(),
+              AdminServices(),
             ]),
           ),
         ),

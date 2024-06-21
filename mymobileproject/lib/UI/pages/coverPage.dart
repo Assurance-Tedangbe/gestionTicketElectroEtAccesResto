@@ -11,12 +11,12 @@ class CoverPage extends StatefulWidget {
 }
 
 class _CoverPageState extends State<CoverPage> {
-  static const String _title = 'Couverture';
+  static const String _title = 'SenTicket';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        drawer: const CoverDrawer(),
+        // drawer: const CoverDrawer(),
         appBar: AppBar(title: const Text(_title)),
         body: CoverBody());
   }

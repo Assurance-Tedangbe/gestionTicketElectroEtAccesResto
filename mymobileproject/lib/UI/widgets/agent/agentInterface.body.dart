@@ -1,16 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/agent/agent.services.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
-class Body extends StatefulWidget {
+class AgentBody extends StatefulWidget {
   // const Body({super.key});
 
   @override
-  State<Body> createState() => _BodyState();
+  State<AgentBody> createState() => _AgentBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _AgentBodyState extends State<AgentBody> {
   @override
   Widget build(BuildContext context) {
-    return const Background(child: SingleChildScrollView());
+    Size size = MediaQuery.of(context).size;
+    return Background(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+          child: SizedBox(
+            height: size.height,
+            width: size.width,
+            child: const Column(children: [
+              AgentServices(),
+            ]),
+          ),
+        ),
+      ),
+    );
   }
 }

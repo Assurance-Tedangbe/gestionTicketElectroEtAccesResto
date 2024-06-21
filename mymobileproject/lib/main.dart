@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/activateAccount.dart';
+import 'package:mymobileproject/UI/pages/adminInterface.dart';
 import 'package:mymobileproject/UI/pages/agentInterface.dart';
 import 'package:mymobileproject/UI/pages/cancelRecharge.dart';
 import 'package:mymobileproject/UI/pages/cancelTransfert.dart';
@@ -12,6 +13,10 @@ import 'package:mymobileproject/UI/pages/rootView.dart';
 import 'package:mymobileproject/UI/pages/login.dart';
 import 'package:mymobileproject/UI/pages/logout.dart';
 import 'package:mymobileproject/UI/pages/porterInterface.dart';
+import 'package:mymobileproject/UI/widgets/admin/manage.agent.dart';
+import 'package:mymobileproject/UI/widgets/admin/manage.porter.dart';
+import 'package:mymobileproject/UI/widgets/admin/manage.student.dart';
+import 'package:mymobileproject/UI/widgets/scanqr.dart';
 import 'package:mymobileproject/UI/pages/settings.dart';
 import 'package:mymobileproject/UI/pages/signup.dart';
 import 'package:mymobileproject/UI/pages/studentInterface.dart';
@@ -47,9 +52,13 @@ class RootView extends StatelessWidget {
       ),
       routes: {
         "/cover": (context) => CoverPage(),
-        "/home": (context) => Home(),
+        "/home": (context) => RootV(),
         "/login": (context) => LoginPage(),
         "/sign-up": (context) => SignUpPage(),
+        "/admin": (context) => AdminInterface(),
+        "/manage-students": (context) => ManageStudent(),
+        "/manage-agents": (context) => ManageAgent(),
+        "/manage-porters": (context) => ManagePorter(),
         "/activate-account": (context) => ActivateAccount(),
         "/student": (context) => StudentInterface(),
         "/ticket": (context) => Ticket(),
@@ -64,6 +73,7 @@ class RootView extends StatelessWidget {
         "/settings": (context) => SettingsPage(),
         "/cancel-recharge": (context) => CancelRecharge(),
         "/cancel-transfert": (context) => CancelTrsf(),
+        "/scanQR": (context) => ScanQR(),
         "/log-out": (context) => LogOut(),
       },
       initialRoute: "/cover",

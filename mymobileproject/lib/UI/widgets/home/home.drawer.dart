@@ -14,15 +14,15 @@ class _HomeDrawerState extends State<HomeDrawer> {
   Widget build(BuildContext context) {
     List<dynamic> menus = [
       {
-        "title": "Créer compte",
-        "route": "/sign-up",
-        "leadingIcon": Icons.person_add,
+        "title": "Accueil",
+        "route": "/home",
+        "leadingIcon": Icons.home,
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Activer compte",
-        "route": "/activate-account",
-        "leadingIcon": Icons.account_box,
+        "title": "Créer compte",
+        "route": "/sign-up",
+        "leadingIcon": Icons.person_add,
         "trailingIcon": Icons.arrow_forward
       },
       {
@@ -50,13 +50,13 @@ class _HomeDrawerState extends State<HomeDrawer> {
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Désactiver compte",
-        "route": "/deactivate-account",
-        "leadingIcon": Icons.disabled_by_default,
+        "title": "Portail admin",
+        "route": "/admin",
+        "leadingIcon": Icons.manage_accounts,
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Deconnexion",
+        "title": "Se déconnecter",
         "route": "/log-out",
         "leadingIcon": Icons.logout,
         "trailingIcon": Icons.arrow_forward

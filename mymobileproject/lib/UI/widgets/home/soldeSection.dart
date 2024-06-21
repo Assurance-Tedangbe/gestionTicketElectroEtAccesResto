@@ -9,10 +9,10 @@ class SoldeSection extends StatefulWidget {
 
 class _SoldeSectionState extends State<SoldeSection> {
 //LocalStorage storage = LocalStorage('user_information');
-  bool isVisible = false;
-  String defaultValue = "----------";
-  String solde = "";
-  String afficher = "----------";
+//  bool isVisible = false;
+  // String defaultValue = "----------";
+//  String solde = "";
+  String afficher = "- - - - ";
 
   @override
   Widget build(BuildContext context) {
@@ -20,80 +20,64 @@ class _SoldeSectionState extends State<SoldeSection> {
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 5.5,
+          height: MediaQuery.of(context).size.height / 6.5,
           decoration: const BoxDecoration(
-              color: Color.fromRGBO(23, 101, 152, 1),
+              color: Colors.blue,
               borderRadius: BorderRadius.all(Radius.circular(17.0))),
         ),
-        Container(
-          decoration: BoxDecoration(),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              const Text(
+                "Solde",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.w700),
+              ),
+              const Text(
+                "- - - -",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold),
+              ),
               Container(
-                  height: MediaQuery.of(context).size.height / 7.5,
-                  // decoration: BoxDecoration(color: Colors.red),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "+ 2.70% Aujourd'hui",
-                        style: TextStyle(
-                            color: Color.fromRGBO(235, 155, 216, 1),
-                            fontSize: 17.0),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
-                        child: Text(
-                          '₿ $afficher',
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 30.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      )
-                    ],
-                  )),
-              Image.asset("images/bitcoin.png"),
+                height: MediaQuery.of(context).size.width / 12,
+                width: MediaQuery.of(context).size.width / 12,
+                decoration: const BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.all(Radius.circular(50.0))),
+                child: IconButton(
+                    onPressed: () {},
+                    /*  () async {
+                Map response = await SellBtcService().getBalance();
+                if (response['solde'] == '0E-8') {
+                  storage.setItem('solde', '0.00000');
+                } else {
+                  storage.setItem('solde', response['solde']);
+                }
+        
+                setState(() {
+                  isVisible = !isVisible;
+                  if (isVisible) {
+                    afficher = '${storage.getItem('solde')}';
+                  } else {
+                    afficher = defaultValue;
+                  }
+                });
+              },*/
+                    icon: const Icon(
+                      Icons.visibility_off,
+                      //  isVisible ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.white,
+                    )),
+              )
             ],
           ),
         ),
-        Container(
-          height: MediaQuery.of(context).size.height / 4.8,
-          width: MediaQuery.of(context).size.width / 5,
-          child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-            Container(
-              height: MediaQuery.of(context).size.width / 7.5,
-              width: MediaQuery.of(context).size.width / 7.5,
-              decoration: const BoxDecoration(
-                  color: Color.fromRGBO(160, 32, 130, 1),
-                  borderRadius: BorderRadius.all(Radius.circular(50.0))),
-              child: IconButton(
-                  onPressed: () {},
-                  /*  () async {
-                      Map response = await SellBtcService().getBalance();
-                      if (response['solde'] == '0E-8') {
-                        storage.setItem('solde', '0.00000');
-                      } else {
-                        storage.setItem('solde', response['solde']);
-                      }
-
-                      setState(() {
-                        isVisible = !isVisible;
-                        if (isVisible) {
-                          afficher = '${storage.getItem('solde')}';
-                        } else {
-                          afficher = defaultValue;
-                        }
-                      });
-                    },*/
-                  icon: Icon(
-                    isVisible ? Icons.visibility : Icons.visibility_off,
-                    color: Colors.white,
-                  )),
-            )
-          ]),
-        )
       ],
     );
   }

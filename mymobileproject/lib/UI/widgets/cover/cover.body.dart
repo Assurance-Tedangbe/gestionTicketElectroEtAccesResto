@@ -26,15 +26,15 @@ class _CoverBodyState extends State<CoverBody> {
               alignment: Alignment.center,
               height: size.height * 0.1,
               width: size.width * 0.5,
+              color: Colors.blue,
               child: const Text(
-                "My favorite food",
+                "SenTicket",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25,
                   fontStyle: FontStyle.italic,
                 ),
               ),
-              color: Colors.blue,
             ),
             SizedBox(height: size.height * 0.03),
             const Image(

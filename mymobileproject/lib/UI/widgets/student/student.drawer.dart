@@ -13,9 +13,9 @@ class _StudentDrawerState extends State<StudentDrawer> {
   Widget build(BuildContext context) {
     List<dynamic> menus = [
       {
-        "title": "Activer compte",
-        "route": "/activate-account",
-        "leadingIcon": Icons.accessible,
+        "title": "Accueil",
+        "route": "/home",
+        "leadingIcon": Icons.home,
         "trailingIcon": Icons.arrow_forward
       },
       {
@@ -61,11 +61,11 @@ class _StudentDrawerState extends State<StudentDrawer> {
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Désactiver compte",
-        "route": "/deactivate-account",
-        "leadingIcon": Icons.disabled_by_default,
+        "title": "Se déconnecter",
+        "route": "/log-out",
+        "leadingIcon": Icons.cancel,
         "trailingIcon": Icons.arrow_forward
-      },
+      }
     ];
 
     return Drawer(

@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/rootView.dart';
-import 'package:mymobileproject/UI/widgets/agent/agent.drawer.dart';
-import 'package:mymobileproject/UI/widgets/agent/agentInterface.body.dart';
+import 'package:mymobileproject/UI/widgets/admin/admin.drawer.dart';
+import 'package:mymobileproject/UI/widgets/admin/adminInterface.body.dart';
 
-class AgentInterface extends StatefulWidget {
-  const AgentInterface({super.key});
+class AdminInterface extends StatelessWidget {
+  static const String _title = 'Interface Administrateur';
+  const AdminInterface({super.key});
 
-  @override
-  State<AgentInterface> createState() => _AgentInterfaceState();
-}
-
-class _AgentInterfaceState extends State<AgentInterface> {
-  static const String _title = 'Interface Agent';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      drawer: const AgentDrawer(),
+      drawer: const AdminDrawer(),
       appBar: AppBar(
         title: const Text(_title),
         actions: <Widget>[
@@ -33,8 +28,7 @@ class _AgentInterfaceState extends State<AgentInterface> {
           ),
         ],
       ),
-      body: AgentBody(),
-      //  bottomNavigationBar: NavigationBarAgent(),
+      body: const AdminBody(),
     );
   }
 }
