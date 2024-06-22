@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/agent/agent.services.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
-class AgentBody extends StatefulWidget {
-  // const Body({super.key});
+class AgentBody extends StatelessWidget {
+  const AgentBody({super.key});
 
-  @override
-  State<AgentBody> createState() => _AgentBodyState();
-}
-
-class _AgentBodyState extends State<AgentBody> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

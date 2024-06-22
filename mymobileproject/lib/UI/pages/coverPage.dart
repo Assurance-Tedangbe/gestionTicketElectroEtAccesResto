@@ -16,8 +16,8 @@ class _CoverPageState extends State<CoverPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        // drawer: const CoverDrawer(),
+        drawer: const CoverDrawer(),
         appBar: AppBar(title: const Text(_title)),
-        body: CoverBody());
+        body: const CoverBody());
   }
 }

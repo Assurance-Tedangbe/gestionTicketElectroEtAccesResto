@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/debitAccount.dart';
+import 'package:mymobileproject/UI/pages/scanqr.dart';
 import 'package:mymobileproject/UI/widgets/home/bloctitle.dart';
 import 'package:mymobileproject/UI/widgets/home/container.template.dart';
 import 'package:mymobileproject/UI/widgets/home/myhome.body.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
-import 'package:mymobileproject/UI/widgets/scanqr.dart';
 
 class PorterServices extends StatelessWidget {
   const PorterServices({super.key});
@@ -14,9 +14,7 @@ class PorterServices extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          BlocTitle(text: "Mes services")
-        ],
+        children: [BlocTitle(text: "Mes services")],
       ),
       const SizeboxTemplate(),
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [

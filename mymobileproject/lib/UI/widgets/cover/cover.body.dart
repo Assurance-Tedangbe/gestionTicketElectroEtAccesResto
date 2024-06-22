@@ -4,14 +4,9 @@ import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/cover/cover.body.roundedButton.dart';
 import 'package:mymobileproject/constants.dart';
 
-class CoverBody extends StatefulWidget {
-  // const Body({super.key});
+class CoverBody extends StatelessWidget {
+  const CoverBody({super.key});
 
-  @override
-  State<CoverBody> createState() => _CoverBodyState();
-}
-
-class _CoverBodyState extends State<CoverBody> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

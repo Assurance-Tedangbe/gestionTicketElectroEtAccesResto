@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/activateAccount.dart';
 import 'package:mymobileproject/UI/pages/deactivateAccount.dart';
+import 'package:mymobileproject/UI/pages/updateProfile.dart';
 import 'package:mymobileproject/UI/widgets/home/container.template.dart';
 import 'package:mymobileproject/UI/widgets/home/myhome.body.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
 
-class ManageAgent extends StatelessWidget {
-  const ManageAgent({super.key});
+class StudentMgmt extends StatelessWidget {
+  const StudentMgmt({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class ManageAgent extends StatelessWidget {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => HomeBody()));
             },
-            servicename: "Lister agents",
+            servicename: "Lister étudiants",
             imagepath: "images/graphic.png"),
         ContainerTemplate(
             press: () {
@@ -40,7 +41,7 @@ class ManageAgent extends StatelessWidget {
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const HomeBody()));
+                  MaterialPageRoute(builder: (context) => UpdateProfile()));
             },
             servicename: "Modifier compte",
             imagepath: "images/graphic.png"),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
-import 'package:mymobileproject/UI/widgets/porter/porter.services.dart';
 
-class PorterBody extends StatelessWidget {
-  const PorterBody({super.key});
+class ServiceResearchBody extends StatelessWidget {
+  const ServiceResearchBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +14,9 @@ class PorterBody extends StatelessWidget {
           child: SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: const Column(children: [
-              PorterServices(),
-            ]),
+            child: const Row(
+              children: [],
+            ),
           ),
         ),
       ),
