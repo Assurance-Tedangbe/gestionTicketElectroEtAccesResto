@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/cancelTransfert.dart';
 import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/pages/creditAccount.dart';
+import 'package:mymobileproject/UI/pages/scanqr.dart';
 import 'package:mymobileproject/UI/pages/ticket.dart';
 import 'package:mymobileproject/UI/pages/transfertCredit.dart';
 import 'package:mymobileproject/UI/pages/updateProfile.dart';
@@ -9,7 +10,6 @@ import 'package:mymobileproject/UI/widgets/home/bloctitle.dart';
 import 'package:mymobileproject/UI/widgets/home/container.template.dart';
 import 'package:mymobileproject/UI/widgets/home/myhome.body.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
-import 'package:mymobileproject/UI/widgets/scanqr.dart';
 
 class StudentServices extends StatelessWidget {
   const StudentServices({super.key});

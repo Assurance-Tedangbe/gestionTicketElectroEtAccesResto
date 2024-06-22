@@ -16,7 +16,7 @@ import 'package:mymobileproject/UI/pages/porterInterface.dart';
 import 'package:mymobileproject/UI/widgets/admin/manage.agent.dart';
 import 'package:mymobileproject/UI/widgets/admin/manage.porter.dart';
 import 'package:mymobileproject/UI/widgets/admin/manage.student.dart';
-import 'package:mymobileproject/UI/widgets/scanqr.dart';
+import 'package:mymobileproject/UI/pages/scanqr.dart';
 import 'package:mymobileproject/UI/pages/settings.dart';
 import 'package:mymobileproject/UI/pages/signup.dart';
 import 'package:mymobileproject/UI/pages/studentInterface.dart';

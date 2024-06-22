@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/login.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/cover/cover.body.roundedButton.dart';
+import 'package:mymobileproject/constants.dart';
 
 class CoverBody extends StatefulWidget {
   // const Body({super.key});
@@ -26,7 +27,7 @@ class _CoverBodyState extends State<CoverBody> {
               alignment: Alignment.center,
               height: size.height * 0.1,
               width: size.width * 0.5,
-              color: Colors.blue,
+              color: kPrimaryColor,
               child: const Text(
                 "SenTicket",
                 style: TextStyle(

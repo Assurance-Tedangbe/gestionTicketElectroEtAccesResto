@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/cancelTransfert.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
+import 'package:mymobileproject/constants.dart';
 
 class TransfertBody extends StatefulWidget {
   const TransfertBody({super.key});
@@ -21,7 +22,7 @@ class _TransfertBodyState extends State<TransfertBody> {
           children: <Widget>[
             const Icon(
               Icons.attach_money,
-              color: Colors.blue,
+              color: kPrimaryColor,
               size: 70,
             ),
             const SizedBox(height: 20),
@@ -37,7 +38,7 @@ class _TransfertBodyState extends State<TransfertBody> {
                 iconSize: 60,
                 icon: const Icon(
                   Icons.cancel,
-                  color: Colors.blue,
+                  color: kPrimaryColor,
                 ),
                 tooltip: 'Annuler transfert',
                 // the method which is called when button is pressed

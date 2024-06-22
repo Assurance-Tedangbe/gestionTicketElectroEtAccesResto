@@ -13,7 +13,6 @@ class _DebitBodyState extends State<DebitBody> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return Background(
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -44,12 +43,12 @@ class _DebitBodyState extends State<DebitBody> {
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              /* const SizedBox(height: 12),
               const Icon(
                 Icons.money_off,
                 color: Colors.blue,
                 size: 70,
-              ),
+              ),*/
               const SizedBox(height: 15),
               const ScanQR(),
               const SizedBox(height: 10),
@@ -68,7 +67,7 @@ class _DebitBodyState extends State<DebitBody> {
                   ],
                 ),
                 child: const Text(
-                  "Ou",
+                  "---------------Ou----------------",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,

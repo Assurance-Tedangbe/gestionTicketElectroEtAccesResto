@@ -16,7 +16,7 @@ class AgentDrawer extends StatelessWidget {
       {
         "title": "Activer compte",
         "route": "/activate-account",
-        "leadingIcon": Icons.accessible,
+        "leadingIcon": Icons.account_box,
         "trailingIcon": Icons.arrow_forward
       },
       {

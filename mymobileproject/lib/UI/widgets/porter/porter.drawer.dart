@@ -24,6 +24,12 @@ class _PortierDrawerState extends State<PortierDrawer> {
         "leadingIcon": Icons.money_off,
         "trailingIcon": Icons.arrow_forward
       },
+      {
+        "title": "Se déconnecter",
+        "route": "/log-out",
+        "leadingIcon": Icons.cancel,
+        "trailingIcon": Icons.arrow_forward
+      }
     ];
 
     return Drawer(
