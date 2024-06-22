@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mymobileproject/UI/widgets/login.body.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,6 +13,6 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(title: const Text(_title)),
-        body: Body());
+        body: LoginBody());
   }
 }

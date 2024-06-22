@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
+import 'package:mymobileproject/UI/widgets/signup/checksignin.btn.dart';
+import 'package:mymobileproject/UI/widgets/signup/confirmpwdsection.dart';
+import 'package:mymobileproject/UI/widgets/signup/emailsection.dart';
+import 'package:mymobileproject/UI/widgets/signup/namesection.dart';
+import 'package:mymobileproject/UI/widgets/signup/passwordsection.dart';
+import 'package:mymobileproject/UI/widgets/signup/signup.Btn.dart';
+import 'package:mymobileproject/UI/widgets/signup/usernamesection.dart';
+import 'package:mymobileproject/constants.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -11,31 +19,31 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    return Background(
+    return const Background(
       child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 120),
+        physics: AlwaysScrollableScrollPhysics(),
+        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 120),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Icon(
+            Icon(
               Icons.person_add,
-              color: Colors.blue,
+              color: kPrimaryColor,
               size: 70,
             ),
-            const SizedBox(height: 12),
-            manageName(),
-            const SizedBox(height: 12),
-            manageUsername(),
-            const SizedBox(height: 12),
-            manageEmail(),
-            const SizedBox(height: 12),
-            managePassword(),
-            const SizedBox(height: 12),
-            confirmPassword(),
-            const SizedBox(height: 12),
-            manageSignupBtn(),
-            checkSignInBtn(),
+            SizedBox(height: 12),
+            NameSection(),
+            SizedBox(height: 12),
+            UsernameSection(),
+            SizedBox(height: 12),
+            EmailSection(),
+            SizedBox(height: 12),
+            PasswordSection(),
+            SizedBox(height: 12),
+            ConfirmPwdSection(),
+            SizedBox(height: 12),
+            SignupBtn(),
+            CheckSigninBtn()
             // manageFields(label: "Confirmer mot de passe", obscureText: true),
           ],
         ),
@@ -44,7 +52,7 @@ class _BodyState extends State<Body> {
   }
 }
 
-Widget manageName() {
+/*Widget manageName() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -81,9 +89,9 @@ Widget manageName() {
       )
     ],
   );
-}
+}*/
 
-Widget manageUsername() {
+/*Widget manageUsername() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -120,9 +128,9 @@ Widget manageUsername() {
       )
     ],
   );
-}
+}*/
 
-Widget manageEmail() {
+/* Widget manageEmail() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -163,9 +171,9 @@ Widget manageEmail() {
       )
     ],
   );
-}
+}*/
 
-Widget managePassword() {
+/* Widget managePassword() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -212,9 +220,9 @@ Widget managePassword() {
       )
     ],
   );
-}
+} */
 
-Widget confirmPassword() {
+/* Widget confirmPassword() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -261,9 +269,9 @@ Widget confirmPassword() {
       )
     ],
   );
-}
+}*/
 
-Widget manageSignupBtn() {
+/*Widget manageSignupBtn() {
   return Container(
       padding: const EdgeInsets.symmetric(vertical: 25),
       width: double.infinity,
@@ -279,9 +287,9 @@ Widget manageSignupBtn() {
               color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ));
-}
+}*/
 
-Widget checkSignInBtn() {
+/*Widget checkSignInBtn() {
   return GestureDetector(
     onTap: () => print("Sign in pressed"),
     child: RichText(
@@ -299,8 +307,9 @@ Widget checkSignInBtn() {
       ]),
     ),
   );
-}
+}*/
 
+/*
 Widget manageFields({label, obscureText = false}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -334,3 +343,4 @@ Widget manageFields({label, obscureText = false}) {
     ],
   );
 }
+*/

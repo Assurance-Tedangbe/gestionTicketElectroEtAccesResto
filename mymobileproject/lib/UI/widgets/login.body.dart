@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
+import 'package:mymobileproject/UI/widgets/login/checksignup.btn.dart';
+import 'package:mymobileproject/UI/widgets/login/forgotPwdBtn.dart';
+import 'package:mymobileproject/UI/widgets/login/login.btn.dart';
+import 'package:mymobileproject/UI/widgets/login/login.emailsection.dart';
+import 'package:mymobileproject/UI/widgets/login/login.passwordsection.dart';
+import 'package:mymobileproject/constants.dart';
 
-class Body extends StatefulWidget {
+class LoginBody extends StatefulWidget {
+  const LoginBody({super.key});
+
   @override
-  _BodyState createState() => _BodyState();
+  _LoginBodyState createState() => _LoginBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _LoginBodyState extends State<LoginBody> {
   bool isRememberMe = false;
 
   Widget rememberMe() {
@@ -18,7 +26,7 @@ class _BodyState extends State<Body> {
           child: Checkbox(
               value: isRememberMe,
               checkColor: Colors.white,
-              activeColor: Colors.blue,
+              activeColor: kPrimaryColor,
               onChanged: (value) {
                 setState(() {
                   isRememberMe = value!;
@@ -45,18 +53,18 @@ class _BodyState extends State<Body> {
           children: <Widget>[
             const Icon(
               Icons.lock_open,
-              color: Colors.blue,
+              color: kPrimaryColor,
               size: 70,
             ),
             const SizedBox(height: 15),
-            manageEmail(),
+            LoginEmailSection(),
             const SizedBox(height: 15),
-            managePassword(),
-            manageForgotPasswordBtn(),
+            LoginPasswordSection(),
+            ForgotPwdBtn(),
             rememberMe(),
             const SizedBox(height: 15),
-            manageLoginBtn(),
-            checkSignUpBtn(),
+            LoginBtn(),
+            CheckSignupBtn()
           ],
         ),
       ),
@@ -65,7 +73,7 @@ class _BodyState extends State<Body> {
   }
 }
 
-Widget manageEmail() {
+/*Widget manageEmail() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -107,9 +115,9 @@ Widget manageEmail() {
       )
     ],
   );
-}
+}*/
 
-Widget managePassword() {
+/*Widget managePassword() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -157,13 +165,14 @@ Widget managePassword() {
       )
     ],
   );
-}
+}*/
 
-Widget manageForgotPasswordBtn() {
+/*Widget manageForgotPasswordBtn() {
   return Container(
     alignment: Alignment.centerRight,
     child: TextButton(
-      onPressed: () => print("Forgot password pressed"),
+      onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => CancelTrsf())),
       child: const Text(
         'Mot de passe oublié?',
         style: TextStyle(
@@ -171,9 +180,9 @@ Widget manageForgotPasswordBtn() {
       ),
     ),
   );
-}
+}*/
 
-Widget manageLoginBtn() {
+/*Widget manageLoginBtn() {
   return Container(
       padding: const EdgeInsets.symmetric(vertical: 25),
       width: double.infinity,
@@ -190,9 +199,9 @@ Widget manageLoginBtn() {
               color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ));
-}
+}*/
 
-Widget checkSignUpBtn() {
+/*Widget checkSignUpBtn() {
   return GestureDetector(
     onTap: () => print("Sign up pressed"),
     child: RichText(
@@ -210,4 +219,4 @@ Widget checkSignUpBtn() {
       ]),
     ),
   );
-}
+}*/
