@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/constants.dart';
 
 class BottomIcon extends StatelessWidget {
   final IconData bottomicon;
@@ -9,7 +10,7 @@ class BottomIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Icon(
       bottomicon,
-      color: Colors.white,
+      color: kSecondColor,
       size: 35.0,
     );
   }

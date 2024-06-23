@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/cancelRecharge.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
+import 'package:mymobileproject/constants.dart';
 
 class CreditBody extends StatefulWidget {
   const CreditBody({super.key});
@@ -21,7 +22,7 @@ class _CreditBodyState extends State<CreditBody> {
           children: <Widget>[
             const Icon(
               Icons.attach_money,
-              color: Colors.blue,
+              color: kPrimaryColor,
               size: 70,
             ),
             const SizedBox(height: 20),
@@ -35,7 +36,7 @@ class _CreditBodyState extends State<CreditBody> {
                 iconSize: 60,
                 icon: const Icon(
                   Icons.cancel,
-                  color: Colors.blue,
+                  color: kPrimaryColor,
                 ),
                 tooltip: 'Annuler recharge',
                 // the method which is called when button is pressed

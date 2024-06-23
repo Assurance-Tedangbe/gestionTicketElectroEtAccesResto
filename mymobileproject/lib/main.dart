@@ -3,7 +3,7 @@ import 'package:mymobileproject/UI/pages/activateAccount.dart';
 import 'package:mymobileproject/UI/pages/adminInterface.dart';
 import 'package:mymobileproject/UI/pages/agentInterface.dart';
 import 'package:mymobileproject/UI/pages/cancelRecharge.dart';
-import 'package:mymobileproject/UI/pages/cancelTransfert.dart';
+import 'package:mymobileproject/UI/pages/cancelTransfertCredit.dart';
 import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/pages/creditAccount.dart';
 import 'package:mymobileproject/UI/pages/deactivateAccount.dart';
@@ -13,9 +13,9 @@ import 'package:mymobileproject/UI/pages/rootView.dart';
 import 'package:mymobileproject/UI/pages/login.dart';
 import 'package:mymobileproject/UI/pages/logout.dart';
 import 'package:mymobileproject/UI/pages/porterInterface.dart';
-import 'package:mymobileproject/UI/widgets/admin/manage.agent.dart';
-import 'package:mymobileproject/UI/widgets/admin/manage.porter.dart';
-import 'package:mymobileproject/UI/widgets/admin/manage.student.dart';
+import 'package:mymobileproject/UI/widgets/admin/agent.mgmt.dart/manage.agent.dart';
+import 'package:mymobileproject/UI/widgets/admin/porter.mgmt.dart/manage.porter.dart';
+import 'package:mymobileproject/UI/widgets/admin/student.mgmt.dart/manage.student.dart';
 import 'package:mymobileproject/UI/pages/scanqr.dart';
 import 'package:mymobileproject/UI/pages/settings.dart';
 import 'package:mymobileproject/UI/pages/signup.dart';
@@ -62,7 +62,7 @@ class RootView extends StatelessWidget {
         "/activate-account": (context) => ActivateAccount(),
         "/student": (context) => StudentInterface(),
         "/ticket": (context) => Ticket(),
-        "/transfert-credit": (context) => Transfert(),
+        "/transfert-credit": (context) => TransfertCredit(),
         "/consult-account": (context) => ConsultAccount(),
         "/update-profile": (context) => UpdateProfile(),
         "/porter": (context) => PorterInterface(),
@@ -72,7 +72,7 @@ class RootView extends StatelessWidget {
         "/deactivate-account": (context) => DeactivateAccount(),
         "/settings": (context) => SettingsPage(),
         "/cancel-recharge": (context) => CancelRecharge(),
-        "/cancel-transfert": (context) => CancelTrsf(),
+        "/cancel-transfert": (context) => CancelTrsfCreditBody(),
         "/scanQR": (context) => ScanQR(),
         "/log-out": (context) => LogOut(),
       },

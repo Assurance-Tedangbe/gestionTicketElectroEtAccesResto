@@ -45,8 +45,8 @@ class NavigationBarStudent extends StatelessWidget {
           ),
           IconButton(
             enableFeedback: false,
-            onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Transfert())),
+            onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => TransfertCredit())),
             tooltip: 'Transfert credit',
             icon: const Icon(
               Icons.transfer_within_a_station,

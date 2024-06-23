@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/activateAccount.dart';
-import 'package:mymobileproject/UI/pages/cancelTransfert.dart';
+import 'package:mymobileproject/UI/pages/cancelTransfertCredit.dart';
 import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/pages/creditAccount.dart';
 import 'package:mymobileproject/UI/pages/ticket.dart';
@@ -47,8 +47,8 @@ class AgentServices extends StatelessWidget {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         ContainerTemplate(
             press: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const CancelTrsf()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const CancelTrsfCreditBody()));
             },
             servicename: "Annuler recharge",
             imagepath: "images/annuler_transaction.JPG"),

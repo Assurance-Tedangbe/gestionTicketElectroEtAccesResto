@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/pages/cancelTransfert.dart';
+import 'package:mymobileproject/UI/pages/cancelTransfertCredit.dart';
+import 'package:mymobileproject/UI/pages/cancelTransfertTicket.dart';
 import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/pages/creditAccount.dart';
 import 'package:mymobileproject/UI/pages/scanqr.dart';
 import 'package:mymobileproject/UI/pages/ticket.dart';
+import 'package:mymobileproject/UI/pages/transfert.ticket.dart';
 import 'package:mymobileproject/UI/pages/transfertCredit.dart';
 import 'package:mymobileproject/UI/pages/updateProfile.dart';
 import 'package:mymobileproject/UI/widgets/home/bloctitle.dart';
@@ -32,8 +34,8 @@ class StudentServices extends StatelessWidget {
             imagepath: "images/ticket.JPG"),
         ContainerTemplate(
             press: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const Transfert()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const TransfertTicket()));
             },
             servicename: "Transfert ticket",
             imagepath: "images/transfert.JPG"),
@@ -56,8 +58,8 @@ class StudentServices extends StatelessWidget {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         ContainerTemplate(
             press: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const CancelTrsf()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const CancelTrsfTicket()));
             },
             servicename: "Annuler transfert",
             imagepath: "images/annuler_transaction.JPG"),

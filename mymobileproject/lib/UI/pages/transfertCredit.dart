@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/transfert.body.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/transfert.credit.body.dart';
 
-class Transfert extends StatefulWidget {
-  const Transfert({super.key});
+class TransfertCredit extends StatefulWidget {
+  const TransfertCredit({super.key});
 
   @override
-  State<Transfert> createState() => _TransfertState();
+  State<TransfertCredit> createState() => _TransfertCreditState();
 }
 
-class _TransfertState extends State<Transfert> {
+class _TransfertCreditState extends State<TransfertCredit> {
   static const String _title = 'Transfert crédit';
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/coverPage.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
