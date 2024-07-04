@@ -12,11 +12,11 @@ class GoToConsultPage extends StatefulWidget {
 class _GoToConsultPageState extends State<GoToConsultPage> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-      //  width: double.infinity,
-      width: 320,
-      height: 95,
+      width: size.width / 1.5,
+      height: size.height / 7.5,
       child: ElevatedButton(
         onPressed: () => Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => ConsultData())),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/home/stat.label.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/constants.dart';
 
 class UserAccountNumberSection extends StatefulWidget {
@@ -16,7 +16,7 @@ class _UserAccountNumberSectionState extends State<UserAccountNumberSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(label: 'N° compte étudiant'),
+        const Label(text: 'N° compte étudiant'),
         const SizedBox(height: 10),
         Container(
           width: 300,

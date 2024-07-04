@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/home/stat.label.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/constants.dart';
 
 class AmountCreditToCancel extends StatefulWidget {
@@ -15,7 +15,7 @@ class _AmountCreditToCancelState extends State<AmountCreditToCancel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(label: 'Montant transferé'),
+        const Label(text: 'Montant transferé'),
         const SizedBox(height: 10),
         Container(
           width: 300,

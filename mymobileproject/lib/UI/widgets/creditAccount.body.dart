@@ -16,7 +16,7 @@ class _CreditBodyState extends State<CreditBody> {
     return Background(
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 120),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

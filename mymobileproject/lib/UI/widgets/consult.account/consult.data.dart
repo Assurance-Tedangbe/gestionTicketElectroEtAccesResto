@@ -65,143 +65,159 @@ class _ConsultDataState extends State<ConsultData> {
                           offset: Offset(0, 2))
                     ],
                   ),
-                  child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Row(
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Label(label: 'N° compte'),
-                                Text(
-                                  "- - - -",
-                                  style: TextStyle(
-                                      color: kThirdColor,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Label(label: 'Nom complet'),
-                                Text(
-                                  "- - - -",
-                                  style: TextStyle(
-                                      color: kThirdColor,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                Label(label: 'Nom d\'utilisateur'),
-                                Text(
-                                  "- - - -",
-                                  style: TextStyle(
-                                      color: kThirdColor,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                Label(label: 'Email'),
-                                Text(
-                                  "- - - -",
-                                  style: TextStyle(
-                                      color: kThirdColor,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                Column(
-                                  children: [
-                                    Label(label: 'Mot de passe'),
-                                    Text(
-                                      "- - - -",
-                                      style: TextStyle(
-                                          color: kThirdColor,
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                Label(label: 'Solde'),
-                                Text(
-                                  "- - - -",
-                                  style: TextStyle(
-                                      color: kThirdColor,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        /*  FutureBuilder(
-                         future: consulterCpt,
-                         builder: (BuildContext context, AsyncSnapshot snapshot){
-                          if (snapshot.data == null){
-                            return Container(child: Center(child: Icon(Icons.error)));
-                          }
-                          return ListView.builder(
-                            itemCount: snapshot.data.length,
-                            itemBuilder: (BuildContext context, int index){
-                              return ListTile(
-                                title: Text(
-                                  'Solde' + ' ' + ' Nom' +  ' ' + 'Prénom' + ' ' + 'N° compte' + ' '
-                                ),
-                                subtitle: 
-                                Text(
-                                  '$(snapshot.data[index].solde}' +
-                                  '$(snapshot.data[index].nom}' +
-                                   '$(snapshot.data[index].prenom}' +
-                                   '$(snapshot.data[index].numeroCompte}'
-                                  )',
-                                  onTap:() {
-                                    
-                                  },
-                                  );
-                              )} );
-                         } ),
-                         */
-                      ]),
+                  child: const Padding(
+                    padding: EdgeInsets.fromLTRB(40.0, 8.0, 8.0, 8.0),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  StatisticsLabel(label: 'N° compte'),
+                                  Text(
+                                    "- - - -",
+                                    style: TextStyle(
+                                        color: kThirdColor,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  StatisticsLabel(label: 'Nom complet'),
+                                  Text(
+                                    "- - - -",
+                                    style: TextStyle(
+                                        color: kThirdColor,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  StatisticsLabel(label: 'Nom d\'utilisateur'),
+                                  Text(
+                                    "- - - -",
+                                    style: TextStyle(
+                                        color: kThirdColor,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  StatisticsLabel(label: 'Email'),
+                                  Text(
+                                    "- - - -",
+                                    style: TextStyle(
+                                        color: kThirdColor,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  StatisticsLabel(label: 'Mot de passe'),
+                                  Text(
+                                    "- - - -",
+                                    style: TextStyle(
+                                        color: kThirdColor,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  StatisticsLabel(label: 'Solde'),
+                                  Text(
+                                    "- - - -",
+                                    style: TextStyle(
+                                        color: kThirdColor,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          /*  FutureBuilder(
+                           future: consulterCpt,
+                           builder: (BuildContext context, AsyncSnapshot snapshot){
+                            if (snapshot.data == null){
+                              return Container(child: Center(child: Icon(Icons.error)));
+                            }
+                            return ListView.builder(
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (BuildContext context, int index){
+                                return ListTile(
+                                  title: Text(
+                                    'Solde' + ' ' + ' Nom' +  ' ' + 'Prénom' + ' ' + 'N° compte' + ' '
+                                  ),
+                                  subtitle: 
+                                  Text(
+                                    '$(snapshot.data[index].solde}' +
+                                    '$(snapshot.data[index].nom}' +
+                                     '$(snapshot.data[index].prenom}' +
+                                     '$(snapshot.data[index].numeroCompte}'
+                                    )',
+                                    onTap:() {
+                                      
+                                    },
+                                    );
+                                )} );
+                           } ),
+                           */
+                        ]),
+                  ),
                 ),
               ]),
         )));

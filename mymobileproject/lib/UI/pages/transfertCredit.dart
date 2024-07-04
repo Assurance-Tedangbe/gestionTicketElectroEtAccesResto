@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/studentInterface.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/transfert.credit.body.dart';
 
 class TransfertCredit extends StatefulWidget {
@@ -14,7 +15,9 @@ class _TransfertCreditState extends State<TransfertCredit> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: AppBar(title: const Text(_title)),
+        appBar: AppBar(
+          title: const Text(_title),
+        ),
         body: TransfertBody());
   }
 }

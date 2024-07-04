@@ -8,7 +8,6 @@ import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/passwordTr
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/recipientNumberSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.ticket/numberTicketsSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.ticket/ticketTypeSection.dart';
-import 'package:mymobileproject/constants.dart';
 
 class CancelTrsfTicketBody extends StatefulWidget {
   const CancelTrsfTicketBody({super.key});
@@ -23,23 +22,26 @@ class _CancelTrsfTicketBodyState extends State<CancelTrsfTicketBody> {
     return const Background(
       child: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 70, vertical: 70),
+        padding: EdgeInsets.symmetric(horizontal: 70, vertical: 25),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(
+            /*  Icon(
               Icons.cancel,
               color: kPrimaryColor,
               size: 70,
-            ),
-            SizeboxHeight(),
+            ), */
+            //  SizeboxHeight(),
             ReferenceNumberSection(),
             SizeboxTemplate(),
             RecipientNumberSection(),
             SizeboxTemplate(),
             NumberTicketsSection(),
             SizeboxTemplate(),
-            TicketTypeSection(),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(25.0, 0.0, 8.0, 0.0),
+              child: TicketTypeSection(),
+            ),
             SizeboxTemplate(),
             PasswordTrsfSection(),
             SizeboxTemplate(),

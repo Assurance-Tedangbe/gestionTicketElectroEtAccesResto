@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/constants.dart';
 
-class Label extends StatelessWidget {
+class StatisticsLabel extends StatelessWidget {
   final String label;
-  const Label({super.key, required this.label});
+  const StatisticsLabel({super.key, required this.label});
 
   @override
   Widget build(BuildContext context) {

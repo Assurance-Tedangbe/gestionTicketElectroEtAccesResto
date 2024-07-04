@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/home/stat.label.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/constants.dart';
 
 class RecipientNumberSection extends StatefulWidget {
@@ -15,7 +15,7 @@ class _RecipientNumberSectionState extends State<RecipientNumberSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(label: 'Numéro compte destinataire'),
+        const Label(text: 'Numéro compte destinataire'),
         const SizedBox(height: 10),
         Container(
           width: 300,

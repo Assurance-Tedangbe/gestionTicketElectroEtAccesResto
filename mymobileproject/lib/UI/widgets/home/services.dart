@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/cancelTransfertCredit.dart';
+import 'package:mymobileproject/UI/pages/cancelTransfertTicket.dart';
 import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/pages/creditAccount.dart';
 import 'package:mymobileproject/UI/pages/debitAccount.dart';
@@ -63,7 +64,7 @@ class Services extends StatelessWidget {
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const CancelTrsfCredit()));
+                  builder: (context) => const CancelTrsfTicket()));
             },
             servicename: "Annuler transfert",
             imagepath: "images/annuler_transaction.JPG"),

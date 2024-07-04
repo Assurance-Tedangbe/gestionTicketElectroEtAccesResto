@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/pages/cancelTransfertCredit.dart';
+import 'package:mymobileproject/UI/widgets/cancelTrsf/cancelTrsfTicketBody/cancelTrsfTicketBody.dart';
 
 class CancelTrsfTicket extends StatelessWidget {
   static const String _title = 'Annuler transfert ticket';
@@ -10,7 +10,7 @@ class CancelTrsfTicket extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(title: const Text(_title)),
-      body: CancelTrsfCredit(),
+      body: CancelTrsfTicketBody(),
     );
   }
 }

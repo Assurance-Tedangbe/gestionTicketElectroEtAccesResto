@@ -37,7 +37,10 @@ class _TrsfTicketBodyState extends State<TrsfTicketBody> {
             const SizeboxTemplate(),
             NumberTicketsSection(),
             const SizeboxTemplate(),
-            TicketTypeSection(),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(70.0, 0.0, 8.0, 0.0),
+              child: TicketTypeSection(),
+            ),
             const SizeboxTemplate(),
             PasswordTrsfSection(),
             const SizeboxTemplate(),

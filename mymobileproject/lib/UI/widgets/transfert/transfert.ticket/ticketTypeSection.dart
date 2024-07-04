@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/home/stat.label.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/constants.dart';
 
 class TicketTypeSection extends StatefulWidget {
@@ -17,7 +17,7 @@ class _TicketTypeSectionState extends State<TicketTypeSection> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 20,
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      child: Row(children: [
         Theme(
           data: ThemeData(unselectedWidgetColor: kPrimaryColor),
           child: Checkbox(
@@ -30,20 +30,23 @@ class _TicketTypeSectionState extends State<TicketTypeSection> {
                 });
               }),
         ),
-        const Label(label: 'Type A'),
+        const Label(text: 'Type A'),
         Padding(
           padding: const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
-          child: Checkbox(
-              value: istypeA,
-              checkColor: kSecondColor,
-              activeColor: kPrimaryColor,
-              onChanged: (value) {
-                setState(() {
-                  istypeA = value!;
-                });
-              }),
+          child: Theme(
+            data: ThemeData(unselectedWidgetColor: kPrimaryColor),
+            child: Checkbox(
+                value: istypeA,
+                checkColor: kSecondColor,
+                activeColor: kPrimaryColor,
+                onChanged: (value) {
+                  setState(() {
+                    istypeB = value!;
+                  });
+                }),
+          ),
         ),
-        const Label(label: 'Type B'),
+        const Label(text: 'Type B'),
       ]),
     );
   }

@@ -40,7 +40,7 @@ class _StatisticsState extends State<Statistics> {
                   ],
                   border: Border.all(color: kPrimaryColor, width: 1)),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,14 +50,18 @@ class _StatisticsState extends State<Statistics> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ImageAsset(iconpath: "images/increase.png"),
-                          Padding(
+                          SizedBox(
+                              width: size.width / 35.0,
+                              height: size.height / 30.0,
+                              child: const ImageAsset(
+                                  iconpath: "images/increase.JPG")),
+                          const Padding(
                             padding: EdgeInsets.fromLTRB(6.0, 0.0, 0.0, 0.0),
-                            child: Label(label: "Total tickets"),
+                            child: StatisticsLabel(label: "Total tickets"),
                           )
                         ],
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
                         child: Text(
                           "20",
@@ -89,7 +93,7 @@ class _StatisticsState extends State<Statistics> {
                     ],
                     border: Border.all(color: kPrimaryColor, width: 1)),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,14 +103,18 @@ class _StatisticsState extends State<Statistics> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            ImageAsset(iconpath: "images/breakfast_icon.png"),
-                            Padding(
+                            SizedBox(
+                                width: size.width / 25.0,
+                                height: size.height / 30.0,
+                                child: const ImageAsset(
+                                    iconpath: "images/breakfast.JPG")),
+                            const Padding(
                               padding: EdgeInsets.fromLTRB(6.0, 0.0, 0.0, 0.0),
-                              child: Label(label: "Tickets A"),
+                              child: StatisticsLabel(label: "Tickets A"),
                             )
                           ],
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
                           child: Text(
                             "10",
@@ -118,7 +126,7 @@ class _StatisticsState extends State<Statistics> {
                         ),
                       ],
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
                       child: Column(
                         children: [
@@ -128,7 +136,7 @@ class _StatisticsState extends State<Statistics> {
                               Icon(
                                 Icons.food_bank,
                               ),
-                              Label(label: "Tickets B")
+                              StatisticsLabel(label: "Tickets B")
                             ],
                           ),
                           Padding(

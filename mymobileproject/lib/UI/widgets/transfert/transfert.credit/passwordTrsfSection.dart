@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/home/stat.label.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/constants.dart';
 
 class PasswordTrsfSection extends StatefulWidget {
@@ -15,7 +15,7 @@ class _PasswordTrsfSectionState extends State<PasswordTrsfSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(label: 'Votre mot de passe'),
+        const Label(text: 'Votre mot de passe'),
         const SizedBox(height: 10),
         Container(
           width: 300,
@@ -37,14 +37,14 @@ class _PasswordTrsfSectionState extends State<PasswordTrsfSection> {
             ),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.password, color: kPrimaryColor),
+              prefixIcon: Icon(Icons.lock_open, color: kPrimaryColor),
               hintText: 'Mot de passe',
               hintStyle: TextStyle(
                 color: kPrimaryColor,
                 fontSize: 12,
               ),
               suffixIcon: Icon(
-                Icons.visibility,
+                Icons.visibility_off,
                 color: kPrimaryColor,
               ),
               border: InputBorder.none,

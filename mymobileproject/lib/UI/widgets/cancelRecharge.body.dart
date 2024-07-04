@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
+import 'package:mymobileproject/UI/widgets/home/sizebox.height.dart';
 
 class CancelBody extends StatefulWidget {
   const CancelBody({super.key});
@@ -11,15 +12,15 @@ class CancelBody extends StatefulWidget {
 class _CancelBodyState extends State<CancelBody> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    //  Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 70, vertical: 70),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
+            /* Container(
               alignment: Alignment.center,
               height: size.height * 0.1,
               width: size.width * 0.7,
@@ -32,29 +33,22 @@ class _CancelBodyState extends State<CancelBody> {
                       blurRadius: 6,
                       offset: Offset(0, 2))
                 ],
-                //    border: Border.all(color: Colors.blue, width: 3)
               ),
               child: const Text(
-                "Pour annuler la recharge que vous venez d'effectuer, veuillez renseigner le n° de référence",
+                "Pour annuler la recharge que vous venez d'effectuer, veuillez renseigner les informations suivantes",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
                 ),
               ),
             ),
-            const SizedBox(height: 12),
-            const Icon(
-              Icons.cancel,
-              color: Colors.blue,
-              size: 70,
-            ),
-            const SizedBox(height: 20),
+            const SizeboxHeight(),*/
             referenceNumber(),
-            const SizedBox(height: 12),
+            const SizeboxHeight(),
             numberAccount(),
-            const SizedBox(height: 12),
+            const SizeboxHeight(),
             amount(),
-            const SizedBox(height: 12),
+            const SizeboxHeight(),
             cancelBtn(),
           ],
         ),

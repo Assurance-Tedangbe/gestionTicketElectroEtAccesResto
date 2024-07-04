@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/activateAccount.dart';
+import 'package:mymobileproject/UI/pages/cancelRecharge.dart';
 import 'package:mymobileproject/UI/pages/cancelTransfertCredit.dart';
 import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/pages/creditAccount.dart';
+import 'package:mymobileproject/UI/pages/scanqr.dart';
 import 'package:mymobileproject/UI/pages/ticket.dart';
 import 'package:mymobileproject/UI/widgets/home/bloctitle.dart';
 import 'package:mymobileproject/UI/widgets/home/container.template.dart';
-import 'package:mymobileproject/UI/widgets/home/myhome.body.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
 
 class AgentServices extends StatelessWidget {
@@ -48,7 +49,7 @@ class AgentServices extends StatelessWidget {
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const CancelTrsfCredit()));
+                  builder: (context) => const CancelRecharge()));
             },
             servicename: "Annuler recharge",
             imagepath: "images/annuler_transaction.JPG"),
@@ -62,7 +63,7 @@ class AgentServices extends StatelessWidget {
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const HomeBody()));
+                  MaterialPageRoute(builder: (context) => const ScanQR()));
             },
             servicename: "Historique",
             imagepath: "images/graphic.png"),

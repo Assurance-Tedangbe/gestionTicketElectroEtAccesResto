@@ -40,7 +40,7 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
                   ],
                   border: Border.all(color: kPrimaryColor, width: 1)),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,14 +50,18 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ImageAsset(iconpath: "images/increase.png"),
-                          Padding(
+                          SizedBox(
+                              width: size.width / 30.0,
+                              height: size.height / 35.0,
+                              child: const ImageAsset(
+                                  iconpath: "images/increase.JPG")),
+                          const Padding(
                             padding: EdgeInsets.fromLTRB(6.0, 0.0, 0.0, 0.0),
-                            child: Label(label: "Total tickets"),
+                            child: StatisticsLabel(label: "Total tickets"),
                           )
                         ],
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
                         child: Text(
                           "20",
@@ -89,7 +93,7 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
                     ],
                     border: Border.all(color: kPrimaryColor, width: 1)),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,14 +103,18 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            ImageAsset(iconpath: "images/ticket_icon.png"),
-                            Padding(
+                            SizedBox(
+                                width: size.width / 25.0,
+                                height: size.height / 30.0,
+                                child: const ImageAsset(
+                                    iconpath: "images/ticket_icon.JPG")),
+                            const Padding(
                               padding: EdgeInsets.fromLTRB(6.0, 0.0, 0.0, 0.0),
-                              child: Label(label: "Non utilisés"),
+                              child: StatisticsLabel(label: "Non utilisés"),
                             )
                           ],
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
                           child: Text(
                             "10",
@@ -119,21 +127,25 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+                      padding: const EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
                       child: Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              ImageAsset(iconpath: "images/ticket_icon.png"),
-                              Padding(
+                              SizedBox(
+                                  width: size.width / 25.0,
+                                  height: size.height / 30.0,
+                                  child: const ImageAsset(
+                                      iconpath: "images/ticket_icon.JPG")),
+                              const Padding(
                                 padding:
                                     EdgeInsets.fromLTRB(6.0, 0.0, 0.0, 0.0),
-                                child: Label(label: "Utilisés"),
+                                child: StatisticsLabel(label: "Utilisés"),
                               )
                             ],
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
                             child: Text(
                               "10",

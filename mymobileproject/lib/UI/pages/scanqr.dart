@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/constants.dart';
 
 class ScanQR extends StatefulWidget {
   const ScanQR({super.key});
@@ -10,14 +11,18 @@ class ScanQR extends StatefulWidget {
 class _ScanQRState extends State<ScanQR> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
+      width: size.width / 1.12,
+      height: size.height / 6.5,
       padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: ElevatedButton(
         onPressed: () => print('scan'),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue,
-          shape: const BeveledRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5))),
+          backgroundColor: kPrimaryColor,
           textStyle: const TextStyle(
               color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
         ),
