@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/pages/rootView.dart';
+import 'package:mymobileproject/UI/pages/research.dart';
 import 'package:mymobileproject/UI/widgets/admin/admin.drawer.dart';
 import 'package:mymobileproject/UI/widgets/admin/adminInterface.body.dart';
 
@@ -18,8 +18,8 @@ class AdminInterface extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.search),
             tooltip: 'Rechercher des services',
-            onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => RootV())),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const ServiceResearch())),
           ),
           IconButton(
             icon: const Icon(Icons.logout),

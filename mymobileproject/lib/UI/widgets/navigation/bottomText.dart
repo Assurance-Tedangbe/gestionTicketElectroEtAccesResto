@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/constants.dart';
 
 class TextAsTooltip extends StatelessWidget {
   final String text;
@@ -11,7 +12,7 @@ class TextAsTooltip extends StatelessWidget {
       text,
       style: const TextStyle(
         fontSize: 11.0,
-        color: Colors.white,
+        color: kSecondColor,
       ),
     );
   }

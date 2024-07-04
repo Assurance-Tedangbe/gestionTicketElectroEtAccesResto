@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/constants.dart';
 
 class LoginEmailSection extends StatefulWidget {
   const LoginEmailSection({super.key});
@@ -31,7 +32,7 @@ class _LoginEmailSectionState extends State<LoginEmailSection> {
                 BoxShadow(
                     color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
               ],
-              border: Border.all(color: Colors.blue, width: 3)),
+              border: Border.all(color: kPrimaryColor, width: 3)),
           height: 60,
           child: const TextField(
             keyboardType: TextInputType.emailAddress,
@@ -41,10 +42,10 @@ class _LoginEmailSectionState extends State<LoginEmailSection> {
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(Icons.email, color: Colors.blue),
+                prefixIcon: Icon(Icons.email, color: kPrimaryColor),
                 hintText: 'Email',
                 hintStyle: TextStyle(
-                  color: Colors.blue,
+                  color: kPrimaryColor,
                   fontSize: 12,
                 )),
           ),

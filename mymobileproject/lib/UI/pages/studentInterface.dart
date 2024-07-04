@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/logout.dart';
-import 'package:mymobileproject/UI/pages/rootView.dart';
+import 'package:mymobileproject/UI/pages/research.dart';
 import 'package:mymobileproject/UI/widgets/student/student.drawer.dart';
 import 'package:mymobileproject/UI/widgets/student/studentInterface.body.dart';
 
@@ -27,14 +27,14 @@ class _StudentInterfaceState extends State<StudentInterface> {
           IconButton(
             icon: const Icon(Icons.search),
             tooltip: 'Rechercher des services',
-            onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => RootV())),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const ServiceResearch())),
           ),
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'Se déconnecter',
             onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => LogOut())),
+                .push(MaterialPageRoute(builder: (context) => const LogOut())),
           ),
         ],
       ),

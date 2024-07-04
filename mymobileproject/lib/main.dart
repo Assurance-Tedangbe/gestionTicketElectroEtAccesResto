@@ -72,7 +72,7 @@ class RootView extends StatelessWidget {
         "/deactivate-account": (context) => DeactivateAccount(),
         "/settings": (context) => SettingsPage(),
         "/cancel-recharge": (context) => CancelRecharge(),
-        "/cancel-transfert": (context) => CancelTrsfCreditBody(),
+        "/cancel-transfert": (context) => CancelTrsfCredit(),
         "/scanQR": (context) => ScanQR(),
         "/log-out": (context) => LogOut(),
       },

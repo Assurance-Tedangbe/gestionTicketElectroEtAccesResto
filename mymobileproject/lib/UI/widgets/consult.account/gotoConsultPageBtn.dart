@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/pages/consult.data.dart';
+import 'package:mymobileproject/UI/widgets/consult.account/consult.data.dart';
 import 'package:mymobileproject/constants.dart';
 
 class GoToConsultPage extends StatefulWidget {

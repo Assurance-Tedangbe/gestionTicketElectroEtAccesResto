@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/signup.body.dart';
+import 'package:mymobileproject/UI/widgets/signup/signup.body.dart';
 
 class SignUpPage extends StatefulWidget {
 //  const SignUpPage({super.key});

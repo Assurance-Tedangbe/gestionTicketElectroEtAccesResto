@@ -25,7 +25,7 @@ class _PasswordSectionState extends State<PasswordSection> {
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-              color: Colors.white,
+              color: kSecondColor,
               borderRadius: BorderRadius.circular(10),
               boxShadow: const [
                 BoxShadow(
@@ -41,15 +41,15 @@ class _PasswordSectionState extends State<PasswordSection> {
             ),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.password, color: Colors.blue),
+              prefixIcon: Icon(Icons.password, color: kPrimaryColor),
               hintText: 'Mot de passe',
               hintStyle: TextStyle(
-                color: Colors.blue,
+                color: kPrimaryColor,
                 fontSize: 12,
               ),
               suffixIcon: Icon(
-                Icons.visibility,
-                color: Colors.blue,
+                Icons.visibility_off,
+                color: kPrimaryColor,
               ),
               border: InputBorder.none,
             ),

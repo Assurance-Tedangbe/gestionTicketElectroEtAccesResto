@@ -22,7 +22,7 @@ class _BodyState extends State<Body> {
     return const Background(
       child: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 120),
+        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

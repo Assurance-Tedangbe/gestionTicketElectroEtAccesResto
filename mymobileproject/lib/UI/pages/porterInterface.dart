@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/pages/debitAccount.dart';
-import 'package:mymobileproject/UI/pages/coverPage.dart';
 import 'package:mymobileproject/UI/pages/logout.dart';
-import 'package:mymobileproject/UI/pages/rootView.dart';
-import 'package:mymobileproject/UI/widgets/porter/navigationbar.porter.dart';
+import 'package:mymobileproject/UI/pages/research.dart';
 import 'package:mymobileproject/UI/widgets/porter/porterInterface.body.dart';
 import 'package:mymobileproject/UI/widgets/porter/porter.drawer.dart';
 
@@ -27,18 +24,18 @@ class _PorterInterfaceState extends State<PorterInterface> {
           IconButton(
             icon: const Icon(Icons.search),
             tooltip: 'Rechercher des services',
-            onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => RootV())),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const ServiceResearch())),
           ),
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'Se déconnecter',
             onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => LogOut())),
+                .push(MaterialPageRoute(builder: (context) => const LogOut())),
           ),
         ],
       ),
-      body: PorterBody(),
+      body: const PorterBody(),
       //   bottomNavigationBar: NavigationBarPorter(),
     );
   }

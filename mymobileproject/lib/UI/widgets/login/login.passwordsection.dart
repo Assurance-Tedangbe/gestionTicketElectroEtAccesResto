@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/constants.dart';
 
 class LoginPasswordSection extends StatefulWidget {
   const LoginPasswordSection({super.key});
@@ -25,13 +26,13 @@ class _LoginPasswordSectionState extends State<LoginPasswordSection> {
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-              color: Colors.white,
+              color: kSecondColor,
               borderRadius: BorderRadius.circular(10),
               boxShadow: const [
                 BoxShadow(
                     color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
               ],
-              border: Border.all(color: Colors.blue, width: 3)),
+              border: Border.all(color: kPrimaryColor, width: 3)),
           height: 60,
           child: const TextField(
             //  keyboardType: TextInputType.emailAddress,
@@ -41,15 +42,15 @@ class _LoginPasswordSectionState extends State<LoginPasswordSection> {
             ),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.password, color: Colors.blue),
+              prefixIcon: Icon(Icons.password, color: kPrimaryColor),
               hintText: 'Mot de passe',
               hintStyle: TextStyle(
-                color: Colors.blue,
+                color: kPrimaryColor,
                 fontSize: 12,
               ),
               suffixIcon: Icon(
-                Icons.visibility,
-                color: Colors.blue,
+                Icons.visibility_off,
+                color: kPrimaryColor,
               ),
               border: InputBorder.none,
             ),

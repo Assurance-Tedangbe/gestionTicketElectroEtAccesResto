@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/admin/account.student.management.dart';
+import 'package:mymobileproject/UI/widgets/admin/student.mgmt.dart/account.student.management.dart';
 
 class ManageStudentsBody extends StatelessWidget {
   const ManageStudentsBody({super.key});

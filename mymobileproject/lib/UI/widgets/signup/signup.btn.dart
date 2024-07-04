@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/constants.dart';
 
 class SignupBtn extends StatefulWidget {
   const SignupBtn({super.key});
@@ -18,7 +19,7 @@ class _SignupBtnState extends State<SignupBtn> {
           onPressed: () => print('Signup pressed'),
           child: const Text('Créer un compte'),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
+            backgroundColor: kPrimaryColor,
             shape: const BeveledRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5))),
             textStyle: const TextStyle(

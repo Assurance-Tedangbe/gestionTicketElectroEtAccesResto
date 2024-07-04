@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
-import 'package:mymobileproject/UI/widgets/consult.account.dart/gotoConsultPageBtn.dart';
-import 'package:mymobileproject/UI/widgets/consult.account.dart/userAccountNumberSection.dart';
+import 'package:mymobileproject/UI/widgets/consult.account/gotoConsultPageBtn.dart';
+import 'package:mymobileproject/UI/widgets/consult.account/userAccountNumberSection.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
 
 class ConsultBody extends StatefulWidget {

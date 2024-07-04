@@ -19,7 +19,7 @@ class StudentMgmt extends StatelessWidget {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => HomeBody()));
             },
-            servicename: "Lister étudiants",
+            servicename: "Lister Etudiants",
             imagepath: "images/graphic.png"),
         ContainerTemplate(
             press: () {

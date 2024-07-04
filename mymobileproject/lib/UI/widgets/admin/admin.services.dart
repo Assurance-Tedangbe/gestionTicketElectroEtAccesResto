@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/admin/manage.agent.dart';
-import 'package:mymobileproject/UI/widgets/admin/manage.porter.dart';
-import 'package:mymobileproject/UI/widgets/admin/manage.student.dart';
+import 'package:mymobileproject/UI/widgets/admin/agent.mgmt.dart/manage.agent.dart';
+import 'package:mymobileproject/UI/widgets/admin/porter.mgmt.dart/manage.porter.dart';
+import 'package:mymobileproject/UI/widgets/admin/student.mgmt.dart/manage.student.dart';
 import 'package:mymobileproject/UI/widgets/home/bloctitle.dart';
 import 'package:mymobileproject/UI/widgets/home/container.template.dart';
 import 'package:mymobileproject/UI/widgets/home/myhome.body.dart';

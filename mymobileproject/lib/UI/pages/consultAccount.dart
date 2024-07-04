@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/consultAccount.body.dart';
+import 'package:mymobileproject/UI/widgets/consult.account/consultAccount.body.dart';
 
 class ConsultAccount extends StatefulWidget {
   const ConsultAccount({super.key});

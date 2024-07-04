@@ -15,7 +15,7 @@ class _CancelBodyState extends State<CancelBody> {
     return Background(
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 65, vertical: 120),
+        padding: const EdgeInsets.symmetric(horizontal: 70, vertical: 70),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

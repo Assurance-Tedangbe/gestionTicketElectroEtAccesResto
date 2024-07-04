@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/cancelTrsf/cancelTrsfCreditBody/cancelTrsfCredit.body.dart';
 
-class CancelTrsfCreditBody extends StatefulWidget {
-  const CancelTrsfCreditBody({super.key});
+class CancelTrsfCredit extends StatefulWidget {
+  const CancelTrsfCredit({super.key});
 
   @override
-  State<CancelTrsfCreditBody> createState() => _CancelTrsfCreditBodyState();
+  State<CancelTrsfCredit> createState() => _CancelTrsfCreditState();
 }
 
-class _CancelTrsfCreditBodyState extends State<CancelTrsfCreditBody> {
+class _CancelTrsfCreditState extends State<CancelTrsfCredit> {
   static const String _title = 'Annuler transfert crédit';
   @override
   Widget build(BuildContext context) {

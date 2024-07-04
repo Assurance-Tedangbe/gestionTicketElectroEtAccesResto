@@ -63,7 +63,7 @@ class Services extends StatelessWidget {
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const CancelTrsfCreditBody()));
+                  builder: (context) => const CancelTrsfCredit()));
             },
             servicename: "Annuler transfert",
             imagepath: "images/annuler_transaction.JPG"),
