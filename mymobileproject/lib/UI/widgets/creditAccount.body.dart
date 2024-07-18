@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/cancelRecharge.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/constants.dart';
 
 class CreditBody extends StatefulWidget {
@@ -55,13 +56,7 @@ Widget manageNumberAccount() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      const Text(
-        'Numéro compte etudiant',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 15,
-        ),
-      ),
+      const Label(text: 'Numéro compte etudiant'),
       const SizedBox(height: 10),
       Container(
         width: 300,
@@ -98,13 +93,7 @@ Widget manageAmount() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      const Text(
-        'Montant',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 15,
-        ),
-      ),
+      Label(text: 'Montant'),
       const SizedBox(height: 10),
       Container(
         width: 300,
@@ -147,7 +136,7 @@ Widget manageRechargeBtn() {
       onPressed: () => print('Credit pressed'),
       child: const Text('Créditer compte'),
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue,
+        backgroundColor: kPrimaryColor,
         shape: const BeveledRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(5))),
         textStyle: const TextStyle(

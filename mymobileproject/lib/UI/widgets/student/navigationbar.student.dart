@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/buyTicket.dart';
 import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/pages/coverPage.dart';
-import 'package:mymobileproject/UI/pages/ticket.dart';
 import 'package:mymobileproject/UI/pages/transfertCredit.dart';
 
 class NavigationBarStudent extends StatelessWidget {
@@ -35,7 +35,7 @@ class NavigationBarStudent extends StatelessWidget {
           IconButton(
             enableFeedback: false,
             onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Ticket())),
+                .push(MaterialPageRoute(builder: (context) => BuyTicket())),
             tooltip: 'Achat ticket',
             icon: const Icon(
               Icons.money,
@@ -56,8 +56,10 @@ class NavigationBarStudent extends StatelessWidget {
           ),
           IconButton(
               enableFeedback: false,
-              onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => ConsultAccount())),
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ConsultAccount()));
+              },
               tooltip: 'Solde',
               icon: const Icon(
                 Icons.account_balance,

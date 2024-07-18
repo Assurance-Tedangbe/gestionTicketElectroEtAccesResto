@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/student/studentdrawer.item.dart';
 
-class StudentDrawer extends StatefulWidget {
+class StudentDrawer extends StatelessWidget {
   const StudentDrawer({super.key});
 
-  @override
-  State<StudentDrawer> createState() => _StudentDrawerState();
-}
-
-class _StudentDrawerState extends State<StudentDrawer> {
   @override
   Widget build(BuildContext context) {
     List<dynamic> menus = [
@@ -63,7 +58,7 @@ class _StudentDrawerState extends State<StudentDrawer> {
       {
         "title": "Se déconnecter",
         "route": "/log-out",
-        "leadingIcon": Icons.cancel,
+        "leadingIcon": Icons.logout,
         "trailingIcon": Icons.arrow_forward
       }
     ];

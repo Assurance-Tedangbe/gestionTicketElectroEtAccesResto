@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/activateAccount.dart';
 import 'package:mymobileproject/UI/pages/cancelRecharge.dart';
-import 'package:mymobileproject/UI/pages/cancelTransfertCredit.dart';
 import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/pages/creditAccount.dart';
+import 'package:mymobileproject/UI/pages/historic.dart';
 import 'package:mymobileproject/UI/pages/scanqr.dart';
-import 'package:mymobileproject/UI/pages/ticket.dart';
 import 'package:mymobileproject/UI/widgets/home/bloctitle.dart';
 import 'package:mymobileproject/UI/widgets/home/container.template.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
@@ -25,7 +24,7 @@ class AgentServices extends StatelessWidget {
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const Ticket()));
+                  MaterialPageRoute(builder: (context) => const ScanQR()));
             },
             servicename: "Scan QR",
             imagepath: "images/scan.JPG"),
@@ -63,10 +62,10 @@ class AgentServices extends StatelessWidget {
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const ScanQR()));
+                  MaterialPageRoute(builder: (context) => const Historic()));
             },
             servicename: "Historique",
-            imagepath: "images/graphic.png"),
+            imagepath: "images/historic.JPG"),
       ])
     ]);
   }

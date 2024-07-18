@@ -49,7 +49,7 @@ class AdminServices extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const HomeBody()));
             },
             servicename: "Historique",
-            imagepath: "images/graphic.png"),
+            imagepath: "images/historic.JPG"),
       ])
     ]);
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/login.dart';
+import 'package:mymobileproject/UI/pages/signup.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/cover/cover.body.roundedButton.dart';
 import 'package:mymobileproject/constants.dart';
@@ -42,17 +43,19 @@ class CoverBody extends StatelessWidget {
             RoundedButton(
               text: "Se connecter",
               press: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return LoginPage();
-                }));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => LoginPage()));
               },
-              // Navigator.pushNamed(context, "/login");
+              //    Navigator.pushNamed(context, "/login");
               textColor: Colors.black,
               color: Colors.white,
             ),
             RoundedButton(
               text: "S'inscrire",
-              press: () {},
+              press: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SignUpPage()));
+              },
               textColor: Colors.cyanAccent,
               color: Colors.white,
             ),

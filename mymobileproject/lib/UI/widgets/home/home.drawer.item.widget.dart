@@ -19,16 +19,22 @@ class HomeDrawerItemWidget extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: Theme.of(context).textTheme.headline6,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
       leading: Icon(
         leadingIcon,
         color: Theme.of(context).primaryColor,
+        //   size: 40,
       ),
       trailing: Icon(
         trailingIcon,
         color: Theme.of(context).primaryColor,
       ),
+      /*
+      CircleAvatar(
+          radius: 40,
+          child: Image.asset(leadingIcon, width: 25.0, height: 25.0)),
+      */
       onTap: (() => onAction()),
     );
   }

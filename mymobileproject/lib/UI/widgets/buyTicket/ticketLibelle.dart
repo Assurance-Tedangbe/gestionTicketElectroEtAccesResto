@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/constants.dart';
 
-class Label extends StatelessWidget {
-  final String text;
-  const Label({super.key, required this.text});
+class TicketLibelle extends StatelessWidget {
+  final String libelle;
+  const TicketLibelle({super.key, required this.libelle});
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      libelle,
       style: const TextStyle(
         color: kThirdColor,
-        fontSize: 13,
+        fontSize: 12,
       ),
     );
   }

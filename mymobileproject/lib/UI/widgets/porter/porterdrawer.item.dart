@@ -19,7 +19,7 @@ class PortierDrawerItem extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: Theme.of(context).textTheme.headline6,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
       leading: Icon(
         leadingIcon,

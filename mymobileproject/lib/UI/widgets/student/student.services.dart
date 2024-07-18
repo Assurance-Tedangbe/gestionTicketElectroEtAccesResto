@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/pages/cancelTransfertCredit.dart';
+import 'package:mymobileproject/UI/pages/buyTicket.dart';
 import 'package:mymobileproject/UI/pages/cancelTransfertTicket.dart';
 import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/pages/creditAccount.dart';
+import 'package:mymobileproject/UI/pages/historic.dart';
 import 'package:mymobileproject/UI/pages/scanqr.dart';
-import 'package:mymobileproject/UI/pages/ticket.dart';
 import 'package:mymobileproject/UI/pages/transfert.ticket.dart';
-import 'package:mymobileproject/UI/pages/transfertCredit.dart';
 import 'package:mymobileproject/UI/pages/updateProfile.dart';
 import 'package:mymobileproject/UI/widgets/home/bloctitle.dart';
 import 'package:mymobileproject/UI/widgets/home/container.template.dart';
-import 'package:mymobileproject/UI/widgets/home/myhome.body.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
 
 class StudentServices extends StatelessWidget {
@@ -28,7 +26,7 @@ class StudentServices extends StatelessWidget {
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const Ticket()));
+                  MaterialPageRoute(builder: (context) => const BuyTicket()));
             },
             servicename: "Acheter ticket",
             imagepath: "images/ticket.JPG"),
@@ -73,17 +71,17 @@ class StudentServices extends StatelessWidget {
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const HomeBody()));
+                  MaterialPageRoute(builder: (context) => const Historic()));
             },
             servicename: "Historique",
-            imagepath: "images/graphic.png"),
+            imagepath: "images/historic.JPG"),
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => UpdateProfile()));
             },
             servicename: "Modifier profil",
-            imagepath: "images/graphic.png")
+            imagepath: "images/update_profile.JPG")
       ])
     ]);
   }

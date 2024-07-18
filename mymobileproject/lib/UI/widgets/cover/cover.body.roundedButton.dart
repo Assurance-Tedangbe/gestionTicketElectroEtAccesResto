@@ -3,9 +3,9 @@ import 'package:mymobileproject/constants.dart';
 
 // RoundedButton(text: "Se connecter", press: () {}), // à placer là où on veut l'appeler
 
-class RoundedButton extends StatelessWidget {
+class RoundedButton extends StatefulWidget {
   final String text;
-  final Function press;
+  final Function() press;
   final Color color, textColor;
   const RoundedButton({
     Key? key,
@@ -15,6 +15,11 @@ class RoundedButton extends StatelessWidget {
     this.textColor = Colors.white,
   }) : super(key: key);
 
+  @override
+  State<RoundedButton> createState() => _RoundedButtonState();
+}
+
+class _RoundedButtonState extends State<RoundedButton> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,13 +32,13 @@ class RoundedButton extends StatelessWidget {
             height: 50,
             color: kPrimaryColor,
             child: TextButton(
-              onPressed: () {
-                press;
-              },
+              onPressed: widget.press,
               child: Text(
-                text,
+                widget.text,
                 style: TextStyle(
-                    color: color, fontWeight: FontWeight.bold, fontSize: 20),
+                    color: widget.color,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
               ),
             )),
       ),

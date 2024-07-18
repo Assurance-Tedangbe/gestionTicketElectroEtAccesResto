@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/porter/porterdrawer.item.dart';
 
-class PortierDrawer extends StatefulWidget {
+class PortierDrawer extends StatelessWidget {
   const PortierDrawer({super.key});
 
-  @override
-  State<PortierDrawer> createState() => _PortierDrawerState();
-}
-
-class _PortierDrawerState extends State<PortierDrawer> {
   @override
   Widget build(BuildContext context) {
     List<dynamic> menus = [
@@ -27,7 +22,7 @@ class _PortierDrawerState extends State<PortierDrawer> {
       {
         "title": "Se déconnecter",
         "route": "/log-out",
-        "leadingIcon": Icons.cancel,
+        "leadingIcon": Icons.logout,
         "trailingIcon": Icons.arrow_forward
       }
     ];
