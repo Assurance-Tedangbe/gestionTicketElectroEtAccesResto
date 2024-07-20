@@ -61,7 +61,10 @@ class _ServiceResearchBodyState extends State<ServiceResearchBody> {
                     style: const TextStyle(color: errorColor)),
                 ElevatedButton(onPressed: () {}, child: const Text('Retry'))
               ]);
-            } else if (state is SearchServicesSucessState) {
+            } else if (state is SearchServicesSucessState &&
+                    textEditingController.text.isNotEmpty
+                //contains('services')
+                ) {
               return const Expanded(child: ResearchListView());
             } else {
               return Container();

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/research.dart/resaerach.listTile.dart';
-import 'package:mymobileproject/constants.dart';
 
 class ResearchListView extends StatelessWidget {
   // List<dynamic> services;
@@ -93,9 +92,7 @@ class ResearchListView extends StatelessWidget {
               },
               separatorBuilder: (context, index) {
                 return const Divider(
-                  height: 3,
-                  //   color: ticketSectionColor,
-                  //  thickness: 1.0,
+                  height: 2,
                 );
               },
               itemCount: services.length),
