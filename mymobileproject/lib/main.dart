@@ -26,6 +26,7 @@ import 'package:mymobileproject/UI/pages/signup.dart';
 import 'package:mymobileproject/UI/pages/studentInterface.dart';
 import 'package:mymobileproject/UI/pages/transfertCredit.dart';
 import 'package:mymobileproject/UI/pages/updateProfile.dart';
+import 'package:mymobileproject/bloc/historic.bloc.dart';
 import 'package:mymobileproject/bloc/services.bloc.dart';
 import 'package:mymobileproject/constants.dart';
 
@@ -38,9 +39,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-        providers: [BlocProvider(create: (context) => ServicesBloc())],
-        child: const RootView());
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (context) => ServicesBloc()),
+      BlocProvider(create: (context) => HistoricBloc()),
+    ], child: const RootView());
   }
 }
 

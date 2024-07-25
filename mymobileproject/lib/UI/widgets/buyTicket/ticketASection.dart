@@ -79,7 +79,6 @@ class _TicketASectionState extends State<TicketASection> {
             TicketABloc(ticketLibelle: "1"),
             TicketABloc(ticketLibelle: "1"),
             TicketABloc(ticketLibelle: "1"),
-
             // })
           ]),
         ),

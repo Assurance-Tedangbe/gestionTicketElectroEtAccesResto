@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mymobileproject/UI/widgets/research.dart/research.listview.dart';
+import 'package:mymobileproject/bloc/historic.bloc.dart';
+import 'package:mymobileproject/constants.dart';
+import 'package:intl/intl.dart';
 
 class HistoricBody extends StatefulWidget {
   const HistoricBody({super.key});
@@ -8,20 +13,176 @@ class HistoricBody extends StatefulWidget {
 }
 
 class _HistoricBodyState extends State<HistoricBody> {
+  TextEditingController dateController1 = TextEditingController();
+  TextEditingController dateController2 = TextEditingController();
+  TextEditingController searchTransactionController = TextEditingController();
+  String _selectedItem = 'Toutes les transactions';
+  var items = [
+    'Toutes les transactions',
+    'Achat ticket',
+    'Créditer compte',
+    'Transfert ticket',
+    'Transfert crédit',
+    'Débiter compte',
+  ];
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: const Row(
-            children: [],
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          child: DropdownButtonFormField<String>(
+            value: _selectedItem,
+            onChanged: (String? value) {
+              setState(() {
+                _selectedItem = value!;
+                if (_selectedItem == true) {
+                  print(_selectedItem);
+                  String kw = _selectedItem;
+                  context
+                      .read<HistoricBloc>()
+                      .add(SearchHistoricEvent(keyword: kw));
+                }
+              });
+            },
+            decoration: const InputDecoration(
+              labelText: 'Selectionner une option',
+              border: OutlineInputBorder(),
+            ),
+            items: items.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Row(
+                  children: [
+                    //   const Icon(Icons.star),
+                    //const SizedBox(width: 10),
+                    Text(value),
+                  ],
+                ),
+              );
+            }).toList(),
           ),
         ),
-      ),
+
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20.0, 4.0, 20.0, 4.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 200,
+                height: 50,
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                    color: kSecondColor,
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: borderColor, width: 1)),
+                child: TextField(
+                    controller: dateController1,
+                    readOnly: true,
+                    decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding:
+                            EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 8.0),
+                        prefixIcon: Icon(
+                          Icons.calendar_month,
+                          color: borderColor,
+                          size: 15,
+                        ),
+                        hintText: 'Choisir date de début',
+                        hintStyle: TextStyle(
+                          color: borderColor,
+                          fontSize: 12,
+                        )),
+                    onTap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1997),
+                          lastDate: DateTime(2050));
+
+                      if (pickedDate != null) {
+                        String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                        setState(() {
+                          dateController1.text = formattedDate.toString();
+                        });
+                      } else {
+                        print("Date is not selected");
+                      }
+                    }),
+              ),
+              Container(
+                width: 200,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: kSecondColor,
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: borderColor, width: 1)),
+                child: TextField(
+                    controller: dateController2,
+                    readOnly: true,
+                    decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding:
+                            EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 8.0),
+                        prefixIcon: Icon(
+                          Icons.calendar_month,
+                          color: borderColor,
+                          size: 15,
+                        ),
+                        hintText: 'Choisir date de début',
+                        hintStyle: TextStyle(
+                          color: borderColor,
+                          fontSize: 12,
+                        )),
+                    onTap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1997),
+                          lastDate: DateTime(2050));
+
+                      if (pickedDate != null) {
+                        String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                        setState(() {
+                          dateController2.text = formattedDate.toString();
+                        });
+                      } else {
+                        print("Date is not selected");
+                      }
+                    }),
+              ),
+            ],
+          ),
+        ),
+
+        //blocBuilder
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20.0, 4.0, 20.0, 4.0),
+          child: BlocBuilder<HistoricBloc, HistoricState>(
+            builder: (context, state) {
+              if (state is SearchHistoricLoadingState) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is SearchHistoricErrorState) {
+                return Column(children: [
+                  Text(state.errorMessage,
+                      style: const TextStyle(color: errorColor)),
+                  ElevatedButton(onPressed: () {}, child: const Text('Retry'))
+                ]);
+              } else if (state is SearchHistoricSucessState &&
+                      searchTransactionController.selection.isValid
+                  //contains('services')
+                  ) {
+                return const Expanded(child: ResearchListView());
+              } else {
+                return Container();
+              }
+            },
+          ),
+        ),
+      ],
     );
   }
 }
