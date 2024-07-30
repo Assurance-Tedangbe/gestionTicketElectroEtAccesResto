@@ -3,14 +3,14 @@ import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart'
 import 'package:mymobileproject/UI/widgets/updateUser/fieldLabel.dart';
 import 'package:mymobileproject/constants.dart';
 
-class PasswordSection extends StatefulWidget {
-  const PasswordSection({super.key});
+class UpdatePassword extends StatefulWidget {
+  const UpdatePassword({super.key});
 
   @override
-  State<PasswordSection> createState() => _PasswordSectionState();
+  State<UpdatePassword> createState() => _UpdatePasswordState();
 }
 
-class _PasswordSectionState extends State<PasswordSection> {
+class _UpdatePasswordState extends State<UpdatePassword> {
   @override
   Widget build(BuildContext context) {
     return Column(

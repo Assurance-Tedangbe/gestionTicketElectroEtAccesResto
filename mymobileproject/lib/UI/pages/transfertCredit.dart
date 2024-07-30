@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/pages/studentInterface.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/transfert.credit.body.dart';
 
 class TransfertCredit extends StatefulWidget {

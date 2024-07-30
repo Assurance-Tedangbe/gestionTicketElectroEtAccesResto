@@ -1,36 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
+import 'package:mymobileproject/UI/widgets/updateUser/fieldLabel.dart';
+import 'package:mymobileproject/constants.dart';
 
-class NameSection extends StatefulWidget {
-  const NameSection({super.key});
+class FullNameSection extends StatefulWidget {
+  const FullNameSection({super.key});
 
   @override
-  State<NameSection> createState() => _NameSectionState();
+  State<FullNameSection> createState() => _FullNameSectionState();
 }
 
-class _NameSectionState extends State<NameSection> {
+class _FullNameSectionState extends State<FullNameSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
-          'Nom complet',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-          ),
-        ),
-        const SizedBox(height: 10),
+        const FieldLabel(fldLabel: "Nom complet"),
+        const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-              color: Colors.white,
+              color: kSecondColor,
               borderRadius: BorderRadius.circular(10),
               boxShadow: const [
                 BoxShadow(
                     color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
               ],
-              border: Border.all(color: Colors.blue, width: 3)),
+              border: Border.all(color: kPrimaryColor, width: 3)),
           height: 60,
           child: const TextField(
             style: TextStyle(
@@ -39,9 +36,9 @@ class _NameSectionState extends State<NameSection> {
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(Icons.person, color: Colors.blue),
+                prefixIcon: Icon(Icons.person, color: kPrimaryColor),
                 hintText: 'Nom & prénom',
-                hintStyle: TextStyle(color: Colors.blue, fontSize: 12)),
+                hintStyle: TextStyle(color: kPrimaryColor, fontSize: 12)),
           ),
         )
       ],

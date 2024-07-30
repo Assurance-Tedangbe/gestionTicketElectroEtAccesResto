@@ -15,6 +15,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
     return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(title: const Text(_title)),
-        body: Body());
+        body: UpdateProfileBody());
   }
 }

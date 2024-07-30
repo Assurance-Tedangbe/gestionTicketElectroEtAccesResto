@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/logout.dart';
 import 'package:mymobileproject/UI/pages/research.dart';
 import 'package:mymobileproject/UI/widgets/agent/agent.drawer.dart';
 import 'package:mymobileproject/UI/widgets/agent/agentInterface.body.dart';
@@ -29,7 +30,8 @@ class _AgentInterfaceState extends State<AgentInterface> {
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'Se déconnecter',
-            onPressed: () {},
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => const LogOut())),
           ),
         ],
       ),

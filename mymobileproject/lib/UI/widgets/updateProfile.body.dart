@@ -1,37 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 
-class Body extends StatefulWidget {
-  const Body({super.key});
+class UpdateProfileBody extends StatefulWidget {
+  const UpdateProfileBody({super.key});
 
   @override
-  State<Body> createState() => _BodyState();
+  State<UpdateProfileBody> createState() => _UpdateProfileBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _UpdateProfileBodyState extends State<UpdateProfileBody> {
   @override
   Widget build(BuildContext context) {
-    return Background(
+    return const Background(
         child: SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+      physics: AlwaysScrollableScrollPhysics(),
+      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Icon(
-            Icons.update,
-            color: Colors.blue,
-            size: 70,
-          ),
-          const SizedBox(height: 12),
-          updateName(),
-          const SizedBox(height: 12),
-          updateUsername(),
-          const SizedBox(height: 12),
-          updateEmail(),
-          const SizedBox(height: 12),
-          manageUpdateBtn(),
-        ],
+        children: <Widget>[],
       ),
     ));
   }

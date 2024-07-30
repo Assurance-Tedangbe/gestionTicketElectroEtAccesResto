@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/constants.dart';
 
-class SignupBtn extends StatefulWidget {
-  const SignupBtn({super.key});
+class UpdateUserBtn extends StatefulWidget {
+  const UpdateUserBtn({super.key});
 
   @override
-  State<SignupBtn> createState() => _SignupBtnState();
+  State<UpdateUserBtn> createState() => _UpdateUserBtnState();
 }
 
-class _SignupBtnState extends State<SignupBtn> {
+class _UpdateUserBtnState extends State<UpdateUserBtn> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,8 +16,8 @@ class _SignupBtnState extends State<SignupBtn> {
         width: double.infinity,
         height: 100,
         child: ElevatedButton(
-          onPressed: () => print('Signup pressed'),
-          child: const Text('Créer un compte'),
+          onPressed: () => print('update pressed'),
+          child: const Text('Modifier'),
           style: ElevatedButton.styleFrom(
             backgroundColor: kPrimaryColor,
             shape: const BeveledRectangleBorder(

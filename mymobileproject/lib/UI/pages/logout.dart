@@ -15,6 +15,6 @@ class _LogOutState extends State<LogOut> {
     return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(title: const Text(_title)),
-        body: Body());
+        body: LogOutBody());
   }
 }

@@ -1,23 +1,26 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/deactivateAccount.dart';
-import 'package:mymobileproject/UI/pages/coverPage.dart';
+import 'package:mymobileproject/UI/pages/home.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
+import 'package:mymobileproject/UI/widgets/home/sizebox.height.dart';
+import 'package:mymobileproject/UI/widgets/updateUser/pageIconTemplate.dart';
+import 'package:mymobileproject/constants.dart';
 
-class Body extends StatefulWidget {
-  const Body({super.key});
+class ActivateAccountBody extends StatefulWidget {
+  const ActivateAccountBody({super.key});
 
   @override
-  State<Body> createState() => _BodyState();
+  State<ActivateAccountBody> createState() => _ActivateAccountBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _ActivateAccountBodyState extends State<ActivateAccountBody> {
   @override
   Widget build(BuildContext context) {
     Widget animated() {
       return AnimatedButton(
         text: "Activer compte",
-        color: Colors.blue,
+        color: kPrimaryColor,
         width: 290,
         height: 90,
         pressEvent: () {
@@ -29,7 +32,7 @@ class _BodyState extends State<Body> {
             title: "Succès",
             desc: "compte active",
             btnOkOnPress: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => CoverPage())),
+                .push(MaterialPageRoute(builder: (context) => Home())),
           ).show();
         },
       );
@@ -43,11 +46,11 @@ class _BodyState extends State<Body> {
         child: ElevatedButton(
           onPressed: () {},
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
+            backgroundColor: kPrimaryColor,
             shape: const BeveledRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5))),
             textStyle: const TextStyle(
-                color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+                color: kSecondColor, fontSize: 15, fontWeight: FontWeight.bold),
           ),
           child: const Text('Activer compte'),
         ),
@@ -61,22 +64,18 @@ class _BodyState extends State<Body> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Icon(
-              Icons.accessible,
-              color: Colors.blue,
-              size: 70,
-            ),
-            const SizedBox(height: 20),
+            const PageIconTemplate(iconData: Icons.account_circle),
+            const SizeboxHeight(),
             manageNumberAccount(),
-            const SizedBox(height: 20),
+            const SizeboxHeight(),
             //  manageActivateBtn(),
             animated(),
             Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
               IconButton(
-                iconSize: 60,
+                iconSize: 40,
                 icon: const Icon(
-                  Icons.cancel,
-                  color: Colors.blue,
+                  Icons.no_accounts,
+                  color: kPrimaryColor,
                 ),
                 tooltip: 'désactiver compte',
                 // the method which is called when button is pressed

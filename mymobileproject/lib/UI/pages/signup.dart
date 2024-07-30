@@ -15,6 +15,6 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(title: const Text(_title)),
-        body: Body());
+        body: SignupBody());
   }
 }

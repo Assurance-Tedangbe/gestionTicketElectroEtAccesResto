@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/activateAccount.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
+import 'package:mymobileproject/UI/widgets/home/sizebox.height.dart';
+import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
+import 'package:mymobileproject/UI/widgets/updateUser/pageIconTemplate.dart';
+import 'package:mymobileproject/constants.dart';
 
-class Body extends StatefulWidget {
-  const Body({super.key});
+class DeactivateAccountBody extends StatefulWidget {
+  const DeactivateAccountBody({super.key});
 
   @override
-  State<Body> createState() => _BodyState();
+  State<DeactivateAccountBody> createState() => _DeactivateAccountBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _DeactivateAccountBodyState extends State<DeactivateAccountBody> {
   @override
   Widget build(BuildContext context) {
     return Background(
@@ -19,21 +23,17 @@ class _BodyState extends State<Body> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Icon(
-              Icons.cancel,
-              color: Colors.blue,
-              size: 70,
-            ),
-            const SizedBox(height: 20),
+            const PageIconTemplate(iconData: Icons.no_accounts),
+            const SizeboxHeight(),
             manageNumberAccount(),
-            const SizedBox(height: 12),
+            const SizeboxTemplate(),
             manageDeactivateBtn(),
             Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
               IconButton(
                 iconSize: 40,
                 icon: const Icon(
-                  Icons.accessible,
-                  color: Colors.blue,
+                  Icons.account_circle,
+                  color: kPrimaryColor,
                 ),
                 tooltip: 'Réactiver compte',
                 onPressed: () => Navigator.of(context).push(

@@ -13,6 +13,6 @@ class _ActivateAccountState extends State<ActivateAccount> {
     return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(title: const Text(_title)),
-        body: const Body());
+        body: const ActivateAccountBody());
   }
 }

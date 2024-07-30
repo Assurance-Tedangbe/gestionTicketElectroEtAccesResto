@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
+import 'package:mymobileproject/UI/widgets/updateUser/fieldLabel.dart';
 import 'package:mymobileproject/constants.dart';
 
 class ConfirmPwdSection extends StatefulWidget {
@@ -14,15 +16,8 @@ class _ConfirmPwdSectionState extends State<ConfirmPwdSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
-          'Confirmer mot de passe',
-          style: TextStyle(
-            color: kThirdColor,
-            fontSize: 20,
-            //    fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: 10),
+        const FieldLabel(fldLabel: "Confirmer mot de passe"),
+        const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(

@@ -3,20 +3,20 @@ import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart'
 import 'package:mymobileproject/UI/widgets/updateUser/fieldLabel.dart';
 import 'package:mymobileproject/constants.dart';
 
-class PasswordSection extends StatefulWidget {
-  const PasswordSection({super.key});
+class UpdateConfirmPassword extends StatefulWidget {
+  const UpdateConfirmPassword({super.key});
 
   @override
-  State<PasswordSection> createState() => _PasswordSectionState();
+  State<UpdateConfirmPassword> createState() => _UpdateConfirmPasswordState();
 }
 
-class _PasswordSectionState extends State<PasswordSection> {
+class _UpdateConfirmPasswordState extends State<UpdateConfirmPassword> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const FieldLabel(fldLabel: "Mot de passe"),
+        const FieldLabel(fldLabel: "Confirmer mot de passe"),
         const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
@@ -30,7 +30,6 @@ class _PasswordSectionState extends State<PasswordSection> {
               border: Border.all(color: kPrimaryColor, width: 3)),
           height: 60,
           child: const TextField(
-            //  keyboardType: TextInputType.emailAddress,
             obscureText: true,
             style: TextStyle(
               color: Colors.black87,
@@ -38,7 +37,7 @@ class _PasswordSectionState extends State<PasswordSection> {
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(Icons.password, color: kPrimaryColor),
-              hintText: 'Mot de passe',
+              hintText: 'Confirmer mot de passe',
               hintStyle: TextStyle(
                 color: kPrimaryColor,
                 fontSize: 12,

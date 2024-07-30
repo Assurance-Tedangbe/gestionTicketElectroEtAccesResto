@@ -15,6 +15,6 @@ class _DeactivateAccountState extends State<DeactivateAccount> {
     return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(title: const Text(_title)),
-        body: Body());
+        body: DeactivateAccountBody());
   }
 }

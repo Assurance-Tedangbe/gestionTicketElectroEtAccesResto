@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/coverPage.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
+import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
+import 'package:mymobileproject/UI/widgets/updateUser/pageIconTemplate.dart';
+import 'package:mymobileproject/constants.dart';
 
-class Body extends StatefulWidget {
-  const Body({super.key});
+class LogOutBody extends StatefulWidget {
+  const LogOutBody({super.key});
 
   @override
-  State<Body> createState() => _BodyState();
+  State<LogOutBody> createState() => _LogOutBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _LogOutBodyState extends State<LogOutBody> {
   Future<void> _showAlertDialog() async {
     return showDialog<void>(
       context: context,
@@ -50,11 +53,11 @@ class _BodyState extends State<Body> {
       child: ElevatedButton(
         onPressed: _showAlertDialog,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue,
+          backgroundColor: kPrimaryColor,
           shape: const BeveledRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8))),
           textStyle: const TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+              color: kSecondColor, fontSize: 18, fontWeight: FontWeight.bold),
         ),
         child: const Text('Se déconnecter'),
       ),
@@ -70,12 +73,8 @@ class _BodyState extends State<Body> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Icon(
-              Icons.logout,
-              color: Colors.blue,
-              size: 70,
-            ),
-            const SizedBox(height: 12),
+            const PageIconTemplate(iconData: Icons.logout),
+            const SizeboxTemplate(),
             logoutBtn(),
           ],
         ),

@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/fieldLabel.dart';
 import 'package:mymobileproject/constants.dart';
 
-class PasswordSection extends StatefulWidget {
-  const PasswordSection({super.key});
+class UpdateEmail extends StatefulWidget {
+  const UpdateEmail({super.key});
 
   @override
-  State<PasswordSection> createState() => _PasswordSectionState();
+  State<UpdateEmail> createState() => _UpdateEmailState();
 }
 
-class _PasswordSectionState extends State<PasswordSection> {
+class _UpdateEmailState extends State<UpdateEmail> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const FieldLabel(fldLabel: "Mot de passe"),
+        const FieldLabel(fldLabel: "Email"),
         const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
@@ -30,24 +31,13 @@ class _PasswordSectionState extends State<PasswordSection> {
               border: Border.all(color: kPrimaryColor, width: 3)),
           height: 60,
           child: const TextField(
-            //  keyboardType: TextInputType.emailAddress,
-            obscureText: true,
+            keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black87,
             ),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.password, color: kPrimaryColor),
-              hintText: 'Mot de passe',
-              hintStyle: TextStyle(
-                color: kPrimaryColor,
-                fontSize: 12,
-              ),
-              suffixIcon: Icon(
-                Icons.visibility_off,
-                color: kPrimaryColor,
-              ),
               border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14),
             ),
           ),
         )
