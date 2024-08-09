@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/fieldLabel.dart';
 import 'package:mymobileproject/constants.dart';
@@ -36,9 +35,14 @@ class _UpdateEmailState extends State<UpdateEmail> {
               color: Colors.black87,
             ),
             decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-            ),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(top: 14),
+                prefixIcon: Icon(Icons.email, color: kPrimaryColor),
+                hintText: 'Email',
+                hintStyle: TextStyle(
+                  color: kPrimaryColor,
+                  fontSize: 12,
+                )),
           ),
         )
       ],

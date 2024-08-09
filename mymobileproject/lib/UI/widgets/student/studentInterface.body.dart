@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
-import 'package:mymobileproject/UI/widgets/home/sizebox.height.dart';
+import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 import 'package:mymobileproject/UI/widgets/home/soldeSection.dart';
 import 'package:mymobileproject/UI/widgets/student/statistics.student.dart';
 import 'package:mymobileproject/UI/widgets/student/student.services.dart';
@@ -17,17 +17,17 @@ class _StudentBodyState extends State<StudentBody> {
   Widget build(BuildContext context) {
     return Background(
       child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
+          padding: const EdgeInsets.fromLTRB(2.0, 0, 2.0, 0),
           child: SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: const Column(children: [
               SoldeSection(),
-              SizeboxHeight(),
+              SizeboxHeightSession(),
               StudentServices(),
-              SizeboxHeight(),
+              SizeboxHeightSession(),
               StatisticsStudent()
             ]),
           ),

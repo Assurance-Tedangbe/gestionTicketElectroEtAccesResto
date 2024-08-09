@@ -10,7 +10,7 @@ class StatisticsLabel extends StatelessWidget {
     return Text(
       label,
       style: const TextStyle(
-          color: kPrimaryColor, fontSize: 15.0, fontWeight: FontWeight.w700),
+          color: kThirdColor, fontSize: 16.0, fontWeight: FontWeight.bold),
     );
   }
 }

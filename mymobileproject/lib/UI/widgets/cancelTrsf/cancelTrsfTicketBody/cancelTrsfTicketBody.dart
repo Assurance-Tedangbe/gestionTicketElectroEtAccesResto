@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/cancelTrsf/cancelTrsfCreditBody/referenceNumber.dart';
 import 'package:mymobileproject/UI/widgets/cancelTrsf/cancelTrsfTicketBody/cancelTrsfTicketBtn.dart';
-import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
+import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/passwordTrsfSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/recipientNumberSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.ticket/numberTicketsSection.dart';
@@ -21,7 +21,7 @@ class _CancelTrsfTicketBodyState extends State<CancelTrsfTicketBody> {
     return const Background(
       child: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 70, vertical: 25),
+        padding: EdgeInsets.symmetric(horizontal: 70, vertical: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -32,18 +32,18 @@ class _CancelTrsfTicketBodyState extends State<CancelTrsfTicketBody> {
             ), */
             //  SizeboxHeight(),
             ReferenceNumberSection(),
-            SizeboxTemplate(),
+            SizeboxHeightSession(),
             RecipientNumberSection(),
-            SizeboxTemplate(),
+            SizeboxHeightSession(),
             NumberTicketsSection(),
-            SizeboxTemplate(),
+            SizeboxHeightSession(),
             Padding(
-              padding: const EdgeInsets.fromLTRB(25.0, 0.0, 8.0, 0.0),
+              padding: EdgeInsets.fromLTRB(25.0, 0.0, 8.0, 0.0),
               child: TicketTypeSection(),
             ),
-            SizeboxTemplate(),
+            SizeboxHeightSession(),
             PasswordTrsfSection(),
-            SizeboxTemplate(),
+            SizeboxHeightSession(),
             CancelTrsfTicketBtn()
           ],
         ),

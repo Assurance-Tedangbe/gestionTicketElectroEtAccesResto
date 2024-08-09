@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
+import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/updateConfirmPassword.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/updateEmail.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/updateFullName.dart';
@@ -30,17 +31,17 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
           PageIconTemplate(iconData: Icons.update),
           SizeboxTemplate(),
           UpdateFullName(),
-          SizeboxTemplate(),
+          SizeboxHeightSession(),
           UpdateUsername(),
-          SizeboxTemplate(),
+          SizeboxHeightSession(),
           UpdateRole(),
-          SizeboxTemplate(),
+          SizeboxHeightSession(),
           UpdateEmail(),
-          SizeboxTemplate(),
+          SizeboxHeightSession(),
           UpdatePassword(),
-          SizeboxTemplate(),
+          SizeboxHeightSession(),
           UpdateConfirmPassword(),
-          SizeboxTemplate(),
+          SizeboxHeightSession(),
           UpdateUserBtn()
         ],
       ),

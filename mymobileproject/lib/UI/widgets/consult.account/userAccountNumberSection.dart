@@ -13,23 +13,26 @@ class UserAccountNumberSection extends StatefulWidget {
 class _UserAccountNumberSectionState extends State<UserAccountNumberSection> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Label(text: 'N° compte étudiant'),
         const SizedBox(height: 10),
         Container(
-          width: 300,
-          height: 50,
+          //  width: 290,
+          //  height: 50,
+          width: size.width / 1.5,
+          height: size.height / 10.0,
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-              color: Colors.white,
+              color: kSecondColor,
               borderRadius: BorderRadius.circular(10),
               boxShadow: const [
                 BoxShadow(
                     color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
               ],
-              border: Border.all(color: Colors.blue, width: 3)),
+              border: Border.all(color: kPrimaryColor, width: 3)),
           child: const TextField(
             style: TextStyle(
               color: Colors.black87,

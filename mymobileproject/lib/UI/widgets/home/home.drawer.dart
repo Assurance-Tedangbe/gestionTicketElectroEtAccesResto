@@ -26,7 +26,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Interface étudiant",
+        "title": "Interface Etudiant",
         "route": "/student",
         "leadingIcon": Icons.person,
         "trailingIcon": Icons.arrow_forward
@@ -38,19 +38,19 @@ class _HomeDrawerState extends State<HomeDrawer> {
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Interface portier",
+        "title": "Interface Portier",
         "route": "/porter",
-        "leadingIcon": Icons.person,
+        "leadingIcon": Icons.person_4,
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Interface vendeur",
+        "title": "Interface Agent",
         "route": "/agent",
-        "leadingIcon": Icons.person,
+        "leadingIcon": Icons.person_3_outlined,
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Portail admin",
+        "title": "Portail Admin",
         "route": "/admin",
         "leadingIcon": Icons.manage_accounts,
         "trailingIcon": Icons.arrow_forward

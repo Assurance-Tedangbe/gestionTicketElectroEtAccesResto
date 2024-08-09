@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/cancelTransfertTicket.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.height.dart';
-import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
+import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/passwordTrsfSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/recipientNumberSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.ticket/numberTicketsSection.dart';
@@ -34,16 +34,16 @@ class _TrsfTicketBodyState extends State<TrsfTicketBody> {
             ),
             const SizeboxHeight(),
             RecipientNumberSection(),
-            const SizeboxTemplate(),
+            const SizeboxHeightSession(),
             NumberTicketsSection(),
-            const SizeboxTemplate(),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(70.0, 0.0, 8.0, 0.0),
+            const SizeboxHeightSession(),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(70.0, 0.0, 8.0, 0.0),
               child: TicketTypeSection(),
             ),
-            const SizeboxTemplate(),
+            const SizeboxHeightSession(),
             PasswordTrsfSection(),
-            const SizeboxTemplate(),
+            const SizeboxHeightSession(),
             TransfertTicketBtn(),
             Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
               IconButton(

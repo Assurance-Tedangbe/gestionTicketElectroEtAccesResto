@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/scanqr.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
+import 'package:mymobileproject/constants.dart';
 
 class DebitBody extends StatefulWidget {
   const DebitBody({super.key});
@@ -16,14 +17,14 @@ class _DebitBodyState extends State<DebitBody> {
     return Background(
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 70, vertical: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 25),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
                 alignment: Alignment.center,
                 height: size.height * 0.15,
-                width: size.width * 0.7,
+                width: size.width * 0.9,
                 decoration: BoxDecoration(
                   color: Colors.white70,
                   borderRadius: BorderRadius.circular(10),
@@ -53,7 +54,7 @@ class _DebitBodyState extends State<DebitBody> {
                 height: size.height * 0.05,
                 width: double.infinity,
                 child: const Text(
-                  "-----------------------------------------Ou---------------------------------------------",
+                  "-------------------OU---------------------",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
@@ -64,7 +65,7 @@ class _DebitBodyState extends State<DebitBody> {
               Container(
                 alignment: Alignment.center,
                 height: size.height * 0.4,
-                width: size.width * 5,
+                width: size.width * 7,
                 decoration: BoxDecoration(
                   color: Colors.white70,
                   borderRadius: BorderRadius.circular(10),
@@ -96,23 +97,23 @@ Widget studentAccountNumber() {
       const Text(
         'N° compte étudiant',
         style: TextStyle(
-          color: Colors.black,
+          color: kThirdColor,
           fontSize: 15,
         ),
       ),
       const SizedBox(height: 10),
       Container(
-        width: 300,
+        width: 290,
         height: 50,
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: kSecondColor,
             borderRadius: BorderRadius.circular(10),
             boxShadow: const [
               BoxShadow(
                   color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
             ],
-            border: Border.all(color: Colors.blue, width: 3)),
+            border: Border.all(color: kPrimaryColor, width: 3)),
         child: const TextField(
           style: TextStyle(
             color: Colors.black87,
@@ -120,10 +121,10 @@ Widget studentAccountNumber() {
           decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.person, color: Colors.blue),
+              prefixIcon: Icon(Icons.person, color: kPrimaryColor),
               hintText: 'N° compte etudiant',
               hintStyle: TextStyle(
-                color: Colors.blue,
+                color: kPrimaryColor,
                 fontSize: 12,
               )),
         ),
@@ -135,18 +136,17 @@ Widget studentAccountNumber() {
 Widget validateBtn() {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
-    //  width: double.infinity,
     width: 320,
     height: 95,
     child: ElevatedButton(
       onPressed: () => print('validate pressed'),
       child: const Text('Valider'),
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue,
+        backgroundColor: kPrimaryColor,
         shape: const BeveledRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(5))),
         textStyle: const TextStyle(
-            color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+            color: kSecondColor, fontSize: 15, fontWeight: FontWeight.bold),
       ),
     ),
   );

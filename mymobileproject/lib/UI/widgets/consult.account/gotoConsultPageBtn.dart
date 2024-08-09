@@ -16,7 +16,7 @@ class _GoToConsultPageState extends State<GoToConsultPage> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
       width: size.width / 1.5,
-      height: size.height / 7.5,
+      height: size.height / 10.0,
       child: ElevatedButton(
         onPressed: () => Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => ConsultData())),

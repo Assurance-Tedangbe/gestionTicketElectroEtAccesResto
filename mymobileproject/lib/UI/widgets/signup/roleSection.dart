@@ -36,6 +36,12 @@ class _RoleSectionState extends State<RoleSection> {
             padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 12),
             child: DropdownButtonFormField<String>(
               value: roleSelected,
+              iconDisabledColor: kThirdColor,
+              iconEnabledColor: kPrimaryColor,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
               onChanged: (String? value) {
                 setState(() {
                   roleSelected = value!;

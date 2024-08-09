@@ -17,7 +17,7 @@ class _CreditBodyState extends State<CreditBody> {
     return Background(
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -40,7 +40,6 @@ class _CreditBodyState extends State<CreditBody> {
                   color: kPrimaryColor,
                 ),
                 tooltip: 'Annuler recharge',
-                // the method which is called when button is pressed
                 onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => CancelRecharge())),
               ),

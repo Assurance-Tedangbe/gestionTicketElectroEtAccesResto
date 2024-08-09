@@ -30,7 +30,7 @@ class _HistoricBodyState extends State<HistoricBody> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 10.0),
           child: DropdownButtonFormField<String>(
             value: _selectedItem,
             onChanged: (String? value) {
@@ -54,8 +54,6 @@ class _HistoricBodyState extends State<HistoricBody> {
                 value: value,
                 child: Row(
                   children: [
-                    //   const Icon(Icons.star),
-                    //const SizedBox(width: 10),
                     Text(value),
                   ],
                 ),
@@ -70,7 +68,7 @@ class _HistoricBodyState extends State<HistoricBody> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: 200,
+                width: 150,
                 height: 50,
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
@@ -92,7 +90,7 @@ class _HistoricBodyState extends State<HistoricBody> {
                         hintText: 'Choisir date de début',
                         hintStyle: TextStyle(
                           color: borderColor,
-                          fontSize: 12,
+                          fontSize: 10,
                         )),
                     onTap: () async {
                       DateTime? pickedDate = await showDatePicker(
@@ -113,7 +111,7 @@ class _HistoricBodyState extends State<HistoricBody> {
                     }),
               ),
               Container(
-                width: 200,
+                width: 150,
                 height: 50,
                 decoration: BoxDecoration(
                     color: kSecondColor,
@@ -131,10 +129,10 @@ class _HistoricBodyState extends State<HistoricBody> {
                           color: borderColor,
                           size: 15,
                         ),
-                        hintText: 'Choisir date de début',
+                        hintText: 'Choisir date de fin',
                         hintStyle: TextStyle(
                           color: borderColor,
-                          fontSize: 12,
+                          fontSize: 10,
                         )),
                     onTap: () async {
                       DateTime? pickedDate = await showDatePicker(

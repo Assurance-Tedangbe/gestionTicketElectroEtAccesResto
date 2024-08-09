@@ -34,9 +34,14 @@ class _ReferenceNumberSectionState extends State<ReferenceNumberSection> {
               color: Colors.black87,
             ),
             decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-            ),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(top: 14),
+                prefixIcon: Icon(Icons.person, color: kPrimaryColor),
+                hintText: 'N° de référence',
+                hintStyle: TextStyle(
+                  color: kPrimaryColor,
+                  fontSize: 12,
+                )),
           ),
         )
       ],

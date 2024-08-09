@@ -9,7 +9,7 @@ class CreditAccount extends StatefulWidget {
 }
 
 class _CreditAccountState extends State<CreditAccount> {
-  static const String _title = 'Créditer(Recharger) un compte';
+  static const String _title = 'Créditer un compte';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

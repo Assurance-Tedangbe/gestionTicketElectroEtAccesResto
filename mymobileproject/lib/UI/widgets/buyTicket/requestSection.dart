@@ -17,7 +17,7 @@ class _RequestSectionState extends State<RequestSection> {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Container(
         width: double.infinity,
-        height: size.height / 4,
+        height: size.height / 3.5,
         decoration: BoxDecoration(
             color: const Color.fromRGBO(234, 234, 244, 1),
             borderRadius: const BorderRadius.all(Radius.circular(17.0)),

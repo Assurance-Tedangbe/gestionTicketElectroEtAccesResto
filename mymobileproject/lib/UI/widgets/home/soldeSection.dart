@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/constants.dart';
 
 class SoldeSection extends StatefulWidget {
   const SoldeSection({super.key});
@@ -22,11 +23,11 @@ class _SoldeSectionState extends State<SoldeSection> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height / 6.5,
           decoration: const BoxDecoration(
-              color: Colors.blue,
+              color: kPrimaryColor,
               borderRadius: BorderRadius.all(Radius.circular(17.0))),
         ),
         Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 30.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -45,10 +46,10 @@ class _SoldeSectionState extends State<SoldeSection> {
                     fontWeight: FontWeight.bold),
               ),
               Container(
-                height: MediaQuery.of(context).size.width / 12,
+                height: MediaQuery.of(context).size.height / 15,
                 width: MediaQuery.of(context).size.width / 12,
                 decoration: const BoxDecoration(
-                    color: Colors.black,
+                    color: kThirdColor,
                     borderRadius: BorderRadius.all(Radius.circular(50.0))),
                 child: IconButton(
                     onPressed: () {},
@@ -72,7 +73,7 @@ class _SoldeSectionState extends State<SoldeSection> {
                     icon: const Icon(
                       Icons.visibility_off,
                       //  isVisible ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.white,
+                      color: kSecondColor,
                     )),
               )
             ],

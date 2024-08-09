@@ -1,44 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/pages/coverPage.dart';
-import 'package:mymobileproject/UI/pages/home.dart';
-import 'package:mymobileproject/UI/widgets/background.dart';
+import 'package:mymobileproject/UI/widgets/admin/student.mgmt.dart/manage.student.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/pageIconTemplate.dart';
 import 'package:mymobileproject/constants.dart';
 
-class LogOutBody extends StatefulWidget {
-  const LogOutBody({super.key});
+class DeleteStudent extends StatefulWidget {
+  const DeleteStudent({super.key});
 
   @override
-  State<LogOutBody> createState() => _LogOutBodyState();
+  State<DeleteStudent> createState() => _DeleteStudentState();
 }
 
-class _LogOutBodyState extends State<LogOutBody> {
-  Future<void> _showAlertDialog() async {
+class _DeleteStudentState extends State<DeleteStudent> {
+  Future<void> _showDeleteStudentDialog() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Déconnexion'),
+          title: const Text('Suppression compte Etudiant'),
           content: const SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Etes-vous sûr de vouloir vous déconnecter'),
+                Text('Etes-vous sûr de vouloir supprimer ce compte'),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
               child: const Text('ANNULER'),
-              onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Home())),
-              //() {  Navigator.of(context).pop();},
+              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const ManageStudent())),
             ),
             TextButton(
               child: const Text('OUI'),
-              onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => CoverPage())),
+              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const ManageStudent())),
             ),
           ],
         );
@@ -52,7 +49,7 @@ class _LogOutBodyState extends State<LogOutBody> {
       height: 100,
       width: 170,
       child: ElevatedButton(
-        onPressed: _showAlertDialog,
+        onPressed: _showDeleteStudentDialog,
         style: ElevatedButton.styleFrom(
           backgroundColor: kPrimaryColor,
           shape: const BeveledRectangleBorder(
@@ -60,25 +57,22 @@ class _LogOutBodyState extends State<LogOutBody> {
           textStyle: const TextStyle(
               color: kSecondColor, fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        child: const Text('Se déconnecter'),
+        child: const Text('Supprimer'),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Background(
-      child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 120),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const PageIconTemplate(iconData: Icons.logout),
-            const SizeboxTemplate(),
-            logoutBtn(),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const PageIconTemplate(iconData: Icons.delete_outline),
+          const SizeboxTemplate(),
+          logoutBtn(),
+        ],
       ),
     );
   }

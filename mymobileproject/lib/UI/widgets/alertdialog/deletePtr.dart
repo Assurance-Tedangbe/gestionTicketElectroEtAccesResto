@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/adminInterface.dart';
 import 'package:mymobileproject/UI/widgets/admin/porter.mgmt.dart/manage.porter.dart';
 
-class DeletePorter extends StatefulWidget {
-  const DeletePorter({super.key});
+class DeletePtr extends StatefulWidget {
+  const DeletePtr({super.key});
 
   @override
-  State<DeletePorter> createState() => _DeletePorterState();
+  State<DeletePtr> createState() => _DeletePtrState();
 }
 
-class _DeletePorterState extends State<DeletePorter> {
+class _DeletePtrState extends State<DeletePtr> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -23,13 +24,13 @@ class _DeletePorterState extends State<DeletePorter> {
       actions: <Widget>[
         TextButton(
           child: const Text('ANNULER'),
-          onPressed: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ManagePorter())),
+          onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ManagePorter())),
         ),
         TextButton(
           child: const Text('OUI'),
-          onPressed: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ManagePorter())),
+          onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ManagePorter())),
         ),
       ],
     );

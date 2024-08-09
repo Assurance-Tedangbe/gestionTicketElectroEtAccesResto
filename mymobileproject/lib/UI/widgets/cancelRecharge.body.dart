@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
-import 'package:mymobileproject/UI/widgets/home/sizebox.height.dart';
+import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 
 class CancelBody extends StatefulWidget {
   const CancelBody({super.key});
@@ -16,7 +16,7 @@ class _CancelBodyState extends State<CancelBody> {
     return Background(
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -44,11 +44,11 @@ class _CancelBodyState extends State<CancelBody> {
             ),
             const SizeboxHeight(),*/
             referenceNumber(),
-            const SizeboxHeight(),
+            const SizeboxHeightSession(),
             numberAccount(),
-            const SizeboxHeight(),
+            const SizeboxHeightSession(),
             amount(),
-            const SizeboxHeight(),
+            const SizeboxHeightSession(),
             cancelBtn(),
           ],
         ),

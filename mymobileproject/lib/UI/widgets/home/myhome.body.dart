@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/home/services.dart';
-import 'package:mymobileproject/UI/widgets/home/sizebox.height.dart';
+import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 import 'package:mymobileproject/UI/widgets/home/soldeSection.dart';
 import 'package:mymobileproject/UI/widgets/home/statistics.dart';
 
@@ -15,20 +15,20 @@ class HomeBody extends StatefulWidget {
 class _HomeBodyState extends State<HomeBody> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
-        // physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
+          padding: const EdgeInsets.fromLTRB(2.0, 0, 2.0, 0),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
+            height: size.height,
+            width: size.width,
             child: const Column(children: [
               SoldeSection(),
-              SizeboxHeight(),
+              SizeboxHeightSession(),
               Services(),
-              SizeboxHeight(),
+              SizeboxHeightSession(),
               Statistics()
             ]),
           ),

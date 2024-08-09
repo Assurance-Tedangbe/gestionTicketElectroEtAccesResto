@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/adminInterface.dart';
 import 'package:mymobileproject/UI/widgets/admin/agent.mgmt.dart/manage.agent.dart';
 
-class DeleteAgent extends StatefulWidget {
-  const DeleteAgent({super.key});
+class DeleteAgt extends StatefulWidget {
+  const DeleteAgt({super.key});
 
   @override
-  State<DeleteAgent> createState() => _DeleteAgentState();
+  State<DeleteAgt> createState() => _DeleteAgtState();
 }
 
-class _DeleteAgentState extends State<DeleteAgent> {
+class _DeleteAgtState extends State<DeleteAgt> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -23,13 +24,13 @@ class _DeleteAgentState extends State<DeleteAgent> {
       actions: <Widget>[
         TextButton(
           child: const Text('ANNULER'),
-          onPressed: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ManageAgent())),
+          onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ManageAgent())),
         ),
         TextButton(
           child: const Text('OUI'),
-          onPressed: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ManageAgent())),
+          onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ManageAgent())),
         ),
       ],
     );

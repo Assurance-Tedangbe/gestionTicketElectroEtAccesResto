@@ -34,9 +34,11 @@ class _UpdateUsernameState extends State<UpdateUsername> {
               color: Colors.black87,
             ),
             decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-            ),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(top: 14),
+                prefixIcon: Icon(Icons.person, color: kPrimaryColor),
+                hintText: 'Nom d\'utilisateur',
+                hintStyle: TextStyle(color: kPrimaryColor, fontSize: 12)),
           ),
         )
       ],

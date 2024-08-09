@@ -18,7 +18,7 @@ class ContainerTemplate extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       height: size.height * 0.2,
-      width: size.width * 0.15,
+      width: size.width * 0.2,
       decoration: BoxDecoration(
           color: Colors.white70,
           borderRadius: BorderRadius.circular(10),
@@ -28,7 +28,7 @@ class ContainerTemplate extends StatelessWidget {
           ],
           border: Border.all(color: Colors.white70, width: 1)),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(

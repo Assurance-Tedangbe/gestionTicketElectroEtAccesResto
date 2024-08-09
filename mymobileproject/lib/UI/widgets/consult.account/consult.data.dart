@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:http/http.dart' as http;
+import 'package:mymobileproject/UI/widgets/consult.account/dataConsultBack.dart';
 import 'dart:convert';
-
 import 'package:mymobileproject/UI/widgets/home/stat.label.dart';
-import 'package:mymobileproject/constants.dart';
 
 class ConsultData extends StatefulWidget {
   const ConsultData({super.key});
@@ -47,14 +46,14 @@ class _ConsultDataState extends State<ConsultData> {
         body: Background(
             child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 70, vertical: 70),
+          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 70),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
                   alignment: Alignment.center,
-                  height: size.height * 0.7,
-                  width: size.width * 5,
+                  height: size.height * 0.6,
+                  width: size.width * 6.0,
                   decoration: BoxDecoration(
                     color: Colors.white70,
                     borderRadius: BorderRadius.circular(10),
@@ -66,7 +65,7 @@ class _ConsultDataState extends State<ConsultData> {
                     ],
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.fromLTRB(40.0, 8.0, 8.0, 8.0),
+                    padding: EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
@@ -79,13 +78,15 @@ class _ConsultDataState extends State<ConsultData> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   StatisticsLabel(label: 'N° compte'),
-                                  Text(
+                                  SizedBox(height: 5),
+                                  /* Text(
                                     "- - - -",
                                     style: TextStyle(
                                         color: kThirdColor,
-                                        fontSize: 15.0,
+                                        fontSize: 14.0,
                                         fontWeight: FontWeight.bold),
-                                  ),
+                                  ), */
+                                  DataConsultBack()
                                 ],
                               ),
                             ],
@@ -98,13 +99,8 @@ class _ConsultDataState extends State<ConsultData> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   StatisticsLabel(label: 'Nom complet'),
-                                  Text(
-                                    "- - - -",
-                                    style: TextStyle(
-                                        color: kThirdColor,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                  SizedBox(height: 5),
+                                  DataConsultBack()
                                 ],
                               ),
                             ],
@@ -118,13 +114,8 @@ class _ConsultDataState extends State<ConsultData> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   StatisticsLabel(label: 'Nom d\'utilisateur'),
-                                  Text(
-                                    "- - - -",
-                                    style: TextStyle(
-                                        color: kThirdColor,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                  SizedBox(height: 5),
+                                  DataConsultBack()
                                 ],
                               ),
                             ],
@@ -138,13 +129,8 @@ class _ConsultDataState extends State<ConsultData> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   StatisticsLabel(label: 'Email'),
-                                  Text(
-                                    "- - - -",
-                                    style: TextStyle(
-                                        color: kThirdColor,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                  SizedBox(height: 5),
+                                  DataConsultBack()
                                 ],
                               ),
                             ],
@@ -158,13 +144,8 @@ class _ConsultDataState extends State<ConsultData> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   StatisticsLabel(label: 'Mot de passe'),
-                                  Text(
-                                    "- - - -",
-                                    style: TextStyle(
-                                        color: kThirdColor,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                  SizedBox(height: 5),
+                                  DataConsultBack()
                                 ],
                               ),
                             ],
@@ -178,13 +159,8 @@ class _ConsultDataState extends State<ConsultData> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   StatisticsLabel(label: 'Solde'),
-                                  Text(
-                                    "- - - -",
-                                    style: TextStyle(
-                                        color: kThirdColor,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                  SizedBox(height: 5),
+                                  DataConsultBack()
                                 ],
                               ),
                             ],

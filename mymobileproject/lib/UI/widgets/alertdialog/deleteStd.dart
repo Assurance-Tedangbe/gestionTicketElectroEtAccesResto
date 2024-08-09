@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/admin/student.mgmt.dart/manage.student.dart';
 
-class DeleteStudent extends StatefulWidget {
-  const DeleteStudent({super.key});
+class DeleteStd extends StatefulWidget {
+  const DeleteStd({super.key});
 
   @override
-  State<DeleteStudent> createState() => _DeleteStudentState();
+  State<DeleteStd> createState() => _DeleteStdState();
 }
 
-class _DeleteStudentState extends State<DeleteStudent> {
+class _DeleteStdState extends State<DeleteStd> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -23,13 +23,13 @@ class _DeleteStudentState extends State<DeleteStudent> {
       actions: <Widget>[
         TextButton(
           child: const Text('ANNULER'),
-          onPressed: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ManageStudent())),
+          onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ManageStudent())),
         ),
         TextButton(
           child: const Text('OUI'),
-          onPressed: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ManageStudent())),
+          onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ManageStudent())),
         ),
       ],
     );

@@ -9,7 +9,7 @@ import 'package:mymobileproject/UI/pages/transfert.ticket.dart';
 import 'package:mymobileproject/UI/pages/updateProfile.dart';
 import 'package:mymobileproject/UI/widgets/home/bloctitle.dart';
 import 'package:mymobileproject/UI/widgets/home/container.template.dart';
-import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
+import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 
 class StudentServices extends StatelessWidget {
   const StudentServices({super.key});
@@ -21,7 +21,7 @@ class StudentServices extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [BlocTitle(text: "Mes services")],
       ),
-      const SizeboxTemplate(),
+      const SizeboxHeightSession(),
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         ContainerTemplate(
             press: () {
@@ -52,7 +52,7 @@ class StudentServices extends StatelessWidget {
             servicename: "Scan QR",
             imagepath: "images/scan.JPG")
       ]),
-      const SizeboxTemplate(),
+      const SizeboxHeightSession(),
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         ContainerTemplate(
             press: () {

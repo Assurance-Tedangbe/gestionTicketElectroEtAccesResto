@@ -21,8 +21,8 @@ class _ClientNameSectionState extends State<ClientNameSection> {
           const Label(text: "Nom de l'acheteur"),
           const SizedBox(height: 5),
           Container(
-            width: size.width * 0.55,
-            height: size.height / 14.0,
+            width: size.width * 0.50,
+            height: size.height / 13.0,
             alignment: Alignment.centerLeft,
             decoration: BoxDecoration(
                 color: const Color.fromRGBO(234, 234, 244, 1),
@@ -40,7 +40,7 @@ class _ClientNameSectionState extends State<ClientNameSection> {
               ),
               decoration: InputDecoration(
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.only(top: 8),
+                  contentPadding: EdgeInsets.only(top: 10),
                   prefixIcon: Icon(Icons.person, color: Colors.black54),
                   hintText: "Acheteur",
                   hintStyle: TextStyle(

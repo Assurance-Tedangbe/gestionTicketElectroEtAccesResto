@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
+import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 import 'package:mymobileproject/UI/widgets/signup/checksignin.btn.dart';
 import 'package:mymobileproject/UI/widgets/signup/confirmpwdsection.dart';
 import 'package:mymobileproject/UI/widgets/signup/emailsection.dart';
@@ -31,17 +32,17 @@ class _SignupBodyState extends State<SignupBody> {
             PageIconTemplate(iconData: Icons.person_add),
             SizeboxTemplate(),
             FullNameSection(),
-            SizeboxTemplate(),
+            SizeboxHeightSession(),
             UsernameSection(),
-            SizeboxTemplate(),
+            SizeboxHeightSession(),
             RoleSection(),
-            SizeboxTemplate(),
+            SizeboxHeightSession(),
             EmailSection(),
-            SizeboxTemplate(),
+            SizeboxHeightSession(),
             PasswordSection(),
-            SizeboxTemplate(),
+            SizeboxHeightSession(),
             ConfirmPwdSection(),
-            SizeboxTemplate(),
+            SizeboxHeightSession(),
             SignupBtn(),
             CheckSigninBtn()
             // manageFields(label: "Confirmer mot de passe", obscureText: true),
