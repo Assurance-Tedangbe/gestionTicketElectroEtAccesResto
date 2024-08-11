@@ -27,8 +27,8 @@ class _StatisticsState extends State<Statistics> {
         children: [
           Stack(children: [
             Container(
-              width: size.width / 3.5,
-              height: size.height / 9.5,
+              width: size.width / 4.5,
+              height: size.height / 8.0,
               decoration: BoxDecoration(
                   color: const Color.fromRGBO(234, 234, 244, 1),
                   borderRadius: const BorderRadius.all(Radius.circular(17.0)),
@@ -80,8 +80,8 @@ class _StatisticsState extends State<Statistics> {
           Stack(
             children: [
               Container(
-                width: size.width / 2.0,
-                height: size.height / 9.5,
+                width: size.width / 3.0,
+                height: size.height / 8.0,
                 decoration: BoxDecoration(
                     color: const Color.fromRGBO(234, 234, 244, 1),
                     borderRadius: const BorderRadius.all(Radius.circular(17.0)),

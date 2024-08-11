@@ -17,11 +17,12 @@ class _SoldeSectionState extends State<SoldeSection> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Stack(
       children: [
         Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 6.5,
+          width: size.width,
+          height: size.height / 6.5,
           decoration: const BoxDecoration(
               color: kPrimaryColor,
               borderRadius: BorderRadius.all(Radius.circular(17.0))),
@@ -46,8 +47,8 @@ class _SoldeSectionState extends State<SoldeSection> {
                     fontWeight: FontWeight.bold),
               ),
               Container(
-                height: MediaQuery.of(context).size.height / 15,
-                width: MediaQuery.of(context).size.width / 12,
+                height: size.height / 12,
+                width: size.width / 12,
                 decoration: const BoxDecoration(
                     color: kThirdColor,
                     borderRadius: BorderRadius.all(Radius.circular(50.0))),

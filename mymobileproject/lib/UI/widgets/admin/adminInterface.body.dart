@@ -12,7 +12,7 @@ class AdminBody extends StatelessWidget {
       child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
           child: SizedBox(
             height: size.height,
             width: size.width,
