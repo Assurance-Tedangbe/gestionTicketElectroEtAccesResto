@@ -1,8 +1,9 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/activateAccount.dart';
+import 'package:mymobileproject/UI/pages/home.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.height.dart';
-import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/pageIconTemplate.dart';
 import 'package:mymobileproject/constants.dart';
 
@@ -16,6 +17,27 @@ class DeactivateAccountBody extends StatefulWidget {
 class _DeactivateAccountBodyState extends State<DeactivateAccountBody> {
   @override
   Widget build(BuildContext context) {
+    Widget desactivateBtnAnimated() {
+      return AnimatedButton(
+        text: "Désactiver compte",
+        color: kPrimaryColor,
+        width: 290,
+        height: 90,
+        pressEvent: () {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.warning,
+            animType: AnimType.bottomSlide,
+            showCloseIcon: true,
+            title: "Succès",
+            desc: "compte desactivé",
+            btnOkOnPress: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => Home())),
+          ).show();
+        },
+      );
+    }
+
     return Background(
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -26,8 +48,9 @@ class _DeactivateAccountBodyState extends State<DeactivateAccountBody> {
             const PageIconTemplate(iconData: Icons.no_accounts),
             const SizeboxHeight(),
             manageNumberAccount(),
-            const SizeboxTemplate(),
-            manageDeactivateBtn(),
+            const SizeboxHeight(),
+            desactivateBtnAnimated(),
+            // manageDeactivateBtn(),
             Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
               IconButton(
                 iconSize: 40,
