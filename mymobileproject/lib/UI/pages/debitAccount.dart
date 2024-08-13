@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/debitAccount.body.dart';
+import 'package:mymobileproject/UI/widgets/debitAccount/debitAccount.body.dart';
 
 class DebitAccount extends StatefulWidget {
   const DebitAccount({super.key});

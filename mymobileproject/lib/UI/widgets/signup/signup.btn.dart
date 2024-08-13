@@ -14,10 +14,9 @@ class _SignupBtnState extends State<SignupBtn> {
     return Container(
         padding: const EdgeInsets.symmetric(vertical: 25),
         width: double.infinity,
-        height: 100,
+        height: 90,
         child: ElevatedButton(
           onPressed: () => print('Signup pressed'),
-          child: const Text('Créer un compte'),
           style: ElevatedButton.styleFrom(
             backgroundColor: kPrimaryColor,
             shape: const BeveledRectangleBorder(
@@ -25,6 +24,7 @@ class _SignupBtnState extends State<SignupBtn> {
             textStyle: const TextStyle(
                 color: kSecondColor, fontSize: 18, fontWeight: FontWeight.bold),
           ),
+          child: const Text('Créer un compte'),
         ));
   }
 }

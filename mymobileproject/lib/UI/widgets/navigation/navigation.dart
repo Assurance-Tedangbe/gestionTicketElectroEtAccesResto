@@ -53,7 +53,10 @@ class _NavigationState extends State<Navigation> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BottomIcon(bottomicon: Icons.person),
-                TextAsTooltip(text: "Interface Etudiant")
+                Padding(
+                  padding: EdgeInsets.only(left: 2.0, right: 2.0),
+                  child: TextAsTooltip(text: "Interface Etudiant"),
+                )
               ],
             ),
             Column(
@@ -90,7 +93,10 @@ class _NavigationState extends State<Navigation> {
         widget = const Home();
         break;
       case 1:
-        widget = const StudentInterface();
+        widget = const Padding(
+          padding: EdgeInsets.only(left: 2.0, right: 2.0),
+          child: StudentInterface(),
+        );
         break;
       case 2:
         widget = const AgentInterface();

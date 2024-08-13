@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
-import 'package:mymobileproject/UI/widgets/updateUser/fieldLabel.dart';
 import 'package:mymobileproject/constants.dart';
 
 class UpdateConfirmPassword extends StatefulWidget {
@@ -16,7 +16,7 @@ class _UpdateConfirmPasswordState extends State<UpdateConfirmPassword> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const FieldLabel(fldLabel: "Confirmer mot de passe"),
+        const Label(text: 'Confirmer mot de passe'),
         const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
@@ -28,7 +28,7 @@ class _UpdateConfirmPasswordState extends State<UpdateConfirmPassword> {
                     color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
               ],
               border: Border.all(color: kPrimaryColor, width: 3)),
-          height: 60,
+          height: 50,
           child: const TextField(
             obscureText: true,
             style: TextStyle(

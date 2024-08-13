@@ -74,7 +74,7 @@ class RootView extends StatelessWidget {
         "/ticket": (context) => BuyTicket(),
         "/transfert-ticket": (context) => TransfertTicket(),
         "/transfert-credit": (context) => TransfertCredit(),
-        "cancel-transfert-ticket": (context) => CancelTrsfTicket(),
+        "/cancel-transfert-ticket": (context) => CancelTrsfTicket(),
         "/cancel-transfert-credit": (context) => CancelTrsfCredit(),
         "/consult-account": (context) => ConsultAccount(),
         "/update-profile": (context) => UpdateProfile(),

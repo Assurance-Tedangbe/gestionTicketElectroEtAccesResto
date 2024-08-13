@@ -17,7 +17,7 @@ class ActivateAccountBody extends StatefulWidget {
 class _ActivateAccountBodyState extends State<ActivateAccountBody> {
   @override
   Widget build(BuildContext context) {
-    Widget animated() {
+    Widget activationBtnAnimated() {
       return AnimatedButton(
         text: "Activer compte",
         color: kPrimaryColor,
@@ -69,7 +69,7 @@ class _ActivateAccountBodyState extends State<ActivateAccountBody> {
             manageNumberAccount(),
             const SizeboxHeight(),
             //  manageActivateBtn(),
-            animated(),
+            activationBtnAnimated(),
             Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
               IconButton(
                 iconSize: 40,
@@ -78,7 +78,6 @@ class _ActivateAccountBodyState extends State<ActivateAccountBody> {
                   color: kPrimaryColor,
                 ),
                 tooltip: 'désactiver compte',
-                // the method which is called when button is pressed
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => DeactivateAccount())),
               ),

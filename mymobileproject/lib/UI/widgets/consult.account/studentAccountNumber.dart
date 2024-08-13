@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
-import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/constants.dart';
 
-class EmailSection extends StatefulWidget {
-  const EmailSection({super.key});
+class StudentAccountNumber extends StatefulWidget {
+  const StudentAccountNumber({super.key});
 
   @override
-  State<EmailSection> createState() => _EmailSectionState();
+  State<StudentAccountNumber> createState() => _StudentAccountNumberState();
 }
 
-class _EmailSectionState extends State<EmailSection> {
+class _StudentAccountNumberState extends State<StudentAccountNumber> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(text: 'Email'),
-        const SizeBoxBtwLabelField(),
+        const Text(
+          'N° compte étudiant',
+          style: TextStyle(
+            color: kThirdColor,
+            fontSize: 15,
+          ),
+        ),
+        const SizedBox(height: 10),
         Container(
+          width: 290,
+          height: 50,
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
               color: kSecondColor,
@@ -28,17 +34,15 @@ class _EmailSectionState extends State<EmailSection> {
                     color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
               ],
               border: Border.all(color: kPrimaryColor, width: 3)),
-          height: 50,
           child: const TextField(
-            keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black87,
             ),
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(Icons.email, color: kPrimaryColor),
-                hintText: 'Email',
+                prefixIcon: Icon(Icons.person, color: kPrimaryColor),
+                hintText: 'N° compte etudiant',
                 hintStyle: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 12,

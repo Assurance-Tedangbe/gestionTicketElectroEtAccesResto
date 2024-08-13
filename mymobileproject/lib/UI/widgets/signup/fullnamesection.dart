@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
-import 'package:mymobileproject/UI/widgets/updateUser/fieldLabel.dart';
 import 'package:mymobileproject/constants.dart';
 
 class FullNameSection extends StatefulWidget {
@@ -16,7 +16,8 @@ class _FullNameSectionState extends State<FullNameSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const FieldLabel(fldLabel: "Nom complet"),
+        // const FieldLabel(fldLabel: "Nom complet"),
+        const Label(text: 'Nom complet'),
         const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
@@ -28,7 +29,7 @@ class _FullNameSectionState extends State<FullNameSection> {
                     color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
               ],
               border: Border.all(color: kPrimaryColor, width: 3)),
-          height: 60,
+          height: 50,
           child: const TextField(
             style: TextStyle(
               color: Colors.black87,

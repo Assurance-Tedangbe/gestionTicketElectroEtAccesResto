@@ -17,7 +17,7 @@ class DeactivateAccountBody extends StatefulWidget {
 class _DeactivateAccountBodyState extends State<DeactivateAccountBody> {
   @override
   Widget build(BuildContext context) {
-    Widget desactivateBtnAnimated() {
+    Widget desactivationBtnAnimated() {
       return AnimatedButton(
         text: "Désactiver compte",
         color: kPrimaryColor,
@@ -49,7 +49,7 @@ class _DeactivateAccountBodyState extends State<DeactivateAccountBody> {
             const SizeboxHeight(),
             manageNumberAccount(),
             const SizeboxHeight(),
-            desactivateBtnAnimated(),
+            desactivationBtnAnimated(),
             // manageDeactivateBtn(),
             Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
               IconButton(

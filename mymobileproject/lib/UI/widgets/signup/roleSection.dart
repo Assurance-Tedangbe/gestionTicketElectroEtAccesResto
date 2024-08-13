@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
-import 'package:mymobileproject/UI/widgets/updateUser/fieldLabel.dart';
 import 'package:mymobileproject/constants.dart';
 
 class RoleSection extends StatefulWidget {
@@ -19,7 +19,7 @@ class _RoleSectionState extends State<RoleSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const FieldLabel(fldLabel: "Rôle"),
+        const Label(text: 'Rôle'),
         const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
@@ -31,9 +31,9 @@ class _RoleSectionState extends State<RoleSection> {
                     color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
               ],
               border: Border.all(color: kPrimaryColor, width: 3)),
-          height: 60,
+          height: 50,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 12),
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8),
             child: DropdownButtonFormField<String>(
               value: roleSelected,
               iconDisabledColor: kThirdColor,

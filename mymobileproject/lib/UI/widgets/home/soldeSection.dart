@@ -35,14 +35,14 @@ class _SoldeSectionState extends State<SoldeSection> {
               const Text(
                 "Solde",
                 style: TextStyle(
-                    color: Colors.black,
+                    color: kThirdColor,
                     fontSize: 17.0,
                     fontWeight: FontWeight.w700),
               ),
               const Text(
                 "- - - -",
                 style: TextStyle(
-                    color: Colors.black,
+                    color: kThirdColor,
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold),
               ),

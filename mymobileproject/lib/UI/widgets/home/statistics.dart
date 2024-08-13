@@ -41,7 +41,7 @@ class _StatisticsState extends State<Statistics> {
                   border: Border.all(color: kPrimaryColor, width: 1)),
             ),
             Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -66,7 +66,7 @@ class _StatisticsState extends State<Statistics> {
                         child: Text(
                           "20",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: kThirdColor,
                               fontSize: 12.0,
                               fontWeight: FontWeight.w700),
                         ),
@@ -94,7 +94,7 @@ class _StatisticsState extends State<Statistics> {
                     border: Border.all(color: kPrimaryColor, width: 1)),
               ),
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -144,7 +144,7 @@ class _StatisticsState extends State<Statistics> {
                             child: Text(
                               "10",
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: kThirdColor,
                                   fontSize: 12.0,
                                   fontWeight: FontWeight.w700),
                             ),

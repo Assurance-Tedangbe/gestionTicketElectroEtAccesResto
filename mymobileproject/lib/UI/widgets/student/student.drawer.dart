@@ -38,7 +38,7 @@ class StudentDrawer extends StatelessWidget {
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Transfert",
+        "title": "Transfert crédit",
         "route": "/transfert-credit",
         "leadingIcon": Icons.transfer_within_a_station,
         "trailingIcon": Icons.arrow_forward
@@ -50,8 +50,8 @@ class StudentDrawer extends StatelessWidget {
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Annuler transfert",
-        "route": "/cancel-transfert",
+        "title": "Annuler transfert crédit",
+        "route": "/cancel-transfert-credit",
         "leadingIcon": Icons.cancel,
         "trailingIcon": Icons.arrow_forward
       },

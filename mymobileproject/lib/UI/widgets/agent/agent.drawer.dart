@@ -26,12 +26,6 @@ class AgentDrawer extends StatelessWidget {
         "trailingIcon": Icons.arrow_forward
       },
       {
-        "title": "Consulter compte",
-        "route": "/consult-account",
-        "leadingIcon": Icons.account_balance,
-        "trailingIcon": Icons.arrow_forward
-      },
-      {
         "title": "Annuler recharge",
         "route": "/cancel-recharge",
         "leadingIcon": Icons.cancel,

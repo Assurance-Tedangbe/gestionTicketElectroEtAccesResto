@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/debitAccount.dart';
-import 'package:mymobileproject/UI/pages/historic.dart';
 import 'package:mymobileproject/UI/pages/scanqr.dart';
 import 'package:mymobileproject/UI/widgets/home/bloctitle.dart';
 import 'package:mymobileproject/UI/widgets/home/container.template.dart';
@@ -32,13 +31,13 @@ class PorterServices extends StatelessWidget {
             },
             servicename: "Debiter compte",
             imagepath: "images/debiter.JPG"),
-        ContainerTemplate(
+        /*   ContainerTemplate(
             press: () {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const Historic()));
             },
             servicename: "Historique",
-            imagepath: "images/historic.JPG"),
+            imagepath: "images/historic.JPG"), */
       ]),
     ]);
   }

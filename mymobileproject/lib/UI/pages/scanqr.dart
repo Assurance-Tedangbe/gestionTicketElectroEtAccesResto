@@ -13,8 +13,10 @@ class _ScanQRState extends State<ScanQR> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      width: size.width / 1.12,
-      height: size.height / 6.5,
+      width: size.width / 1.15,
+      //  height: size.height / 4,
+      //  width: 320,
+      height: 95,
       padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),

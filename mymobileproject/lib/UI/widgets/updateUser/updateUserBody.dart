@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
-import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
 import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/updateConfirmPassword.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/updateEmail.dart';
@@ -24,12 +23,12 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
     return const Background(
         child: SingleChildScrollView(
       physics: AlwaysScrollableScrollPhysics(),
-      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           PageIconTemplate(iconData: Icons.update),
-          SizeboxTemplate(),
+          SizedBox(height: 5),
           UpdateFullName(),
           SizeboxHeightSession(),
           UpdateUsername(),
@@ -41,7 +40,6 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
           UpdatePassword(),
           SizeboxHeightSession(),
           UpdateConfirmPassword(),
-          SizeboxHeightSession(),
           UpdateUserBtn()
         ],
       ),

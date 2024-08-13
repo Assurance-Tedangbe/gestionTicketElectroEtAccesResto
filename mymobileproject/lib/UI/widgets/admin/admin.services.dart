@@ -4,7 +4,6 @@ import 'package:mymobileproject/UI/widgets/admin/porter.mgmt.dart/manage.porter.
 import 'package:mymobileproject/UI/widgets/admin/student.mgmt.dart/manage.student.dart';
 import 'package:mymobileproject/UI/widgets/home/bloctitle.dart';
 import 'package:mymobileproject/UI/widgets/home/container.template.dart';
-import 'package:mymobileproject/UI/widgets/home/myhome.body.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
 
 class AdminServices extends StatelessWidget {
@@ -33,8 +32,15 @@ class AdminServices extends StatelessWidget {
             },
             servicename: "Gérer Agents",
             imagepath: "images/graphic.png"),
+        ContainerTemplate(
+            press: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const ManagePorter()));
+            },
+            servicename: "Gérer Portiers",
+            imagepath: "images/graphic.png"),
       ]),
-      const SizeboxTemplate(),
+      /*  const SizeboxTemplate(),
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         ContainerTemplate(
             press: () {
@@ -50,7 +56,7 @@ class AdminServices extends StatelessWidget {
             },
             servicename: "Historique",
             imagepath: "images/historic.JPG"),
-      ])
+      ]) */
     ]);
   }
 }
