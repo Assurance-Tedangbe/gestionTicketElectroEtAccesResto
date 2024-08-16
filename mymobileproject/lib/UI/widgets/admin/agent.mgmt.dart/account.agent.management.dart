@@ -27,7 +27,7 @@ class AgentMgmt extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => ActivateAccount()));
             },
             servicename: "Activer compte",
-            imagepath: "images/graphic.png"),
+            imagepath: "images/activate_icon.JPG"),
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(

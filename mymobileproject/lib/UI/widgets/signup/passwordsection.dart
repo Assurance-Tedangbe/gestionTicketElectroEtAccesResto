@@ -36,7 +36,7 @@ class _PasswordSectionState extends State<PasswordSection> {
               color: Colors.black87,
             ),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(top: 14),
+              contentPadding: EdgeInsets.only(top: 11),
               prefixIcon: Icon(Icons.password, color: kPrimaryColor),
               hintText: 'Mot de passe',
               hintStyle: TextStyle(

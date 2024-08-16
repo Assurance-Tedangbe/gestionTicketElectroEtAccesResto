@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/login.dart';
 import 'package:mymobileproject/constants.dart';
 
 class CheckSigninBtn extends StatefulWidget {
@@ -12,7 +13,10 @@ class _CheckSigninBtnState extends State<CheckSigninBtn> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print("Sign in pressed"),
+      onTap: () => {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => LoginPage()))
+      },
       child: RichText(
         text: const TextSpan(children: [
           TextSpan(

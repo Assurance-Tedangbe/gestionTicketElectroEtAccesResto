@@ -51,8 +51,8 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                              width: size.width / 30.0,
-                              height: size.height / 35.0,
+                              width: size.width / 20.0,
+                              height: size.height / 50.0,
                               child: const ImageAsset(
                                   iconpath: "images/increase.JPG")),
                           const Padding(
@@ -80,8 +80,8 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
           Stack(
             children: [
               Container(
-                width: size.width / 3.0,
-                height: size.height / 8.0,
+                width: size.width / 2.0,
+                height: size.height / 9.0,
                 decoration: BoxDecoration(
                     color: const Color.fromRGBO(234, 234, 244, 1),
                     borderRadius: const BorderRadius.all(Radius.circular(17.0)),

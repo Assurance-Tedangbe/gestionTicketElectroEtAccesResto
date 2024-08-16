@@ -24,21 +24,21 @@ class AdminServices extends StatelessWidget {
                   builder: (context) => const ManageStudent()));
             },
             servicename: "Gérer Etudiants",
-            imagepath: "images/graphic.png"),
+            imagepath: "images/account_mgt_icon.jpeg"),
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const ManageAgent()));
             },
             servicename: "Gérer Agents",
-            imagepath: "images/graphic.png"),
+            imagepath: "images/account_mgt_icon.jpeg"),
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const ManagePorter()));
             },
             servicename: "Gérer Portiers",
-            imagepath: "images/graphic.png"),
+            imagepath: "images/account_mgt_icon.jpeg"),
       ]),
       /*  const SizeboxTemplate(),
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [

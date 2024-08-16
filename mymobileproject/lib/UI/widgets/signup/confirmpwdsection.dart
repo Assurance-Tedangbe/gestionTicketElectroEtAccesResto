@@ -35,7 +35,7 @@ class _ConfirmPwdSectionState extends State<ConfirmPwdSection> {
               color: Colors.black87,
             ),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(top: 14),
+              contentPadding: EdgeInsets.only(top: 11),
               prefixIcon: Icon(Icons.password, color: kPrimaryColor),
               hintText: 'Confirmer mot de passe',
               hintStyle: TextStyle(

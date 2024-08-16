@@ -22,13 +22,13 @@ class StudentDrawer extends StatelessWidget {
       {
         "title": "Acheter ticket",
         "route": "/ticket",
-        "leadingIcon": Icons.money,
+        "leadingIcon": Icons.credit_card,
         "trailingIcon": Icons.arrow_forward
       },
       {
         "title": "Consulter compte",
         "route": "/consult-account",
-        "leadingIcon": Icons.account_balance,
+        "leadingIcon": Icons.visibility,
         "trailingIcon": Icons.arrow_forward
       },
       {

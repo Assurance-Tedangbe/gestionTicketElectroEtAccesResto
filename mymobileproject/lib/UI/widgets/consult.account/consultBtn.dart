@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/consult.account/consult.data.dart';
 import 'package:mymobileproject/constants.dart';
 
 class ConsultBtn extends StatefulWidget {
@@ -16,7 +17,8 @@ class _ConsultBtnState extends State<ConsultBtn> {
       width: 320,
       height: 95,
       child: ElevatedButton(
-        onPressed: () => print('pressed'),
+        onPressed: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => ConsultData())),
         style: ElevatedButton.styleFrom(
           backgroundColor: kPrimaryColor,
           shape: const BeveledRectangleBorder(

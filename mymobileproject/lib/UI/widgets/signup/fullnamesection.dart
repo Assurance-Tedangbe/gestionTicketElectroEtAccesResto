@@ -36,7 +36,7 @@ class _FullNameSectionState extends State<FullNameSection> {
             ),
             decoration: InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
+                contentPadding: EdgeInsets.only(top: 11),
                 prefixIcon: Icon(Icons.person, color: kPrimaryColor),
                 hintText: 'Nom & prénom',
                 hintStyle: TextStyle(color: kPrimaryColor, fontSize: 12)),

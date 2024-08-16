@@ -8,13 +8,13 @@ class ForgotPwdBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(16.0),
+    return const SingleChildScrollView(
+      physics: AlwaysScrollableScrollPhysics(),
+      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           LoginEmailSection(),
-          SizeboxHeight(),
           GoToResetPwdBtn(),
         ],
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/forgot.pwd/reset.btn.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.height.dart';
 import 'package:mymobileproject/UI/widgets/signup/confirmpwdsection.dart';
@@ -14,12 +13,14 @@ class ResetPwd extends StatefulWidget {
 }
 
 class _ResetPwdState extends State<ResetPwd> {
+  static const String _title = 'Réinitialisation mot de passe';
   @override
   Widget build(BuildContext context) {
-    return const Background(
-      child: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(title: const Text(_title)),
+      body: const Padding(
+        padding: EdgeInsets.all(32.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

@@ -14,7 +14,7 @@ class _BuyTicketBtnState extends State<BuyTicketBtn> {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width * 0.3,
-      height: size.height / 9.0,
+      height: size.height / 14.0,
       child: ElevatedButton(
         onPressed: () => print('buy pressed'),
         style: ElevatedButton.styleFrom(

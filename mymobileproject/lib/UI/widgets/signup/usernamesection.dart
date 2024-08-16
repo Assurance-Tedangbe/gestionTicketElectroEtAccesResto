@@ -35,7 +35,7 @@ class _UsernameSectionState extends State<UsernameSection> {
             ),
             decoration: InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
+                contentPadding: EdgeInsets.only(top: 11),
                 prefixIcon: Icon(Icons.person, color: kPrimaryColor),
                 hintText: 'Nom d\'utilisateur',
                 hintStyle: TextStyle(color: kPrimaryColor, fontSize: 12)),

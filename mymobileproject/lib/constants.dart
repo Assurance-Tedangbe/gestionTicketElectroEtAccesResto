@@ -8,3 +8,4 @@ const ticketSectionColor = Color.fromRGBO(234, 234, 244, 1);
 const blueOfImages = Color.fromARGB(255, 70, 178, 233);
 const errorColor = Colors.red;
 const borderColor = Colors.grey;
+const dateColor = Color.fromARGB(180, 0, 0, 0);

@@ -36,7 +36,7 @@ class _EmailSectionState extends State<EmailSection> {
             ),
             decoration: InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
+                contentPadding: EdgeInsets.only(top: 10),
                 prefixIcon: Icon(Icons.email, color: kPrimaryColor),
                 hintText: 'Email',
                 hintStyle: TextStyle(

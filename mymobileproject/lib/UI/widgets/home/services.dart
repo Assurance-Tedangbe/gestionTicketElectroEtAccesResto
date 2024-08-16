@@ -74,7 +74,7 @@ class Services extends StatelessWidget {
                   builder: (context) => const ConsultAccount()));
             },
             servicename: "Consulter compte",
-            imagepath: "images/graphic.png"),
+            imagepath: "images/consult_icon.JPG"),
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(

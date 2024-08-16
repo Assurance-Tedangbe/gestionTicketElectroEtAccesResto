@@ -35,7 +35,7 @@ class _UpdateConfirmPasswordState extends State<UpdateConfirmPassword> {
               color: Colors.black87,
             ),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(top: 14),
+              contentPadding: EdgeInsets.only(top: 11),
               prefixIcon: Icon(Icons.password, color: kPrimaryColor),
               hintText: 'Confirmer mot de passe',
               hintStyle: TextStyle(

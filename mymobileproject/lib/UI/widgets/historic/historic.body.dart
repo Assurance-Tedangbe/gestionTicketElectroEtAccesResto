@@ -68,7 +68,7 @@ class _HistoricBodyState extends State<HistoricBody> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: 150,
+                width: 160,
                 height: 50,
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
@@ -84,12 +84,12 @@ class _HistoricBodyState extends State<HistoricBody> {
                             EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 8.0),
                         prefixIcon: Icon(
                           Icons.calendar_month,
-                          color: borderColor,
+                          color: dateColor,
                           size: 15,
                         ),
                         hintText: 'Choisir date de début',
                         hintStyle: TextStyle(
-                          color: borderColor,
+                          color: dateColor,
                           fontSize: 10,
                         )),
                     onTap: () async {
@@ -111,7 +111,7 @@ class _HistoricBodyState extends State<HistoricBody> {
                     }),
               ),
               Container(
-                width: 150,
+                width: 160,
                 height: 50,
                 decoration: BoxDecoration(
                     color: kSecondColor,
@@ -126,12 +126,12 @@ class _HistoricBodyState extends State<HistoricBody> {
                             EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 8.0),
                         prefixIcon: Icon(
                           Icons.calendar_month,
-                          color: borderColor,
+                          color: dateColor,
                           size: 15,
                         ),
                         hintText: 'Choisir date de fin',
                         hintStyle: TextStyle(
-                          color: borderColor,
+                          color: dateColor,
                           fontSize: 10,
                         )),
                     onTap: () async {

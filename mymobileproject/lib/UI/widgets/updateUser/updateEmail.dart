@@ -36,7 +36,7 @@ class _UpdateEmailState extends State<UpdateEmail> {
             ),
             decoration: InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
+                contentPadding: EdgeInsets.only(top: 11),
                 prefixIcon: Icon(Icons.email, color: kPrimaryColor),
                 hintText: 'Email',
                 hintStyle: TextStyle(
