@@ -16,7 +16,7 @@ class AdminDrawer extends StatelessWidget {
       {
         "title": "Activer compte",
         "route": "/activate-account",
-        "leadingIcon": Icons.account_box,
+        "leadingIcon": Icons.account_circle,
         "trailingIcon": Icons.arrow_forward
       },
       {
