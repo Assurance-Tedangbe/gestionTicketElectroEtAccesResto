@@ -33,7 +33,7 @@ class _RoleSectionState extends State<RoleSection> {
               border: Border.all(color: kPrimaryColor, width: 3)),
           height: 50,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8),
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 5.0),
             child: DropdownButtonFormField<String>(
               value: roleSelected,
               iconDisabledColor: kThirdColor,
@@ -59,7 +59,10 @@ class _RoleSectionState extends State<RoleSection> {
                   value: value,
                   child: Row(
                     children: [
-                      Text(value),
+                      Text(
+                        value,
+                        style: const TextStyle(color: kThirdColor),
+                      ),
                     ],
                   ),
                 );

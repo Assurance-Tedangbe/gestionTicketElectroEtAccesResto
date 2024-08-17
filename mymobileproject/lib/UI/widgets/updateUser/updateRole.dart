@@ -33,7 +33,7 @@ class _UpdateRoleState extends State<UpdateRole> {
               border: Border.all(color: kPrimaryColor, width: 3)),
           height: 50,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 12),
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 5.0),
             child: DropdownButtonFormField<String>(
               value: roleSelected,
               iconDisabledColor: kThirdColor,
@@ -59,7 +59,12 @@ class _UpdateRoleState extends State<UpdateRole> {
                   value: value,
                   child: Row(
                     children: [
-                      Text(value),
+                      Text(
+                        value,
+                        style: const TextStyle(
+                          color: kThirdColor,
+                        ),
+                      ),
                     ],
                   ),
                 );

@@ -53,10 +53,7 @@ class _NavigationState extends State<Navigation> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BottomIcon(bottomicon: Icons.person),
-                Padding(
-                  padding: EdgeInsets.only(left: 2.0, right: 2.0),
-                  child: TextAsTooltip(text: "Interface Etudiant"),
-                )
+                TextAsTooltip(text: "Interface Etudiant")
               ],
             ),
             Column(
