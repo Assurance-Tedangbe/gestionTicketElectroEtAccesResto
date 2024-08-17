@@ -17,7 +17,7 @@ class _ConsultBodyState extends State<ConsultBody> {
     return const Background(
       child: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

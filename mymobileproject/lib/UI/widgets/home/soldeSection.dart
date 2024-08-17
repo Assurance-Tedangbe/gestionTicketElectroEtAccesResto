@@ -47,8 +47,8 @@ class _SoldeSectionState extends State<SoldeSection> {
                     fontWeight: FontWeight.bold),
               ),
               Container(
-                height: size.height / 12,
-                width: size.width / 12,
+                height: size.height / 22.0,
+                width: size.width / 12.0,
                 decoration: const BoxDecoration(
                     color: kThirdColor,
                     borderRadius: BorderRadius.all(Radius.circular(50.0))),

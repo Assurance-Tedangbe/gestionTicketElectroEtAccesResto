@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/home/bloctitle.dart';
 import 'package:mymobileproject/UI/widgets/home/imageasset.template.dart';
-import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
+import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 import 'package:mymobileproject/UI/widgets/home/stat.label.dart';
 import 'package:mymobileproject/constants.dart';
 
@@ -21,14 +21,14 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [BlocTitle(text: "Statistiques")],
       ),
-      const SizeboxTemplate(),
+      const SizeboxHeightSession(),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Stack(children: [
             Container(
-              width: size.width / 4.5,
-              height: size.height / 8.0,
+              width: size.width / 3.0,
+              height: size.height / 13.0,
               decoration: BoxDecoration(
                   color: const Color.fromRGBO(234, 234, 244, 1),
                   borderRadius: const BorderRadius.all(Radius.circular(17.0)),
@@ -80,8 +80,8 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
           Stack(
             children: [
               Container(
-                width: size.width / 2.0,
-                height: size.height / 9.0,
+                width: size.width / 1.9,
+                height: size.height / 13.0,
                 decoration: BoxDecoration(
                     color: const Color.fromRGBO(234, 234, 244, 1),
                     borderRadius: const BorderRadius.all(Radius.circular(17.0)),

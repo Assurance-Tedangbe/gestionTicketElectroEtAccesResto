@@ -6,6 +6,7 @@ import 'package:mymobileproject/UI/pages/creditAccount.dart';
 import 'package:mymobileproject/UI/pages/historic.dart';
 import 'package:mymobileproject/UI/pages/scanqr.dart';
 import 'package:mymobileproject/UI/pages/transfert.ticket.dart';
+import 'package:mymobileproject/UI/pages/transfertCredit.dart';
 import 'package:mymobileproject/UI/pages/updateProfile.dart';
 import 'package:mymobileproject/UI/widgets/home/bloctitle.dart';
 import 'package:mymobileproject/UI/widgets/home/container.template.dart';
@@ -78,10 +79,10 @@ class StudentServices extends StatelessWidget {
         ContainerTemplate(
             press: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => UpdateProfile()));
+                  MaterialPageRoute(builder: (context) => TransfertCredit()));
             },
-            servicename: "Modifier profil",
-            imagepath: "images/update_profile.JPG")
+            servicename: "Transfert crédit",
+            imagepath: "images/transfert.JPG")
       ])
     ]);
   }

@@ -21,16 +21,10 @@ class _CancelTrsfTicketBodyState extends State<CancelTrsfTicketBody> {
     return const Background(
       child: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 70, vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            /*  Icon(
-              Icons.cancel,
-              color: kPrimaryColor,
-              size: 70,
-            ), */
-            //  SizeboxHeight(),
             ReferenceNumberSection(),
             SizeboxHeightSession(),
             RecipientNumberSection(),
