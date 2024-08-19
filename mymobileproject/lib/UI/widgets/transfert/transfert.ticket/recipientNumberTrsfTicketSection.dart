@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/constants.dart';
 
-class NumberTicketsSection extends StatefulWidget {
-  const NumberTicketsSection({super.key});
+class RecipientNumberTrsfTicketSection extends StatefulWidget {
+  const RecipientNumberTrsfTicketSection({super.key});
 
   @override
-  State<NumberTicketsSection> createState() => _NumberTicketsSectionState();
+  State<RecipientNumberTrsfTicketSection> createState() =>
+      _RecipientNumberTrsfTicketSectionState();
 }
 
-class _NumberTicketsSectionState extends State<NumberTicketsSection> {
+class _RecipientNumberTrsfTicketSectionState
+    extends State<RecipientNumberTrsfTicketSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(text: 'Nombre de ticket(s)'),
+        const Label(text: 'Numéro compte destinataire'),
         const SizedBox(height: 10),
         Container(
           width: 300,
@@ -37,8 +39,8 @@ class _NumberTicketsSectionState extends State<NumberTicketsSection> {
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(Icons.attach_money, color: kPrimaryColor),
-                hintText: 'Nombre de ticket',
+                prefixIcon: Icon(Icons.person, color: kPrimaryColor),
+                hintText: 'N° compte etudiant',
                 hintStyle: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 12,

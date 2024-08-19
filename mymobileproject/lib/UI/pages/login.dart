@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/login/login.body.dart';
 
-class LoginPage extends StatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
+class LoginPage extends StatelessWidget {
   static const String _title = 'Se Connecter';
+  const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(title: const Text(_title)),
-        body: LoginBody());
+        body: const LoginBody());
   }
 }

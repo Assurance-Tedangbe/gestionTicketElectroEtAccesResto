@@ -14,8 +14,6 @@ class _ScanQRState extends State<ScanQR> {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width / 1.15,
-      //  height: size.height / 4,
-      //  width: 320,
       height: 95,
       padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
       decoration: BoxDecoration(
@@ -26,7 +24,7 @@ class _ScanQRState extends State<ScanQR> {
         style: ElevatedButton.styleFrom(
           backgroundColor: kPrimaryColor,
           textStyle: const TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+              color: kSecondColor, fontSize: 15, fontWeight: FontWeight.bold),
         ),
         child: const Text('Scanner code QR'),
       ),

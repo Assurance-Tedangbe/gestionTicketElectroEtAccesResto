@@ -8,7 +8,7 @@ class HeadTableStyle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       data,
-      style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+      style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
     );
   }
 }

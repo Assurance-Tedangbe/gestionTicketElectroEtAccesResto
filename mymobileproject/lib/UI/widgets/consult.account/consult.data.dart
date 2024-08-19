@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:mymobileproject/UI/widgets/consult.account/dataConsultBack.dart';
 import 'dart:convert';
 import 'package:mymobileproject/UI/widgets/home/stat.label.dart';
+import 'package:mymobileproject/constants.dart';
 
 class ConsultData extends StatefulWidget {
   const ConsultData({super.key});
@@ -55,11 +56,11 @@ class _ConsultDataState extends State<ConsultData> {
                   height: size.height * 0.6,
                   width: size.width * 6.0,
                   decoration: BoxDecoration(
-                    color: Colors.white70,
+                    color: textContainerColor,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: const [
                       BoxShadow(
-                          color: Colors.black26,
+                          color: boxshadowColor,
                           blurRadius: 6,
                           offset: Offset(0, 2))
                     ],

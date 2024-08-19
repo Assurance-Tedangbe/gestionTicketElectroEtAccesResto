@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/activateAccount.body.dart';
 
-class ActivateAccount extends StatefulWidget {
-  @override
-  State<ActivateAccount> createState() => _ActivateAccountState();
-}
-
-class _ActivateAccountState extends State<ActivateAccount> {
+class ActivateAccount extends StatelessWidget {
   static const String _title = 'Activer son compte';
+  const ActivateAccount({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/constants.dart';
 
-class PasswordTrsfSection extends StatefulWidget {
-  const PasswordTrsfSection({super.key});
+class PasswordTrsfTicketSection extends StatefulWidget {
+  const PasswordTrsfTicketSection({super.key});
 
   @override
-  State<PasswordTrsfSection> createState() => _PasswordTrsfSectionState();
+  State<PasswordTrsfTicketSection> createState() =>
+      _PasswordTrsfTicketSectionState();
 }
 
-class _PasswordTrsfSectionState extends State<PasswordTrsfSection> {
+class _PasswordTrsfTicketSectionState extends State<PasswordTrsfTicketSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,18 +27,18 @@ class _PasswordTrsfSectionState extends State<PasswordTrsfSection> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: const [
                 BoxShadow(
-                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+                    color: boxshadowColor, blurRadius: 6, offset: Offset(0, 2))
               ],
               border: Border.all(color: kPrimaryColor, width: 3)),
           child: const TextField(
-            //  keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.visiblePassword,
             obscureText: true,
             style: TextStyle(
-              color: Colors.black87,
+              color: enterTextFieldColor,
             ),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.lock_open, color: kPrimaryColor),
+              prefixIcon: Icon(Icons.lock, color: kPrimaryColor),
               hintText: 'Mot de passe',
               hintStyle: TextStyle(
                 color: kPrimaryColor,

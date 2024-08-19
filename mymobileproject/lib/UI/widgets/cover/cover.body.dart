@@ -10,8 +10,8 @@ class CoverBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     //This size provides us total height and width of our screen
+    Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -43,21 +43,19 @@ class CoverBody extends StatelessWidget {
             RoundedButton(
               text: "Se connecter",
               press: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => LoginPage()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const LoginPage()));
               },
               //    Navigator.pushNamed(context, "/login");
-              textColor: Colors.black,
-              color: Colors.white,
+              color: kSecondColor,
             ),
             RoundedButton(
               text: "S'inscrire",
               press: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => SignUpPage()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const SignUpPage()));
               },
-              textColor: Colors.cyanAccent,
-              color: Colors.white,
+              color: kSecondColor,
             ),
           ],
         ),

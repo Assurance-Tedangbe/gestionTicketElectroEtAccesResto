@@ -10,7 +10,7 @@ class CancelTrsfTicket extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(title: const Text(_title)),
-      body: CancelTrsfTicketBody(),
+      body: const CancelTrsfTicketBody(),
     );
   }
 }

@@ -4,17 +4,12 @@ import 'package:mymobileproject/UI/widgets/cancelTrsf/cancelTrsfCreditBody/cance
 import 'package:mymobileproject/UI/widgets/cancelTrsf/cancelTrsfCreditBody/cancelTrsfCreditBtn.dart';
 import 'package:mymobileproject/UI/widgets/cancelTrsf/cancelTrsfCreditBody/referenceNumber.dart';
 import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
-import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/passwordTrsfSection.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/passwordTrsfCreditSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/recipientNumberSection.dart';
 
-class CancelTrsfCreditBody extends StatefulWidget {
+class CancelTrsfCreditBody extends StatelessWidget {
   const CancelTrsfCreditBody({super.key});
 
-  @override
-  State<CancelTrsfCreditBody> createState() => _CancelTrsfCreditBodyState();
-}
-
-class _CancelTrsfCreditBodyState extends State<CancelTrsfCreditBody> {
   @override
   Widget build(BuildContext context) {
     return const Background(
@@ -30,7 +25,7 @@ class _CancelTrsfCreditBodyState extends State<CancelTrsfCreditBody> {
             SizeboxHeightSession(),
             AmountCreditToCancel(),
             SizeboxHeightSession(),
-            PasswordTrsfSection(),
+            PasswordTrsfCreditSection(),
             SizeboxHeightSession(),
             CancelTrsfCreditBtn()
           ],

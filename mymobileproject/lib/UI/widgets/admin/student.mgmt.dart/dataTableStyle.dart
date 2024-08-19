@@ -7,6 +7,6 @@ class DataTableStyle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(datafromBack,
-        style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w500));
+        style: const TextStyle(fontSize: 33, fontWeight: FontWeight.w500));
   }
 }

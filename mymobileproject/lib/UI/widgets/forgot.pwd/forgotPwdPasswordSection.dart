@@ -3,20 +3,21 @@ import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/constants.dart';
 
-class UsernameSection extends StatefulWidget {
-  const UsernameSection({super.key});
+class ForgotPwdPasswordSection extends StatefulWidget {
+  const ForgotPwdPasswordSection({super.key});
 
   @override
-  State<UsernameSection> createState() => _UsernameSectionState();
+  State<ForgotPwdPasswordSection> createState() =>
+      _ForgotPwdPasswordSectionState();
 }
 
-class _UsernameSectionState extends State<UsernameSection> {
+class _ForgotPwdPasswordSectionState extends State<ForgotPwdPasswordSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(text: "Nom d'utilisateur"),
+        const Label(text: 'Mot de passe'),
         const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
@@ -30,16 +31,25 @@ class _UsernameSectionState extends State<UsernameSection> {
               border: Border.all(color: kPrimaryColor, width: 3)),
           height: 50,
           child: const TextField(
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.visiblePassword,
+            obscureText: true,
             style: TextStyle(
               color: enterTextFieldColor,
             ),
             decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 11),
-                prefixIcon: Icon(Icons.person, color: kPrimaryColor),
-                hintText: 'Nom d\'utilisateur',
-                hintStyle: TextStyle(color: kPrimaryColor, fontSize: 12)),
+              contentPadding: EdgeInsets.only(top: 11),
+              prefixIcon: Icon(Icons.password, color: kPrimaryColor),
+              hintText: 'Mot de passe',
+              hintStyle: TextStyle(
+                color: kPrimaryColor,
+                fontSize: 12,
+              ),
+              suffixIcon: Icon(
+                Icons.visibility_off,
+                color: kPrimaryColor,
+              ),
+              border: InputBorder.none,
+            ),
           ),
         )
       ],

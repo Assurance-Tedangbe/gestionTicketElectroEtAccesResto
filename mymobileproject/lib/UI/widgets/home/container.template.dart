@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
+import 'package:mymobileproject/constants.dart';
 
 class ContainerTemplate extends StatelessWidget {
   final String servicename;
@@ -20,13 +21,13 @@ class ContainerTemplate extends StatelessWidget {
       height: size.height * 0.2,
       width: size.width * 0.2,
       decoration: BoxDecoration(
-          color: Colors.white70,
+          color: textContainerColor,
           borderRadius: BorderRadius.circular(10),
           boxShadow: const [
             BoxShadow(
-                color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+                color: boxshadowColor, blurRadius: 6, offset: Offset(0, 2))
           ],
-          border: Border.all(color: Colors.white70, width: 1)),
+          border: Border.all(color: textContainerColor, width: 1)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

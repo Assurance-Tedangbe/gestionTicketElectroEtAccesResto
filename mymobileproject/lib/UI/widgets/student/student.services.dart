@@ -7,7 +7,6 @@ import 'package:mymobileproject/UI/pages/historic.dart';
 import 'package:mymobileproject/UI/pages/scanqr.dart';
 import 'package:mymobileproject/UI/pages/transfert.ticket.dart';
 import 'package:mymobileproject/UI/pages/transfertCredit.dart';
-import 'package:mymobileproject/UI/pages/updateProfile.dart';
 import 'package:mymobileproject/UI/widgets/home/bloctitle.dart';
 import 'package:mymobileproject/UI/widgets/home/container.template.dart';
 import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
@@ -78,8 +77,8 @@ class StudentServices extends StatelessWidget {
             imagepath: "images/historic.JPG"),
         ContainerTemplate(
             press: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => TransfertCredit()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const TransfertCredit()));
             },
             servicename: "Transfert crédit",
             imagepath: "images/transfert.JPG")

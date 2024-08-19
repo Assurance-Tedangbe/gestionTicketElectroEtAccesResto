@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/consult.account/consult.data.dart';
 import 'package:mymobileproject/constants.dart';
 
-class ConsultBtn extends StatefulWidget {
+class ConsultBtn extends StatelessWidget {
   const ConsultBtn({super.key});
 
-  @override
-  State<ConsultBtn> createState() => _ConsultBtnState();
-}
-
-class _ConsultBtnState extends State<ConsultBtn> {
   @override
   Widget build(BuildContext context) {
     return Container(

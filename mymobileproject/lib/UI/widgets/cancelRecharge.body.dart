@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
+import 'package:mymobileproject/constants.dart';
 
-class CancelBody extends StatefulWidget {
-  const CancelBody({super.key});
+class CancelRechargeBody extends StatelessWidget {
+  const CancelRechargeBody({super.key});
 
-  @override
-  State<CancelBody> createState() => _CancelBodyState();
-}
-
-class _CancelBodyState extends State<CancelBody> {
   @override
   Widget build(BuildContext context) {
-    //  Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -20,29 +15,6 @@ class _CancelBodyState extends State<CancelBody> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            /* Container(
-              alignment: Alignment.center,
-              height: size.height * 0.1,
-              width: size.width * 0.7,
-              decoration: BoxDecoration(
-                color: Colors.white70,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 6,
-                      offset: Offset(0, 2))
-                ],
-              ),
-              child: const Text(
-                "Pour annuler la recharge que vous venez d'effectuer, veuillez renseigner les informations suivantes",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-            const SizeboxHeight(),*/
             referenceNumber(),
             const SizeboxHeightSession(),
             numberAccount(),
@@ -64,7 +36,7 @@ Widget referenceNumber() {
       const Text(
         'N° de référence',
         style: TextStyle(
-          color: Colors.black,
+          color: kThirdColor,
           fontSize: 15,
         ),
       ),
@@ -74,16 +46,17 @@ Widget referenceNumber() {
         height: 50,
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: kSecondColor,
             borderRadius: BorderRadius.circular(10),
             boxShadow: const [
               BoxShadow(
-                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+                  color: boxshadowColor, blurRadius: 6, offset: Offset(0, 2))
             ],
-            border: Border.all(color: Colors.blue, width: 3)),
+            border: Border.all(color: kPrimaryColor, width: 3)),
         child: const TextField(
+          // keyboardType: TextInputType.number,
           style: TextStyle(
-            color: Colors.black87,
+            color: enterTextFieldColor,
           ),
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -102,7 +75,7 @@ Widget numberAccount() {
       const Text(
         'Numéro compte etudiant',
         style: TextStyle(
-          color: Colors.black,
+          color: kThirdColor,
           fontSize: 15,
         ),
       ),
@@ -112,16 +85,17 @@ Widget numberAccount() {
         height: 50,
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: kSecondColor,
             borderRadius: BorderRadius.circular(10),
             boxShadow: const [
               BoxShadow(
-                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+                  color: boxshadowColor, blurRadius: 6, offset: Offset(0, 2))
             ],
-            border: Border.all(color: Colors.blue, width: 3)),
+            border: Border.all(color: kPrimaryColor, width: 3)),
         child: const TextField(
+          //   keyboardType: TextInputType.number,
           style: TextStyle(
-            color: Colors.black87,
+            color: enterTextFieldColor,
           ),
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -140,7 +114,7 @@ Widget amount() {
       const Text(
         'Montant deposé',
         style: TextStyle(
-          color: Colors.black,
+          color: kThirdColor,
           fontSize: 15,
         ),
       ),
@@ -150,16 +124,17 @@ Widget amount() {
         height: 50,
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: kSecondColor,
             borderRadius: BorderRadius.circular(10),
             boxShadow: const [
               BoxShadow(
-                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+                  color: boxshadowColor, blurRadius: 6, offset: Offset(0, 2))
             ],
-            border: Border.all(color: Colors.blue, width: 3)),
+            border: Border.all(color: kPrimaryColor, width: 3)),
         child: const TextField(
+          //  keyboardType: TextInputType.number,
           style: TextStyle(
-            color: Colors.black87,
+            color: enterTextFieldColor,
           ),
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -178,14 +153,14 @@ Widget cancelBtn() {
     height: 95,
     child: ElevatedButton(
       onPressed: () => print('cancel pressed'),
-      child: const Text('Annuler recharge'),
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue,
+        backgroundColor: kPrimaryColor,
         shape: const BeveledRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(5))),
         textStyle: const TextStyle(
-            color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+            color: kSecondColor, fontSize: 15, fontWeight: FontWeight.bold),
       ),
+      child: const Text('Annuler recharge'),
     ),
   );
 }

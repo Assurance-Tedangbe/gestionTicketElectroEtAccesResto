@@ -25,14 +25,14 @@ class _EmailSectionState extends State<EmailSection> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: const [
                 BoxShadow(
-                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+                    color: boxshadowColor, blurRadius: 6, offset: Offset(0, 2))
               ],
               border: Border.all(color: kPrimaryColor, width: 3)),
           height: 50,
           child: const TextField(
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
-              color: Colors.black87,
+              color: enterTextFieldColor,
             ),
             decoration: InputDecoration(
                 border: InputBorder.none,

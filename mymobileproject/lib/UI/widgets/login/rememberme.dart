@@ -13,14 +13,14 @@ class _RememberMeState extends State<RememberMe> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 20,
       child: Row(children: <Widget>[
         Theme(
-          data: ThemeData(unselectedWidgetColor: Colors.blue),
+          data: ThemeData(unselectedWidgetColor: kPrimaryColor),
           child: Checkbox(
               value: isRememberMe,
-              checkColor: Colors.white,
+              checkColor: kSecondColor,
               activeColor: kPrimaryColor,
               onChanged: (value) {
                 setState(() {
@@ -30,7 +30,7 @@ class _RememberMeState extends State<RememberMe> {
         ),
         const Text(
           'Se souvenir',
-          style: TextStyle(color: Colors.black, fontSize: 20),
+          style: TextStyle(color: kThirdColor, fontSize: 20),
         )
       ]),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/constants.dart';
 
 class InfoContainer extends StatelessWidget {
   const InfoContainer({super.key});
@@ -11,10 +12,10 @@ class InfoContainer extends StatelessWidget {
       height: size.height * 0.09,
       width: size.width * 0.9,
       decoration: BoxDecoration(
-        color: Colors.white70,
+        color: textContainerColor,
         borderRadius: BorderRadius.circular(10),
         boxShadow: const [
-          BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+          BoxShadow(color: boxshadowColor, blurRadius: 6, offset: Offset(0, 2))
         ],
       ),
       child: const Padding(

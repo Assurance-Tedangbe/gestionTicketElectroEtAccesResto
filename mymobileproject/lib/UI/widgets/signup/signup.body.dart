@@ -11,14 +11,9 @@ import 'package:mymobileproject/UI/widgets/signup/signup.Btn.dart';
 import 'package:mymobileproject/UI/widgets/signup/usernamesection.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/pageIconTemplate.dart';
 
-class SignupBody extends StatefulWidget {
+class SignupBody extends StatelessWidget {
   const SignupBody({super.key});
 
-  @override
-  State<SignupBody> createState() => _SignupBodyState();
-}
-
-class _SignupBodyState extends State<SignupBody> {
   @override
   Widget build(BuildContext context) {
     return const Background(

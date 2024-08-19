@@ -76,6 +76,7 @@ class _HistoricBodyState extends State<HistoricBody> {
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(color: borderColor, width: 1)),
                 child: TextField(
+                    keyboardType: TextInputType.datetime,
                     controller: dateController1,
                     readOnly: true,
                     decoration: const InputDecoration(
@@ -118,6 +119,7 @@ class _HistoricBodyState extends State<HistoricBody> {
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(color: borderColor, width: 1)),
                 child: TextField(
+                    keyboardType: TextInputType.datetime,
                     controller: dateController2,
                     readOnly: true,
                     decoration: const InputDecoration(

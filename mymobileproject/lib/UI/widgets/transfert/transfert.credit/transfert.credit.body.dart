@@ -4,19 +4,14 @@ import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.height.dart';
 import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/amountSection.dart';
-import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/passwordTrsfSection.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/passwordTrsfCreditSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/recipientNumberSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/trsfCreditBtn.dart';
 import 'package:mymobileproject/constants.dart';
 
-class TransfertBody extends StatefulWidget {
+class TransfertBody extends StatelessWidget {
   const TransfertBody({super.key});
 
-  @override
-  State<TransfertBody> createState() => _TransfertBodyState();
-}
-
-class _TransfertBodyState extends State<TransfertBody> {
   @override
   Widget build(BuildContext context) {
     return Background(
@@ -36,7 +31,7 @@ class _TransfertBodyState extends State<TransfertBody> {
             const SizeboxHeightSession(),
             AmountSection(),
             const SizeboxHeightSession(),
-            PasswordTrsfSection(),
+            PasswordTrsfCreditSection(),
             const SizeboxHeightSession(),
             TrnasfertCreditBtn(),
             Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[

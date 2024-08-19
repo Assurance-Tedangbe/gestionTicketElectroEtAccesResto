@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/home/home.drawer.header.dart';
 import 'package:mymobileproject/UI/widgets/home/home.drawer.item.widget.dart';
 
-class HomeDrawer extends StatefulWidget {
+class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});
 
-  @override
-  State<HomeDrawer> createState() => _HomeDrawerState();
-}
-
-class _HomeDrawerState extends State<HomeDrawer> {
   @override
   Widget build(BuildContext context) {
     List<dynamic> menus = [
@@ -31,12 +26,12 @@ class _HomeDrawerState extends State<HomeDrawer> {
         "leadingIcon": Icons.person,
         "trailingIcon": Icons.arrow_forward
       },
-      {
+      /* {
         "title": "Mise à jour profil",
         "route": "/update-profile",
         "leadingIcon": Icons.update,
         "trailingIcon": Icons.arrow_forward
-      },
+      }, */
       {
         "title": "Interface Portier",
         "route": "/porter",

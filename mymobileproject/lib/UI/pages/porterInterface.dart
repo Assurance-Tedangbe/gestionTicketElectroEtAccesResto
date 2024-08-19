@@ -4,15 +4,10 @@ import 'package:mymobileproject/UI/pages/research.dart';
 import 'package:mymobileproject/UI/widgets/porter/porterInterface.body.dart';
 import 'package:mymobileproject/UI/widgets/porter/porter.drawer.dart';
 
-class PorterInterface extends StatefulWidget {
+class PorterInterface extends StatelessWidget {
+  static const String _title = 'Interface portier';
   const PorterInterface({super.key});
 
-  @override
-  State<PorterInterface> createState() => _PorterInterfaceState();
-}
-
-class _PorterInterfaceState extends State<PorterInterface> {
-  static const String _title = 'Interface portier';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +31,6 @@ class _PorterInterfaceState extends State<PorterInterface> {
         ],
       ),
       body: const PorterBody(),
-      //   bottomNavigationBar: NavigationBarPorter(),
     );
   }
 }

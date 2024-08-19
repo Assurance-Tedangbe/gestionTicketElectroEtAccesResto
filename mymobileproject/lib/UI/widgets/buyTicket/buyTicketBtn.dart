@@ -12,7 +12,7 @@ class _BuyTicketBtnState extends State<BuyTicketBtn> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
+    return SizedBox(
       width: size.width * 0.3,
       height: size.height / 14.0,
       child: ElevatedButton(

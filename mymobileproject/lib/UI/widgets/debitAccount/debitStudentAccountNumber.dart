@@ -31,12 +31,13 @@ class _DebitStdAccNumberState extends State<DebitStdAccNumber> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: const [
                 BoxShadow(
-                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+                    color: boxshadowColor, blurRadius: 6, offset: Offset(0, 2))
               ],
               border: Border.all(color: kPrimaryColor, width: 3)),
           child: const TextField(
+            keyboardType: TextInputType.number,
             style: TextStyle(
-              color: Colors.black87,
+              color: enterTextFieldColor,
             ),
             decoration: InputDecoration(
                 border: InputBorder.none,

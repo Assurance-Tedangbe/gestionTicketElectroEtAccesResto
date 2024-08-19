@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/widgets/login/loginLabel.dart';
+import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/constants.dart';
 
 class LoginPasswordSection extends StatefulWidget {
@@ -14,15 +16,8 @@ class _LoginPasswordSectionState extends State<LoginPasswordSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
-          'Mot de passe',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            //    fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: 10),
+        const LoginLabel(text: 'Mot de passe'),
+        const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
@@ -30,15 +25,15 @@ class _LoginPasswordSectionState extends State<LoginPasswordSection> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: const [
                 BoxShadow(
-                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+                    color: boxshadowColor, blurRadius: 6, offset: Offset(0, 2))
               ],
               border: Border.all(color: kPrimaryColor, width: 3)),
           height: 60,
           child: const TextField(
-            //  keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.visiblePassword,
             obscureText: true,
             style: TextStyle(
-              color: Colors.black87,
+              color: enterTextFieldColor,
             ),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(top: 14),

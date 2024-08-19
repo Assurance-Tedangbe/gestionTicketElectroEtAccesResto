@@ -4,17 +4,11 @@ import 'package:mymobileproject/UI/pages/research.dart';
 import 'package:mymobileproject/UI/widgets/student/student.drawer.dart';
 import 'package:mymobileproject/UI/widgets/student/studentInterface.body.dart';
 
-class StudentInterface extends StatefulWidget {
+class StudentInterface extends StatelessWidget {
+  static const String _title = 'Interface Etudiant';
   const StudentInterface({super.key});
 
-  @override
-  State<StudentInterface> createState() => _StudentInterfaceState();
-}
-
-class _StudentInterfaceState extends State<StudentInterface> {
-  static const String _title = 'Interface Etudiant';
-
-  int pageIndex = 0;
+  // int pageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +32,7 @@ class _StudentInterfaceState extends State<StudentInterface> {
           ),
         ],
       ),
-      body: StudentBody(),
-      // bottomNavigationBar: NavigationBarStudent(),
-      //backgroundColor: Colors.blueGrey,
+      body: const StudentBody(),
     );
   }
 }

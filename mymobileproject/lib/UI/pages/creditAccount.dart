@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/creditAccount.body.dart';
 
-class CreditAccount extends StatefulWidget {
+class CreditAccount extends StatelessWidget {
+  static const String _title = 'Créditer un compte';
   const CreditAccount({super.key});
 
-  @override
-  State<CreditAccount> createState() => _CreditAccountState();
-}
-
-class _CreditAccountState extends State<CreditAccount> {
-  static const String _title = 'Créditer un compte';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

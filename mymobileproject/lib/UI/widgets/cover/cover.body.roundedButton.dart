@@ -12,7 +12,7 @@ class RoundedButton extends StatefulWidget {
     required this.text,
     required this.press,
     this.color = kPrimaryColor,
-    this.textColor = Colors.white,
+    this.textColor = kSecondColor,
   }) : super(key: key);
 
   @override

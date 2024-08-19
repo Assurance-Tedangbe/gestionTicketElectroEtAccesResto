@@ -39,7 +39,7 @@ class _NavigationState extends State<Navigation> {
               index = selectedIndex;
             });
           },
-          backgroundColor: const Color.fromARGB(255, 250, 250, 250),
+          backgroundColor: navigationBackgroundColor,
           color: kPrimaryColor,
           items: const [
             Column(
@@ -90,10 +90,7 @@ class _NavigationState extends State<Navigation> {
         widget = const Home();
         break;
       case 1:
-        widget = const Padding(
-          padding: EdgeInsets.only(left: 2.0, right: 2.0),
-          child: StudentInterface(),
-        );
+        widget = const StudentInterface();
         break;
       case 2:
         widget = const AgentInterface();

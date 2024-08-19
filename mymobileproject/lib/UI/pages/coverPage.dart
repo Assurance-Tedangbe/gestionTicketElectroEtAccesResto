@@ -3,15 +3,10 @@ import 'package:flutter/material.dart';
 import '../widgets/cover/cover.body.dart';
 import '../widgets/cover/cover.drawer.dart';
 
-class CoverPage extends StatefulWidget {
+class CoverPage extends StatelessWidget {
+  static const String _title = 'SenTicket';
   const CoverPage({super.key});
 
-  @override
-  State<CoverPage> createState() => _CoverPageState();
-}
-
-class _CoverPageState extends State<CoverPage> {
-  static const String _title = 'SenTicket';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

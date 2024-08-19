@@ -32,13 +32,13 @@ class _LogOutBodyState extends State<LogOutBody> {
             TextButton(
               child: const Text('ANNULER'),
               onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Home())),
+                  .push(MaterialPageRoute(builder: (context) => const Home())),
               //() {  Navigator.of(context).pop();},
             ),
             TextButton(
               child: const Text('OUI'),
-              onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => CoverPage())),
+              onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const CoverPage())),
             ),
           ],
         );

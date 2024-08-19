@@ -40,8 +40,8 @@ class _CreditBodyState extends State<CreditBody> {
                   color: kPrimaryColor,
                 ),
                 tooltip: 'Annuler recharge',
-                onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => CancelRecharge())),
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const CancelRecharge())),
               ),
             ]),
           ],
@@ -62,24 +62,25 @@ Widget manageNumberAccount() {
         height: 50,
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: kSecondColor,
             borderRadius: BorderRadius.circular(10),
             boxShadow: const [
               BoxShadow(
-                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+                  color: boxshadowColor, blurRadius: 6, offset: Offset(0, 2))
             ],
-            border: Border.all(color: Colors.blue, width: 3)),
+            border: Border.all(color: kPrimaryColor, width: 3)),
         child: const TextField(
+          keyboardType: TextInputType.number,
           style: TextStyle(
-            color: Colors.black87,
+            color: enterTextFieldColor,
           ),
           decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.person, color: Colors.blue),
+              prefixIcon: Icon(Icons.person, color: kPrimaryColor),
               hintText: 'N° compte etudiant',
               hintStyle: TextStyle(
-                color: Colors.blue,
+                color: kPrimaryColor,
                 fontSize: 12,
               )),
         ),
@@ -92,31 +93,32 @@ Widget manageAmount() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      Label(text: 'Montant'),
+      const Label(text: 'Montant'),
       const SizedBox(height: 10),
       Container(
         width: 300,
         height: 50,
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: kSecondColor,
             borderRadius: BorderRadius.circular(10),
             boxShadow: const [
               BoxShadow(
-                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+                  color: boxshadowColor, blurRadius: 6, offset: Offset(0, 2))
             ],
-            border: Border.all(color: Colors.blue, width: 3)),
+            border: Border.all(color: kPrimaryColor, width: 3)),
         child: const TextField(
+          keyboardType: TextInputType.number,
           style: TextStyle(
-            color: Colors.black87,
+            color: enterTextFieldColor,
           ),
           decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.attach_money, color: Colors.blue),
+              prefixIcon: Icon(Icons.attach_money, color: kPrimaryColor),
               hintText: 'Montant',
               hintStyle: TextStyle(
-                color: Colors.blue,
+                color: kPrimaryColor,
                 fontSize: 12,
               )),
         ),
@@ -128,19 +130,18 @@ Widget manageAmount() {
 Widget manageRechargeBtn() {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
-    //  width: double.infinity,
     width: 320,
     height: 95,
     child: ElevatedButton(
       onPressed: () => print('Credit pressed'),
-      child: const Text('Créditer compte'),
       style: ElevatedButton.styleFrom(
         backgroundColor: kPrimaryColor,
         shape: const BeveledRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(5))),
         textStyle: const TextStyle(
-            color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+            color: kSecondColor, fontSize: 15, fontWeight: FontWeight.bold),
       ),
+      child: const Text('Créditer compte'),
     ),
   );
 }

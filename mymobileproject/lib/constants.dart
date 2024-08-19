@@ -9,3 +9,7 @@ const blueOfImages = Color.fromARGB(255, 70, 178, 233);
 const errorColor = Colors.red;
 const borderColor = Colors.grey;
 const dateColor = Color.fromARGB(180, 0, 0, 0);
+const boxshadowColor = Colors.black26;
+const enterTextFieldColor = Colors.black87;
+const textContainerColor = Colors.white70;
+const navigationBackgroundColor = Color.fromARGB(255, 250, 250, 250);

@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/constants.dart';
 
-class NumberTicketsSection extends StatefulWidget {
-  const NumberTicketsSection({super.key});
+class PasswordTrsfCreditSection extends StatefulWidget {
+  const PasswordTrsfCreditSection({super.key});
 
   @override
-  State<NumberTicketsSection> createState() => _NumberTicketsSectionState();
+  State<PasswordTrsfCreditSection> createState() =>
+      _PasswordTrsfCreditSectionState();
 }
 
-class _NumberTicketsSectionState extends State<NumberTicketsSection> {
+class _PasswordTrsfCreditSectionState extends State<PasswordTrsfCreditSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(text: 'Nombre de ticket(s)'),
+        const Label(text: 'Votre mot de passe'),
         const SizedBox(height: 10),
         Container(
           width: 300,
@@ -30,19 +31,25 @@ class _NumberTicketsSectionState extends State<NumberTicketsSection> {
               ],
               border: Border.all(color: kPrimaryColor, width: 3)),
           child: const TextField(
-            keyboardType: TextInputType.number,
+            // keyboardType: TextInputType.visiblePassword,
+            obscureText: true,
             style: TextStyle(
               color: enterTextFieldColor,
             ),
             decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(Icons.attach_money, color: kPrimaryColor),
-                hintText: 'Nombre de ticket',
-                hintStyle: TextStyle(
-                  color: kPrimaryColor,
-                  fontSize: 12,
-                )),
+              contentPadding: EdgeInsets.only(top: 14),
+              prefixIcon: Icon(Icons.lock, color: kPrimaryColor),
+              hintText: 'Mot de passe',
+              hintStyle: TextStyle(
+                color: kPrimaryColor,
+                fontSize: 12,
+              ),
+              suffixIcon: Icon(
+                Icons.visibility_off,
+                color: kPrimaryColor,
+              ),
+              border: InputBorder.none,
+            ),
           ),
         )
       ],

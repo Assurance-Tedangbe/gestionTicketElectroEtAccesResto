@@ -3,21 +3,16 @@ import 'package:mymobileproject/UI/pages/cancelTransfertTicket.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.height.dart';
 import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
-import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/passwordTrsfSection.dart';
-import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/recipientNumberSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.ticket/numberTicketsSection.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.ticket/passwordTrsfTicketSection.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.ticket/recipientNumberTrsfTicketSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.ticket/ticketTypeSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.ticket/trsfTicketBtn.dart';
 import 'package:mymobileproject/constants.dart';
 
-class TrsfTicketBody extends StatefulWidget {
+class TrsfTicketBody extends StatelessWidget {
   const TrsfTicketBody({super.key});
 
-  @override
-  State<TrsfTicketBody> createState() => _TrsfTicketBodyState();
-}
-
-class _TrsfTicketBodyState extends State<TrsfTicketBody> {
   @override
   Widget build(BuildContext context) {
     return Background(
@@ -33,16 +28,17 @@ class _TrsfTicketBodyState extends State<TrsfTicketBody> {
               size: 70,
             ),
             const SizeboxHeight(),
-            RecipientNumberSection(),
+            RecipientNumberTrsfTicketSection(),
             const SizeboxHeightSession(),
             NumberTicketsSection(),
             const SizeboxHeightSession(),
             const Padding(
-              padding: EdgeInsets.fromLTRB(70.0, 0.0, 8.0, 0.0),
+              // padding: EdgeInsets.fromLTRB(70.0, 0.0, 8.0, 0.0),
+              padding: EdgeInsets.fromLTRB(25.0, 0.0, 8.0, 0.0),
               child: TicketTypeSection(),
             ),
             const SizeboxHeightSession(),
-            PasswordTrsfSection(),
+            PasswordTrsfTicketSection(),
             const SizeboxHeightSession(),
             TransfertTicketBtn(),
             Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[

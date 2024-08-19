@@ -30,11 +30,11 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
               width: size.width / 3.0,
               height: size.height / 13.0,
               decoration: BoxDecoration(
-                  color: const Color.fromRGBO(234, 234, 244, 1),
+                  color: textContainerColor,
                   borderRadius: const BorderRadius.all(Radius.circular(17.0)),
                   boxShadow: const [
                     BoxShadow(
-                        color: Colors.black26,
+                        color: boxshadowColor,
                         blurRadius: 6,
                         offset: Offset(0, 2))
                   ],
@@ -66,7 +66,7 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
                         child: Text(
                           "20",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: kThirdColor,
                               fontSize: 12.0,
                               fontWeight: FontWeight.w700),
                         ),
@@ -83,18 +83,18 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
                 width: size.width / 1.9,
                 height: size.height / 13.0,
                 decoration: BoxDecoration(
-                    color: const Color.fromRGBO(234, 234, 244, 1),
+                    color: textContainerColor,
                     borderRadius: const BorderRadius.all(Radius.circular(17.0)),
                     boxShadow: const [
                       BoxShadow(
-                          color: Colors.black26,
+                          color: boxshadowColor,
                           blurRadius: 6,
                           offset: Offset(0, 2))
                     ],
                     border: Border.all(color: kPrimaryColor, width: 1)),
               ),
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -119,7 +119,7 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
                           child: Text(
                             "10",
                             style: TextStyle(
-                                color: Colors.black,
+                                color: kThirdColor,
                                 fontSize: 12.0,
                                 fontWeight: FontWeight.w700),
                           ),
@@ -150,7 +150,7 @@ class _StatisticsStudentState extends State<StatisticsStudent> {
                             child: Text(
                               "10",
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: kThirdColor,
                                   fontSize: 12.0,
                                   fontWeight: FontWeight.w700),
                             ),

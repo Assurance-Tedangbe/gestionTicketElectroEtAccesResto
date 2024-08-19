@@ -90,22 +90,23 @@ class _ListAgentsPageState extends State<ListAgentsPage> {
                                   builder: (context) =>
                                       const ConsultAccount()));
                             },
-                            icon: const Icon(Icons.visibility)),*/
+                            icon: const Icon(Icons.visibility,size: 45)),*/
                         IconButton(
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => const UpdateUser()));
                             },
-                            icon: const Icon(Icons.update)),
+                            icon: const Icon(Icons.update, size: 45)),
                         IconButton(
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ActivateAccount()));
+                                  builder: (context) =>
+                                      const ActivateAccount()));
                             },
-                            icon: const Icon(Icons.no_accounts)),
+                            icon: const Icon(Icons.no_accounts, size: 45)),
                         IconButton(
                             onPressed: _showDeleteAgentDialog,
-                            icon: const Icon(Icons.delete)),
+                            icon: const Icon(Icons.delete, size: 45)),
                       ],
                     )),
                   ])

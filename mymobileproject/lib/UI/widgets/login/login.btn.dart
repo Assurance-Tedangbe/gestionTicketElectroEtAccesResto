@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/home.dart';
+import 'package:mymobileproject/constants.dart';
 
 class LoginBtn extends StatefulWidget {
   const LoginBtn({super.key});
@@ -17,16 +18,15 @@ class _LoginBtnState extends State<LoginBtn> {
         height: 100,
         child: ElevatedButton(
           onPressed: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => Home())),
-          child: const Text('Se connecter'),
+              .push(MaterialPageRoute(builder: (context) => const Home())),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
-            //side: const BorderSide(color: Colors.cyanAccent, width: 1),
+            backgroundColor: kPrimaryColor,
             shape: const BeveledRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5))),
             textStyle: const TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                color: kSecondColor, fontSize: 18, fontWeight: FontWeight.bold),
           ),
+          child: const Text('Se connecter'),
         ));
   }
 }

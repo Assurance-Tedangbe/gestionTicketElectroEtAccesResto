@@ -5,14 +5,9 @@ import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 import 'package:mymobileproject/UI/widgets/home/soldeSection.dart';
 import 'package:mymobileproject/UI/widgets/home/statistics.dart';
 
-class HomeBody extends StatefulWidget {
+class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
 
-  @override
-  State<HomeBody> createState() => _HomeBodyState();
-}
-
-class _HomeBodyState extends State<HomeBody> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

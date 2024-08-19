@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
-import 'package:mymobileproject/UI/widgets/cancelTrsf/cancelTrsfCreditBody/referenceNumber.dart';
 import 'package:mymobileproject/UI/widgets/cancelTrsf/cancelTrsfTicketBody/cancelTrsfTicketBtn.dart';
+import 'package:mymobileproject/UI/widgets/cancelTrsf/cancelTrsfTicketBody/referenceNumberCancelTrsfTicketSection.dart';
 import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
-import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/passwordTrsfSection.dart';
-import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/recipientNumberSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.ticket/numberTicketsSection.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.ticket/passwordTrsfTicketSection.dart';
+import 'package:mymobileproject/UI/widgets/transfert/transfert.ticket/recipientNumberTrsfTicketSection.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.ticket/ticketTypeSection.dart';
 
-class CancelTrsfTicketBody extends StatefulWidget {
+class CancelTrsfTicketBody extends StatelessWidget {
   const CancelTrsfTicketBody({super.key});
 
-  @override
-  State<CancelTrsfTicketBody> createState() => _CancelTrsfTicketBodyState();
-}
-
-class _CancelTrsfTicketBodyState extends State<CancelTrsfTicketBody> {
   @override
   Widget build(BuildContext context) {
     return const Background(
@@ -25,9 +20,9 @@ class _CancelTrsfTicketBodyState extends State<CancelTrsfTicketBody> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ReferenceNumberSection(),
+            ReferenceNumberCancelTrsfTicketSection(),
             SizeboxHeightSession(),
-            RecipientNumberSection(),
+            RecipientNumberTrsfTicketSection(),
             SizeboxHeightSession(),
             NumberTicketsSection(),
             SizeboxHeightSession(),
@@ -36,7 +31,7 @@ class _CancelTrsfTicketBodyState extends State<CancelTrsfTicketBody> {
               child: TicketTypeSection(),
             ),
             SizeboxHeightSession(),
-            PasswordTrsfSection(),
+            PasswordTrsfTicketSection(),
             SizeboxHeightSession(),
             CancelTrsfTicketBtn()
           ],

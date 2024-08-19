@@ -32,8 +32,6 @@ class Home extends StatelessWidget {
         ],
       ),
       body: const HomeBody(),
-      // bottomNavigationBar: buildMyNavBar(context),
-      //backgroundColor: Colors.blueGrey,
     );
   }
 }

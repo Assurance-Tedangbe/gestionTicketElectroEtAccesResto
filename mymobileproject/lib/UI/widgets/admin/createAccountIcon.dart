@@ -15,7 +15,7 @@ class CreateAccountIcon extends StatelessWidget {
       ),
       tooltip: 'Créer un utilisateur',
       onPressed: () => Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => SignUpPage())),
+          .push(MaterialPageRoute(builder: (context) => const SignUpPage())),
     );
   }
 }

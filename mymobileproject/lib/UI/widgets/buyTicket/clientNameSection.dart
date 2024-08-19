@@ -25,18 +25,19 @@ class _ClientNameSectionState extends State<ClientNameSection> {
             height: size.height / 14.0,
             alignment: Alignment.centerLeft,
             decoration: BoxDecoration(
-                color: const Color.fromRGBO(234, 234, 244, 1),
+                color: ticketSectionColor,
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: const [
                   BoxShadow(
-                      color: Colors.black26,
+                      color: boxshadowColor,
                       blurRadius: 6,
                       offset: Offset(0, 2))
                 ],
                 border: Border.all(color: kPrimaryColor, width: 1)),
             child: const TextField(
+              keyboardType: TextInputType.text,
               style: TextStyle(
-                color: Colors.black87,
+                color: enterTextFieldColor,
               ),
               decoration: InputDecoration(
                   border: InputBorder.none,
@@ -44,7 +45,7 @@ class _ClientNameSectionState extends State<ClientNameSection> {
                   prefixIcon: Icon(Icons.person, color: Colors.black54),
                   hintText: "Acheteur",
                   hintStyle: TextStyle(
-                    color: Colors.black87,
+                    color: enterTextFieldColor,
                     fontSize: 11,
                   )),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/pages/signup.dart';
+import 'package:mymobileproject/constants.dart';
 
 class CheckSignupBtn extends StatefulWidget {
   const CheckSignupBtn({super.key});
@@ -19,13 +20,13 @@ class _CheckSignupBtnState extends State<CheckSignupBtn> {
           TextSpan(
               text: "N'avez vous pas de compte?",
               style: TextStyle(
-                  color: Colors.black,
+                  color: kThirdColor,
                   fontSize: 15,
                   fontWeight: FontWeight.w500)),
           TextSpan(
               text: "  S'inscrire",
               style: TextStyle(
-                  color: Colors.blue,
+                  color: kPrimaryColor,
                   fontSize: 15,
                   fontWeight: FontWeight.bold))
         ]),

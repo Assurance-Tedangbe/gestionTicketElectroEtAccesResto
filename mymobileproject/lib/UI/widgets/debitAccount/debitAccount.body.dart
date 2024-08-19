@@ -7,15 +7,11 @@ import 'package:mymobileproject/UI/widgets/debitAccount/infoContainer.dart';
 import 'package:mymobileproject/UI/widgets/debitAccount/ouContainer.dart';
 import 'package:mymobileproject/UI/widgets/home/sizebox.template.dart';
 import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
+import 'package:mymobileproject/constants.dart';
 
-class DebitBody extends StatefulWidget {
+class DebitBody extends StatelessWidget {
   const DebitBody({super.key});
 
-  @override
-  State<DebitBody> createState() => _DebitBodyState();
-}
-
-class _DebitBodyState extends State<DebitBody> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -37,11 +33,11 @@ class _DebitBodyState extends State<DebitBody> {
                 height: size.height * 0.4,
                 width: size.width * 7,
                 decoration: BoxDecoration(
-                  color: Colors.white70,
+                  color: textContainerColor,
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: const [
                     BoxShadow(
-                        color: Colors.black26,
+                        color: boxshadowColor,
                         blurRadius: 6,
                         offset: Offset(0, 2))
                   ],
