@@ -15,7 +15,7 @@ class BuyTicketBody extends StatelessWidget {
     return Background(
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
           child: SizedBox(
