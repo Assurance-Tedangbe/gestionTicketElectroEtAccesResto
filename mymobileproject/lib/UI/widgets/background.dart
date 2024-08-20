@@ -20,32 +20,32 @@ class Background extends StatelessWidget {
             top: 0,
             left: 0,
             child: Image.asset(
-              "images/graphic.png",
-              width: size.width * 0.04,
+              "images/logo-senticket.png",
+              width: size.width * 0.08,
             ),
           ),
           Positioned(
             bottom: 0,
             left: 0,
             child: Image.asset(
-              "images/graphic.png",
-              width: size.width * 0.04,
+              "images/logo-senticket.png",
+              width: size.width * 0.08,
             ),
           ),
           Positioned(
             bottom: 0,
             right: 0,
             child: Image.asset(
-              "images/graphic.png",
-              width: size.width * 0.04,
+              "images/logo-senticket.png",
+              width: size.width * 0.08,
             ),
           ),
           Positioned(
             top: 0,
             right: 0,
             child: Image.asset(
-              "images/graphic.png",
-              width: size.width * 0.04,
+              "images/logo-senticket.png",
+              width: size.width * 0.08,
             ),
           ),
           child,

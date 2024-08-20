@@ -21,7 +21,7 @@ class _CoverDrawerHeaderState extends State<CoverDrawerHeader> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const CircleAvatar(
-              backgroundImage: AssetImage("images/restaurantlogo.png"),
+              backgroundImage: AssetImage("images/logo-senticket.png"),
               radius: 30,
             ),
             IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
