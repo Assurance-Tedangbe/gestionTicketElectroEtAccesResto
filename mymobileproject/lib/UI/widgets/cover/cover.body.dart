@@ -17,7 +17,7 @@ class CoverBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Container(
+          /*   Container(
             alignment: Alignment.center,
             height: size.height * 0.1,
             width: size.width * 0.7,
@@ -30,7 +30,7 @@ class CoverBody extends StatelessWidget {
                 fontStyle: FontStyle.italic,
               ),
             ),
-          ),
+          ), */
           SizedBox(height: size.height * 0.02),
           const Image(
             image: AssetImage("images/logo-senticket.png"),
