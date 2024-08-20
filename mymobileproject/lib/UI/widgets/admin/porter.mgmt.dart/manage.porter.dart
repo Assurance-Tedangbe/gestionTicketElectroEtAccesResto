@@ -9,7 +9,8 @@ class ManagePorter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: AppBar(title: const Text(_title)),
+        appBar:
+            AppBar(title: const Text(_title, style: TextStyle(fontSize: 19.5))),
         body: const ManagePorterBody());
   }
 }
