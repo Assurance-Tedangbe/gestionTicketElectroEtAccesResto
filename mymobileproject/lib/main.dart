@@ -88,3 +88,24 @@ class RootView extends StatelessWidget {
     );
   }
 }
+
+/* 
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => UserProvider(),
+      child: MaterialApp(
+        title: 'Gestion Utilisateurs - Spring Boot + Flutter',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: UserListPage(),
+        debugShowCheckedModeBanner: false,
+      ),
+    );
+  }
+}
+
+ */
