@@ -1,8 +1,14 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:mymobileproject/model/role_model.dart';
 import 'package:mymobileproject/model/user_model.dart';
 
-//Creates a class that handles all communication with the API
+/* 
+ - Service combiné qui gère :
+ - Appels HTTP vers l'API Spring Boot: handles all communication with the API
+ - Cache simple des données
+ - Logique métier légère
+ - Transformation des données */
 class UserApiService {
   /* Use the IP address of the Android emulator (10.0.2.2)
   or your machine's IP address for other emulators/devices. */
@@ -17,29 +23,42 @@ class UserApiService {
       'Authorization': 'Bearer your_jwt_token', */
   };
 
+  // === CACHE SIMPLE INTÉGRÉ ===
+  List<User> _cachedUsers = []; // Cache des utilisateurs
+  DateTime? _lastFetchTime; // Dernière récupération
+  static const Duration cacheDuration = Duration(minutes: 5); // Durée de cache
+
   // -------------------------
   // 1. CREATE USER (POST /api/users)
   // -------------------------
-  static Future<User> createUser(User user) async {
+  Future<User> createUser(User user) async {
     // I will create a user via POST /api/users and return the created user"
-
     try {
+      print("New user creation: ${user.username}");
+
       final response = await http.post(
         // I'm trying to send a POST request:
 
         Uri.parse(baseUrl), // Converts the URL string to a Uri object
         headers: headers, // Uses the configured headers
-        body: json.encode(
-            user.toJson()), // Converts the User object to a JSON string"
+        body: json.encode(user.toJson()), // Converts User object → JSON string
       );
 
       if (response.statusCode == 201) {
-        return User.fromJson(json.decode(
-            response.body)); // Converts the JSON response into a User object
+        final newUser = User.fromJson(json.decode(
+            response.body)); // // Converts the JSON response → User object
+
+        print("User created with ID: ${newUser.userId}");
+
+        // Cache update
+        _cachedUsers.add(newUser);
+
+        return newUser;
       } else {
         throw Exception('Erreur création utilisateur: ${response.statusCode}');
       }
     } catch (e) {
+      print("Erreur création: $e");
       throw Exception('Erreur réseau: $e');
     }
   }
@@ -47,25 +66,56 @@ class UserApiService {
   // -------------------------
   // 2. READ ALL USERS (GET /api/users)
   // -------------------------
-  static Future<List<User>> getAllUsers() async {
+  // Uses caching to avoid unnecessary API calls
+  Future<List<User>> getAllUsers({bool forceRefresh = false}) async {
+    // Checks if the cache is still valid
+    final now = DateTime.now();
+
+    final cacheValide = _lastFetchTime != null &&
+        now.difference(_lastFetchTime!) < cacheDuration;
+
+    // Returns the cache if valid and not forced
+    if (!forceRefresh && cacheValide && _cachedUsers.isNotEmpty) {
+      print("Retourne ${_cachedUsers.length} utilisateurs depuis le cache");
+
+      return _cachedUsers;
+    }
+
     try {
+      print("Retrieving users from the API");
+
       final response = await http.get(
         Uri.parse(baseUrl),
         headers: headers,
-      ); // I do a GET /api/users to retrieve all users
+      );
 
       if (response.statusCode == 200) {
-        final List<dynamic> jsonList = json.decode(response
-            .body); // Converts the JSON string into a List of Dart objects
+        // Converts the JSON response → a list of User objects
 
-        return jsonList
+        final List<dynamic> jsonList = json.decode(
+            response.body); // Converts JSON string  → List of Dart objects
+
+        _cachedUsers = jsonList
             .map((json) => User.fromJson(json))
-            .toList(); //Transforms each JSON object into a User object"
+            .toList(); // Transforms each JSON object → User object"
+        _lastFetchTime = DateTime.now();
+
+        print(" ${_cachedUsers.length} utilisateurs récupérés");
+
+        return _cachedUsers;
       } else {
         throw Exception(
             'Erreur récupération utilisateurs: ${response.statusCode}');
       }
     } catch (e) {
+      print("Erreur récupération: $e");
+
+      // Fallback: retourne le cache même expiré si pas de réseau
+      if (_cachedUsers.isNotEmpty) {
+        print("Retourne cache expiré en fallback");
+        return _cachedUsers;
+      }
+
       throw Exception('Erreur réseau: $e');
     }
   }
@@ -73,15 +123,41 @@ class UserApiService {
   // -------------------------
   // 3. READ USER BY ID (GET /api/users/{userId})
   // -------------------------
-  static Future<User> getUserById(int userId) async {
+  Future<User> getUserById(int userId) async {
     try {
+      print("Retrieving user ID: $userId");
+
+      // First, search the cache.
+      final cachedUser = _cachedUsers.firstWhere(
+        (user) => user.userId == userId,
+        orElse: () => User(
+          userId: -1, // Marqueur "non trouvé"
+          username: '',
+          password: '',
+          email: '',
+          firstName: '',
+          lastName: '',
+          role: Role(roleName: ''),
+        ),
+      );
+
+      if (cachedUser.userId != -1) {
+        print("📦 User found in cache");
+        return cachedUser;
+      }
+
+      // If not in the cache, API call
       final response = await http.get(
         Uri.parse('$baseUrl/$userId'),
         headers: headers,
       ); // GET /api/users/{userId} to retrieve a specific user"
 
       if (response.statusCode == 200) {
-        return User.fromJson(json.decode(response.body));
+        final user = User.fromJson(json.decode(response.body));
+
+        print("Utilisateur récupéré: ${user.username}");
+
+        return user;
       } else if (response.statusCode == 404) {
         throw Exception('Utilisateur non trouvé');
       } else {
@@ -89,6 +165,8 @@ class UserApiService {
             'Erreur récupération utilisateur: ${response.statusCode}');
       }
     } catch (e) {
+      print("Erreur récupération par ID: $e");
+
       throw Exception('Erreur réseau: $e');
     }
   }
@@ -96,7 +174,7 @@ class UserApiService {
   // -------------------------
   // 4. READ USER BY USERNAME (GET /api/users/username/{username})
   // -------------------------
-  static Future<User> getUserByUsername(String username) async {
+  Future<User> getUserByUsername(String username) async {
     try {
       final response = await http.get(
         Uri.parse('$baseUrl/username/$username'),
@@ -119,8 +197,10 @@ class UserApiService {
   // -------------------------
   // 5. UPDATE USER (PUT /api/users/{userId})
   // -------------------------
-  static Future<User> updateUser(User user) async {
+  Future<User> updateUser(User user) async {
     try {
+      print("Update user with ID: ${user.userId}");
+
       final response = await http.put(
         Uri.parse('$baseUrl/${user.userId}'),
         headers: headers,
@@ -128,12 +208,22 @@ class UserApiService {
       ); // PUT /api/users/{userId} to modify an existing user
 
       if (response.statusCode == 200) {
-        return User.fromJson(json.decode(response.body));
+        final updatedUser = User.fromJson(json.decode(response.body));
+        print(" User updated: ${updatedUser.username}");
+
+        // Updates the cache
+        final index = _cachedUsers.indexWhere((u) => u.userId == user.userId);
+        if (index != -1) {
+          _cachedUsers[index] = updatedUser;
+        }
+
+        return updatedUser;
       } else {
         throw Exception(
             'Erreur mise à jour utilisateur: ${response.statusCode}');
       }
     } catch (e) {
+      print("Erreur mise à jour: $e");
       throw Exception('Erreur réseau: $e');
     }
   }
@@ -141,7 +231,7 @@ class UserApiService {
   // -------------------------
   // 6. UPDATE PASSWORD (PUT /api/users/password/{userId})
   // -------------------------
-  static Future<void> updatePassword(int userId, String newPassword) async {
+  Future<void> updatePassword(int userId, String newPassword) async {
     try {
       final response = await http.put(
         Uri.parse('$baseUrl/password/$userId'),
@@ -154,6 +244,8 @@ class UserApiService {
         throw Exception(
             'Erreur mise à jour mot de passe: ${response.statusCode}');
       }
+
+      print("Password updated for user with ID: $userId");
     } catch (e) {
       throw Exception('Erreur réseau: $e');
     }
@@ -162,18 +254,27 @@ class UserApiService {
   // -------------------------
   // 7. DELETE USER (DELETE /api/users/{userId})
   // -------------------------
-  static Future<void> deleteUser(int userId) async {
+  Future<void> deleteUser(int userId) async {
     try {
+      print("Deleting user with ID: $userId");
+
       final response = await http.delete(
         Uri.parse('$baseUrl/$userId'),
         headers: headers,
       );
 
-      if (response.statusCode != 204) {
+      if (response.statusCode == 204) {
+        print("User deleted with ID: $userId");
+
+        // Updates the cache
+        _cachedUsers.removeWhere((user) => user.userId == userId);
+      } else {
         throw Exception(
             'Erreur suppression utilisateur: ${response.statusCode}');
       }
     } catch (e) {
+      print("Erreur suppression: $e");
+
       throw Exception('Erreur réseau: $e');
     }
   }
@@ -181,7 +282,7 @@ class UserApiService {
   // -------------------------
   // 8. ADD ROLE TO USER (PUT /api/users/{userId}/roles/{roleId})
   // -------------------------
-  static Future<void> addRoleToUser(int userId, int roleId) async {
+  Future<void> addRoleToUser(int userId, int roleId) async {
     try {
       final response = await http.put(
         Uri.parse('$baseUrl/$userId/roles/$roleId'),
@@ -191,6 +292,8 @@ class UserApiService {
       if (response.statusCode != 200) {
         throw Exception('Erreur ajout rôle: ${response.statusCode}');
       }
+
+      print("Rôle $roleId ajouté à l'utilisateur $userId");
     } catch (e) {
       throw Exception('Erreur réseau: $e');
     }
@@ -199,7 +302,7 @@ class UserApiService {
   // -------------------------
   // 9. REMOVE ROLE FROM USER (DELETE /api/users/{userId}/roles/{roleId})
   // -------------------------
-  static Future<void> removeRoleFromUser(int userId, int roleId) async {
+  Future<void> removeRoleFromUser(int userId, int roleId) async {
     try {
       final response = await http.delete(
         Uri.parse('$baseUrl/$userId/roles/$roleId'),
@@ -209,10 +312,54 @@ class UserApiService {
       if (response.statusCode != 200) {
         throw Exception('Erreur retrait rôle: ${response.statusCode}');
       }
+
+      print("✅ Rôle $roleId retiré de l'utilisateur $userId");
     } catch (e) {
       throw Exception('Erreur réseau: $e');
     }
   }
+
+  // UTILITY METHODS WITH LIGHTWEIGHT BUSINESS LOGIC
+
+  //Searching for users in the local cache
+  List<User> searchUsers(String query) {
+    if (query.isEmpty) return _cachedUsers;
+
+    final queryLower = query.toLowerCase();
+
+    return _cachedUsers
+        .where((user) =>
+            user.username.toLowerCase().contains(queryLower) ||
+            user.email.toLowerCase().contains(queryLower) ||
+            user.firstName.toLowerCase().contains(queryLower) ||
+            user.lastName.toLowerCase().contains(queryLower) ||
+            user.role.roleName.toLowerCase().contains(queryLower))
+        .toList();
+  }
+
+  // Basic validation of user data
+  void validateUserData(User user) {
+    if (user.username.length < 3) {
+      throw Exception(
+          'Le nom d\'utilisateur doit contenir au moins 3 caractères');
+    }
+
+    if (user.password.length < 6) {
+      throw Exception('Le mot de passe doit contenir au moins 6 caractères');
+    }
+
+    if (!user.email.contains('@')) {
+      throw Exception('Email invalide');
+    }
+  }
+
+  // Clear the cache (useful for forcing a refresh)
+  void clearCache() {
+    _cachedUsers.clear();
+    _lastFetchTime = null;
+    print("🗑️ Cache utilisateurs vidé");
+  }
+}
 
   /* 
    RÉSUMÉ DU PATTERN GÉNÉRAL
@@ -256,4 +403,4 @@ class UserApiService {
 
    Ce service est le pont essentiel entre votre app Flutter et votre API Spring Boot ! 🌉
    */
-}
+

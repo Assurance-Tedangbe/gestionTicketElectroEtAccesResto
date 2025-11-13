@@ -90,18 +90,30 @@ class RootView extends StatelessWidget {
 }
 
 /* 
+void main() {
+  runApp(MyApp());
+}
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => UserProvider(),
+    return MultiProvider(
+      providers: [
+        // Fournit le Service combiné (Service + Repository)
+        Provider(create: (context) => UserService()),
+        
+        // Fournit le Provider avec dépendance vers le Service
+        ChangeNotifierProvider(
+          create: (context) => UserProvider(context.read<UserService>()),
+        ),
+      ],
       child: MaterialApp(
         title: 'Gestion Utilisateurs - Spring Boot + Flutter',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: UserListPage(),
+        home: UserListPage(), // Page d'accueil
         debugShowCheckedModeBanner: false,
       ),
     );
