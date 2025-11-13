@@ -98,6 +98,7 @@ class UserApiService {
         _cachedUsers = jsonList
             .map((json) => User.fromJson(json))
             .toList(); // Transforms each JSON object → User object"
+
         _lastFetchTime = DateTime.now();
 
         print(" ${_cachedUsers.length} utilisateurs récupérés");
@@ -173,6 +174,7 @@ class UserApiService {
 
   // -------------------------
   // 4. READ USER BY USERNAME (GET /api/users/username/{username})
+  // without cahe
   // -------------------------
   Future<User> getUserByUsername(String username) async {
     try {
@@ -230,6 +232,7 @@ class UserApiService {
 
   // -------------------------
   // 6. UPDATE PASSWORD (PUT /api/users/password/{userId})
+  // without cahe
   // -------------------------
   Future<void> updatePassword(int userId, String newPassword) async {
     try {
@@ -281,6 +284,7 @@ class UserApiService {
 
   // -------------------------
   // 8. ADD ROLE TO USER (PUT /api/users/{userId}/roles/{roleId})
+  // without cahe
   // -------------------------
   Future<void> addRoleToUser(int userId, int roleId) async {
     try {
@@ -319,9 +323,9 @@ class UserApiService {
     }
   }
 
-  // UTILITY METHODS WITH LIGHTWEIGHT BUSINESS LOGIC
+  // === MÉTHODES UTILITAIRES AVEC LOGIQUE MÉTIER LÉGÈRE ===
 
-  //Searching for users in the local cache
+  // Searching for users in the local cache
   List<User> searchUsers(String query) {
     if (query.isEmpty) return _cachedUsers;
 

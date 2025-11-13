@@ -45,8 +45,7 @@ class User {
     };
   }
 
-  // Creates a copy of the user with some modified values
-  // Very useful for edit forms
+  // Creates a copy of the user with some modified values: useful for edit forms
   User copyWith({
     int? userId,
     String? username,

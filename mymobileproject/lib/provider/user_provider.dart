@@ -227,14 +227,14 @@ class UserProvider with ChangeNotifier {
       print(" User loaded with username: $username");
     } catch (e) {
       _error = 'Error loading user with username: ${e.toString()}';
-      print("Error loadUserByUsername: $e");
+      print(" Error loadUserByUsername: $e");
     } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
 
-  // Mettre à jour le mot de passe
+  // Update password
   Future<bool> updateUserPassword(int userId, String newPassword) async {
     _isUpdatingPassword = true;
     _isLoading = true;
