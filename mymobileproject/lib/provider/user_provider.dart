@@ -5,10 +5,10 @@ import 'package:mymobileproject/service/user_service.dart';
 /*
   Rôle Principal: Gestionnaire d'état entralisé pour les utilisateurs
   Votre UserProvider sert de cerveau central qui :
-  - Stocke l'état de tous les utilisateurs / gére l'état de l'interface utilisateur 
-  - Coordonne les opérations CRUD / actions utilisateur 
-  - Gère le loading et les erreurs
-  - Notifie l'UI des changements / notifie les changements aux écouteurs
+   - Stocke l'état de tous les utilisateurs / gére l'état de l'interface utilisateur 
+   - Coordonne les opérations CRUD / actions utilisateur 
+   - Gère le loading et les erreurs
+   - Notifie l'UI des changements / notifie les changements aux écouteurs
 
   Gère l'état de toutes les opérations du UserApiService
 */

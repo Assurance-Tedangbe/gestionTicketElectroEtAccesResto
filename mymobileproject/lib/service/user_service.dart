@@ -4,11 +4,12 @@ import 'package:mymobileproject/model/role_model.dart';
 import 'package:mymobileproject/model/user_model.dart';
 
 /* 
- - Service combiné qui gère :
- - Appels HTTP vers l'API Spring Boot: handles all communication with the API
- - Cache simple des données
- - Logique métier légère
- - Transformation des données */
+  - Service combiné qui gère :
+  - Appels HTTP vers l'API Spring Boot: handles all communication with the API
+  - Cache simple des données
+  - Logique métier légère
+  - Transformation des données 
+*/
 class UserApiService {
   /* Use the IP address of the Android emulator (10.0.2.2)
   or your machine's IP address for other emulators/devices. */
@@ -90,16 +91,16 @@ class UserApiService {
       );
 
       if (response.statusCode == 200) {
-        // Converts the JSON response → a list of User objects
+        // the JSON response → a list of User objects
 
-        final List<dynamic> jsonList = json.decode(
-            response.body); // Converts JSON string  → List of Dart objects
+        final List<dynamic> jsonList =
+            json.decode(response.body); // JSON string  → List of Dart objects
 
         _cachedUsers = jsonList
             .map((json) => User.fromJson(json))
             .toList(); // Transforms each JSON object → User object"
 
-        _lastFetchTime = DateTime.now();
+        _lastFetchTime = DateTime.now(); // Timestamp update
 
         print(" ${_cachedUsers.length} utilisateurs récupérés");
 
@@ -346,6 +347,12 @@ class UserApiService {
     if (user.username.length < 3) {
       throw Exception(
           'Le nom d\'utilisateur doit contenir au moins 3 caractères');
+    }
+
+    // Validation de la longueur maximale (comme @Size(max = 70))
+    if (user.username.length > 70) {
+      throw Exception(
+          'Le nom d\'utilisateur ne peut pas dépasser 70 caractères');
     }
 
     if (user.password.length < 6) {
