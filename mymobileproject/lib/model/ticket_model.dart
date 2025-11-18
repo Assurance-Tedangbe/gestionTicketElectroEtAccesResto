@@ -1,3 +1,6 @@
+// lib/models/ticket_model.dart
+
+/// Modèle représentant un ticket
 class Ticket {
   final String ticketId;
   final String ticketType;

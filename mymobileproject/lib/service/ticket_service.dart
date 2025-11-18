@@ -1,5 +1,3 @@
-// lib/services/ticket_api_service.dart
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mymobileproject/model/ticket_model.dart';
