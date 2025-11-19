@@ -38,8 +38,8 @@ class Credit {
     };
   }
 
-  /// Crée une copie de l'objet Credit avec des valeurs optionnelles modifiées
-  Credit copyWith({
+  // Crée une copie de l'objet Credit avec des valeurs optionnelles modifiées
+  /* Credit copyWith({
     String? creditId,
     DateTime? creditDate,
     double? creditAmount,
@@ -53,14 +53,14 @@ class Credit {
       accountDTO: accountDTO ?? this.accountDTO,
       userDTO: userDTO ?? this.userDTO,
     );
-  }
+  } */
 
   @override
   String toString() {
     return 'Credit(creditId: $creditId, creditDate: $creditDate, creditAmount: $creditAmount, account: ${accountDTO.accountNumber}, user: ${userDTO.firstName} ${userDTO.lastName})';
   }
 
-  @override
+  /* @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     return other is Credit && other.creditId == creditId;
@@ -69,7 +69,7 @@ class Credit {
   @override
   int get hashCode {
     return creditId.hashCode;
-  }
+  } */
 }
 
 /// Modèles DTO associés (simplifiés pour l'exemple)

@@ -125,15 +125,21 @@ class UserApiService {
   // -------------------------
   // 3. READ USER BY ID (GET /api/users/{userId})
   // -------------------------
+
+// Déclaration d'une méthode asynchrone qui retourne un objet User
   Future<User> getUserById(int userId) async {
     try {
       print("Retrieving user ID: $userId");
 
-      // First, search the cache.
+      // Recherche d'abord dans le cache local pour éviter un appel API inutile
       final cachedUser = _cachedUsers.firstWhere(
+        // Condition de recherche : cherche un utilisateur avec l'ID correspondant
         (user) => user.userId == userId,
+
+        // Si aucun utilisateur n'est trouvé dans le cache, retourne un utilisateur "vide" avec userId = -1
         orElse: () => User(
-          userId: -1, // Marqueur "non trouvé"
+          userId:
+              -1, // Marqueur "non trouvé" - valeur spéciale pour indiquer l'absence
           username: '',
           password: '',
           email: '',
@@ -143,22 +149,32 @@ class UserApiService {
         ),
       );
 
+      // Vérifie si l'utilisateur a été trouvé dans le cache
+      // cachedUser.userId != -1 signifie qu'on a trouvé un utilisateur valide dans le cache
       if (cachedUser.userId != -1) {
         print("📦 User found in cache");
+        // Retourne l'utilisateur du cache sans faire d'appel API
         return cachedUser;
       }
 
       // If not in the cache, API call
+      // Si l'utilisateur n'est pas dans le cache, on fait un appel API
       final response = await http.get(
+        // Construit l'URL pour l'endpoint spécifique de l'utilisateur
+        // Exemple: http://10.0.2.2:8080/api/users/123
         Uri.parse('$baseUrl/$userId'),
-        headers: headers,
+        headers:
+            headers, // Utilise les headers configurés (Content-Type, Accept, etc.)
       ); // GET /api/users/{userId} to retrieve a specific user"
 
+      // Vérifie le code de statut HTTP de la réponse
       if (response.statusCode == 200) {
+        // Décode le corps de la réponse JSON en objet Dart
         final user = User.fromJson(json.decode(response.body));
 
         print("Utilisateur récupéré: ${user.username}");
 
+        // Retourne l'utilisateur récupéré depuis l'API
         return user;
       } else if (response.statusCode == 404) {
         throw Exception('Utilisateur non trouvé');
@@ -167,8 +183,10 @@ class UserApiService {
             'Erreur récupération utilisateur: ${response.statusCode}');
       }
     } catch (e) {
+      // Bloc catch qui capture toutes les exceptions pouvant survenir
       print("Erreur récupération par ID: $e");
 
+      // Relance une exception avec un message générique
       throw Exception('Erreur réseau: $e');
     }
   }
@@ -288,6 +306,8 @@ class UserApiService {
   // without cahe
   // -------------------------
   Future<void> addRoleToUser(int userId, int roleId) async {
+    print("Add role : $roleId to user : $userId");
+
     try {
       final response = await http.put(
         Uri.parse('$baseUrl/$userId/roles/$roleId'),
@@ -306,8 +326,10 @@ class UserApiService {
 
   // -------------------------
   // 9. REMOVE ROLE FROM USER (DELETE /api/users/{userId}/roles/{roleId})
+  // without cahe
   // -------------------------
   Future<void> removeRoleFromUser(int userId, int roleId) async {
+    print("Remove role : $roleId from user : $userId");
     try {
       final response = await http.delete(
         Uri.parse('$baseUrl/$userId/roles/$roleId'),
@@ -328,6 +350,8 @@ class UserApiService {
 
   // Searching for users in the local cache
   List<User> searchUsers(String query) {
+    print("searching for users with query: $query");
+
     if (query.isEmpty) return _cachedUsers;
 
     final queryLower = query.toLowerCase();
@@ -366,6 +390,7 @@ class UserApiService {
 
   // Clear the cache (useful for forcing a refresh)
   void clearCache() {
+    print("Clearing the cache");
     _cachedUsers.clear();
     _lastFetchTime = null;
     print("🗑️ Cache utilisateurs vidé");

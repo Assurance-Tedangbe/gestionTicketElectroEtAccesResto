@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:mymobileproject/model/account_model.dart';
-import 'package:mymobileproject/service/account_service.dart'; // "Importe les bases de Flutter, dont ChangeNotifier"
+import 'package:mymobileproject/service/account_service.dart';
 
 /*
   Rôle Principal: Gestionnaire d'état centralisé pour les comptes
@@ -266,7 +266,8 @@ class AccountProvider with ChangeNotifier {
           newBalance); // "demande à l'API de mettre à jour le solde de ce compte"
 
       _error = '';
-      print("Solde mis à jour pour le compte $accountId: $newBalance");
+      print(
+          "Solde mis à jour avec succès pour le compte $accountId newBalance: $newBalance");
       return true;
     } catch (e) {
       _error = 'Erreur mise à jour solde: ${e.toString()}';
@@ -291,7 +292,8 @@ class AccountProvider with ChangeNotifier {
           newAccountNumber); // "demande à l'API de mettre à jour le numéro de compte"
 
       _error = '';
-      print("Numéro de compte mis à jour pour $accountId: $newAccountNumber");
+      print(
+          "Numéro de compte mis à jour avec succès pour $accountId ewAccountNumber: $newAccountNumber");
       return true;
     } catch (e) {
       _error = 'Erreur mise à jour numéro de compte: ${e.toString()}';
@@ -353,7 +355,7 @@ class AccountProvider with ChangeNotifier {
   }
 
   // "Transfert de fonds entre comptes"
-  Future<bool> transferFundsBetweenAccounts(
+  Future<bool> transferFunds(
       String fromAccountId, String toAccountId, double amount) async {
     _isTransferringFunds = true;
     _isLoading = true;
@@ -378,7 +380,7 @@ class AccountProvider with ChangeNotifier {
   }
 
   // "Annule un transfert de fonds"
-  Future<bool> cancelTransferBetweenAccounts(
+  Future<bool> cancelTransferFunds(
       String fromAccountId, String toAccountId, double amount) async {
     _isCancelingTransfer = true;
     _isLoading = true;

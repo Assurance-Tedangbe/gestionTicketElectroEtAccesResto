@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:mymobileproject/model/menu_model.dart';
-import 'package:mymobileproject/service/menu_service.dart'; // "Importe les bases de Flutter, dont ChangeNotifier"
+import 'package:mymobileproject/service/menu_service.dart';
 
 /*
   Rôle Principal: Gestionnaire d'état centralisé pour les menus
@@ -62,6 +62,7 @@ class MenuProvider with ChangeNotifier {
       _menus = await _service.getAllMenus(
           forceRefresh:
               forceRefresh); // "Demande au service de me donner tous les menus"
+
       _error = ''; // "Confirme qu'il n'y a pas d'erreurs"
       print("Chargement réussi : ${_menus.length} menus");
     } catch (e) {
@@ -86,8 +87,10 @@ class MenuProvider with ChangeNotifier {
 
       final newMenu = await _service
           .createMenu(menu); // "demande au service de créer ce menu dans l'API"
+
       _menus.add(
           newMenu); // "Si ça fonctionne, ajoute le nouveau menu à ma liste locale"
+
       _error = ''; // "Efface les erreurs"
       print("Menu créé avec succès: ${newMenu.menuName}");
       return true; // "Succès"
@@ -219,7 +222,7 @@ class MenuProvider with ChangeNotifier {
     await loadAllMenus(forceRefresh: true);
   }
 
-  // "Obtient tous les types de menus uniques"
+  /*  // "Obtient tous les types de menus uniques"
   List<String> getUniqueMenuTypes() {
     final types = _menus.map((menu) => menu.menuType).toSet().toList();
     types.sort();
@@ -252,5 +255,5 @@ class MenuProvider with ChangeNotifier {
     }
 
     return statistics;
-  }
+  } */
 }

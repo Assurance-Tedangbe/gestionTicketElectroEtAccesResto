@@ -26,7 +26,7 @@ class Role {
 
   // Creates a copy of the role with certain modified values
   // useful for modifying forms without affecting the original
-  Role copyWith({
+  /* Role copyWith({
     int? roleId,
     String? roleName,
   }) {
@@ -34,7 +34,7 @@ class Role {
       roleId: roleId ?? this.roleId, // Keep the old roleId if not provided
       roleName: roleName ?? this.roleName,
     );
-  }
+  } */
 
   // Textual representation for debugging
   @override
@@ -42,7 +42,7 @@ class Role {
     return 'Role(roleId: $roleId, roleName: $roleName)';
   }
 
-  // Compare two roles for equality (based on roleId and name)
+  /* // Compare two roles for equality (based on roleId and name)
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -53,5 +53,5 @@ class Role {
 
   // HashCode for using roles in Sets and Maps
   @override
-  int get hashCode => roleId.hashCode ^ roleName.hashCode;
+  int get hashCode => roleId.hashCode ^ roleName.hashCode; */
 }

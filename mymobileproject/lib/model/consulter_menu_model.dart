@@ -35,8 +35,8 @@ class ConsulterMenu {
     };
   }
 
-  /// Crée une copie de l'objet ConsulterMenu avec des valeurs optionnelles modifiées
-  ConsulterMenu copyWith({
+  // Crée une copie de l'objet ConsulterMenu avec des valeurs optionnelles modifiées
+  /*  ConsulterMenu copyWith({
     String? consulterMenuId,
     DateTime? consultationDate,
     MenuDTO? menuDTO,
@@ -48,14 +48,14 @@ class ConsulterMenu {
       menuDTO: menuDTO ?? this.menuDTO,
       userDTO: userDTO ?? this.userDTO,
     );
-  }
+  } */
 
   @override
   String toString() {
     return 'ConsulterMenu(consulterMenuId: $consulterMenuId, consultationDate: $consultationDate, menu: ${menuDTO.menuName}, user: ${userDTO.firstName} ${userDTO.lastName})';
   }
 
-  @override
+/*   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     return other is ConsulterMenu && other.consulterMenuId == consulterMenuId;
@@ -64,7 +64,7 @@ class ConsulterMenu {
   @override
   int get hashCode {
     return consulterMenuId.hashCode;
-  }
+  } */
 }
 
 // Modèles DTO associés (simplifiés pour l'exemple)

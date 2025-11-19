@@ -82,6 +82,7 @@ class UserProvider with ChangeNotifier {
       _users = await _service.getAllUsers(
           forceRefresh:
               forceRefresh); //Ask the service to give me all the users
+
       _error = ''; //Confirm that there are no errors
       print(" successfully laoding : ${_users.length} users");
     } catch (e) {
@@ -106,7 +107,9 @@ class UserProvider with ChangeNotifier {
 
       final newUser = await _service
           .createUser(user); // ask the service to create this user in the API
+
       _users.add(newUser); // If it works, add the new user to my local list
+
       _error = ''; // Clears errors
       // _isCreatingUser = false;
       // _isLoading = false; // Stops loading

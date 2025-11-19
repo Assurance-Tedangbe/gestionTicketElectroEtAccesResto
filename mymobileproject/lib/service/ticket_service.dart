@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:mymobileproject/enums/ticket_status.dart';
+import 'package:mymobileproject/model/menu_model.dart';
 import 'package:mymobileproject/model/ticket_model.dart';
 
 /* 
@@ -124,7 +126,7 @@ class TicketApiService {
   // -------------------------
   // 3. READ TICKET BY ID (GET /api/tickets/{ticketId})
   // -------------------------
-  Future<Ticket> getTicketById(String ticketId) async {
+  Future<Ticket> getTicketById(int ticketId) async {
     try {
       print("Récupération du ticket ID: $ticketId");
 
@@ -132,21 +134,21 @@ class TicketApiService {
       final cachedTicket = _cachedTickets.firstWhere(
         (ticket) => ticket.ticketId == ticketId,
         orElse: () => Ticket(
-          ticketId: '', // "Marqueur 'non trouvé'"
+          ticketId: -1, // "Marqueur 'non trouvé'"
           ticketType: '',
           ticketPrice: 0.0,
           paymentCode: '',
           booked: false,
-          ticketStatus: '',
+          ticketStatus: TicketStatus.available,
           ticketCreationDate: DateTime.now(),
           ticketDescription: '',
-          menuDTO: MenuDTO(menuId: '', menuName: ''),
+          menu: Menu(menuName: '', menuType: '', menuDescription: ''),
           userDTO: UserDTO(userId: '', firstName: '', lastName: ''),
           accountDTO: AccountDTO(accountId: '', accountNumber: ''),
         ),
       );
 
-      if (cachedTicket.ticketId.isNotEmpty) {
+      if (cachedTicket.ticketId != -1) {
         print("Ticket trouvé dans le cache");
         return cachedTicket;
       }
@@ -240,7 +242,8 @@ class TicketApiService {
   // 6. UPDATE TICKET STATUS (PUT /api/tickets/ticketStatus/{ticketId})
   // sans cache
   // -------------------------
-  Future<void> updateTicketStatus(String ticketId, String ticketStatus) async {
+  Future<void> updateTicketStatus(
+      int ticketId, TicketStatus ticketStatus) async {
     try {
       final response = await http.put(
         Uri.parse('$baseUrl/ticketStatus/$ticketId'),
@@ -546,13 +549,13 @@ class TicketApiService {
 
     return _cachedTickets
         .where((ticket) =>
-            ticket.ticketId.toLowerCase().contains(queryLower) ||
+            // ticket.ticketId.toLowerCase().contains(queryLower) ||
             ticket.ticketType.toLowerCase().contains(queryLower) ||
-            ticket.ticketStatus.toLowerCase().contains(queryLower) ||
+            // ticket.ticketStatus.toLowerCase().contains(queryLower) ||
             ticket.paymentCode.toLowerCase().contains(queryLower) ||
             ticket.userDTO.firstName.toLowerCase().contains(queryLower) ||
             ticket.userDTO.lastName.toLowerCase().contains(queryLower) ||
-            ticket.menuDTO.menuName.toLowerCase().contains(queryLower))
+            ticket.menu.menuName.toLowerCase().contains(queryLower))
         .toList();
   }
 
@@ -583,10 +586,9 @@ class TicketApiService {
   }
 
   // "Filtre les tickets par statut"
-  List<Ticket> filterTicketsByStatus(String status) {
+  List<Ticket> filterTicketsByStatus(TicketStatus status) {
     return _cachedTickets
-        .where((ticket) =>
-            ticket.ticketStatus.toLowerCase() == status.toLowerCase())
+        .where((ticket) => ticket.ticketStatus == status)
         .toList();
   }
 

@@ -136,7 +136,6 @@ class AccountApiService {
           balance: 0.0,
           dateCreation: DateTime.now(),
           user: User(
-            //userId: '',
             username: '',
             password: '',
             firstName: '',
@@ -148,7 +147,13 @@ class AccountApiService {
         ),
       );
 
-      /* if (cachedAccount.accountId.isNotEmpty) {
+      if (cachedAccount.accountId != -1) {
+        print("Compte trouvé dans le cache");
+        return cachedAccount;
+      }
+
+      /*  can use this if accountId is a String
+      if (cachedAccount.accountId.isNotEmpty) {
         print("Compte trouvé dans le cache");
         return cachedAccount;
       } */
@@ -188,7 +193,7 @@ class AccountApiService {
         Uri.parse('$baseUrl/${account.accountId}'),
         headers: headers,
         body: json.encode(account.toJson()), // "Envoie les nouvelles données"
-      ); // "PUT /api/accounts/{accountId} pour modifier un compte existant"
+      );
 
       if (response.statusCode == 200) {
         final updatedAccount = Account.fromJson(json.decode(response.body));
@@ -244,6 +249,8 @@ class AccountApiService {
   // sans cache
   // -------------------------
   Future<void> linkAccountToUser(String accountId, String userId) async {
+    print("Liaison compte : $accountId à l'utilisateur : $userId");
+
     try {
       final response = await http.put(
         Uri.parse('$baseUrl/$accountId/link/$userId'),
@@ -252,7 +259,7 @@ class AccountApiService {
 
       if (response.statusCode != 200) {
         throw Exception(
-            'Erreur liaison compte-utilisateur: ${response.statusCode}');
+            'Erreur liaison compte à utilisateur: ${response.statusCode}');
       }
 
       print("Compte $accountId lié à l'utilisateur $userId");
@@ -266,6 +273,7 @@ class AccountApiService {
   // sans cache
   // -------------------------
   Future<void> unlinkAccountFromUser(String accountId, String userId) async {
+    print("Delier compte : $accountId de l'utilisateur : $userId");
     try {
       final response = await http.put(
         Uri.parse('$baseUrl/$accountId/unlink/$userId'),
@@ -288,6 +296,7 @@ class AccountApiService {
   // sans cache
   // -------------------------
   Future<void> updateAccountBalance(String accountId, double newBalance) async {
+    print("Mise à jour solde du compte ID: $accountId");
     try {
       final response = await http.put(
         Uri.parse('$baseUrl/balance/$accountId'),
@@ -299,7 +308,8 @@ class AccountApiService {
         throw Exception('Erreur mise à jour solde: ${response.statusCode}');
       }
 
-      print("Solde mis à jour pour le compte $accountId: $newBalance");
+      print(
+          "Solde mis à jour pour le compte $accountId newBalance:  $newBalance");
     } catch (e) {
       throw Exception('Erreur réseau: $e');
     }
@@ -311,6 +321,7 @@ class AccountApiService {
   // -------------------------
   Future<void> updateAccountNumber(
       String accountId, String newAccountNumber) async {
+    print("Mise à jour numero du compte d'ID: $accountId");
     try {
       final response = await http.put(
         Uri.parse('$baseUrl/accountNumber/$accountId'),
@@ -324,7 +335,8 @@ class AccountApiService {
             'Erreur mise à jour numéro de compte: ${response.statusCode}');
       }
 
-      print("Numéro de compte mis à jour pour $accountId: $newAccountNumber");
+      print(
+          "Numéro de compte mis à jour pour $accountId: newAccountNumber: $newAccountNumber");
     } catch (e) {
       throw Exception('Erreur réseau: $e');
     }
@@ -334,6 +346,7 @@ class AccountApiService {
   // 10. ACTIVATE ACCOUNT (PUT /api/accounts/activate/{accountId})
   // -------------------------
   Future<void> activateAccount(String accountId) async {
+    print("Activation du compte ID: $accountId");
     try {
       final response = await http.put(
         Uri.parse('$baseUrl/activate/$accountId'),
@@ -360,6 +373,7 @@ class AccountApiService {
   // 11. DEACTIVATE ACCOUNT (PUT /api/accounts/deactivate/{accountId})
   // -------------------------
   Future<void> deactivateAccount(String accountId) async {
+    print("Désactivation du compte ID: $accountId");
     try {
       final response = await http.put(
         Uri.parse('$baseUrl/deactivate/$accountId'),
@@ -399,7 +413,8 @@ class AccountApiService {
         throw Exception('Erreur transfert de fonds: ${response.statusCode}');
       }
 
-      print("Transfert de $amount du compte $fromAccountId vers $toAccountId");
+      print(
+          "Transfert effectué de $amount du compte $fromAccountId vers $toAccountId");
     } catch (e) {
       throw Exception('Erreur réseau: $e');
     }
@@ -475,6 +490,7 @@ class AccountApiService {
 
   // "Recherche de comptes dans le cache local"
   List<Account> searchAccounts(String query) {
+    print("searching for accounts with query: $query");
     if (query.isEmpty) return _cachedAccounts;
 
     final queryLower = query.toLowerCase();
@@ -511,6 +527,7 @@ class AccountApiService {
 
   // "Vide le cache (utile pour forcer un rafraîchissement)"
   void clearCache() {
+    print("Vider le cache");
     _cachedAccounts.clear();
     _lastFetchTime = null;
     print("Cache comptes vidé");

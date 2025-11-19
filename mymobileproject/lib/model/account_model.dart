@@ -1,12 +1,12 @@
 import 'user_model.dart';
 
 class Account {
-  final int? accountId; // ID unique du compte (null si nouveau compte)
-  final String accountNumber; // Numéro de compte unique
-  final double balance; // Solde du compte
-  final DateTime dateCreation; // Date de création du compte
+  final int? accountId; // null si nouveau compte
+  final String accountNumber;
+  final double balance;
+  final DateTime dateCreation;
   final User user; // Utilisateur propriétaire du compte (relation OneToOne)
-  final bool active; // Statut actif/inactif du compte
+  final bool active;
 
   // Constructeur avec paramètres requis
   Account({
@@ -21,20 +21,20 @@ class Account {
   // Factory constructor pour créer un Account depuis la réponse JSON de l'API
   factory Account.fromJson(Map<String, dynamic> json) {
     return Account(
-      accountId: json['accountId'], // Extrait l'ID du compte
+      accountId: json['accountId'], // Extrait l'ID
       accountNumber: json['accountNumber'], // Extrait le numéro de compte
       balance: json['balance'].toDouble(), // Convertit le solde en double
       dateCreation:
           DateTime.parse(json['dateCreation']), // Parse la date de création
       user: User.fromJson(json['userDTO']), // Convertit l'utilisateur associé
-      active: json['active'], // Extrait le statut actif
+      active: json['active'], // Extrait le statut
     );
   }
 
   // Objet Account →  Map JSON pour l'envoi à l'API
   Map<String, dynamic> toJson() {
     return {
-      'accountId': accountId, // Inclut l'ID du compte
+      'accountId': accountId, // Inclut l'ID
       'accountNumber': accountNumber, // Inclut le numéro de compte
       'balance': balance, // Inclut le solde
       'dateCreation': dateCreation.toIso8601String(), // Format ISO pour la date
@@ -45,6 +45,7 @@ class Account {
 
   // Crée une copie du compte avec certaines valeurs modifiées
   // Utile pour les mises à jour partielles
+  // utilisé ds AccountApiService
   Account copyWith({
     int? accountId,
     String? accountNumber,
@@ -69,7 +70,7 @@ class Account {
     return 'Account(accountId: $accountId, accountNumber: $accountNumber, balance: $balance, active: $active)';
   }
 
-  // Compare deux comptes pour l'égalité (basé sur accountId)
+  /*  // Compare deux comptes pour l'égalité (basé sur accountId)
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -78,7 +79,7 @@ class Account {
 
   // HashCode pour utiliser les comptes dans les Sets et Maps
   @override
-  int get hashCode => accountId.hashCode;
+  int get hashCode => accountId.hashCode; */
 
   /*  factory Account.fromJson(Map<String, dynamic> json) {
     return Account(

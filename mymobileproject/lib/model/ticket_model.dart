@@ -1,23 +1,23 @@
-// lib/models/ticket_model.dart
+import 'package:mymobileproject/enums/ticket_status.dart';
+import 'package:mymobileproject/model/menu_model.dart';
 
-/// Modèle représentant un ticket
 class Ticket {
-  final String ticketId;
+  final int? ticketId;
   final String ticketType;
   final double ticketPrice;
   final String paymentCode;
   final bool booked;
-  final String ticketStatus;
+  final TicketStatus ticketStatus;
   final DateTime ticketCreationDate;
   final DateTime? ticketPurchaseDate;
   final String ticketDescription;
-  final MenuDTO menuDTO;
+  final Menu menu;
   final UserDTO userDTO;
   final AccountDTO accountDTO;
 
-  /// Constructeur principal
+  // Constructeur principal
   Ticket({
-    required this.ticketId,
+    this.ticketId,
     required this.ticketType,
     required this.ticketPrice,
     required this.paymentCode,
@@ -26,7 +26,7 @@ class Ticket {
     required this.ticketCreationDate,
     this.ticketPurchaseDate,
     required this.ticketDescription,
-    required this.menuDTO,
+    required this.menu,
     required this.userDTO,
     required this.accountDTO,
   });
@@ -34,7 +34,8 @@ class Ticket {
   /// Factory constructor pour créer un Ticket à partir d'un JSON
   factory Ticket.fromJson(Map<String, dynamic> json) {
     return Ticket(
-      ticketId: json['ticketId']?.toString() ?? '',
+      // ticketId: json['ticketId']?.toString() ?? '',
+      ticketId: json['ticketId'],
       ticketType: json['ticketType'] ?? '',
       ticketPrice: (json['ticketPrice'] as num?)?.toDouble() ?? 0.0,
       paymentCode: json['paymentCode'] ?? '',
@@ -45,7 +46,7 @@ class Ticket {
           ? DateTime.parse(json['ticketPurchaseDate'])
           : null,
       ticketDescription: json['ticketDescription'] ?? '',
-      menuDTO: MenuDTO.fromJson(json['menuDTO']),
+      menu: Menu.fromJson(json['menuDTO']),
       userDTO: UserDTO.fromJson(json['userDTO']),
       accountDTO: AccountDTO.fromJson(json['accountDTO']),
     );
@@ -63,24 +64,25 @@ class Ticket {
       'ticketCreationDate': ticketCreationDate.toIso8601String(),
       'ticketPurchaseDate': ticketPurchaseDate?.toIso8601String(),
       'ticketDescription': ticketDescription,
-      'menuDTO': menuDTO.toJson(),
+      'menu': menu.toJson(),
       'userDTO': userDTO.toJson(),
       'accountDTO': accountDTO.toJson(),
     };
   }
 
-  /// Crée une copie de l'objet Ticket avec des valeurs optionnelles modifiées
+  // Crée une copie de l'objet Ticket avec des valeurs optionnelles modifiées:
+  // utilisé ds TicketApiService
   Ticket copyWith({
-    String? ticketId,
+    int? ticketId,
     String? ticketType,
     double? ticketPrice,
     String? paymentCode,
     bool? booked,
-    String? ticketStatus,
+    TicketStatus? ticketStatus,
     DateTime? ticketCreationDate,
     DateTime? ticketPurchaseDate,
     String? ticketDescription,
-    MenuDTO? menuDTO,
+    Menu? menu,
     UserDTO? userDTO,
     AccountDTO? accountDTO,
   }) {
@@ -94,7 +96,7 @@ class Ticket {
       ticketCreationDate: ticketCreationDate ?? this.ticketCreationDate,
       ticketPurchaseDate: ticketPurchaseDate ?? this.ticketPurchaseDate,
       ticketDescription: ticketDescription ?? this.ticketDescription,
-      menuDTO: menuDTO ?? this.menuDTO,
+      menu: menu ?? this.menu,
       userDTO: userDTO ?? this.userDTO,
       accountDTO: accountDTO ?? this.accountDTO,
     );
@@ -102,7 +104,7 @@ class Ticket {
 }
 
 /// Modèles DTO associés (simplifiés pour l'exemple)
-class MenuDTO {
+/* class MenuDTO {
   final String menuId;
   final String menuName;
 
@@ -121,7 +123,7 @@ class MenuDTO {
       'menuName': menuName,
     };
   }
-}
+} */
 
 class UserDTO {
   final String userId;

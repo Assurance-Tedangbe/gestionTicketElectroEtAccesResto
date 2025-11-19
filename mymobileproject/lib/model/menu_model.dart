@@ -1,28 +1,28 @@
 class Menu {
-  final String menuId;
+  final int? menuId;
   final String menuName;
   final String menuType;
   final String menuDescription;
 
-  /// Constructeur principal
+  // Constructeur principal
   Menu({
-    required this.menuId,
+    this.menuId,
     required this.menuName,
     required this.menuType,
     required this.menuDescription,
   });
 
-  /// Factory constructor pour créer un Menu à partir d'un JSON
+  // JSON -> Menu
   factory Menu.fromJson(Map<String, dynamic> json) {
     return Menu(
-      menuId: json['menuId']?.toString() ?? '',
+      menuId: json['menuId'],
       menuName: json['menuName'] ?? '',
       menuType: json['menuType'] ?? '',
       menuDescription: json['menuDescription'] ?? '',
     );
   }
 
-  /// Convertit l'objet Menu en Map JSON
+  // Menu -> Map JSON
   Map<String, dynamic> toJson() {
     return {
       'menuId': menuId,
@@ -32,8 +32,8 @@ class Menu {
     };
   }
 
-  /// Crée une copie de l'objet Menu avec des valeurs optionnelles modifiées
-  Menu copyWith({
+  // Crée une copie de l'objet Menu avec des valeurs optionnelles modifiées
+  /*  Menu copyWith({
     String? menuId,
     String? menuName,
     String? menuType,
@@ -45,14 +45,15 @@ class Menu {
       menuType: menuType ?? this.menuType,
       menuDescription: menuDescription ?? this.menuDescription,
     );
-  }
+  } */
 
+  // Représentation textuelle pour le débogage
   @override
   String toString() {
     return 'Menu(menuId: $menuId, menuName: $menuName, menuType: $menuType, menuDescription: $menuDescription)';
   }
 
-  @override
+/*   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     return other is Menu && other.menuId == menuId;
@@ -61,5 +62,5 @@ class Menu {
   @override
   int get hashCode {
     return menuId.hashCode;
-  }
+  } */
 }

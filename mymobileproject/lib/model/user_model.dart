@@ -19,7 +19,7 @@ class User {
     required this.role,
   });
 
-  // Conversion JSON -> User
+  // JSON -> User
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       userId: json['userId'],
@@ -32,7 +32,7 @@ class User {
     );
   }
 
-  // Conversion User -> JSON
+  // User -> JSON
   Map<String, dynamic> toJson() {
     return {
       'userId': userId,
@@ -46,7 +46,7 @@ class User {
   }
 
   // Creates a copy of the user with some modified values: useful for edit forms
-  User copyWith({
+/*   User copyWith({
     int? userId,
     String? username,
     String? password,
@@ -64,5 +64,5 @@ class User {
       lastName: lastName ?? this.lastName,
       role: role ?? this.role,
     );
-  }
+  } */
 }

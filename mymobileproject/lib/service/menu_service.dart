@@ -129,14 +129,14 @@ class MenuApiService {
       final cachedMenu = _cachedMenus.firstWhere(
         (menu) => menu.menuId == menuId,
         orElse: () => Menu(
-          menuId: '', // "Marqueur 'non trouvé'"
+          menuId: -1, // Marqueur "non trouvé"
           menuName: '',
           menuType: '',
           menuDescription: '',
         ),
       );
 
-      if (cachedMenu.menuId.isNotEmpty) {
+      if (cachedMenu.menuId != -1) {
         print("Menu trouvé dans le cache");
         return cachedMenu;
       }
@@ -145,7 +145,7 @@ class MenuApiService {
       final response = await http.get(
         Uri.parse('$baseUrl/$menuId'),
         headers: headers,
-      ); // "GET /api/menus/{menuId} pour récupérer un menu spécifique"
+      );
 
       if (response.statusCode == 200) {
         final menu = Menu.fromJson(json.decode(response.body));
@@ -176,7 +176,7 @@ class MenuApiService {
         Uri.parse('$baseUrl/${menu.menuId}'),
         headers: headers,
         body: json.encode(menu.toJson()), // "Envoie les nouvelles données"
-      ); // "PUT /api/menus/{menuId} pour modifier un menu existant"
+      );
 
       if (response.statusCode == 200) {
         final updatedMenu = Menu.fromJson(json.decode(response.body));
@@ -229,6 +229,7 @@ class MenuApiService {
 
   // "Recherche de menus dans le cache local"
   List<Menu> searchMenus(String query) {
+    print("searching for menus with query: $query");
     if (query.isEmpty) return _cachedMenus;
 
     final queryLower = query.toLowerCase();
@@ -273,6 +274,7 @@ class MenuApiService {
 
   // "Vide le cache (utile pour forcer un rafraîchissement)"
   void clearCache() {
+    print("Vider le cache");
     _cachedMenus.clear();
     _lastFetchTime = null;
     print("Cache menus vidé");
@@ -280,6 +282,8 @@ class MenuApiService {
 
   // "Filtre les menus par type"
   List<Menu> filterMenusByType(String menuType) {
+    print("Filtrer les menus par type: $menuType");
+
     if (menuType.isEmpty) return _cachedMenus;
 
     return _cachedMenus
@@ -288,11 +292,15 @@ class MenuApiService {
   }
 
   // "Trie les menus par nom (ordre alphabétique)"
-  List<Menu> sortMenusByName(bool ascending) {
+  List<Menu> sortMenusByName(bool ascendingOrder) {
+    print("Trie les menus par nom: $ascendingOrder");
+
     final sortedMenus = List<Menu>.from(_cachedMenus);
-    sortedMenus.sort((a, b) => ascending
+
+    sortedMenus.sort((a, b) => ascendingOrder
         ? a.menuName.compareTo(b.menuName)
         : b.menuName.compareTo(a.menuName));
+
     return sortedMenus;
   }
 }

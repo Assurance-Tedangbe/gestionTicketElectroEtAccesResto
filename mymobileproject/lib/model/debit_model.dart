@@ -6,7 +6,7 @@ class Debit {
   final AccountDTO accountDTO;
   final UserDTO userDTO;
 
-  /// Constructeur principal
+  // Constructeur principal
   Debit({
     required this.debitId,
     required this.debitDate,
@@ -15,7 +15,7 @@ class Debit {
     required this.userDTO,
   });
 
-  /// Factory constructor pour créer un Debit à partir d'un JSON
+  // Factory constructor pour créer un Debit à partir d'un JSON
   factory Debit.fromJson(Map<String, dynamic> json) {
     return Debit(
       debitId: json['debitId']?.toString() ?? '',
@@ -38,8 +38,8 @@ class Debit {
     };
   }
 
-  /// Crée une copie de l'objet Debit avec des valeurs optionnelles modifiées
-  Debit copyWith({
+  // Crée une copie de l'objet Debit avec des valeurs optionnelles modifiées
+  /*  Debit copyWith({
     String? debitId,
     DateTime? debitDate,
     double? debitAmount,
@@ -53,14 +53,14 @@ class Debit {
       accountDTO: accountDTO ?? this.accountDTO,
       userDTO: userDTO ?? this.userDTO,
     );
-  }
+  } */
 
   @override
   String toString() {
     return 'Debit(debitId: $debitId, debitDate: $debitDate, debitAmount: $debitAmount, account: ${accountDTO.accountNumber}, user: ${userDTO.firstName} ${userDTO.lastName})';
   }
 
-  @override
+  /*  @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     return other is Debit && other.debitId == debitId;
@@ -69,7 +69,7 @@ class Debit {
   @override
   int get hashCode {
     return debitId.hashCode;
-  }
+  } */
 }
 
 /// Modèles DTO associés (simplifiés pour l'exemple)
