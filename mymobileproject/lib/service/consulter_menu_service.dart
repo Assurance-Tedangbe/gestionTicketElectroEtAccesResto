@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mymobileproject/model/consulter_menu_model.dart';
+import 'package:mymobileproject/model/menu_model.dart';
 
 /* 
   - Service combiné qui gère :
@@ -34,7 +35,7 @@ class ConsulterMenuApiService {
     // "Je vais créer une consultation de menu via POST /api/consulter_menus et retourner la consultation créée"
     try {
       print(
-          "Création d'une nouvelle consultation de menu: ${consulterMenu.menuDTO.menuName} par ${consulterMenu.userDTO.firstName}");
+          "Création d'une nouvelle consultation de menu: ${consulterMenu.menu.menuName} par ${consulterMenu.userDTO.firstName}");
 
       final response = await http.post(
         // "J'envoie une requête POST :"
@@ -139,17 +140,15 @@ class ConsulterMenuApiService {
         orElse: () => ConsulterMenu(
           consulterMenuId: '', // "Marqueur 'non trouvé'"
           consultationDate: DateTime.now(),
-          menuDTO: MenuDTO(
-            menuId: '',
+          menu: Menu(
             menuName: '',
             menuType: '',
             menuDescription: '',
           ),
           userDTO: UserDTO(
-            userId: '',
             firstName: '',
             lastName: '',
-            email: '',
+            username: '',
           ),
         ),
       );
@@ -264,13 +263,13 @@ class ConsulterMenuApiService {
 
     return _cachedConsulterMenus
         .where((consulterMenu) =>
-            consulterMenu.menuDTO.menuName.toLowerCase().contains(queryLower) ||
-            consulterMenu.menuDTO.menuType.toLowerCase().contains(queryLower) ||
+            consulterMenu.menu.menuName.toLowerCase().contains(queryLower) ||
+            consulterMenu.menu.menuType.toLowerCase().contains(queryLower) ||
             consulterMenu.userDTO.firstName
                 .toLowerCase()
                 .contains(queryLower) ||
             consulterMenu.userDTO.lastName.toLowerCase().contains(queryLower) ||
-            consulterMenu.userDTO.email.toLowerCase().contains(queryLower) ||
+            consulterMenu.userDTO.username.toLowerCase().contains(queryLower) ||
             _formatDate(consulterMenu.consultationDate).contains(queryLower))
         .toList();
   }
@@ -281,11 +280,14 @@ class ConsulterMenuApiService {
       throw Exception('La date de consultation ne peut pas être dans le futur');
     }
 
-    if (consulterMenu.menuDTO.menuId.isEmpty) {
+    if (consulterMenu.menu.menuId == -1) {
       throw Exception('Le menu est requis');
     }
+    /* if (consulterMenu.menu.menuId.isEmpty) {
+      throw Exception('Le menu est requis');
+    } */
 
-    if (consulterMenu.userDTO.userId.isEmpty) {
+    if (consulterMenu.userDTO.userId == -1) {
       throw Exception('L\'utilisateur est requis');
     }
   }
@@ -307,7 +309,7 @@ class ConsulterMenuApiService {
   // "Filtre les consultations par menu"
   List<ConsulterMenu> filterConsulterMenusByMenuId(String menuId) {
     return _cachedConsulterMenus
-        .where((consulterMenu) => consulterMenu.menuDTO.menuId == menuId)
+        .where((consulterMenu) => consulterMenu.menu.menuId == menuId)
         .toList();
   }
 
@@ -348,8 +350,8 @@ class ConsulterMenuApiService {
     final sortedConsulterMenus =
         List<ConsulterMenu>.from(_cachedConsulterMenus);
     sortedConsulterMenus.sort((a, b) => ascending
-        ? a.menuDTO.menuName.compareTo(b.menuDTO.menuName)
-        : b.menuDTO.menuName.compareTo(a.menuDTO.menuName));
+        ? a.menu.menuName.compareTo(b.menu.menuName)
+        : b.menu.menuName.compareTo(a.menu.menuName));
     return sortedConsulterMenus;
   }
 
@@ -380,7 +382,7 @@ class ConsulterMenuApiService {
     // "Consultations par menu"
     final consultationsByMenu = <String, int>{};
     for (final consulterMenu in _cachedConsulterMenus) {
-      final menuName = consulterMenu.menuDTO.menuName;
+      final menuName = consulterMenu.menu.menuName;
       consultationsByMenu[menuName] = (consultationsByMenu[menuName] ?? 0) + 1;
     }
     statistics['consultationsByMenu'] = consultationsByMenu;
@@ -410,7 +412,7 @@ class ConsulterMenuApiService {
     final today = DateTime.now();
     return _cachedConsulterMenus.any((consulterMenu) =>
         consulterMenu.userDTO.userId == userId &&
-        consulterMenu.menuDTO.menuId == menuId &&
+        consulterMenu.menu.menuId == menuId &&
         consulterMenu.consultationDate.year == today.year &&
         consulterMenu.consultationDate.month == today.month &&
         consulterMenu.consultationDate.day == today.day);
@@ -422,7 +424,7 @@ class ConsulterMenuApiService {
 
     final menuCounts = <String, int>{};
     for (final consulterMenu in _cachedConsulterMenus) {
-      final menuName = consulterMenu.menuDTO.menuName;
+      final menuName = consulterMenu.menu.menuName;
       menuCounts[menuName] = (menuCounts[menuName] ?? 0) + 1;
     }
 

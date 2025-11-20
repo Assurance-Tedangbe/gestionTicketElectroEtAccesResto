@@ -1,26 +1,25 @@
-// lib/models/consulter_menu_model.dart
+import 'package:mymobileproject/model/menu_model.dart';
 
-/// Modèle représentant une consultation de menu
 class ConsulterMenu {
   final String consulterMenuId;
   final DateTime consultationDate;
-  final MenuDTO menuDTO;
+  final Menu menu;
   final UserDTO userDTO;
 
-  /// Constructeur principal
+  // Constructeur principal
   ConsulterMenu({
     required this.consulterMenuId,
     required this.consultationDate,
-    required this.menuDTO,
+    required this.menu,
     required this.userDTO,
   });
 
-  /// Factory constructor pour créer un ConsulterMenu à partir d'un JSON
+  // Factory constructor pour créer un ConsulterMenu à partir d'un JSON
   factory ConsulterMenu.fromJson(Map<String, dynamic> json) {
     return ConsulterMenu(
       consulterMenuId: json['consulterMenuId']?.toString() ?? '',
       consultationDate: DateTime.parse(json['consultationDate']),
-      menuDTO: MenuDTO.fromJson(json['menuDTO']),
+      menu: Menu.fromJson(json['menu']),
       userDTO: UserDTO.fromJson(json['userDTO']),
     );
   }
@@ -30,7 +29,7 @@ class ConsulterMenu {
     return {
       'consulterMenuId': consulterMenuId,
       'consultationDate': consultationDate.toIso8601String(),
-      'menuDTO': menuDTO.toJson(),
+      'menu': menu.toJson(),
       'userDTO': userDTO.toJson(),
     };
   }
@@ -39,20 +38,20 @@ class ConsulterMenu {
   /*  ConsulterMenu copyWith({
     String? consulterMenuId,
     DateTime? consultationDate,
-    MenuDTO? menuDTO,
+    Menu? menu,
     UserDTO? userDTO,
   }) {
     return ConsulterMenu(
       consulterMenuId: consulterMenuId ?? this.consulterMenuId,
       consultationDate: consultationDate ?? this.consultationDate,
-      menuDTO: menuDTO ?? this.menuDTO,
+      menu: menu ?? this.menu,
       userDTO: userDTO ?? this.userDTO,
     );
   } */
 
   @override
   String toString() {
-    return 'ConsulterMenu(consulterMenuId: $consulterMenuId, consultationDate: $consultationDate, menu: ${menuDTO.menuName}, user: ${userDTO.firstName} ${userDTO.lastName})';
+    return 'ConsulterMenu(consulterMenuId: $consulterMenuId, consultationDate: $consultationDate, menu: ${menu.menuName}, user: ${userDTO.firstName} ${userDTO.lastName})';
   }
 
 /*   @override
@@ -68,57 +67,25 @@ class ConsulterMenu {
 }
 
 // Modèles DTO associés (simplifiés pour l'exemple)
-class MenuDTO {
-  final String menuId;
-  final String menuName;
-  final String menuType;
-  final String menuDescription;
-
-  MenuDTO({
-    required this.menuId,
-    required this.menuName,
-    required this.menuType,
-    required this.menuDescription,
-  });
-
-  factory MenuDTO.fromJson(Map<String, dynamic> json) {
-    return MenuDTO(
-      menuId: json['menuId']?.toString() ?? '',
-      menuName: json['menuName'] ?? '',
-      menuType: json['menuType'] ?? '',
-      menuDescription: json['menuDescription'] ?? '',
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'menuId': menuId,
-      'menuName': menuName,
-      'menuType': menuType,
-      'menuDescription': menuDescription,
-    };
-  }
-}
-
 class UserDTO {
-  final String userId;
+  final int? userId;
   final String firstName;
   final String lastName;
-  final String email;
+  final String username;
 
   UserDTO({
-    required this.userId,
+    this.userId,
     required this.firstName,
     required this.lastName,
-    required this.email,
+    required this.username,
   });
 
   factory UserDTO.fromJson(Map<String, dynamic> json) {
     return UserDTO(
-      userId: json['userId']?.toString() ?? '',
+      userId: json['userId'],
       firstName: json['firstName'] ?? '',
       lastName: json['lastName'] ?? '',
-      email: json['email'] ?? '',
+      username: json['username'],
     );
   }
 
@@ -127,7 +94,7 @@ class UserDTO {
       'userId': userId,
       'firstName': firstName,
       'lastName': lastName,
-      'email': email,
+      'username': username,
     };
   }
 }

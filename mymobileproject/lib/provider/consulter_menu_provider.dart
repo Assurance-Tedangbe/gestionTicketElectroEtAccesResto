@@ -1,7 +1,6 @@
-// lib/providers/consulter_menu_provider.dart
-
-import 'package:flutter/foundation.dart'; // "Importe les bases de Flutter, dont ChangeNotifier"
+import 'package:flutter/foundation.dart';
 import 'package:mymobileproject/model/consulter_menu_model.dart';
+import 'package:mymobileproject/model/menu_model.dart';
 import 'package:mymobileproject/service/consulter_menu_service.dart';
 
 /*
@@ -253,7 +252,7 @@ class ConsulterMenuProvider with ChangeNotifier {
   Future<void> refreshData() async {
     await loadAllConsulterMenus(forceRefresh: true);
   }
-
+/* 
   // "Obtient les statistiques de consultation"
   Map<String, dynamic> getConsultationStatistics() {
     return _service.getConsultationStatistics();
@@ -302,7 +301,7 @@ class ConsulterMenuProvider with ChangeNotifier {
   // "Obtient le nombre de consultations pour un menu spécifique"
   int getConsultationCountForMenu(String menuId) {
     return _consulterMenus
-        .where((consulterMenu) => consulterMenu.menuDTO.menuId == menuId)
+        .where((consulterMenu) => consulterMenu.menu.menuId == menuId)
         .length;
   }
 
@@ -315,14 +314,14 @@ class ConsulterMenuProvider with ChangeNotifier {
 
   // "Enregistre une consultation rapide (avec date actuelle)"
   Future<bool> recordQuickConsultation(
-      String userId, String menuId, MenuDTO menuDTO, UserDTO userDTO) async {
+      int userId, int menuId, Menu menu, UserDTO userDTO) async {
     final newConsultation = ConsulterMenu(
       consulterMenuId: '', // "L'ID sera généré par le backend"
       consultationDate: DateTime.now(),
-      menuDTO: menuDTO,
+      menu: menu,
       userDTO: userDTO,
     );
 
     return await createNewConsulterMenu(newConsultation);
-  }
+  }  */
 }
