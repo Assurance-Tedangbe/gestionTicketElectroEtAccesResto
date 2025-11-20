@@ -37,7 +37,9 @@ class Account {
       'accountId': accountId, // Inclut l'ID
       'accountNumber': accountNumber, // Inclut le numéro de compte
       'balance': balance, // Inclut le solde
-      'dateCreation': dateCreation.toIso8601String(), // Format ISO pour la date
+      'dateCreation': dateCreation
+          .toIso8601String()
+          .split('T')[0], // Format ISO pour la date
       'userDTO': user.toJson(), // Convertit l'utilisateur en JSON
       'active': active, // Inclut le statut actif
     };

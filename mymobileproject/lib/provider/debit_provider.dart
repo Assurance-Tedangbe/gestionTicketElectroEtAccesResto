@@ -335,7 +335,7 @@ class DebitProvider with ChangeNotifier {
   String getUserWithMostDebits() {
     return _service.getUserWithMostDebits();
   }
-
+/* 
   // "Obtient les débits récents (derniers 30 jours)"
   List<Debit> getRecentDebits() {
     final oneMonthAgo = DateTime.now().subtract(const Duration(days: 30));
@@ -386,7 +386,6 @@ class DebitProvider with ChangeNotifier {
   Future<bool> createQuickDebit(
       double amount, AccountDTO accountDTO, UserDTO userDTO) async {
     final newDebit = Debit(
-      debitId: '', // "L'ID sera généré par le backend"
       debitDate: DateTime.now(),
       debitAmount: amount,
       accountDTO: accountDTO,
@@ -408,5 +407,5 @@ class DebitProvider with ChangeNotifier {
   double getNetBalanceForAccount(String accountId, double totalCredits) {
     final totalDebits = getTotalDebitsForAccount(accountId);
     return totalCredits - totalDebits;
-  }
+  } */
 }

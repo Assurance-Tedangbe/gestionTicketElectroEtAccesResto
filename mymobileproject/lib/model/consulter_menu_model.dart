@@ -1,14 +1,14 @@
 import 'package:mymobileproject/model/menu_model.dart';
 
 class ConsulterMenu {
-  final String consulterMenuId;
+  final int? consulterMenuId;
   final DateTime consultationDate;
   final Menu menu;
   final UserDTO userDTO;
 
   // Constructeur principal
   ConsulterMenu({
-    required this.consulterMenuId,
+    this.consulterMenuId,
     required this.consultationDate,
     required this.menu,
     required this.userDTO,
@@ -17,7 +17,7 @@ class ConsulterMenu {
   // Factory constructor pour créer un ConsulterMenu à partir d'un JSON
   factory ConsulterMenu.fromJson(Map<String, dynamic> json) {
     return ConsulterMenu(
-      consulterMenuId: json['consulterMenuId']?.toString() ?? '',
+      consulterMenuId: json['consulterMenuId'],
       consultationDate: DateTime.parse(json['consultationDate']),
       menu: Menu.fromJson(json['menu']),
       userDTO: UserDTO.fromJson(json['userDTO']),
@@ -82,11 +82,10 @@ class UserDTO {
 
   factory UserDTO.fromJson(Map<String, dynamic> json) {
     return UserDTO(
-      userId: json['userId'],
-      firstName: json['firstName'] ?? '',
-      lastName: json['lastName'] ?? '',
-      username: json['username'],
-    );
+        userId: json['userId'],
+        firstName: json['firstName'] ?? '',
+        lastName: json['lastName'] ?? '',
+        username: json['username'] ?? '');
   }
 
   Map<String, dynamic> toJson() {

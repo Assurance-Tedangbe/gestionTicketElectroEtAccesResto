@@ -138,7 +138,8 @@ class ConsulterMenuApiService {
       final cachedConsulterMenu = _cachedConsulterMenus.firstWhere(
         (consulterMenu) => consulterMenu.consulterMenuId == consulterMenuId,
         orElse: () => ConsulterMenu(
-          consulterMenuId: '', // "Marqueur 'non trouvé'"
+          consulterMenuId:
+              -1, // Marqueur "non trouvé" - valeur spéciale pour indiquer l'absence
           consultationDate: DateTime.now(),
           menu: Menu(
             menuName: '',
@@ -153,7 +154,7 @@ class ConsulterMenuApiService {
         ),
       );
 
-      if (cachedConsulterMenu.consulterMenuId.isNotEmpty) {
+      if (cachedConsulterMenu.consulterMenuId != -1) {
         print("Consultation de menu trouvée dans le cache");
         return cachedConsulterMenu;
       }
@@ -280,14 +281,14 @@ class ConsulterMenuApiService {
       throw Exception('La date de consultation ne peut pas être dans le futur');
     }
 
-    if (consulterMenu.menu.menuId == -1) {
+    if (consulterMenu.menu.menuId == null) {
       throw Exception('Le menu est requis');
     }
     /* if (consulterMenu.menu.menuId.isEmpty) {
       throw Exception('Le menu est requis');
     } */
 
-    if (consulterMenu.userDTO.userId == -1) {
+    if (consulterMenu.userDTO.userId == null) {
       throw Exception('L\'utilisateur est requis');
     }
   }

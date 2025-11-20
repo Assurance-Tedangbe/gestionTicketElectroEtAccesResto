@@ -1,6 +1,5 @@
-// Modèle représentant un crédit
 class Credit {
-  final String creditId;
+  final int? creditId;
   final DateTime creditDate;
   final double creditAmount;
   final AccountDTO accountDTO;
@@ -8,7 +7,7 @@ class Credit {
 
   // Constructeur principal
   Credit({
-    required this.creditId,
+    this.creditId,
     required this.creditDate,
     required this.creditAmount,
     required this.accountDTO,
@@ -18,7 +17,7 @@ class Credit {
   // Factory constructor pour créer un Credit à partir d'un JSON
   factory Credit.fromJson(Map<String, dynamic> json) {
     return Credit(
-      creditId: json['creditId']?.toString() ?? '',
+      creditId: json['creditId'],
       creditDate: DateTime.parse(json['creditDate']),
       creditAmount: (json['creditAmount'] as num?)?.toDouble() ?? 0.0,
       accountDTO: AccountDTO.fromJson(json['accountDTO']),
@@ -74,19 +73,19 @@ class Credit {
 
 /// Modèles DTO associés (simplifiés pour l'exemple)
 class AccountDTO {
-  final String accountId;
+  final int? accountId;
   final String accountNumber;
   final double balance;
 
   AccountDTO({
-    required this.accountId,
+    this.accountId,
     required this.accountNumber,
     required this.balance,
   });
 
   factory AccountDTO.fromJson(Map<String, dynamic> json) {
     return AccountDTO(
-      accountId: json['accountId']?.toString() ?? '',
+      accountId: json['accountId'],
       accountNumber: json['accountNumber'] ?? '',
       balance: (json['balance'] as num?)?.toDouble() ?? 0.0,
     );
@@ -102,25 +101,24 @@ class AccountDTO {
 }
 
 class UserDTO {
-  final String userId;
+  final int? userId;
   final String firstName;
   final String lastName;
-  final String email;
+  final String username;
 
   UserDTO({
-    required this.userId,
+    this.userId,
     required this.firstName,
     required this.lastName,
-    required this.email,
+    required this.username,
   });
 
   factory UserDTO.fromJson(Map<String, dynamic> json) {
     return UserDTO(
-      userId: json['userId']?.toString() ?? '',
-      firstName: json['firstName'] ?? '',
-      lastName: json['lastName'] ?? '',
-      email: json['email'] ?? '',
-    );
+        userId: json['userId'],
+        firstName: json['firstName'] ?? '',
+        lastName: json['lastName'] ?? '',
+        username: json['username'] ?? '');
   }
 
   Map<String, dynamic> toJson() {
@@ -128,7 +126,7 @@ class UserDTO {
       'userId': userId,
       'firstName': firstName,
       'lastName': lastName,
-      'email': email,
+      'username': username,
     };
   }
 }

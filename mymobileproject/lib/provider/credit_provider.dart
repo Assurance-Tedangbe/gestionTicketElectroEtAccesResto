@@ -336,7 +336,7 @@ class CreditProvider with ChangeNotifier {
   String getUserWithMostCredits() {
     return _service.getUserWithMostCredits();
   }
-
+/* 
   // "Obtient les crédits récents (derniers 30 jours)"
   List<Credit> getRecentCredits() {
     final oneMonthAgo = DateTime.now().subtract(const Duration(days: 30));
@@ -383,11 +383,10 @@ class CreditProvider with ChangeNotifier {
     return _credits.reduce((a, b) => a.creditAmount < b.creditAmount ? a : b);
   }
 
-  // "Crée un crédit rapide (avec date actuelle)"
+   // "Crée un crédit rapide (avec date actuelle)"
   Future<bool> createQuickCredit(
       double amount, AccountDTO accountDTO, UserDTO userDTO) async {
     final newCredit = Credit(
-      creditId: '', // "L'ID sera généré par le backend"
       creditDate: DateTime.now(),
       creditAmount: amount,
       accountDTO: accountDTO,
@@ -395,5 +394,5 @@ class CreditProvider with ChangeNotifier {
     );
 
     return await createNewCredit(newCredit);
-  }
+  }  */
 }

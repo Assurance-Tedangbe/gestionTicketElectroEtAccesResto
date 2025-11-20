@@ -130,24 +130,23 @@ class CreditApiService {
       final cachedCredit = _cachedCredits.firstWhere(
         (credit) => credit.creditId == creditId,
         orElse: () => Credit(
-          creditId: '', // "Marqueur 'non trouvé'"
+          creditId:
+              -1, // Marqueur "non trouvé" - valeur spéciale pour indiquer l'absence
           creditDate: DateTime.now(),
           creditAmount: 0.0,
           accountDTO: AccountDTO(
-            accountId: '',
             accountNumber: '',
             balance: 0.0,
           ),
           userDTO: UserDTO(
-            userId: '',
             firstName: '',
             lastName: '',
-            email: '',
+            username: '',
           ),
         ),
       );
 
-      if (cachedCredit.creditId.isNotEmpty) {
+      if (cachedCredit.creditId != -1) {
         print("Crédit trouvé dans le cache");
         return cachedCredit;
       }
@@ -304,13 +303,12 @@ class CreditApiService {
 
     return _cachedCredits
         .where((credit) =>
-            credit.creditId.toLowerCase().contains(queryLower) ||
             credit.accountDTO.accountNumber
                 .toLowerCase()
                 .contains(queryLower) ||
             credit.userDTO.firstName.toLowerCase().contains(queryLower) ||
             credit.userDTO.lastName.toLowerCase().contains(queryLower) ||
-            credit.userDTO.email.toLowerCase().contains(queryLower) ||
+            credit.userDTO.username.toLowerCase().contains(queryLower) ||
             credit.creditAmount.toString().contains(queryLower) ||
             _formatDate(credit.creditDate).contains(queryLower))
         .toList();
@@ -326,13 +324,17 @@ class CreditApiService {
       throw Exception('La date du crédit ne peut pas être dans le futur');
     }
 
-    if (credit.accountDTO.accountId.isEmpty) {
+    if (credit.accountDTO.accountId == null) {
       throw Exception('Le compte est requis');
     }
 
-    if (credit.userDTO.userId.isEmpty) {
+    if (credit.userDTO.userId == null) {
       throw Exception('L\'utilisateur est requis');
     }
+
+    /*  if (credit.userDTO.userId.isEmpty) {
+      throw Exception('L\'utilisateur est requis');
+    } */
   }
 
   // "Vide le cache (utile pour forcer un rafraîchissement)"

@@ -520,7 +520,11 @@ class AccountApiService {
       throw Exception('Le solde ne peut pas être négatif');
     }
 
-    /*   if (account.user.isEmpty) {
+    if (account.user.userId == null) {
+      throw Exception('L\'utilisateur est requis');
+    }
+
+    /* if (account.user.isEmpty) {
       throw Exception('L\'utilisateur est requis');
     } */
   }

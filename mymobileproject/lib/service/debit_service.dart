@@ -130,24 +130,22 @@ class DebitApiService {
       final cachedDebit = _cachedDebits.firstWhere(
         (debit) => debit.debitId == debitId,
         orElse: () => Debit(
-          debitId: '', // "Marqueur 'non trouvé'"
+          debitId: -1, // "Marqueur 'non trouvé'"
           debitDate: DateTime.now(),
           debitAmount: 0.0,
           accountDTO: AccountDTO(
-            accountId: '',
             accountNumber: '',
             balance: 0.0,
           ),
           userDTO: UserDTO(
-            userId: '',
             firstName: '',
             lastName: '',
-            email: '',
+            username: '',
           ),
         ),
       );
 
-      if (cachedDebit.debitId.isNotEmpty) {
+      if (cachedDebit.debitId != -1) {
         print("Débit trouvé dans le cache");
         return cachedDebit;
       }
@@ -303,11 +301,10 @@ class DebitApiService {
 
     return _cachedDebits
         .where((debit) =>
-            debit.debitId.toLowerCase().contains(queryLower) ||
             debit.accountDTO.accountNumber.toLowerCase().contains(queryLower) ||
             debit.userDTO.firstName.toLowerCase().contains(queryLower) ||
             debit.userDTO.lastName.toLowerCase().contains(queryLower) ||
-            debit.userDTO.email.toLowerCase().contains(queryLower) ||
+            debit.userDTO.username.toLowerCase().contains(queryLower) ||
             debit.debitAmount.toString().contains(queryLower) ||
             _formatDate(debit.debitDate).contains(queryLower))
         .toList();
@@ -323,13 +320,17 @@ class DebitApiService {
       throw Exception('La date du débit ne peut pas être dans le futur');
     }
 
-    if (debit.accountDTO.accountId.isEmpty) {
+    if (debit.accountDTO.accountId == null) {
       throw Exception('Le compte est requis');
     }
 
-    if (debit.userDTO.userId.isEmpty) {
+    if (debit.userDTO.userId == null) {
       throw Exception('L\'utilisateur est requis');
     }
+
+    /* if (debit.userDTO.userId.isEmpty) {
+      throw Exception('L\'utilisateur est requis');
+    } */
   }
 
   // "Vide le cache (utile pour forcer un rafraîchissement)"
