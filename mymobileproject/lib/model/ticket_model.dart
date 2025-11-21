@@ -1,5 +1,5 @@
 import 'package:mymobileproject/enums/ticket_status.dart';
-import 'package:mymobileproject/model/menu_model.dart';
+//import 'package:mymobileproject/model/menu_model.dart';
 
 class Ticket {
   final int? ticketId;
@@ -11,7 +11,7 @@ class Ticket {
   final DateTime ticketCreationDate;
   final DateTime? ticketPurchaseDate;
   final String ticketDescription;
-  final Menu menu;
+  // final Menu menu;
   final UserDTO userDTO;
   final AccountDTO accountDTO;
 
@@ -26,7 +26,7 @@ class Ticket {
     required this.ticketCreationDate,
     this.ticketPurchaseDate,
     required this.ticketDescription,
-    required this.menu,
+    // required this.menu,
     required this.userDTO,
     required this.accountDTO,
   });
@@ -46,7 +46,7 @@ class Ticket {
           ? DateTime.parse(json['ticketPurchaseDate'])
           : null,
       ticketDescription: json['ticketDescription'] ?? '',
-      menu: Menu.fromJson(json['menuDTO']),
+      // menu: Menu.fromJson(json['menuDTO']),
       userDTO: UserDTO.fromJson(json['userDTO']),
       accountDTO: AccountDTO.fromJson(json['accountDTO']),
     );
@@ -64,7 +64,7 @@ class Ticket {
       'ticketCreationDate': ticketCreationDate.toIso8601String().split('T')[0],
       'ticketPurchaseDate': ticketPurchaseDate?.toIso8601String().split('T')[0],
       'ticketDescription': ticketDescription,
-      'menu': menu.toJson(),
+      // 'menu': menu.toJson(),
       'userDTO': userDTO.toJson(),
       'accountDTO': accountDTO.toJson(),
     };
@@ -82,7 +82,7 @@ class Ticket {
     DateTime? ticketCreationDate,
     DateTime? ticketPurchaseDate,
     String? ticketDescription,
-    Menu? menu,
+    // Menu? menu,
     UserDTO? userDTO,
     AccountDTO? accountDTO,
   }) {
@@ -96,7 +96,7 @@ class Ticket {
       ticketCreationDate: ticketCreationDate ?? this.ticketCreationDate,
       ticketPurchaseDate: ticketPurchaseDate ?? this.ticketPurchaseDate,
       ticketDescription: ticketDescription ?? this.ticketDescription,
-      menu: menu ?? this.menu,
+      // menu: menu ?? this.menu,
       userDTO: userDTO ?? this.userDTO,
       accountDTO: accountDTO ?? this.accountDTO,
     );

@@ -469,7 +469,7 @@ class TicketProvider with ChangeNotifier {
    * 📋 CHARGEMENT DES TICKETS PAR STATUT
    * @param ticketStatus : le statut des tickets à charger
    */
-  Future<void> loadTicketsByStatus(String ticketStatus) async {
+  Future<void> loadTicketsByStatus(TicketStatus ticketStatus) async {
     _isLoading = true;
     _error = '';
     notifyListeners();

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mymobileproject/enums/ticket_status.dart';
-import 'package:mymobileproject/model/menu_model.dart';
 import 'package:mymobileproject/model/ticket_model.dart';
 
 /* 
@@ -142,7 +141,7 @@ class TicketApiService {
           ticketStatus: TicketStatus.available,
           ticketCreationDate: DateTime.now(),
           ticketDescription: '',
-          menu: Menu(menuName: '', menuType: '', menuDescription: ''),
+          //  menu: Menu(menuName: '', menuType: '', menuDescription: ''),
           userDTO: UserDTO(userId: '', firstName: '', lastName: ''),
           accountDTO: AccountDTO(accountId: '', accountNumber: ''),
         ),
@@ -325,7 +324,7 @@ class TicketApiService {
   // -------------------------
   // 9. READ TICKETS BY STATUS (GET /api/tickets/ticketStatus/{ticketStatus})
   // -------------------------
-  Future<List<Ticket>> getTicketsByStatus(String ticketStatus) async {
+  Future<List<Ticket>> getTicketsByStatus(TicketStatus ticketStatus) async {
     try {
       final response = await http.get(
         Uri.parse('$baseUrl/ticketStatus/$ticketStatus'),
@@ -382,53 +381,6 @@ class TicketApiService {
       } else {
         throw Exception(
             'Erreur récupération tickets par utilisateur: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('Erreur réseau: $e');
-    }
-  }
-
-  // -------------------------
-  // 12. READ TICKETS BY MENU ID AND USER ID (GET /api/tickets/menuId/{menuId}/userId/{userId})
-  // -------------------------
-  Future<List<Ticket>> getTicketsByMenuIdAndUserId(
-      String menuId, String userId) async {
-    try {
-      final response = await http.get(
-        Uri.parse('$baseUrl/menuId/$menuId/userId/$userId'),
-        headers: headers,
-      );
-
-      if (response.statusCode == 200) {
-        final List<dynamic> jsonList = json.decode(response.body);
-        return jsonList.map((json) => Ticket.fromJson(json)).toList();
-      } else {
-        throw Exception(
-            'Erreur récupération tickets par menu et utilisateur: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('Erreur réseau: $e');
-    }
-  }
-
-  // -------------------------
-  // 13. READ TICKETS BY MENU ID, USER ID AND STATUS (GET /api/tickets/menuId/{menuId}/userId/{userId}/status/{ticketStatus})
-  // -------------------------
-  Future<List<Ticket>> getTicketsByMenuIdAndUserIdAndStatus(
-      String menuId, String userId, String ticketStatus) async {
-    try {
-      final response = await http.get(
-        Uri.parse(
-            '$baseUrl/menuId/$menuId/userId/$userId/status/$ticketStatus'),
-        headers: headers,
-      );
-
-      if (response.statusCode == 200) {
-        final List<dynamic> jsonList = json.decode(response.body);
-        return jsonList.map((json) => Ticket.fromJson(json)).toList();
-      } else {
-        throw Exception(
-            'Erreur récupération tickets par menu, utilisateur et statut: ${response.statusCode}');
       }
     } catch (e) {
       throw Exception('Erreur réseau: $e');
@@ -549,13 +501,14 @@ class TicketApiService {
 
     return _cachedTickets
         .where((ticket) =>
-            // ticket.ticketId.toLowerCase().contains(queryLower) ||
-            ticket.ticketType.toLowerCase().contains(queryLower) ||
-            // ticket.ticketStatus.toLowerCase().contains(queryLower) ||
-            ticket.paymentCode.toLowerCase().contains(queryLower) ||
-            ticket.userDTO.firstName.toLowerCase().contains(queryLower) ||
-            ticket.userDTO.lastName.toLowerCase().contains(queryLower) ||
-            ticket.menu.menuName.toLowerCase().contains(queryLower))
+                // ticket.ticketId.toLowerCase().contains(queryLower) ||
+                ticket.ticketType.toLowerCase().contains(queryLower) ||
+                // ticket.ticketStatus.toLowerCase().contains(queryLower) ||
+                ticket.paymentCode.toLowerCase().contains(queryLower) ||
+                ticket.userDTO.firstName.toLowerCase().contains(queryLower) ||
+                ticket.userDTO.lastName.toLowerCase().contains(queryLower)
+            // ticket.menu.menuName.toLowerCase().contains(queryLower)
+            )
         .toList();
   }
 
@@ -622,4 +575,53 @@ class TicketApiService {
         : b.ticketCreationDate.compareTo(a.ticketCreationDate));
     return sortedTickets;
   }
+
+  /*
+   // -------------------------
+  // 12. READ TICKETS BY MENU ID AND USER ID (GET /api/tickets/menuId/{menuId}/userId/{userId})
+  // -------------------------
+  Future<List<Ticket>> getTicketsByMenuIdAndUserId(
+      int menuId, String userId) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl/menuId/$menuId/userId/$userId'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic> jsonList = json.decode(response.body);
+        return jsonList.map((json) => Ticket.fromJson(json)).toList();
+      } else {
+        throw Exception(
+            'Erreur récupération tickets par menu et utilisateur: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Erreur réseau: $e');
+    }
+  }
+
+  // -------------------------
+  // 13. READ TICKETS BY MENU ID, USER ID AND STATUS (GET /api/tickets/menuId/{menuId}/userId/{userId}/status/{ticketStatus})
+  // -------------------------
+  Future<List<Ticket>> getTicketsByMenuIdAndUserIdAndStatus(
+      String menuId, String userId, String ticketStatus) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+            '$baseUrl/menuId/$menuId/userId/$userId/status/$ticketStatus'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic> jsonList = json.decode(response.body);
+        return jsonList.map((json) => Ticket.fromJson(json)).toList();
+      } else {
+        throw Exception(
+            'Erreur récupération tickets par menu, utilisateur et statut: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Erreur réseau: $e');
+    }
+  }
+  */
 }
