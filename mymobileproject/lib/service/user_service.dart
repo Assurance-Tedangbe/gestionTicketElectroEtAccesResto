@@ -46,8 +46,8 @@ class UserApiService {
       );
 
       if (response.statusCode == 201) {
-        final newUser = User.fromJson(json.decode(
-            response.body)); // // Converts the JSON response → User object
+        final newUser = User.fromJson(json
+            .decode(response.body)); // Converts the JSON response → User object
 
         print("User created with ID: ${newUser.userId}");
 
@@ -157,7 +157,6 @@ class UserApiService {
         return cachedUser;
       }
 
-      // If not in the cache, API call
       // Si l'utilisateur n'est pas dans le cache, on fait un appel API
       final response = await http.get(
         // Construit l'URL pour l'endpoint spécifique de l'utilisateur

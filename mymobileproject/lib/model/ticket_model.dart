@@ -1,9 +1,10 @@
 import 'package:mymobileproject/enums/ticket_status.dart';
+import 'package:mymobileproject/enums/ticket_type.dart';
 //import 'package:mymobileproject/model/menu_model.dart';
 
 class Ticket {
   final int? ticketId;
-  final String ticketType;
+  final TicketType ticketType;
   final double ticketPrice;
   final String paymentCode;
   final bool booked;
@@ -74,7 +75,7 @@ class Ticket {
   // utilisé ds TicketApiService
   Ticket copyWith({
     int? ticketId,
-    String? ticketType,
+    TicketType? ticketType,
     double? ticketPrice,
     String? paymentCode,
     bool? booked,
@@ -126,16 +127,15 @@ class Ticket {
 } */
 
 class UserDTO {
-  final String userId;
+  int? userId;
   final String firstName;
   final String lastName;
 
-  UserDTO(
-      {required this.userId, required this.firstName, required this.lastName});
+  UserDTO({this.userId, required this.firstName, required this.lastName});
 
   factory UserDTO.fromJson(Map<String, dynamic> json) {
     return UserDTO(
-      userId: json['userId']?.toString() ?? '',
+      userId: json['userId'],
       firstName: json['firstName'] ?? '',
       lastName: json['lastName'] ?? '',
     );
@@ -151,14 +151,14 @@ class UserDTO {
 }
 
 class AccountDTO {
-  final String accountId;
+  final int? accountId;
   final String accountNumber;
 
-  AccountDTO({required this.accountId, required this.accountNumber});
+  AccountDTO({this.accountId, required this.accountNumber});
 
   factory AccountDTO.fromJson(Map<String, dynamic> json) {
     return AccountDTO(
-      accountId: json['accountId']?.toString() ?? '',
+      accountId: json['accountId'],
       accountNumber: json['accountNumber'] ?? '',
     );
   }
@@ -171,31 +171,35 @@ class AccountDTO {
   }
 }
 
-/// Modèles pour les requêtes complexes
+// Modèles pour les requêtes complexes
 class CreationTicketsRequestDTO {
-  // Ajouter les propriétés nécessaires selon votre backend
-  final String ticketType;
-  final int quantity;
+  // Represents the total number of A tickets to create
+  final int countA;
+  final int countB;
 
-  CreationTicketsRequestDTO({required this.ticketType, required this.quantity});
+  CreationTicketsRequestDTO({required this.countA, required this.countB});
 
   Map<String, dynamic> toJson() {
     return {
-      'ticketType': ticketType,
-      'quantity': quantity,
+      'countA': countA,
+      'countB': countB,
     };
   }
 }
 
 class PurchaseTicketsRequestDTO {
+  final UserDTO userDTO;
   final AccountDTO accountDTO;
-  final List<String> ticketIds;
+  final List<int> ticketIds;
 
   PurchaseTicketsRequestDTO(
-      {required this.accountDTO, required this.ticketIds});
+      {required this.userDTO,
+      required this.accountDTO,
+      required this.ticketIds});
 
   Map<String, dynamic> toJson() {
     return {
+      'userDTO': userDTO.toJson(),
       'accountDTO': accountDTO.toJson(),
       'ticketIds': ticketIds,
     };
@@ -203,55 +207,60 @@ class PurchaseTicketsRequestDTO {
 }
 
 class TransferTicketsRequestDTO {
-  final String fromUserId;
-  final String toUserId;
-  final List<String> ticketIds;
+  final int fromaccountId;
+  final int toAccountId;
+  final List<int> selectedTicketIdsToTransfer;
 
   TransferTicketsRequestDTO({
-    required this.fromUserId,
-    required this.toUserId,
-    required this.ticketIds,
+    required this.fromaccountId,
+    required this.toAccountId,
+    required this.selectedTicketIdsToTransfer,
   });
 
   Map<String, dynamic> toJson() {
     return {
-      'fromUserId': fromUserId,
-      'toUserId': toUserId,
-      'ticketIds': ticketIds,
+      'fromaccountId': fromaccountId,
+      'toAccountId': toAccountId,
+      'selectedTicketIdsToTransfer': selectedTicketIdsToTransfer,
     };
   }
 }
 
 class CancelTransferTicketsRequestDTO {
-  final String fromUserId;
-  final String toUserId;
-  final List<String> ticketIds;
+  final int originalSenderAccountId;
+  final int currentOwnerAccountId;
+  final List<int> ticketIdsToCancel;
 
   CancelTransferTicketsRequestDTO({
-    required this.fromUserId,
-    required this.toUserId,
-    required this.ticketIds,
+    required this.originalSenderAccountId,
+    required this.currentOwnerAccountId,
+    required this.ticketIdsToCancel,
   });
 
   Map<String, dynamic> toJson() {
     return {
-      'fromUserId': fromUserId,
-      'toUserId': toUserId,
-      'ticketIds': ticketIds,
+      'originalSenderAccountId': originalSenderAccountId,
+      'currentOwnerAccountId': currentOwnerAccountId,
+      'ticketIdsToCancel ': ticketIdsToCancel,
     };
   }
 }
 
 class DebitAccountRequestDTO {
-  final String accountId;
-  final double amount;
+  final String portierAccountId;
+  final double etudiantAccountId;
+  final List<int> ticketIds;
 
-  DebitAccountRequestDTO({required this.accountId, required this.amount});
+  DebitAccountRequestDTO(
+      {required this.portierAccountId,
+      required this.etudiantAccountId,
+      required this.ticketIds});
 
   Map<String, dynamic> toJson() {
     return {
-      'accountId': accountId,
-      'amount': amount,
+      'portierAccountId': portierAccountId,
+      'etudiantAccountId': etudiantAccountId,
+      'ticketIds': ticketIds
     };
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mymobileproject/enums/ticket_status.dart';
+import 'package:mymobileproject/enums/ticket_type.dart';
 import 'package:mymobileproject/model/ticket_model.dart';
 
 /* 
@@ -30,18 +31,19 @@ class TicketApiService {
   // -------------------------
   // 1. CREATE TICKETS (POST /api/tickets)
   // -------------------------
-  Future<List<Ticket>> createTickets(CreationTicketsRequestDTO request) async {
+  Future<List<Ticket>> createTickets(
+      CreationTicketsRequestDTO creationTicketsRequestDTO) async {
     // "Je vais créer des tickets via POST /api/tickets et retourner les tickets créés"
     try {
       print(
-          "Création de nouveaux tickets: ${request.ticketType} x ${request.quantity}");
+          "Création de nouveaux tickets: ${creationTicketsRequestDTO.countA} de type A et ${creationTicketsRequestDTO.countB} de type B");
 
       final response = await http.post(
         // "J'envoie une requête POST :"
         Uri.parse(baseUrl), // Convertit l'URL string en objet Uri
         headers: headers, // Utilise les headers configurés
-        body:
-            json.encode(request.toJson()), // Convertit la requête → JSON string
+        body: json.encode(creationTicketsRequestDTO
+            .toJson()), // Convertit la requête → JSON string
       );
 
       if (response.statusCode == 201) {
@@ -127,14 +129,18 @@ class TicketApiService {
   // -------------------------
   Future<Ticket> getTicketById(int ticketId) async {
     try {
-      print("Récupération du ticket ID: $ticketId");
+      print("Récupération du ticket via son id: $ticketId");
 
-      // "D'abord, recherche dans le cache"
+      // Recherche d'abord dans le cache local pour éviter un appel API inutile
       final cachedTicket = _cachedTickets.firstWhere(
+        // Condition de recherche : cherche un ticket avec l'ID correspondant
         (ticket) => ticket.ticketId == ticketId,
+
+        // Si aucun ticket n'est trouvé dans le cache, retourne un ticket "vide" avec ticketId = -1
         orElse: () => Ticket(
-          ticketId: -1, // "Marqueur 'non trouvé'"
-          ticketType: '',
+          ticketId:
+              -1, // Marqueur "non trouvé" - valeur spéciale pour indiquer l'absence
+          ticketType: TicketType.a,
           ticketPrice: 0.0,
           paymentCode: '',
           booked: false,
@@ -142,18 +148,22 @@ class TicketApiService {
           ticketCreationDate: DateTime.now(),
           ticketDescription: '',
           //  menu: Menu(menuName: '', menuType: '', menuDescription: ''),
-          userDTO: UserDTO(userId: '', firstName: '', lastName: ''),
-          accountDTO: AccountDTO(accountId: '', accountNumber: ''),
+          userDTO: UserDTO(firstName: '', lastName: ''),
+          accountDTO: AccountDTO(accountNumber: ''),
         ),
       );
 
+      // Vérifie si le ticket a été trouvé dans le cache
+      // cachedTicket.ticketId != -1 signifie qu'on a trouvé un ticket valide dans le cache
       if (cachedTicket.ticketId != -1) {
         print("Ticket trouvé dans le cache");
         return cachedTicket;
       }
 
-      // "Si pas dans le cache, appel API"
+      // Si le ticket n'est pas dans le cache, on fait un appel API
       final response = await http.get(
+        // Construit l'URL pour l'endpoint spécifique
+        // Exemple: http://10.0.2.2:8080/api/tickets/2
         Uri.parse('$baseUrl/$ticketId'),
         headers: headers,
       ); // "GET /api/tickets/{ticketId} pour récupérer un ticket spécifique"
@@ -181,7 +191,7 @@ class TicketApiService {
   // -------------------------
   Future<Ticket> updateTicket(Ticket ticket) async {
     try {
-      print("Mise à jour du ticket ID: ${ticket.ticketId}");
+      print("Mise à jour du ticket avec ID: ${ticket.ticketId}");
 
       final response = await http.put(
         Uri.parse('$baseUrl/${ticket.ticketId}'),
@@ -213,9 +223,9 @@ class TicketApiService {
   // -------------------------
   // 5. DELETE TICKET (DELETE /api/tickets/{ticketId})
   // -------------------------
-  Future<void> deleteTicket(String ticketId) async {
+  Future<void> deleteTicket(int ticketId) async {
     try {
-      print("Suppression du ticket ID: $ticketId");
+      print("Suppression du ticket avec ID: $ticketId");
 
       final response = await http.delete(
         Uri.parse('$baseUrl/$ticketId'),
@@ -244,6 +254,8 @@ class TicketApiService {
   Future<void> updateTicketStatus(
       int ticketId, TicketStatus ticketStatus) async {
     try {
+      print("Mise à jour du statut de ticket avec ID : $ticketId");
+
       final response = await http.put(
         Uri.parse('$baseUrl/ticketStatus/$ticketId'),
         headers: headers,
@@ -255,7 +267,7 @@ class TicketApiService {
             'Erreur mise à jour statut ticket: ${response.statusCode}');
       }
 
-      print("Statut du ticket $ticketId mis à jour: $ticketStatus");
+      print("Statut du ticket $ticketId mis à jour à: $ticketStatus");
 
       // "Met à jour le cache local"
       final index = _cachedTickets.indexWhere((t) => t.ticketId == ticketId);
@@ -271,8 +283,10 @@ class TicketApiService {
   // -------------------------
   // 7. BOOK TICKET (PUT /api/tickets/book/{ticketId})
   // -------------------------
-  Future<void> bookTicket(String ticketId) async {
+  Future<void> bookTicket(int ticketId) async {
     try {
+      print("Réservation ticket avec ID: $ticketId");
+
       final response = await http.put(
         Uri.parse('$baseUrl/book/$ticketId'),
         headers: headers,
@@ -297,8 +311,10 @@ class TicketApiService {
   // -------------------------
   // 8. UNBOOK TICKET (PUT /api/tickets/unbook/{ticketId})
   // -------------------------
-  Future<void> unbookTicket(String ticketId) async {
+  Future<void> unbookTicket(int ticketId) async {
     try {
+      print("Annuler réservation du ticket avec ID: $ticketId");
+
       final response = await http.put(
         Uri.parse('$baseUrl/unbook/$ticketId'),
         headers: headers,
@@ -309,7 +325,7 @@ class TicketApiService {
             'Erreur annulation réservation ticket: ${response.statusCode}');
       }
 
-      print("Réservation du ticket $ticketId annulée");
+      print("Réservation ticket $ticketId annulée");
 
       // "Met à jour le cache local"
       final index = _cachedTickets.indexWhere((t) => t.ticketId == ticketId);
@@ -326,6 +342,8 @@ class TicketApiService {
   // -------------------------
   Future<List<Ticket>> getTicketsByStatus(TicketStatus ticketStatus) async {
     try {
+      print("Récupération du ticket via son statut: $ticketStatus");
+
       final response = await http.get(
         Uri.parse('$baseUrl/ticketStatus/$ticketStatus'),
         headers: headers,
@@ -333,6 +351,7 @@ class TicketApiService {
 
       if (response.statusCode == 200) {
         final List<dynamic> jsonList = json.decode(response.body);
+
         return jsonList.map((json) => Ticket.fromJson(json)).toList();
       } else {
         throw Exception(
@@ -346,8 +365,10 @@ class TicketApiService {
   // -------------------------
   // 10. READ TICKETS BY ACCOUNT ID (GET /api/tickets/accountId/{accountId})
   // -------------------------
-  Future<List<Ticket>> getTicketsByAccountId(String accountId) async {
+  Future<List<Ticket>> getTicketsByAccountId(int accountId) async {
     try {
+      print("Récupération des tickets par accountId: $accountId");
+
       final response = await http.get(
         Uri.parse('$baseUrl/accountId/$accountId'),
         headers: headers,
@@ -355,6 +376,7 @@ class TicketApiService {
 
       if (response.statusCode == 200) {
         final List<dynamic> jsonList = json.decode(response.body);
+
         return jsonList.map((json) => Ticket.fromJson(json)).toList();
       } else {
         throw Exception(
@@ -368,8 +390,10 @@ class TicketApiService {
   // -------------------------
   // 11. READ TICKETS BY USER ID (GET /api/tickets/userId/{userId})
   // -------------------------
-  Future<List<Ticket>> getTicketsByUserId(String userId) async {
+  Future<List<Ticket>> getTicketsByUserId(int userId) async {
     try {
+      print("Récupération des tickets par usedId: $userId");
+
       final response = await http.get(
         Uri.parse('$baseUrl/userId/$userId'),
         headers: headers,
@@ -391,24 +415,26 @@ class TicketApiService {
   // 14. PURCHASE TICKETS (POST /api/tickets/{purchase})
   // -------------------------
   Future<List<Ticket>> purchaseTickets(
-      PurchaseTicketsRequestDTO request) async {
+      PurchaseTicketsRequestDTO purchaseTicketsRequestDTO) async {
     try {
-      print("Achat de tickets pour le compte: ${request.accountDTO.accountId}");
+      print(
+          "Achat de tickets pour l'utilisateur: ${purchaseTicketsRequestDTO.userDTO.firstName}");
 
       final response = await http.post(
         Uri.parse('$baseUrl/purchase'),
         headers: headers,
-        body: json.encode(request.toJson()),
+        body: json.encode(purchaseTicketsRequestDTO.toJson()),
       );
 
       if (response.statusCode == 201) {
         final List<dynamic> jsonList = json.decode(response.body);
+
         final purchasedTickets =
             jsonList.map((json) => Ticket.fromJson(json)).toList();
 
         print("Tickets achetés: ${purchasedTickets.length}");
 
-        // "Met à jour le cache"
+        // Met à jour le cache
         _cachedTickets.addAll(purchasedTickets);
 
         return purchasedTickets;
@@ -417,6 +443,7 @@ class TicketApiService {
       }
     } catch (e) {
       print("Erreur achat tickets: $e");
+
       throw Exception('Erreur réseau: $e');
     }
   }
@@ -425,12 +452,16 @@ class TicketApiService {
   // 15. TRANSFER TICKETS (PUT /api/tickets/transferTickets)
   // sans cache
   // -------------------------
-  Future<void> transferTickets(TransferTicketsRequestDTO request) async {
+  Future<void> transferTickets(
+      TransferTicketsRequestDTO transferTicketsRequestDTO) async {
     try {
+      print(
+          "Transfert de(s) tickets(s) vers toAccountID: ${transferTicketsRequestDTO.toAccountId}");
+
       final response = await http.put(
         Uri.parse('$baseUrl/transferTickets'),
         headers: headers,
-        body: json.encode(request.toJson()),
+        body: json.encode(transferTicketsRequestDTO.toJson()),
       );
 
       if (response.statusCode != 200) {
@@ -438,7 +469,7 @@ class TicketApiService {
       }
 
       print(
-          "Tickets transférés de ${request.fromUserId} vers ${request.toUserId}");
+          "Tickets transférés de ${transferTicketsRequestDTO.fromaccountId} vers ${transferTicketsRequestDTO.toAccountId}");
     } catch (e) {
       throw Exception('Erreur réseau: $e');
     }
@@ -449,12 +480,15 @@ class TicketApiService {
   // sans cache
   // -------------------------
   Future<void> cancelTransferTickets(
-      CancelTransferTicketsRequestDTO request) async {
+      CancelTransferTicketsRequestDTO cancelTransferTicketsRequestDTO) async {
     try {
+      print(
+          "Annuler transfert de(s) tickets(s) pour currentOwnerAccountId: ${cancelTransferTicketsRequestDTO.currentOwnerAccountId}");
+
       final response = await http.put(
         Uri.parse('$baseUrl/cancelTransferTickets'),
         headers: headers,
-        body: json.encode(request.toJson()),
+        body: json.encode(cancelTransferTicketsRequestDTO.toJson()),
       );
 
       if (response.statusCode != 200) {
@@ -463,7 +497,7 @@ class TicketApiService {
       }
 
       print(
-          "Transfert de tickets annulé entre ${request.fromUserId} et ${request.toUserId}");
+          "Transfert de tickets annulé entre ${cancelTransferTicketsRequestDTO.currentOwnerAccountId} et ${cancelTransferTicketsRequestDTO.originalSenderAccountId}");
     } catch (e) {
       throw Exception('Erreur réseau: $e');
     }
@@ -473,19 +507,23 @@ class TicketApiService {
   // 17. DEBIT ACCOUNT (PUT /api/tickets/debitAccount)
   // sans cache
   // -------------------------
-  Future<void> debitAccount(DebitAccountRequestDTO request) async {
+  Future<void> debitAccount(
+      DebitAccountRequestDTO debitAccountRequestDTO) async {
     try {
+      print(
+          "Debiter le compte avec ID: ${debitAccountRequestDTO.etudiantAccountId}");
+
       final response = await http.put(
         Uri.parse('$baseUrl/debitAccount'),
         headers: headers,
-        body: json.encode(request.toJson()),
+        body: json.encode(debitAccountRequestDTO.toJson()),
       );
 
       if (response.statusCode != 200) {
         throw Exception('Erreur débit compte: ${response.statusCode}');
       }
 
-      print("Compte ${request.accountId} débité de ${request.amount}");
+      print("Compte ${debitAccountRequestDTO.etudiantAccountId} débité");
     } catch (e) {
       throw Exception('Erreur réseau: $e');
     }
@@ -493,17 +531,24 @@ class TicketApiService {
 
   // === MÉTHODES UTILITAIRES AVEC LOGIQUE MÉTIER LÉGÈRE ===
 
-  // "Recherche de tickets dans le cache local"
+  // Recherche de tickets dans le cache local
   List<Ticket> searchTickets(String query) {
+    print("Recherche de tickets avec clé: $query");
+
     if (query.isEmpty) return _cachedTickets;
 
     final queryLower = query.toLowerCase();
 
     return _cachedTickets
         .where((ticket) =>
-                // ticket.ticketId.toLowerCase().contains(queryLower) ||
-                ticket.ticketType.toLowerCase().contains(queryLower) ||
-                // ticket.ticketStatus.toLowerCase().contains(queryLower) ||
+                ticket.ticketType
+                    .toString()
+                    .toLowerCase()
+                    .contains(queryLower) ||
+                ticket.ticketStatus
+                    .toString()
+                    .toLowerCase()
+                    .contains(queryLower) ||
                 ticket.paymentCode.toLowerCase().contains(queryLower) ||
                 ticket.userDTO.firstName.toLowerCase().contains(queryLower) ||
                 ticket.userDTO.lastName.toLowerCase().contains(queryLower)
@@ -512,9 +557,9 @@ class TicketApiService {
         .toList();
   }
 
-  // "Validation basique des données de ticket"
+  // Validation basique des données de ticket
   void validateTicketData(Ticket ticket) {
-    if (ticket.ticketType.isEmpty) {
+    if (ticket.ticketType.toString().isEmpty) {
       throw Exception('Le type de ticket est requis');
     }
 
@@ -531,7 +576,7 @@ class TicketApiService {
     }
   }
 
-  // "Vide le cache (utile pour forcer un rafraîchissement)"
+  // Vide le cache (utile pour forcer un rafraîchissement)
   void clearCache() {
     _cachedTickets.clear();
     _lastFetchTime = null;
@@ -546,10 +591,10 @@ class TicketApiService {
   }
 
   // "Filtre les tickets par type"
-  List<Ticket> filterTicketsByType(String type) {
+  List<Ticket> filterTicketsByType(TicketType type) {
     return _cachedTickets
-        .where(
-            (ticket) => ticket.ticketType.toLowerCase() == type.toLowerCase())
+        .where((ticket) => ticket.ticketType == type)
+        // (ticket) => ticket.ticketType.toLowerCase() == type.toLowerCase())
         .toList();
   }
 

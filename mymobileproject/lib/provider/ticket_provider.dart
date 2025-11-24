@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart'; // Importe les bases de Flutter, dont ChangeNotifier pour la gestion d'état réactive
 import 'package:mymobileproject/enums/ticket_status.dart';
+import 'package:mymobileproject/enums/ticket_type.dart';
 import 'package:mymobileproject/model/ticket_model.dart';
 import 'package:mymobileproject/service/ticket_service.dart';
 
@@ -129,7 +130,8 @@ class TicketProvider with ChangeNotifier {
    * @param request : DTO contenant les données pour créer les tickets
    * @return Future<bool> : true si succès, false si échec
    */
-  Future<bool> createNewTickets(CreationTicketsRequestDTO request) async {
+  Future<bool> createNewTickets(
+      CreationTicketsRequestDTO creationTicketsRequestDTO) async {
     // "Je vais créer des tickets et je vous dirai si ça a fonctionné (bool)"
     _isCreatingTickets = true;
     _isLoading = true;
@@ -138,7 +140,7 @@ class TicketProvider with ChangeNotifier {
     try {
       // Appel au service pour créer les tickets via l'API
       final newTickets = await _service.createTickets(
-          request); // "demande au service de créer ces tickets dans l'API"
+          creationTicketsRequestDTO); // "demande au service de créer ces tickets dans l'API"
 
       // Ajout des nouveaux tickets à la liste locale
       _tickets.addAll(
@@ -206,7 +208,7 @@ class TicketProvider with ChangeNotifier {
    * @param ticketId : l'identifiant du ticket à supprimer
    * @return Future<bool> : true si succès, false si échec
    */
-  Future<bool> deleteExistingTicket(String ticketId) async {
+  Future<bool> deleteExistingTicket(int ticketId) async {
     _isDeletingTicket = true;
     _isLoading = true;
     notifyListeners();
@@ -295,7 +297,7 @@ class TicketProvider with ChangeNotifier {
    * @param ticketId : l'identifiant du ticket à réserver
    * @return Future<bool> : true si succès, false si échec
    */
-  Future<bool> bookTicket(String ticketId) async {
+  Future<bool> bookTicket(int ticketId) async {
     _isBookingTicket = true;
     _isLoading = true;
     notifyListeners();
@@ -323,7 +325,7 @@ class TicketProvider with ChangeNotifier {
    * @param ticketId : l'identifiant du ticket à désactiver
    * @return Future<bool> : true si succès, false si échec
    */
-  Future<bool> unbookTicket(String ticketId) async {
+  Future<bool> unbookTicket(int ticketId) async {
     _isUnbookingTicket = true;
     _isLoading = true;
     notifyListeners();
@@ -351,14 +353,15 @@ class TicketProvider with ChangeNotifier {
    * @param request : DTO contenant les infos d'achat
    * @return Future<bool> : true si succès, false si échec
    */
-  Future<bool> purchaseTickets(PurchaseTicketsRequestDTO request) async {
+  Future<bool> purchaseTickets(
+      PurchaseTicketsRequestDTO purchaseTicketsRequestDTO) async {
     _isPurchasingTickets = true;
     _isLoading = true;
     notifyListeners();
 
     try {
-      final purchasedTickets = await _service
-          .purchaseTickets(request); // "demande à l'API d'acheter les tickets"
+      final purchasedTickets = await _service.purchaseTickets(
+          purchaseTicketsRequestDTO); // "demande à l'API d'acheter les tickets"
 
       _tickets.addAll(
           purchasedTickets); // "Ajoute les tickets achetés à la liste locale"
@@ -381,18 +384,19 @@ class TicketProvider with ChangeNotifier {
    * @param request : DTO contenant les infos de transfert
    * @return Future<bool> : true si succès, false si échec
    */
-  Future<bool> transferTickets(TransferTicketsRequestDTO request) async {
+  Future<bool> transferTickets(
+      TransferTicketsRequestDTO transferTicketsRequestDTO) async {
     _isTransferringTickets = true;
     _isLoading = true;
     notifyListeners();
 
     try {
       await _service.transferTickets(
-          request); // "demande à l'API de transférer les tickets"
+          transferTicketsRequestDTO); // "demande à l'API de transférer les tickets"
 
       _error = '';
       print(
-          "Tickets transférés de ${request.fromUserId} vers ${request.toUserId}");
+          "Tickets transférés de ${transferTicketsRequestDTO.fromaccountId} vers ${transferTicketsRequestDTO.toAccountId}");
       return true;
     } catch (e) {
       _error = 'Erreur transfert tickets: ${e.toString()}';
@@ -411,18 +415,18 @@ class TicketProvider with ChangeNotifier {
    * @return Future<bool> : true si succès, false si échec
    */
   Future<bool> cancelTransferTickets(
-      CancelTransferTicketsRequestDTO request) async {
+      CancelTransferTicketsRequestDTO cancelTransferTicketsRequestDTO) async {
     _isCancelingTransfer = true;
     _isLoading = true;
     notifyListeners();
 
     try {
       await _service.cancelTransferTickets(
-          request); // "demande à l'API d'annuler le transfert de tickets"
+          cancelTransferTicketsRequestDTO); // "demande à l'API d'annuler le transfert de tickets"
 
       _error = '';
       print(
-          "Transfert de tickets annulé entre ${request.fromUserId} et ${request.toUserId}");
+          "Transfert de tickets annulé entre ${cancelTransferTicketsRequestDTO.currentOwnerAccountId} et ${cancelTransferTicketsRequestDTO.originalSenderAccountId}");
       return true;
     } catch (e) {
       _error = 'Erreur annulation transfert tickets: ${e.toString()}';
@@ -440,17 +444,18 @@ class TicketProvider with ChangeNotifier {
    * @param request : DTO contenant les infos de débit
    * @return Future<bool> : true si succès, false si échec
    */
-  Future<bool> debitAccount(DebitAccountRequestDTO request) async {
+  Future<bool> debitAccount(
+      DebitAccountRequestDTO debitAccountRequestDTO) async {
     _isDebitingAccount = true;
     _isLoading = true;
     notifyListeners();
 
     try {
-      await _service
-          .debitAccount(request); // "demande à l'API de débiter le compte"
+      await _service.debitAccount(
+          debitAccountRequestDTO); // "demande à l'API de débiter le compte"
 
       _error = '';
-      print("Compte ${request.accountId} débité de ${request.amount}");
+      print("Compte ${debitAccountRequestDTO.etudiantAccountId} débité");
       return true;
     } catch (e) {
       _error = 'Erreur débit compte: ${e.toString()}';
@@ -492,7 +497,7 @@ class TicketProvider with ChangeNotifier {
    * 👤 CHARGEMENT DES TICKETS PAR COMPTE
    * @param accountId : l'identifiant du compte
    */
-  Future<void> loadTicketsByAccountId(String accountId) async {
+  Future<void> loadTicketsByAccountId(int accountId) async {
     _isLoading = true;
     _error = '';
     notifyListeners();
@@ -515,7 +520,7 @@ class TicketProvider with ChangeNotifier {
    * 👥 CHARGEMENT DES TICKETS PAR UTILISATEUR
    * @param userId : l'identifiant de l'utilisateur
    */
-  Future<void> loadTicketsByUserId(String userId) async {
+  Future<void> loadTicketsByUserId(int userId) async {
     _isLoading = true;
     _error = '';
     notifyListeners();
@@ -558,7 +563,7 @@ class TicketProvider with ChangeNotifier {
    * @param type : le type de ticket (A, B, etc.)
    * @return List<Ticket> : tickets de ce type
    */
-  List<Ticket> filterTicketsByType(String type) {
+  List<Ticket> filterTicketsByType(TicketType type) {
     return _service.filterTicketsByType(type);
   }
 
@@ -708,8 +713,15 @@ class TicketProvider with ChangeNotifier {
       // Premier ticket BOOKED: statistics['BOOKED'] = (null ?? 0) + 1 = 1
     } */
 
+    for (final ticket in _tickets) {
+      // Convertit TicketType enum → String
+      final typeKey = ticket.ticketType.toString().split('.').last;
+
+      statistics[typeKey] = (statistics[typeKey] ?? 0) + 1;
+    }
+
     // 🔄 COMPTAGE PAR TYPE DE TICKET
-    // Cette boucle compte combien de tickets ont chaque type (A, B, etc.)
+    /*  // Cette boucle compte combien de tickets ont chaque type (A, B, etc.)
     for (final ticket in _tickets) {
       // Pour chaque ticket dans la liste _tickets:
 
@@ -719,7 +731,7 @@ class TicketProvider with ChangeNotifier {
       // Premier ticket type A: statistics['A'] = (null ?? 0) + 1 = 1
       // Deuxième ticket type A: statistics['A'] = (1 ?? 0) + 1 = 2
       // Premier ticket type B: statistics['B'] = (null ?? 0) + 1 = 1
-    }
+    } */
 
     // 📤 RETOUR DES STATISTIQUES COMPLÈTES
     return statistics;
@@ -743,7 +755,7 @@ class TicketProvider with ChangeNotifier {
    * 📝 OBTENTION DE TOUS LES TYPES UNIQUES
    * @return List<String> : liste des types de tickets existants
    */
-  List<String> getUniqueTicketTypes() {
+  List<TicketType> getUniqueTicketTypes() {
     final types = _tickets.map((ticket) => ticket.ticketType).toSet().toList();
     types.sort();
     return types;
