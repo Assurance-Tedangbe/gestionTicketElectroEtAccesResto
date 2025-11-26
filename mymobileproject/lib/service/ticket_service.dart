@@ -620,6 +620,7 @@ class TicketApiService {
         : b.ticketCreationDate.compareTo(a.ticketCreationDate));
     return sortedTickets;
   }
+}
 
   /*
    // -------------------------
@@ -669,4 +670,3 @@ class TicketApiService {
     }
   }
   */
-}

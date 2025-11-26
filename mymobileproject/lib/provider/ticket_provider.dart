@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart'; // Importe les bases de Flutter, dont ChangeNotifier pour la gestion d'état réactive
+import 'package:flutter/foundation.dart';
 import 'package:mymobileproject/enums/ticket_status.dart';
 import 'package:mymobileproject/enums/ticket_type.dart';
 import 'package:mymobileproject/model/ticket_model.dart';
@@ -49,14 +49,14 @@ class TicketProvider with ChangeNotifier {
   // True uniquement pendant la création de nouveaux tickets
 
   bool _isUpdatingTicket = false; // "Mise à jour en cours"
-  bool _isDeletingTicket = false; // "Suppression en cours"
-  bool _isUpdatingTicketStatus = false; // "Mise à jour statut en cours"
-  bool _isBookingTicket = false; // "Réservation en cours"
-  bool _isUnbookingTicket = false; // "Annulation réservation en cours"
-  bool _isPurchasingTickets = false; // "Achat en cours"
-  bool _isTransferringTickets = false; // "Transfert en cours"
-  bool _isCancelingTransfer = false; // "Annulation transfert en cours"
-  bool _isDebitingAccount = false; // "Débit compte en cours"
+  bool _isDeletingTicket = false;
+  bool _isUpdatingTicketStatus = false;
+  bool _isBookingTicket = false;
+  bool _isUnbookingTicket = false;
+  bool _isPurchasingTickets = false;
+  bool _isTransferringTickets = false;
+  bool _isCancelingTransfer = false;
+  bool _isDebitingAccount = false;
 
   // CONSTRUCTEUR
   TicketProvider(this._service);
@@ -625,32 +625,6 @@ class TicketProvider with ChangeNotifier {
   }
 
   /*
-   * 📊 OBTENTION DES STATISTIQUES DES TICKETS
-   * @return Map<String, int> : statistiques détaillées
-   */
-  /*  Map<String, int> getTicketStatistics() {
-    final statistics = <String, int>{
-      'total': _tickets.length,
-      'booked': _tickets.where((t) => t.booked).length,
-      'available': _tickets.where((t) => !t.booked).length,
-      'used': _tickets.where((t) => !t.booked).length,
-    };
-
-    // Comptage par statut
-    for (final ticket in _tickets) {
-      statistics[ticket.ticketStatus] =
-          (statistics[ticket.ticketStatus] ?? 0) + 1;
-    }
-
-    // Comptage par type"
-    for (final ticket in _tickets) {
-      statistics[ticket.ticketType] = (statistics[ticket.ticketType] ?? 0) + 1;
-    }
-
-    return statistics;
-  } */
-
-  /*
  * 📊 OBTENTION DES STATISTIQUES DES TICKETS
  * Cette méthode calcule et retourne diverses statistiques sur les tickets
  * @return Map<String, int> : Dictionnaire avec les statistiques détaillées
@@ -692,27 +666,6 @@ class TicketProvider with ChangeNotifier {
       statistics[statusKey] = (statistics[statusKey] ?? 0) + 1;
     }
 
-    // 🔄 COMPTAGE PAR STATUT DES TICKETS
-    // Cette boucle compte combien de tickets ont chaque statut (AVAILABLE, BOOKED, USED, etc.)
-    /*  for (final ticket in _tickets) {
-      // Pour chaque ticket dans la liste _tickets:
-
-      statistics[ticket.ticketStatus] =
-          (statistics[ticket.ticketStatus] ?? 0) + 1;
-      // Explication détaillée de cette ligne :
-      // 1. ticket.ticketStatus → Récupère le statut du ticket (ex: 'AVAILABLE')
-      // 2. statistics['AVAILABLE'] ?? 0 →
-      //    - Si la clé 'AVAILABLE' existe, prend sa valeur
-      //    - Si elle n'existe pas, utilise 0 comme valeur par défaut
-      // 3. + 1 → Ajoute 1 au compteur
-      // 4. statistics['AVAILABLE'] = ... → Stocke la nouvelle valeur
-
-      // Exemple d'exécution :
-      // Premier ticket AVAILABLE: statistics['AVAILABLE'] = (null ?? 0) + 1 = 1
-      // Deuxième ticket AVAILABLE: statistics['AVAILABLE'] = (1 ?? 0) + 1 = 2
-      // Premier ticket BOOKED: statistics['BOOKED'] = (null ?? 0) + 1 = 1
-    } */
-
     for (final ticket in _tickets) {
       // Convertit TicketType enum → String
       final typeKey = ticket.ticketType.toString().split('.').last;
@@ -720,27 +673,13 @@ class TicketProvider with ChangeNotifier {
       statistics[typeKey] = (statistics[typeKey] ?? 0) + 1;
     }
 
-    // 🔄 COMPTAGE PAR TYPE DE TICKET
-    /*  // Cette boucle compte combien de tickets ont chaque type (A, B, etc.)
-    for (final ticket in _tickets) {
-      // Pour chaque ticket dans la liste _tickets:
-
-      statistics[ticket.ticketType] = (statistics[ticket.ticketType] ?? 0) + 1;
-      // Même logique que pour les statuts mais avec le type de ticket
-      // Exemple :
-      // Premier ticket type A: statistics['A'] = (null ?? 0) + 1 = 1
-      // Deuxième ticket type A: statistics['A'] = (1 ?? 0) + 1 = 2
-      // Premier ticket type B: statistics['B'] = (null ?? 0) + 1 = 1
-    } */
-
     // 📤 RETOUR DES STATISTIQUES COMPLÈTES
     return statistics;
     // La Map retournée contient maintenant toutes les statistiques calculées
   }
 
-  // "Obtient tous les statuts de tickets uniques"
   /*
-   * 🎯 OBTENTION DE TOUS LES STATUTS UNIQUES
+   * 🎯 OBTENTION DE TOUS LES STATUTS de tickets UNIQUES
    * @return List<TicketStatus> : liste des statuts existants
    */
   List<TicketStatus> getUniqueTicketStatuses() {
