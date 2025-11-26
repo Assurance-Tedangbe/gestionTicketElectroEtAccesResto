@@ -37,11 +37,14 @@ class Ticket {
     return Ticket(
       // ticketId: json['ticketId']?.toString() ?? '',
       ticketId: json['ticketId'],
-      ticketType: json['ticketType'] ?? '',
+      //  ticketType: json['ticketType'] ?? '',
       ticketPrice: (json['ticketPrice'] as num?)?.toDouble() ?? 0.0,
       paymentCode: json['paymentCode'] ?? '',
       booked: json['booked'] ?? false,
-      ticketStatus: json['ticketStatus'] ?? '',
+      ticketType: TicketTypeExtension.fromBackend(json['ticketType']), // ← ICI
+      ticketStatus:
+          TicketStatusExtension.fromApi(json['ticketStatus']), // ← ICI
+      //  ticketStatus: json['ticketStatus'] ?? '',
       ticketCreationDate: DateTime.parse(json['ticketCreationDate']),
       ticketPurchaseDate: json['ticketPurchaseDate'] != null
           ? DateTime.parse(json['ticketPurchaseDate'])

@@ -100,20 +100,3 @@ extension TicketStatusExtension on TicketStatus {
     }
   }
 }
-
-/* // 🎯 UTILISATION DANS VOTRE METHODE
-Map<String, int> getTicketStatistics() {
-  final statistics = <String, int>{
-    'total': _tickets.length,
-    'booked': _tickets.where((t) => t.booked).length,
-    'available': _tickets.where((t) => !t.booked).length,
-    'used': _tickets.where((t) => t.ticketStatus == TicketStatus.used).length,
-  };
-
-  for (final ticket in _tickets) {
-    statistics[ticket.ticketStatus.forApi] = 
-        (statistics[ticket.ticketStatus.forApi] ?? 0) + 1;
-  }
-
-  return statistics;
-} */

@@ -259,7 +259,10 @@ class TicketApiService {
       final response = await http.put(
         Uri.parse('$baseUrl/ticketStatus/$ticketId'),
         headers: headers,
-        body: json.encode(ticketStatus), // "Envoie seulement le nouveau statut"
+
+        // CORRECTION: Utiliser forApi pour envoyer la valeur au backend au lieu de json.encode direct
+        body: json.encode(
+            ticketStatus.forApi), // ← ICI "Envoie seulement le nouveau statut"
       );
 
       if (response.statusCode != 200) {
@@ -345,14 +348,24 @@ class TicketApiService {
       print("Récupération du ticket via son statut: $ticketStatus");
 
       final response = await http.get(
-        Uri.parse('$baseUrl/ticketStatus/$ticketStatus'),
+        // CORRECTION : Utiliser forApi pour l'URL
+        Uri.parse('$baseUrl/ticketStatus/${ticketStatus.forApi}'), // ← ICI
         headers: headers,
       );
 
       if (response.statusCode == 200) {
         final List<dynamic> jsonList = json.decode(response.body);
 
-        return jsonList.map((json) => Ticket.fromJson(json)).toList();
+        //  return jsonList.map((json) => Ticket.fromJson(json)).toList();
+
+        // ✅ CORRECTION : Utiliser fromApi pour convertir la réponse
+        return jsonList.map((json) {
+          // Supposons que le JSON contient un champ "ticketStatus"
+          final statusFromApi = json['ticketStatus'] as String;
+          final ticket = Ticket.fromJson(json);
+          return ticket.copyWith(
+              ticketStatus: TicketStatusExtension.fromApi(statusFromApi));
+        }).toList();
       } else {
         throw Exception(
             'Erreur récupération tickets par statut: ${response.statusCode}');

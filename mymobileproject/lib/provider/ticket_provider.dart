@@ -646,12 +646,11 @@ class TicketProvider with ChangeNotifier {
 
       'available': _tickets.where((t) => !t.booked).length,
       // Filtre les tickets disponibles (t.booked == false) et compte leur nombre
-      // Exemple: Si 7 tickets ont booked=false, retourne 7
 
-      'used': _tickets.where((t) => !t.booked).length,
-      // ⚠️ BUG POTENTIEL : Même calcul que 'available'
-      // Probablement devrait être: _tickets.where((t) => t.ticketStatus == 'USED').length
+      // 'used': _tickets.where((t) => !t.booked).length,
       // Actuellement, compte aussi les tickets non réservés
+
+      'used': _tickets.where((t) => t.ticketStatus == TicketStatus.used).length,
     };
 
     // 🎯 COMPTAGE PAR STATUT - CONVERSION EN STRING
@@ -672,6 +671,20 @@ class TicketProvider with ChangeNotifier {
 
       statistics[typeKey] = (statistics[typeKey] ?? 0) + 1;
     }
+
+    /*
+    // CORRECTION : Utiliser forApi pour les clés de statut
+  for (final ticket in _tickets) {
+    final statusKey = ticket.ticketStatus.forApi; // ← ICI au lieu de toString().split('.')
+    statistics[statusKey] = (statistics[statusKey] ?? 0) + 1;
+  }
+
+  // CORRECTION : Utiliser toBackend pour les types
+  for (final ticket in _tickets) {
+    final typeKey = ticket.ticketType.toBackend; // ← ICI au lieu de toString().split('.')
+    statistics[typeKey] = (statistics[typeKey] ?? 0) + 1;
+  }
+    */
 
     // 📤 RETOUR DES STATISTIQUES COMPLÈTES
     return statistics;
@@ -714,7 +727,9 @@ class TicketProvider with ChangeNotifier {
    * @return bool : true si le ticket peut être acheté
    */
   bool isTicketAvailableForPurchase(Ticket ticket) {
-    return !ticket.booked && ticket.ticketStatus == 'AVAILABLE';
+    // CORRECTION : Utiliser l'enum directement au lieu de String
+    return !ticket.booked && ticket.ticketStatus == TicketStatus.available;
+    // return !ticket.booked && ticket.ticketStatus == 'AVAILABLE';
   }
 
   /*
