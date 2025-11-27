@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:mymobileproject/enums/ticket_status.dart';
 import 'package:mymobileproject/enums/ticket_type.dart';
 import 'package:mymobileproject/model/ticket_model.dart';
@@ -539,62 +539,6 @@ class TicketProvider with ChangeNotifier {
     }
   }
 
-  // === MÉTHODES UTILITAIRES - OPERATIONS LOCALES ===
-  /*
-   * 🔍 RECHERCHE DE TICKETS DANS LE CACHE LOCAL
-   * @param query : terme de recherche
-   * @return List<Ticket> : liste des tickets correspondants
-   */
-  List<Ticket> searchTickets(String query) {
-    return _service.searchTickets(query);
-  }
-
-  /*
-   * 🎯 FILTRAGE DES TICKETS PAR STATUT
-   * @param status : le statut à filtrer
-   * @return List<Ticket> : tickets ayant ce statut
-   */
-  List<Ticket> filterTicketsByStatus(TicketStatus status) {
-    return _service.filterTicketsByStatus(status);
-  }
-
-  /*
-   * 📝 FILTRAGE DES TICKETS PAR TYPE
-   * @param type : le type de ticket (A, B, etc.)
-   * @return List<Ticket> : tickets de ce type
-   */
-  List<Ticket> filterTicketsByType(TicketType type) {
-    return _service.filterTicketsByType(type);
-  }
-
-  // "Filtre les tickets réservés/non réservés"
-  /*
-   * 📅 FILTRAGE DES TICKETS PAR STATUT DE RESERVATION
-   * @param booked : true pour réservés, false pour disponibles
-   * @return List<Ticket> : tickets correspondants
-   */
-  List<Ticket> filterTicketsByBookedStatus(bool booked) {
-    return _service.filterTicketsByBookedStatus(booked);
-  }
-
-  /*
-   * 💰 TRI DES TICKETS PAR PRIX
-   * @param ascending : true pour croissant, false pour décroissant
-   * @return List<Ticket> : tickets triés par prix
-   */
-  List<Ticket> sortTicketsByPrice(bool ascending) {
-    return _service.sortTicketsByPrice(ascending);
-  }
-
-  /*
-   * 📅 TRI DES TICKETS PAR DATE DE CREATION
-   * @param ascending : true pour plus récents d'abord, false pour plus anciens
-   * @return List<Ticket> : tickets triés par date
-   */
-  List<Ticket> sortTicketsByCreationDate(bool ascending) {
-    return _service.sortTicketsByCreationDate(ascending);
-  }
-
   // === MÉTHODES DE GESTION D'ÉTAT ===
   /*
    * 🧹 EFFACEMENT DU MESSAGE D'ERREUR
@@ -624,71 +568,49 @@ class TicketProvider with ChangeNotifier {
     await loadAllTickets(forceRefresh: true);
   }
 
+  // === MÉTHODES UTILITAIRES - OPERATIONS LOCALES(POUR L'UI) ===
+
   /*
- * 📊 OBTENTION DES STATISTIQUES DES TICKETS
- * Cette méthode calcule et retourne diverses statistiques sur les tickets
- * @return Map<String, int> : Dictionnaire avec les statistiques détaillées
- *   - Clés : Noms des statistiques (ex: 'total', 'booked', 'AVAILABLE', 'A')
- *   - Valeurs : Nombre d'occurrences pour chaque statistique
- */
+   * 📊 OBTENTION DES STATISTIQUES DES TICKETS - CORRIGÉ
+   */
   Map<String, int> getTicketStatistics() {
-    // 🎯 INITIALISATION DE LA MAP DES STATISTIQUES
-    // Crée une Map vide avec des clés String et valeurs int
-    final statistics = <String, int>{
-      // 📈 CALCUL DES STATISTIQUES DE BASE
-
-      'total': _tickets.length,
-      // Compte le nombre total de tickets dans la liste _tickets
-
-      'booked': _tickets.where((t) => t.booked).length,
-      // Filtre les tickets réservés (t.booked == true) et compte leur nombre
-      // Exemple: Si 3 tickets ont booked=true, retourne 3
-
-      'available': _tickets.where((t) => !t.booked).length,
-      // Filtre les tickets disponibles (t.booked == false) et compte leur nombre
-
-      // 'used': _tickets.where((t) => !t.booked).length,
-      // Actuellement, compte aussi les tickets non réservés
-
-      'used': _tickets.where((t) => t.ticketStatus == TicketStatus.used).length,
-    };
-
-    // 🎯 COMPTAGE PAR STATUT - CONVERSION EN STRING
-    for (final ticket in _tickets) {
-      // Convertit TicketStatus enum → String
-      final statusKey = ticket.ticketStatus.toString().split('.').last;
-      // Explication :
-      // TicketStatus.AVAILABLE.toString() → "TicketStatus.AVAILABLE"
-      // .split('.') → ["TicketStatus", "AVAILABLE"]
-      // .last → "AVAILABLE"
-
-      statistics[statusKey] = (statistics[statusKey] ?? 0) + 1;
-    }
-
-    for (final ticket in _tickets) {
-      // Convertit TicketType enum → String
-      final typeKey = ticket.ticketType.toString().split('.').last;
-
-      statistics[typeKey] = (statistics[typeKey] ?? 0) + 1;
-    }
-
-    /*
-    // CORRECTION : Utiliser forApi pour les clés de statut
-  for (final ticket in _tickets) {
-    final statusKey = ticket.ticketStatus.forApi; // ← ICI au lieu de toString().split('.')
-    statistics[statusKey] = (statistics[statusKey] ?? 0) + 1;
+    return _service.getTicketStatistics(_tickets);
   }
 
-  // CORRECTION : Utiliser toBackend pour les types
-  for (final ticket in _tickets) {
-    final typeKey = ticket.ticketType.toBackend; // ← ICI au lieu de toString().split('.')
-    statistics[typeKey] = (statistics[typeKey] ?? 0) + 1;
+  //🔍 RECHERCHE DE TICKETS DANS LE CACHE LOCAL
+  List<Ticket> searchTickets(String query) {
+    return _service.searchTickets(query);
   }
-    */
 
-    // 📤 RETOUR DES STATISTIQUES COMPLÈTES
-    return statistics;
-    // La Map retournée contient maintenant toutes les statistiques calculées
+  // FILTRAGE DES TICKETS PAR STATUT
+  List<Ticket> filterTicketsByStatus(TicketStatus status) {
+    return _service.filterTicketsByStatus(status);
+  }
+
+  // FILTRAGE DES TICKETS PAR TYPE
+  List<Ticket> filterTicketsByType(TicketType type) {
+    return _service.filterTicketsByType(type);
+  }
+
+  // Filtre les tickets réservés/non réservés
+  List<Ticket> filterTicketsByBookedStatus(bool booked) {
+    return _service.filterTicketsByBookedStatus(booked);
+  }
+
+  /*
+   * 💰 TRI DES TICKETS PAR PRIX
+   * @param ascending : true pour croissant, false pour décroissant
+   */
+  List<Ticket> sortTicketsByPrice(bool ascending) {
+    return _service.sortTicketsByPrice(ascending);
+  }
+
+  /*
+   * 📅 TRI DES TICKETS PAR DATE DE CREATION
+   * @param ascending : true pour plus récents d'abord, false pour plus anciens
+   */
+  List<Ticket> sortTicketsByCreationDate(bool ascending) {
+    return _service.sortTicketsByCreationDate(ascending);
   }
 
   /*
@@ -704,7 +626,7 @@ class TicketProvider with ChangeNotifier {
 
   // "Obtient tous les types de tickets uniques"
   /*
-   * 📝 OBTENTION DE TOUS LES TYPES UNIQUES
+   * 📝 OBTENTION DE TOUS LES TYPES UNIQUES (POUR FILTRES UI)
    * @return List<String> : liste des types de tickets existants
    */
   List<TicketType> getUniqueTicketTypes() {
@@ -721,22 +643,23 @@ class TicketProvider with ChangeNotifier {
     return _tickets.fold(0.0, (sum, ticket) => sum + ticket.ticketPrice);
   }
 
-  /*
-   * ✅ VERIFICATION DE DISPONIBILITE D'UN TICKET POUR ACHAT
-   * @param ticket : le ticket à vérifier
-   * @return bool : true si le ticket peut être acheté
-   */
+  // VERIFICATION DE DISPONIBILITE D'UN TICKET POUR ACHAT
   bool isTicketAvailableForPurchase(Ticket ticket) {
     // CORRECTION : Utiliser l'enum directement au lieu de String
     return !ticket.booked && ticket.ticketStatus == TicketStatus.available;
     // return !ticket.booked && ticket.ticketStatus == 'AVAILABLE';
   }
 
-  /*
-   * 🛒 OBTENTION DES TICKETS DISPONIBLES POUR ACHAT
-   * @return List<Ticket> : liste des tickets achetable
-   */
+  // 🛒 OBTENTION DES TICKETS DISPONIBLES POUR ACHAT
   List<Ticket> getAvailableTicketsForPurchase() {
     return _tickets.where(isTicketAvailableForPurchase).toList();
+  }
+
+  Color getStatusColor(TicketStatus status) {
+    return status.displayColor;
+  }
+
+  Color getTypeColor(TicketType type) {
+    return type.displayColor;
   }
 }

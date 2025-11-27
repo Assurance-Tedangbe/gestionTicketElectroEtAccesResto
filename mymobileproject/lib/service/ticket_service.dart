@@ -196,7 +196,8 @@ class TicketApiService {
       final response = await http.put(
         Uri.parse('$baseUrl/${ticket.ticketId}'),
         headers: headers,
-        body: json.encode(ticket.toJson()), // "Envoie les nouvelles données"
+        body: json.encode(ticket
+            .toJson()), // Envoie les nouvelles données, ← Utilise le toJson() corrigé
       ); // "PUT /api/tickets/{ticketId} pour modifier un ticket existant"
 
       if (response.statusCode == 200) {
@@ -356,16 +357,17 @@ class TicketApiService {
       if (response.statusCode == 200) {
         final List<dynamic> jsonList = json.decode(response.body);
 
-        //  return jsonList.map((json) => Ticket.fromJson(json)).toList();
+        // ✅ Conversion correcte utilisant fromJson qui appelle lui-même fromApi
+        return jsonList.map((json) => Ticket.fromJson(json)).toList();
 
         // ✅ CORRECTION : Utiliser fromApi pour convertir la réponse
-        return jsonList.map((json) {
+        /* return jsonList.map((json) {
           // Supposons que le JSON contient un champ "ticketStatus"
           final statusFromApi = json['ticketStatus'] as String;
           final ticket = Ticket.fromJson(json);
           return ticket.copyWith(
               ticketStatus: TicketStatusExtension.fromApi(statusFromApi));
-        }).toList();
+        }).toList(); */
       } else {
         throw Exception(
             'Erreur récupération tickets par statut: ${response.statusCode}');
@@ -552,17 +554,27 @@ class TicketApiService {
 
     final queryLower = query.toLowerCase();
 
+    // Recherche sur les noms d'affichage des enums
     return _cachedTickets
         .where((ticket) =>
-                ticket.ticketType
-                    .toString()
+                ticket.ticketType.displayName
                     .toLowerCase()
                     .contains(queryLower) ||
-                ticket.ticketStatus
+                /* ticket.ticketType
                     .toString()
                     .toLowerCase()
-                    .contains(queryLower) ||
+                    .contains(queryLower) || 
+                 ticket.ticketStatus
+                    .toString()
+                    .toLowerCase()
+                    .contains(queryLower) || */
                 ticket.paymentCode.toLowerCase().contains(queryLower) ||
+                ticket.ticketStatus.frenchLabel
+                    .toLowerCase()
+                    .contains(queryLower) ||
+                ticket.ticketStatus.displayName
+                    .toLowerCase()
+                    .contains(queryLower) ||
                 ticket.userDTO.firstName.toLowerCase().contains(queryLower) ||
                 ticket.userDTO.lastName.toLowerCase().contains(queryLower)
             // ticket.menu.menuName.toLowerCase().contains(queryLower)
@@ -632,6 +644,47 @@ class TicketApiService {
         ? a.ticketCreationDate.compareTo(b.ticketCreationDate)
         : b.ticketCreationDate.compareTo(a.ticketCreationDate));
     return sortedTickets;
+  }
+
+  /*
+   * 📊 OBTENTION DES STATISTIQUES DES TICKETS
+   * Logique de calcul pure - indépendante de l'état UI
+   */
+  Map<String, int> getTicketStatistics(List<Ticket> tickets) {
+    final statistics = <String, int>{
+      'total': tickets.length,
+      'booked': tickets.where((t) => t.booked).length,
+      'available': tickets.where((t) => !t.booked).length,
+      'used': tickets.where((t) => t.ticketStatus == TicketStatus.used).length,
+    };
+
+    // Comptage par statut
+    for (final ticket in tickets) {
+      final statusKey = ticket.ticketStatus.forApi;
+      statistics[statusKey] = (statistics[statusKey] ?? 0) + 1;
+    }
+
+    // Comptage par type
+    for (final ticket in tickets) {
+      final typeKey = ticket.ticketType.toBackend;
+      statistics[typeKey] = (statistics[typeKey] ?? 0) + 1;
+    }
+
+    return statistics;
+    /*
+    exemple de resultat attendu 
+    {
+      'total': 15,
+      'booked': 5,
+      'available': 8,
+      'used': 2,
+      'AVAILABLE': 8,    // ← Clé cohérente avec le backend
+      'BOOKED': 5,       // ← Clé cohérente avec le backend  
+      'USED': 2,         // ← Clé cohérente avec le backend
+      'A': 10,           // ← Clé cohérente avec le backend
+      'B': 5             // ← Clé cohérente avec le backend
+    }
+    */
   }
 }
 

@@ -60,11 +60,11 @@ class Ticket {
   Map<String, dynamic> toJson() {
     return {
       'ticketId': ticketId,
-      'ticketType': ticketType,
+      'ticketType': ticketType.toBackend, // ← ICI: Utilisation de toBackend
       'ticketPrice': ticketPrice,
       'paymentCode': paymentCode,
       'booked': booked,
-      'ticketStatus': ticketStatus,
+      'ticketStatus': ticketStatus.forApi, // ← ICI: Utilisation de forApi
       'ticketCreationDate': ticketCreationDate.toIso8601String().split('T')[0],
       'ticketPurchaseDate': ticketPurchaseDate?.toIso8601String().split('T')[0],
       'ticketDescription': ticketDescription,
