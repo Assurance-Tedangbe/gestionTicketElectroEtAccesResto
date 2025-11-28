@@ -10,6 +10,8 @@ import 'package:mymobileproject/model/ticket_model.dart';
   - Cache simple des données
   - Logique métier légère
   - Transformation des données 
+    ticket_service.dart: role(Communication API): utilise forApi, fromApi, toBackend, fromBackend
+
 */
 class TicketApiService {
   /* Use the IP address of the Android emulator (10.0.2.2)
@@ -48,6 +50,9 @@ class TicketApiService {
 
       if (response.statusCode == 201) {
         final List<dynamic> jsonList = json.decode(response.body);
+
+        /* ICI - La conversion se fait dans Ticket.fromJson()
+           Utilise fromBackend et fromApi via Ticket.fromJson() */
         final newTickets = jsonList
             .map((json) => Ticket.fromJson(json))
             .toList(); // "Convertit la réponse JSON → liste d'objets Ticket"
@@ -99,6 +104,7 @@ class TicketApiService {
         final List<dynamic> jsonList =
             json.decode(response.body); // "JSON string → Liste d'objets Dart"
 
+        // ICI - La conversion se fait dans Ticket.fromJson()
         _cachedTickets = jsonList
             .map((json) => Ticket.fromJson(json))
             .toList(); // "Transforme chaque objet JSON → objet Ticket"
@@ -169,6 +175,7 @@ class TicketApiService {
       ); // "GET /api/tickets/{ticketId} pour récupérer un ticket spécifique"
 
       if (response.statusCode == 200) {
+        // ICI - La conversion se fait dans Ticket.fromJson()
         final ticket = Ticket.fromJson(json.decode(response.body));
 
         print("Ticket récupéré: ${ticket.ticketId}");
@@ -197,7 +204,7 @@ class TicketApiService {
         Uri.parse('$baseUrl/${ticket.ticketId}'),
         headers: headers,
         body: json.encode(ticket
-            .toJson()), // Envoie les nouvelles données, ← Utilise le toJson() corrigé
+            .toJson()), // Envoie les nouvelles données, ← Utilise le toJson() qui appelle forApi et toBackend
       ); // "PUT /api/tickets/{ticketId} pour modifier un ticket existant"
 
       if (response.statusCode == 200) {
@@ -444,6 +451,7 @@ class TicketApiService {
       if (response.statusCode == 201) {
         final List<dynamic> jsonList = json.decode(response.body);
 
+        // ICI - La conversion se fait dans Ticket.fromJson()
         final purchasedTickets =
             jsonList.map((json) => Ticket.fromJson(json)).toList();
 
@@ -569,24 +577,33 @@ class TicketApiService {
                     .toLowerCase()
                     .contains(queryLower) || */
                 ticket.paymentCode.toLowerCase().contains(queryLower) ||
-                ticket.ticketStatus.frenchLabel
-                    .toLowerCase()
-                    .contains(queryLower) ||
+                ticket.ticketStatus.frenchLabel.toLowerCase().contains(
+                    queryLower) || // → "Disponible", "Réservé", "Utilisé"
                 ticket.ticketStatus.displayName
                     .toLowerCase()
-                    .contains(queryLower) ||
+                    .contains(queryLower) || // → "available", "booked", "used"
                 ticket.userDTO.firstName.toLowerCase().contains(queryLower) ||
                 ticket.userDTO.lastName.toLowerCase().contains(queryLower)
             // ticket.menu.menuName.toLowerCase().contains(queryLower)
             )
         .toList();
+
+    /*  Resultat: exemple de recherche :
+          "dispo" → trouve les tickets "Disponible"
+          "réserv" → trouve les tickets "Réservé"  */
   }
 
   // Validation basique des données de ticket
   void validateTicketData(Ticket ticket) {
-    if (ticket.ticketType.toString().isEmpty) {
+    // Vérifie que le type de ticket est valide (non null)
+    // Les enums Dart ne peuvent pas être null si définis, mais bonne pratique
+    if (ticket.ticketType == null) {
       throw Exception('Le type de ticket est requis');
     }
+    /*  if (ticket.ticketType.toString().isEmpty) {
+             throw Exception('Le type de ticket est requis');
+          }
+      */
 
     if (ticket.ticketPrice <= 0) {
       throw Exception('Le prix du ticket doit être positif');
@@ -599,6 +616,14 @@ class TicketApiService {
     if (ticket.ticketDescription.length > 100) {
       throw Exception('La description ne peut pas dépasser 100 caractères');
     }
+    // ✅ VALIDATION COHÉRENCE PRIX/TYPE
+    if (ticket.ticketType == TicketType.a && ticket.ticketPrice < 100.0) {
+      throw Exception('Le ticket type A doit coûter au moins 100F');
+    }
+
+    if (ticket.ticketType == TicketType.b && ticket.ticketPrice < 150.0) {
+      throw Exception('Le ticket type B doit coûter au moins 150F');
+    }
   }
 
   // Vide le cache (utile pour forcer un rafraîchissement)
@@ -610,6 +635,7 @@ class TicketApiService {
 
   // "Filtre les tickets par statut"
   List<Ticket> filterTicketsByStatus(TicketStatus status) {
+    // ICI: Filtrage local avec enums Dart purs
     return _cachedTickets
         .where((ticket) => ticket.ticketStatus == status)
         .toList();
@@ -617,6 +643,7 @@ class TicketApiService {
 
   // "Filtre les tickets par type"
   List<Ticket> filterTicketsByType(TicketType type) {
+    // ICI: Filtrage local avec enums Dart purs
     return _cachedTickets
         .where((ticket) => ticket.ticketType == type)
         // (ticket) => ticket.ticketType.toLowerCase() == type.toLowerCase())

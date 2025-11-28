@@ -2,6 +2,8 @@ import 'package:mymobileproject/enums/ticket_status.dart';
 import 'package:mymobileproject/enums/ticket_type.dart';
 //import 'package:mymobileproject/model/menu_model.dart';
 
+/*  ticket_model.dart: role(Conversion données), utilise forApi, fromApi, toBackend, fromBackend  */
+
 class Ticket {
   final int? ticketId;
   final TicketType ticketType;
@@ -60,11 +62,12 @@ class Ticket {
   Map<String, dynamic> toJson() {
     return {
       'ticketId': ticketId,
-      'ticketType': ticketType.toBackend, // ← ICI: Utilisation de toBackend
+      'ticketType': ticketType.toBackend, // ← ICI: "A", "B"
       'ticketPrice': ticketPrice,
       'paymentCode': paymentCode,
       'booked': booked,
-      'ticketStatus': ticketStatus.forApi, // ← ICI: Utilisation de forApi
+      'ticketStatus':
+          ticketStatus.forApi, // ← ICI:  "AVAILABLE", "BOOKED", "USED"
       'ticketCreationDate': ticketCreationDate.toIso8601String().split('T')[0],
       'ticketPurchaseDate': ticketPurchaseDate?.toIso8601String().split('T')[0],
       'ticketDescription': ticketDescription,

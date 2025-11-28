@@ -15,6 +15,7 @@ import 'package:mymobileproject/service/ticket_service.dart';
   Gère l'état de toutes les opérations du TicketApiService.
   Il sert d'intermédiaire entre l'interface utilisateur et les services backend
 
+  role(État UI + Coordination). Le Provider travaille avec les enums Dart, pas les conversions
 */
 class TicketProvider with ChangeNotifier {
   // "Crée une classe qui peut notifier ses écouteurs des changements"
@@ -26,9 +27,7 @@ class TicketProvider with ChangeNotifier {
   final TicketApiService _service;
   // Instance du service qui gère les appels API - injectée via le constructeur
 
-  // === INTERNAL STATE FOR ALL OPERATIONS ===
-
-  // === ETAT PRINCIPAL DE L'APPLICATION ===
+  // === INTERNAL STATE FOR ALL OPERATIONS = ETAT PRINCIPAL DE L'APPLICATION ===
 
   List<Ticket> _tickets = []; // "Liste vide pour stocker tous les tickets"
   // Liste principale qui stocke tous les tickets chargés depuis l'API
@@ -62,7 +61,7 @@ class TicketProvider with ChangeNotifier {
   TicketProvider(this._service);
   // Le constructeur reçoit une instance de TicketApiService en paramètre (dependency injection)
 
-  // === GETTERS - Accès contrôlé à l'état ===
+  // === GETTERS - Accès contrôlé à l'état
   // Les getters permettent un accès en lecture seule aux variables privées
 
   // 🎫 GETTERS PRINCIPAUX
@@ -75,7 +74,7 @@ class TicketProvider with ChangeNotifier {
       _isLoading; // Indique si une opération globale est en cours de chargement
   String get error => _error; // Retourne le dernier message d'erreur rencontré
 
-  // 🎯 GETTERS POUR LES ETATS SPECIFIQUES
+  // GETTERS POUR LES ETATS SPECIFIQUES
   bool get isCreatingTickets =>
       _isCreatingTickets; // Indique si une création de tickets est en cours
   bool get isUpdatingTicket => _isUpdatingTicket;
@@ -88,11 +87,10 @@ class TicketProvider with ChangeNotifier {
   bool get isCancelingTransfer => _isCancelingTransfer;
   bool get isDebitingAccount => _isDebitingAccount;
 
-  // === MÉTHODES D'ACTION - OPERATIONS PRINCIPALES: Gestion complète des états ===
+  // === MÉTHODES D'ACTION - OPERATIONS PRINCIPALES: Gestion complète des états
 
   // "Charge tous les tickets depuis le service"
-  /*
-   * 📥 CHARGE TOUS LES TICKETS DEPUIS L'API
+  /* CHARGE TOUS LES TICKETS DEPUIS L'API
    * @param forceRefresh : si true, ignore le cache et force le rechargement
    * @return Future<void> : opération asynchrone qui ne retourne pas de valeur
    */
@@ -263,9 +261,8 @@ class TicketProvider with ChangeNotifier {
 
   /*
    * 🔄 MISE A JOUR DU STATUT D'UN TICKET
-   * @param ticketId : l'identifiant du ticket
    * @param ticketStatus : le nouveau statut à appliquer
-   * @return Future<bool> : true si succès, false si échec
+   *  Le provider utilise les enums DIRECTEMENT
    */
   Future<bool> updateTicketStatus(
       int ticketId, TicketStatus ticketStatus) async {
@@ -275,6 +272,7 @@ class TicketProvider with ChangeNotifier {
 
     try {
       // Appel API pour changer le statut
+      // Il passe l'enum Dart au service, qui se charge de la conversion
       await _service.updateTicketStatus(ticketId,
           ticketStatus); // "demande à l'API de mettre à jour le statut du ticket"
 
@@ -321,7 +319,7 @@ class TicketProvider with ChangeNotifier {
   }
 
   /*
-   * ❌ ANNULATION DE RESERVATION D'UN TICKET
+   * ANNULATION DE RESERVATION D'UN TICKET
    * @param ticketId : l'identifiant du ticket à désactiver
    * @return Future<bool> : true si succès, false si échec
    */
@@ -469,9 +467,7 @@ class TicketProvider with ChangeNotifier {
   }
 
   // === MÉTHODES DE RECHERCHE ET FILTRAGE ===
-
-  /*
-   * 📋 CHARGEMENT DES TICKETS PAR STATUT
+  /* CHARGEMENT DES TICKETS PAR STATUT
    * @param ticketStatus : le statut des tickets à charger
    */
   Future<void> loadTicketsByStatus(TicketStatus ticketStatus) async {
@@ -568,13 +564,24 @@ class TicketProvider with ChangeNotifier {
     await loadAllTickets(forceRefresh: true);
   }
 
-  // === MÉTHODES UTILITAIRES - OPERATIONS LOCALES(POUR L'UI) ===
+  // === MÉTHODES UTILITAIRES - OPERATIONS LOCALES (POUR L'UI)
 
-  /*
-   * 📊 OBTENTION DES STATISTIQUES DES TICKETS - CORRIGÉ
-   */
+  // 📊 OBTENTION DES STATISTIQUES DES TICKETS
   Map<String, int> getTicketStatistics() {
     return _service.getTicketStatistics(_tickets);
+  }
+
+  // OBTENTION DES STATISTIQUES FORMATÉES POUR L'UI
+  Map<String, int> getFrenchStatistics() {
+    final stats = getTicketStatistics();
+    return {
+      'Total': stats['total'] ?? 0,
+      'Réservés': stats['booked'] ?? 0,
+      'Disponibles': stats['available'] ?? 0,
+      'Utilisés': stats['used'] ?? 0,
+      'Type A': stats['A'] ?? 0,
+      'Type B': stats['B'] ?? 0,
+    };
   }
 
   //🔍 RECHERCHE DE TICKETS DANS LE CACHE LOCAL
@@ -614,7 +621,7 @@ class TicketProvider with ChangeNotifier {
   }
 
   /*
-   * 🎯 OBTENTION DE TOUS LES STATUTS de tickets UNIQUES
+   * OBTENTION DE TOUS LES STATUTS de tickets UNIQUES
    * @return List<TicketStatus> : liste des statuts existants
    */
   List<TicketStatus> getUniqueTicketStatuses() {
@@ -625,8 +632,7 @@ class TicketProvider with ChangeNotifier {
   }
 
   // "Obtient tous les types de tickets uniques"
-  /*
-   * 📝 OBTENTION DE TOUS LES TYPES UNIQUES (POUR FILTRES UI)
+  /* OBTENTION DE TOUS LES TYPES UNIQUES (POUR FILTRES UI)
    * @return List<String> : liste des types de tickets existants
    */
   List<TicketType> getUniqueTicketTypes() {
@@ -655,11 +661,23 @@ class TicketProvider with ChangeNotifier {
     return _tickets.where(isTicketAvailableForPurchase).toList();
   }
 
+  // OBTENTION DE LA COULEUR D'UN STATUT
   Color getStatusColor(TicketStatus status) {
     return status.displayColor;
   }
 
+  // OBTENTION DE LA COULEUR D'UN TYPE
   Color getTypeColor(TicketType type) {
     return type.displayColor;
+  }
+
+  // OBTENTION DU LIBELLÉ FRANÇAIS D'UN STATUT
+  String getStatusDisplayName(TicketStatus status) {
+    return status.frenchLabel; // "Disponible", "Réservé", "Utilisé"
+  }
+
+  // OBTENTION DU NOM D'AFFICHAGE D'UN TYPE
+  String getTypeDisplayName(TicketType type) {
+    return type.displayName; // "a", "b"
   }
 }
