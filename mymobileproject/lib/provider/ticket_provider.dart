@@ -582,6 +582,17 @@ class TicketProvider with ChangeNotifier {
       'Type A': stats['A'] ?? 0,
       'Type B': stats['B'] ?? 0,
     };
+    /*
+      Exple de résultat attendu:
+      {
+        'Total': 150,
+        'Réservés': 80,
+        'Disponibles': 70,
+        'Utilisés': 45,
+        'Type A': 90,
+        'Type B': 60
+      }
+    */
   }
 
   //🔍 RECHERCHE DE TICKETS DANS LE CACHE LOCAL
