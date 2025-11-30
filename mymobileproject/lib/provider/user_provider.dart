@@ -14,12 +14,9 @@ import 'package:mymobileproject/service/user_service.dart';
 */
 class UserProvider with ChangeNotifier {
   //Creates a class that can notify its listeners of changes
-
   // _ means these variables are private
 
   final UserApiService _service;
-
-  // === INTERNAL STATE FOR ALL OPERATIONS ===
 
   // Main state
   List<User> _users = []; // Empty list to store all users
@@ -34,6 +31,13 @@ class UserProvider with ChangeNotifier {
   bool _isUpdatingPassword = false; // Password change in progress
   bool _isAddRoleToUser = false; // Adding role to user in progress
   bool _isRemoveRoleFromUser = false; // Remove role from user in progress
+
+  String _fullName = '';
+  String _username = '';
+  String _email = '';
+  String _password = '';
+  String _confirmPassword = '';
+  bool _isPasswordVisible = false;
 
   // Specific error messages
   /* String _createUserError = '';
@@ -60,6 +64,50 @@ class UserProvider with ChangeNotifier {
   bool get isUpdatingPassword => _isUpdatingPassword;
   bool get isAddRoleToUser => _isAddRoleToUser;
   bool get isRemoveRoleFromUser => _isRemoveRoleFromUser;
+
+  String get fullName => _fullName;
+  String get username => _username;
+  String get email => _email;
+  String get password => _password;
+  String get confirmPassword => _confirmPassword;
+  bool get isPasswordVisible => _isPasswordVisible;
+
+  // VALIDATION
+/*   bool get canSubmit =>
+      _email.isNotEmpty &&
+      _password.length >= 6 &&
+      _password == _confirmPassword; */
+
+  // ACTIONS
+  void fullname(String value) {
+    _fullName = value;
+    notifyListeners(); // ← Reconstruction automatique du widget
+  }
+
+  void nomutilisateur(String value) {
+    _username = value;
+    notifyListeners();
+  }
+
+  void mail(String value) {
+    _email = value;
+    notifyListeners();
+  }
+
+  void motdepasse(String value) {
+    _password = value;
+    notifyListeners();
+  }
+
+  void confirmepwd(String value) {
+    _confirmPassword = value;
+    notifyListeners();
+  }
+
+  void togglePasswordVisibility() {
+    _isPasswordVisible = !_isPasswordVisible;
+    notifyListeners();
+  }
 
   // Getters for specific errors
   /* String get createUserError => _createUserError;
