@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart'; // Import les bases de Flutter, dont ChangeNotifier
+import 'package:mymobileproject/model/role_model.dart';
 import 'package:mymobileproject/model/user_model.dart';
 import 'package:mymobileproject/service/user_service.dart';
 
@@ -32,12 +33,14 @@ class UserProvider with ChangeNotifier {
   bool _isAddRoleToUser = false; // Adding role to user in progress
   bool _isRemoveRoleFromUser = false; // Remove role from user in progress
 
-  String _fullName = '';
+  String _firstName = '';
+  String _lastName = '';
   String _username = '';
   String _email = '';
   String _password = '';
   String _confirmPassword = '';
   bool _isPasswordVisible = false;
+  late Role _role;
 
   // Specific error messages
   /* String _createUserError = '';
@@ -65,23 +68,23 @@ class UserProvider with ChangeNotifier {
   bool get isAddRoleToUser => _isAddRoleToUser;
   bool get isRemoveRoleFromUser => _isRemoveRoleFromUser;
 
-  String get fullName => _fullName;
+  String get firstName => _firstName;
+  String get lastName => _lastName;
   String get username => _username;
   String get email => _email;
   String get password => _password;
   String get confirmPassword => _confirmPassword;
   bool get isPasswordVisible => _isPasswordVisible;
 
-  // VALIDATION
-/*   bool get canSubmit =>
-      _email.isNotEmpty &&
-      _password.length >= 6 &&
-      _password == _confirmPassword; */
-
   // ACTIONS
-  void fullname(String value) {
-    _fullName = value;
+  void firstname(String value) {
+    _firstName = firstName;
     notifyListeners(); // ← Reconstruction automatique du widget
+  }
+
+  void lastname(String value) {
+    _lastName = lastName;
+    notifyListeners();
   }
 
   void nomutilisateur(String value) {
@@ -391,6 +394,62 @@ class UserProvider with ChangeNotifier {
   // Force data refresh
   Future<void> refreshData() async {
     await loadAllUsers(forceRefresh: true);
+  }
+
+  // ajoutez ces méthodes :
+
+  // Validation
+  bool get isFormValid =>
+      _firstName.isNotEmpty &&
+      _lastName.isNotEmpty &&
+      _username.isNotEmpty &&
+      _email.isNotEmpty &&
+      _password.isNotEmpty &&
+      _password == _confirmPassword &&
+      _password.length >= 6;
+
+  String? get passwordError {
+    if (_password.isNotEmpty && _password.length < 6) {
+      return 'Le mot de passe doit contenir au moins 6 caractères';
+    }
+    if (_confirmPassword.isNotEmpty && _password != _confirmPassword) {
+      return 'Les mots de passe ne correspondent pas';
+    }
+    return null;
+  }
+
+  String? get emailError {
+    if (_email.isNotEmpty && !_email.contains('@')) {
+      return 'Email invalide';
+    }
+    return null;
+  }
+
+  // Méthode pour soumettre l'inscription
+  Future<bool> submitSignup() async {
+    if (!isFormValid) return false;
+
+    final user = User(
+      firstName: _firstName,
+      lastName: _lastName,
+      username: _username,
+      email: _email,
+      password: _password,
+      role: _role,
+    );
+
+    return await createNewUser(user);
+  }
+
+// Reset du formulaire
+  void resetForm() {
+    _firstName = '';
+    _lastName = '';
+    _username = '';
+    _email = '';
+    _password = '';
+    _confirmPassword = '';
+    notifyListeners();
   }
 }
 

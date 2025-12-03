@@ -1,9 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/provider/role_privider.dart';
+import 'package:provider/provider.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/constants.dart';
+import 'package:mymobileproject/model/role_model.dart';
 
-class RoleSection extends StatefulWidget {
+class RoleSection extends StatelessWidget {
+  final ValueChanged<String?> onRoleChanged; // ← ICI
+
+  const RoleSection({
+    super.key,
+    required this.onRoleChanged, // ← ICI
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<RoleProvider>(
+      // ← ICI
+      builder: (context, roleProvider, child) {
+        // Si les rôles ne sont pas encore chargés, on les charge
+        if (roleProvider.roles.isEmpty && !roleProvider.isLoading) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Provider.of<RoleProvider>(context, listen: false).loadAllRoles();
+          });
+        }
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const Label(text: 'Rôle'),
+            const SizeBoxBtwLabelField(),
+            Container(
+              alignment: Alignment.centerLeft,
+              decoration: BoxDecoration(
+                color: kSecondColor,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: const [
+                  BoxShadow(
+                    color: boxshadowColor,
+                    blurRadius: 6,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+                border: Border.all(color: kPrimaryColor, width: 3),
+              ),
+              height: 50,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 5.0),
+                child: roleProvider.isLoading // ← ICI
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: kPrimaryColor,
+                        ),
+                      )
+                    : DropdownButtonFormField<Role>(
+                        value: roleProvider.roles.isNotEmpty
+                            ? roleProvider.roles.first
+                            : null,
+                        iconDisabledColor: kThirdColor,
+                        iconEnabledColor: kPrimaryColor,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: kThirdColor,
+                        ),
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.only(bottom: 10),
+                        ),
+                        onChanged: (Role? value) {
+                          if (value != null) {
+                            onRoleChanged(value.roleName); // ← ICI
+                          }
+                        },
+                        items: roleProvider.roles // ← ICI
+                            .map<DropdownMenuItem<Role>>((Role role) {
+                          return DropdownMenuItem<Role>(
+                            value: role,
+                            child: Text(
+                              role.roleName,
+                              style: const TextStyle(color: kThirdColor),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+/* class RoleSection extends StatefulWidget {
   const RoleSection({super.key});
 
   @override
@@ -73,4 +165,4 @@ class _RoleSectionState extends State<RoleSection> {
       ],
     );
   }
-}
+} */

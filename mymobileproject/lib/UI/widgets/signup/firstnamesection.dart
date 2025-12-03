@@ -5,12 +5,12 @@ import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/constants.dart';
 
-class UsernameSection extends StatelessWidget {
+class FirstNameSection extends StatelessWidget {
   // final TextEditingController controller; // ← ICI
 
-  const UsernameSection({
+  const FirstNameSection({
     super.key,
-    // required this.controller,   // ← ICI
+    //  required this.controller,     // ← ICI
   });
 
   @override
@@ -18,7 +18,7 @@ class UsernameSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(text: "Nom d'utilisateur"),
+        const Label(text: 'Prénom'),
         const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
@@ -36,18 +36,18 @@ class UsernameSection extends StatelessWidget {
           ),
           height: 50,
           child: TextField(
-            //  controller: controller,  // ← ICI
+            // controller: controller,    // ← ICI
             keyboardType: TextInputType.text,
             style: const TextStyle(color: enterTextFieldColor),
             onChanged: (value) {
               Provider.of<UserProvider>(context, listen: false)
-                  .nomutilisateur(value); // ← ICI
+                  .firstname(value); // ← ICI
             },
             decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 11),
               prefixIcon: Icon(Icons.person, color: kPrimaryColor),
-              hintText: 'Nom d\'utilisateur',
+              hintText: 'Prénom',
               hintStyle: TextStyle(color: kPrimaryColor, fontSize: 12),
             ),
           ),
@@ -57,20 +57,20 @@ class UsernameSection extends StatelessWidget {
   }
 }
 
-/* class UsernameSection extends StatefulWidget {
-  const UsernameSection({super.key});
+/* class FullNameSection extends StatefulWidget {
+  const FullNameSection({super.key});
 
   @override
-  State<UsernameSection> createState() => _UsernameSectionState();
+  State<FullNameSection> createState() => _FullNameSectionState();
 }
 
-class _UsernameSectionState extends State<UsernameSection> {
+class _FullNameSectionState extends State<FullNameSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(text: "Nom d'utilisateur"),
+        const Label(text: 'Nom complet'),
         const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
@@ -92,11 +92,12 @@ class _UsernameSectionState extends State<UsernameSection> {
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 11),
                 prefixIcon: Icon(Icons.person, color: kPrimaryColor),
-                hintText: 'Nom d\'utilisateur',
+                hintText: 'Nom & prénom',
                 hintStyle: TextStyle(color: kPrimaryColor, fontSize: 12)),
           ),
         )
       ],
     );
   }
-} */
+}
+ */

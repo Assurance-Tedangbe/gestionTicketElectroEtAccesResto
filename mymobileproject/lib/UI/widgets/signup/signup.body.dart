@@ -4,7 +4,8 @@ import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 import 'package:mymobileproject/UI/widgets/signup/checksignin.btn.dart';
 import 'package:mymobileproject/UI/widgets/signup/confirmpwdsection.dart';
 import 'package:mymobileproject/UI/widgets/signup/emailsection.dart';
-import 'package:mymobileproject/UI/widgets/signup/fullnamesection.dart';
+import 'package:mymobileproject/UI/widgets/signup/firstnamesection.dart';
+import 'package:mymobileproject/UI/widgets/signup/lastnamesection.dart';
 import 'package:mymobileproject/UI/widgets/signup/passwordsection.dart';
 import 'package:mymobileproject/UI/widgets/signup/roleSection.dart';
 import 'package:mymobileproject/UI/widgets/signup/signup.Btn.dart';
@@ -25,17 +26,19 @@ class SignupBody extends StatelessWidget {
           children: <Widget>[
             PageIconTemplate(iconData: Icons.person_add),
             SizedBox(height: 5),
-            FullNameSection(),
+            FirstNameSection(), //controller: controller),
             SizeboxHeightSession(),
-            UsernameSection(),
+            LastNameSection(), //controller: controller),
             SizeboxHeightSession(),
-            RoleSection(),
+            UsernameSection(), //controller: controller),
             SizeboxHeightSession(),
-            EmailSection(),
+            // RoleSection(onRoleChanged: (String? value) {  },),
             SizeboxHeightSession(),
-            PasswordSection(),
+            EmailSection(), //controller: controller),
             SizeboxHeightSession(),
-            ConfirmPwdSection(),
+            PasswordSection(), //controller: controller),
+            SizeboxHeightSession(),
+            ConfirmPwdSection(), //controller: controller),
             SignupBtn(),
             CheckSigninBtn()
           ],
