@@ -5,18 +5,22 @@ import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/constants.dart';
 
+/*
+  Widget pour le champ "Mot de passe" avec fonctionnalité de visibilité.
+  Gère dynamiquement l'affichage/masquage du mot de passe.
+*/
 class PasswordSection extends StatelessWidget {
-  //final TextEditingController controller;      // ← ICI
+  final TextEditingController controller; // ← ICI
 
   const PasswordSection({
     super.key,
-    //  required this.controller,     // ← ICI
+    required this.controller, // ← ICI
   });
 
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(
-      // ← ICI
+      // Consumer permet de réagir aux changements du Provider // ← ICI
       builder: (context, userProvider, child) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,11 +43,14 @@ class PasswordSection extends StatelessWidget {
               ),
               height: 50,
               child: TextField(
-                // controller: controller,     // ← ICI
-                keyboardType: TextInputType.visiblePassword,
-                obscureText: !userProvider.isPasswordVisible, // ← ICI
+                controller: controller, // ← ICI
+                keyboardType:
+                    TextInputType.visiblePassword, // Clavier pour mot de passe
+                obscureText: !userProvider
+                    .isPasswordVisible, // Masque le texte si false  ← ICI
                 style: const TextStyle(color: enterTextFieldColor),
                 onChanged: (value) {
+                  // Met à jour le mot de passe dans le Provider
                   userProvider.motdepasse(value); // ← ICI
                 },
                 decoration: InputDecoration(
@@ -54,18 +61,23 @@ class PasswordSection extends StatelessWidget {
                     color: kPrimaryColor,
                     fontSize: 12,
                   ),
+
+                  // Bouton pour afficher/masquer le mot de passe
                   suffixIcon: IconButton(
                     icon: Icon(
+                      // Change l'icône selon l'état de visibilité
                       userProvider.isPasswordVisible // ← ICI
                           ? Icons.visibility
                           : Icons.visibility_off,
                       color: kPrimaryColor,
                     ),
                     onPressed: () {
+                      // Bascule l'état de visibilité via le Provider
                       userProvider.togglePasswordVisibility(); // ← ICI
                     },
                   ),
                   border: InputBorder.none,
+                  // Affichage des erreurs de validation
                   errorText: userProvider.passwordError, // ← ICI
                 ),
               ),

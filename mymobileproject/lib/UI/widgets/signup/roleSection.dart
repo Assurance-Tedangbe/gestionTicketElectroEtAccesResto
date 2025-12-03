@@ -6,6 +6,10 @@ import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart'
 import 'package:mymobileproject/constants.dart';
 import 'package:mymobileproject/model/role_model.dart';
 
+/*
+  Widget pour la sélection du rôle avec données chargées depuis l'API.
+  Utilise le RoleProvider pour récupérer la liste des rôles disponibles.
+*/
 class RoleSection extends StatelessWidget {
   final ValueChanged<String?> onRoleChanged; // ← ICI
 
@@ -17,9 +21,9 @@ class RoleSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<RoleProvider>(
-      // ← ICI
+      // Consumer permet de réagir aux changements du Provider  // ← ICI
       builder: (context, roleProvider, child) {
-        // Si les rôles ne sont pas encore chargés, on les charge
+        // Vérifie si les rôles sont chargés, sinon les charge
         if (roleProvider.roles.isEmpty && !roleProvider.isLoading) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Provider.of<RoleProvider>(context, listen: false).loadAllRoles();
@@ -49,13 +53,15 @@ class RoleSection extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 5.0),
                 child: roleProvider.isLoading // ← ICI
-                    ? const Center(
+                    ? // Affiche un indicateur de chargement pendant le chargement
+                    const Center(
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
                           color: kPrimaryColor,
                         ),
                       )
-                    : DropdownButtonFormField<Role>(
+                    : // Affiche la liste déroulante une fois les données chargées
+                    DropdownButtonFormField<Role>(
                         value: roleProvider.roles.isNotEmpty
                             ? roleProvider.roles.first
                             : null,
@@ -73,6 +79,9 @@ class RoleSection extends StatelessWidget {
                         onChanged: (Role? value) {
                           if (value != null) {
                             onRoleChanged(value.roleName); // ← ICI
+                            // Ici, vous pouvez stocker le rôle sélectionné
+                            // Ex: Provider.of<UserProvider>(context, listen: false).selectRole(value);
+                            print('Rôle sélectionné: ${value.roleName}');
                           }
                         },
                         items: roleProvider.roles // ← ICI

@@ -6,11 +6,11 @@ import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart'
 import 'package:mymobileproject/constants.dart';
 
 class UsernameSection extends StatelessWidget {
-  // final TextEditingController controller; // ← ICI
+  final TextEditingController controller; // ← ICI
 
   const UsernameSection({
     super.key,
-    // required this.controller,   // ← ICI
+    required this.controller, // ← ICI
   });
 
   @override
@@ -19,7 +19,11 @@ class UsernameSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Label(text: "Nom d'utilisateur"),
+
+        // Espacement entre le label et le champ
         const SizeBoxBtwLabelField(),
+
+        // Container stylisé pour le champ de saisie
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
@@ -36,10 +40,11 @@ class UsernameSection extends StatelessWidget {
           ),
           height: 50,
           child: TextField(
-            //  controller: controller,  // ← ICI
-            keyboardType: TextInputType.text,
+            controller: controller, // ← ICI
+            keyboardType: TextInputType.text, // Clavier standard
             style: const TextStyle(color: enterTextFieldColor),
             onChanged: (value) {
+              // Met à jour le nom d'utilisateur dans le Provider
               Provider.of<UserProvider>(context, listen: false)
                   .nomutilisateur(value); // ← ICI
             },

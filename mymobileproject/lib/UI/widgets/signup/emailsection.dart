@@ -5,18 +5,22 @@ import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/constants.dart';
 
+/*
+  Widget pour le champ "Email" avec validation en temps réel.
+  Utilise Consumer pour réagir aux changements d'état du Provider.
+*/
 class EmailSection extends StatelessWidget {
-  // final TextEditingController controller;   // ← ICI
+  final TextEditingController controller; // ← ICI
 
   const EmailSection({
     super.key,
-    //  required this.controller,    // ← ICI
+    required this.controller, // ← ICI
   });
 
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(
-      // ← ICI
+      // Consumer permet de réagir aux changements du Provider  // ← ICI
       builder: (context, userProvider, child) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,10 +43,12 @@ class EmailSection extends StatelessWidget {
               ),
               height: 50,
               child: TextField(
-                // controller: controller,   // ← ICI
-                keyboardType: TextInputType.emailAddress,
+                controller: controller, // ← ICI
+                keyboardType:
+                    TextInputType.emailAddress, // Clavier optimisé pour emails
                 style: const TextStyle(color: enterTextFieldColor),
                 onChanged: (value) {
+                  // Met à jour l'email dans le Provider
                   userProvider.mail(value); // ← ICI
                 },
                 decoration: InputDecoration(
@@ -54,6 +60,8 @@ class EmailSection extends StatelessWidget {
                     color: kPrimaryColor,
                     fontSize: 12,
                   ),
+
+                  // Affichage conditionnel des erreurs de validation
                   errorText: userProvider.emailError, // ← ICI
                 ),
               ),
