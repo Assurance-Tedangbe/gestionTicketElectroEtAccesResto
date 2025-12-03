@@ -11,6 +11,8 @@ class LastNameSection extends StatelessWidget {
   const LastNameSection({super.key, required this.controller // ← ICI
       });
 
+  /* Consumer n'est pas utilisé QUAND ON A BESOIN SEULEMENT D'ÉCRIRE DANS LE PROVIDER */
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,6 +45,7 @@ class LastNameSection extends StatelessWidget {
             style: const TextStyle(color: enterTextFieldColor),
             onChanged: (value) {
               // Met à jour le nom d'utilisateur dans le Provider
+              // ↓ Seulement un appel pour écrire dans le Provider
               Provider.of<UserProvider>(context, listen: false)
                   .lastname(value); // ← ICI
             },

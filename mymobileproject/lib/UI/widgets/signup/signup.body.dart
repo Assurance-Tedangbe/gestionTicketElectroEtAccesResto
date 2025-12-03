@@ -15,7 +15,12 @@ import 'package:mymobileproject/UI/widgets/updateUser/pageIconTemplate.dart';
 /*
   Widget principal qui organise tous les champs du formulaire d'inscription.
   Maintenant tous les sous-widgets sont des StatelessWidget dynamisés.
-*/
+  StatefulWidget car GESTION DES TextEditingController (Raison principale), 
+  Nettoyage obligatoire pour éviter les memory leaks, État local pour le rôle sélectionné
+
+  Architecture propre : Le parent (SignupBody) gère les contrôleurs
+   Les enfants (widgets de champs) les reçoivent en paramètre
+   Séparation des responsabilités claire */
 class SignupBody extends StatefulWidget {
   const SignupBody({super.key});
 
@@ -23,7 +28,9 @@ class SignupBody extends StatefulWidget {
   State<SignupBody> createState() => _SignupBodyState();
 }
 
+// Le PARENT gère la création/destruction
 class _SignupBodyState extends State<SignupBody> {
+  // 1. Création du contrôleur
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
@@ -31,10 +38,14 @@ class _SignupBodyState extends State<SignupBody> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+
+  // État local pour le rôle sélectionné
   String? _selectedRole;
 
   @override
   void dispose() {
+    // Nettoyage obligatoire pour éviter les memory leaks
+    // 2. Libérer le contrôleur lorsque le widget est détruit
     _firstNameController.dispose();
     _lastNameController.dispose();
     _usernameController.dispose();
@@ -49,8 +60,12 @@ class _SignupBodyState extends State<SignupBody> {
     Navigator.of(context).pushReplacementNamed('/login');
   }
 
+  /* État local pour le rôle:Le rôle sélectionné est un état local temporaire
+     Pas besoin de le mettre dans le Provider global
+     setState() est parfait pour ça */
   void _onRoleChanged(String? role) {
     setState(() {
+      // ← Besoin de setState pour reconstruire
       _selectedRole = role;
     });
     // Vous pouvez aussi stocker le rôle dans le UserProvider si nécessaire
@@ -70,7 +85,7 @@ class _SignupBodyState extends State<SignupBody> {
             const PageIconTemplate(iconData: Icons.person_add),
             const SizedBox(height: 5),
             FirstNameSection(
-              controller: _firstNameController,
+              controller: _firstNameController, // PASSAGE ou Injection
             ),
             const SizeboxHeightSession(),
             LastNameSection(controller: _lastNameController),
@@ -87,7 +102,7 @@ class _SignupBodyState extends State<SignupBody> {
             ConfirmPwdSection(controller: _confirmPasswordController),
             const SizeboxHeightSession(),
             // Bouton de soumission (activé/désactivé dynamiquement)
-            //SignupBtn(onSignupSuccess: _onSignupSuccess),
+            // SignupBtn(onSignupSuccess: _onSignupSuccess),
             const CheckSigninBtn(),
           ],
         ),

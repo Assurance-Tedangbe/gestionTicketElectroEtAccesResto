@@ -15,6 +15,9 @@ class SignupBtn extends StatelessWidget {
     required this.onSignupSuccess, // ← ICI
   });
 
+  /* Consumer est utilisé QUAND ON A BESOIN DE "LIRE" DES DONNÉES DYNAMIQUES
+     Ces widget a besoin d'accéder à des données dynamiques du Provider  */
+
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(

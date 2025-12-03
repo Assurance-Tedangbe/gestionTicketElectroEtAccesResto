@@ -12,13 +12,18 @@ import 'package:mymobileproject/constants.dart';
   - Une gestion d'état centralisée
   - Une meilleure testabilité
 */
+
+// L'ENFANT utilise seulement
 class FirstNameSection extends StatelessWidget {
-  final TextEditingController controller; // ← ICI
+  final TextEditingController
+      controller; // ← ICI : UTILISATION SEULEMENT(REÇU EN PARAMÈTRE)
 
   const FirstNameSection({
     super.key,
-    required this.controller, // ← ICI
+    required this.controller, // ← ICI :  ← NE LE CRÉE PAS, LE REÇOIT
   });
+
+  /* Consumer n'est pas utilisé QUAND ON A BESOIN SEULEMENT D'ÉCRIRE DANS LE PROVIDER */
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +54,13 @@ class FirstNameSection extends StatelessWidget {
           ),
           height: 50, // Hauteur fixe
           child: TextField(
-            controller: controller, // ← ICI
+            controller:
+                controller, // ← ICI :UTILISATION: 2. Lier le contrôleur au TextField
             keyboardType: TextInputType.text, // Type de clavier texte
             style: const TextStyle(color: enterTextFieldColor),
             onChanged: (value) {
               // Appel au Provider pour mettre à jour l'état
+              // ↓ Seulement un appel pour écrire dans le Provider
               Provider.of<UserProvider>(context, listen: false)
                   .firstname(value); // ← ICI
             },

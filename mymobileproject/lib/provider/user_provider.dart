@@ -76,14 +76,14 @@ class UserProvider with ChangeNotifier {
   String get confirmPassword => _confirmPassword;
   bool get isPasswordVisible => _isPasswordVisible;
 
-  // ACTIONS
+  // ACTIONS - SETTERS
   void firstname(String value) {
-    _firstName = firstName;
+    _firstName = value;
     notifyListeners(); // ← Reconstruction automatique du widget
   }
 
   void lastname(String value) {
-    _lastName = lastName;
+    _lastName = value;
     notifyListeners();
   }
 

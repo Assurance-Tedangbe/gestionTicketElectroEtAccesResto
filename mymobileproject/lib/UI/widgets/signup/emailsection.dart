@@ -17,6 +17,10 @@ class EmailSection extends StatelessWidget {
     required this.controller, // ← ICI
   });
 
+/* Consumer est utilisé QUAND ON A BESOIN DE "LIRE" DES DONNÉES DYNAMIQUES
+   ce widget a besoin d'accéder à des données dynamiques du Provider :
+   userProvider.emailError → Validation en temps réel */
+
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(

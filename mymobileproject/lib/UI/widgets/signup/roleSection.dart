@@ -18,6 +18,10 @@ class RoleSection extends StatelessWidget {
     required this.onRoleChanged, // ← ICI
   });
 
+  /* Consumer est utilisé QUAND ON A BESOIN DE "LIRE" DES DONNÉES DYNAMIQUES
+     Ce widget a besoin d'accéder à des données dynamiques du Provider :
+     roleProvider.roles  */
+
   @override
   Widget build(BuildContext context) {
     return Consumer<RoleProvider>(

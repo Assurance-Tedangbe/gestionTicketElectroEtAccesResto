@@ -17,6 +17,11 @@ class ConfirmPwdSection extends StatelessWidget {
     required this.controller, // ← ICI
   });
 
+  /* Consumer est utilisé QUAND ON A BESOIN DE "LIRE" DES DONNÉES DYNAMIQUES
+     ce widgets a besoin d'accéder à des données dynamiques du Provider :
+     userProvider.isPasswordVisible → Changement d'état booléen
+     userProvider.passwordError → Messages d'erreur dynamiques */
+
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(
