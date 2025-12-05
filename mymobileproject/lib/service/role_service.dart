@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:mymobileproject/config/network_config.dart';
 import 'package:mymobileproject/model/role_model.dart';
 
 /* 
@@ -14,7 +16,10 @@ class RoleApiService {
   // === CONFIGURATION DE BASE ===
 
   /// URL de base de l'API Spring Boot pour les endpoints des rôles
-  static const String baseUrl = 'http://10.0.2.2:8080/api/roles';
+  //static const String baseUrl = 'http://10.0.2.2:8080/api/roles';
+  // static const String baseUrl = 'http://localhost:8080/api/roles';
+  // Utilisez NetworkConfig.baseUrl
+  final baseUrl = '${NetworkConfig.baseUrl}/api/roles';
 
   /// Headers HTTP pour indiquer qu'on travaille avec du JSON
   static final Map<String, String> headers = {
@@ -32,6 +37,38 @@ class RoleApiService {
 
   // Durée de validité du cache (10 minutes pour les rôles qui changent peu)
   static const Duration cacheDuration = Duration(minutes: 10);
+
+  Future<void> testConnection() async {
+    final url = Uri.parse('http://10.0.2.2:8080/api/roles');
+
+    try {
+      // Test avec HttpClient
+      final httpClient = HttpClient();
+
+      final request = await httpClient.getUrl(url);
+      final response = await request.close();
+
+      print('✅ Connexion réussie - Status: ${response.statusCode}');
+
+      // Test avec ping
+      final result = await Process.run('ping', ['-c', '1', '10.0.2.2']);
+      print('Ping result: ${result.stdout}');
+
+      httpClient.close();
+    } catch (e) {
+      print('❌ Erreur de connexion: $e');
+
+      // Vérifier l'accessibilité du port
+      try {
+        final socket = await Socket.connect('10.0.2.2', 8080,
+            timeout: Duration(seconds: 5));
+        print('✅ Port 8080 accessible');
+        socket.destroy();
+      } catch (e) {
+        print('❌ Port 8082 inaccessible: $e');
+      }
+    }
+  }
 
   // === MÉTHODES PRINCIPALES - CORRESPONDANT AUX ENDPOINTS DU CONTROLLER ===
 
