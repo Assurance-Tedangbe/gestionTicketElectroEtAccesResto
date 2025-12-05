@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:mymobileproject/model/menu_model.dart';
-import 'package:mymobileproject/service/menu_service.dart';
+import 'package:mymobileproject/services/menu_service.dart';
 
 /*
   Rôle Principal: Gestionnaire d'état centralisé pour les menus

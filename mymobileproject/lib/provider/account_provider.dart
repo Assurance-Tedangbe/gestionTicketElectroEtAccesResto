@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:mymobileproject/model/account_model.dart';
-import 'package:mymobileproject/service/account_service.dart';
+import 'package:mymobileproject/services/account_service.dart';
 
 /*
   Rôle Principal: Gestionnaire d'état centralisé pour les comptes

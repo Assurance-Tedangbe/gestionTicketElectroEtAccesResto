@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:mymobileproject/model/role_model.dart';
-import 'package:mymobileproject/service/role_service.dart';
+import 'package:mymobileproject/services/role_service.dart';
 
 /* 
    Gestionnaire d'état COMPLET pour les rôles

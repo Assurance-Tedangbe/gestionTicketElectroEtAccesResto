@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart'; // Import les bases de Flutter, dont ChangeNotifier
 import 'package:mymobileproject/model/role_model.dart';
 import 'package:mymobileproject/model/user_model.dart';
-import 'package:mymobileproject/service/user_service.dart';
+import 'package:mymobileproject/services/user_service.dart';
 
 /*
   Rôle Principal: Gestionnaire d'état entralisé pour les utilisateurs

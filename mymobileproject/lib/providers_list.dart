@@ -6,14 +6,14 @@ import 'package:mymobileproject/provider/menu_provider.dart';
 import 'package:mymobileproject/provider/role_privider.dart';
 import 'package:mymobileproject/provider/ticket_provider.dart';
 import 'package:mymobileproject/provider/user_provider.dart';
-import 'package:mymobileproject/service/account_service.dart';
-import 'package:mymobileproject/service/consulter_menu_service.dart';
-import 'package:mymobileproject/service/credit_service.dart';
-import 'package:mymobileproject/service/debit_service.dart';
-import 'package:mymobileproject/service/menu_service.dart';
-import 'package:mymobileproject/service/role_service.dart';
-import 'package:mymobileproject/service/ticket_service.dart';
-import 'package:mymobileproject/service/user_service.dart';
+import 'package:mymobileproject/services/account_service.dart';
+import 'package:mymobileproject/services/consulter_menu_service.dart';
+import 'package:mymobileproject/services/credit_service.dart';
+import 'package:mymobileproject/services/debit_service.dart';
+import 'package:mymobileproject/services/menu_service.dart';
+import 'package:mymobileproject/services/role_service.dart';
+import 'package:mymobileproject/services/ticket_service.dart';
+import 'package:mymobileproject/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 List<ChangeNotifierProvider> getProviders() {

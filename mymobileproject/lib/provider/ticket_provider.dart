@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mymobileproject/enums/ticket_status.dart';
 import 'package:mymobileproject/enums/ticket_type.dart';
 import 'package:mymobileproject/model/ticket_model.dart';
-import 'package:mymobileproject/service/ticket_service.dart';
+import 'package:mymobileproject/services/ticket_service.dart';
 
 /*
   Rôle Principal: Gestionnaire d'état centralisé pour les tickets

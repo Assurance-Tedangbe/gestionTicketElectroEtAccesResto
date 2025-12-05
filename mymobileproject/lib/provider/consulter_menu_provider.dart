@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:mymobileproject/model/consulter_menu_model.dart';
 import 'package:mymobileproject/model/menu_model.dart';
-import 'package:mymobileproject/service/consulter_menu_service.dart';
+import 'package:mymobileproject/services/consulter_menu_service.dart';
 
 /*
   Rôle Principal: Gestionnaire d'état centralisé pour les consultations de menus

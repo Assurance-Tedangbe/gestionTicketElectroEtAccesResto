@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart'; // "Importe les bases de Flutter, dont ChangeNotifier"
 import 'package:mymobileproject/model/credit_model.dart';
-import 'package:mymobileproject/service/credit_service.dart';
+import 'package:mymobileproject/services/credit_service.dart';
 
 /*
   Rôle Principal: Gestionnaire d'état centralisé pour les crédits

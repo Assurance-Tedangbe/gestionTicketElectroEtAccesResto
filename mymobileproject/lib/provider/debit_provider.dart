@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart'; // "Importe les bases de Flutter, dont ChangeNotifier"
 import 'package:mymobileproject/model/debit_model.dart';
-import 'package:mymobileproject/service/debit_service.dart';
+import 'package:mymobileproject/services/debit_service.dart';
 
 /*
   Rôle Principal: Gestionnaire d'état centralisé pour les débits
