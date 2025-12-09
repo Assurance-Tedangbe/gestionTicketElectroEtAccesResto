@@ -1,9 +1,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mymobileproject">
+    package="com.example.mymobileproject"
+    xmlns:tools="http://schemas.android.com/tools"> <!-- Important: outils de build -->
+
+   <!-- ============ SECTION 1: PERMISSIONS RÉSEAU ============ -->
+    <!-- Ces permissions sont OBLIGATOIRES pour accéder au réseau -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- INTERNET: Permet à l'application d'ouvrir des sockets réseau -->
+    
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- ACCESS_NETWORK_STATE: Permet de vérifier l'état du réseau -->
+    
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- ACCESS_WIFI_STATE: Permet de vérifier l'état WiFi --> 
+
    <application
         android:label="mymobileproject"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+   
+        android:usesCleartextTraffic="true"
+        
+        android:networkSecurityConfig="@xml/network_security_config"
+        
+        tools:targetApi="28"> 
+        
         <activity
             android:name=".MainActivity"
             android:exported="true"

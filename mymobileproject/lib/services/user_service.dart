@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mymobileproject/config/network_config.dart';
+import 'package:mymobileproject/global_variables.dart';
 import 'package:mymobileproject/model/role_model.dart';
 import 'package:mymobileproject/model/user_model.dart';
 
@@ -18,6 +19,7 @@ class UserApiService {
   //static const String baseUrl = 'http://localhost:8080/api/users';
   // Utilisez NetworkConfig.baseUrl
   final baseUrl = '${NetworkConfig.baseUrl}/api/users';
+  // String baseUrl = "${GlobalData.host}/api/users";
 
   // Configure HTTP headers for all requests
   static final Map<String, String> headers = {

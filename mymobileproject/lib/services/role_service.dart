@@ -13,13 +13,11 @@ import 'package:mymobileproject/model/role_model.dart';
     - Transformation des données
  */
 class RoleApiService {
-  // === CONFIGURATION DE BASE ===
-
-  /// URL de base de l'API Spring Boot pour les endpoints des rôles
   //static const String baseUrl = 'http://10.0.2.2:8080/api/roles';
   // static const String baseUrl = 'http://localhost:8080/api/roles';
   // Utilisez NetworkConfig.baseUrl
   final baseUrl = '${NetworkConfig.baseUrl}/api/roles';
+  // String baseUrl = "${GlobalData.host}/api/roles";
 
   /// Headers HTTP pour indiquer qu'on travaille avec du JSON
   static final Map<String, String> headers = {
@@ -131,14 +129,20 @@ class RoleApiService {
         headers: headers,
       );
 
+      print(' Status Code: ${response.statusCode}');
+      print(' Response Body (RAW): ${response.body}');
+      print(' Response Body Length: ${response.body.length}');
+
       // Vérification du code HTTP 200 (OK) comme dans le Controller
       if (response.statusCode == 200) {
+        print(' 200 OK - succès de la récupération des rôles');
+
         // JSON response → Role object list
         final List<dynamic> jsonList = json.decode(response.body);
         _cachedRoles = jsonList.map((json) => Role.fromJson(json)).toList();
         _lastFetchTime = DateTime.now(); // Mise à jour du timestamp
 
-        print("✅ ${_cachedRoles.length} rôles récupérés et mis en cache");
+        print("${_cachedRoles.length} rôles récupérés et mis en cache");
         return _cachedRoles;
       } else {
         throw Exception(

@@ -12,7 +12,7 @@ class Role {
   factory Role.fromJson(Map<String, dynamic> json) {
     return Role(
       roleId: json['roleId'], // Extracts the role ID from the JSON
-      roleName: json['roleName'],
+      roleName: json['name'], // Extracts the role name from the JSON
     );
   }
 

@@ -1,11 +1,9 @@
 // Fichier: lib/config/network_config.dart
-
-import 'dart:io'; // Pour Platform.isAndroid, Platform.isIOS
-import 'package:flutter/foundation.dart'; // Pour kIsWeb
+import 'dart:io';  // Pour Platform.isAndroid, Platform.isIOS
+import 'package:flutter/foundation.dart';  // Pour kIsWeb
 
 /*
  * CLASSE DE CONFIGURATION RÉSEAU
- * 
  * Cette classe centralise toutes les configurations liées au réseau.
  * Elle retourne l'URL correcte selon la plateforme d'exécution.
  */
@@ -16,7 +14,7 @@ class NetworkConfig {
     // Cas 1: Application web (depuis un navigateur)
     if (kIsWeb) {
       print('🌐 Plateforme: Web - Utilisation de localhost');
-      return 'http://localhost:8080'; // Web accède directement au localhost
+      return 'http://localhost:8080';  // Web accède directement au localhost
     }
 
     // Cas 2: Application Android (émulateur ou appareil réel)
@@ -64,9 +62,9 @@ class NetworkConfig {
   /// Headers HTTP communs à toutes les requêtes
   static Map<String, String> get defaultHeaders {
     return {
-      'Content-Type': 'application/json', // Nous envoyons du JSON
-      'Accept': 'application/json', // Nous attendons du JSON en retour
-      'Connection': 'keep-alive', // Maintenir la connexion ouverte
+      'Content-Type': 'application/json',  // Nous envoyons du JSON
+      'Accept': 'application/json',        // Nous attendons du JSON en retour
+      'Connection': 'keep-alive',          // Maintenir la connexion ouverte
     };
   }
 
@@ -89,43 +87,3 @@ class NetworkConfig {
     ''');
   }
 }
-/* // Fichier: lib/config/network_config.dart
-
-import 'dart:io'; // Pour Platform.isAndroid, Platform.isIOS
-
-import 'package:flutter/foundation.dart'; // Pour kIsWeb
-
-/*
- * CLASSE DE CONFIGURATION RÉSEAU
- * 
- * Cette classe détermine dynamiquement l'URL de l'API
- * selon la plateforme d'exécution (Android, iOS, Web, etc.)
- */
-class NetworkConfig {
-  static String get baseUrl {
-    // CAS 1: Application WEB (dans un navigateur)
-    if (kIsWeb) {
-      return 'http://localhost:8080';
-      // Pourquoi localhost ?
-      // Car le navigateur web tourne SUR LA MÊME MACHINE que Spring Boot
-    } else if (Platform.isAndroid) {
-      // CAS 2: Application ANDROID (émulateur ou appareil réel)
-      // ADRESSE CRITIQUE pour l'émulateur Android
-      return 'http://10.0.2.2:8080';
-      // Pourquoi 10.0.2.2 ?
-      // C'est l'adresse SPÉCIALE que l'émulateur Android utilise
-      // pour accéder à la machine hôte (votre ordinateur)
-    } else if (Platform.isIOS) {
-      // CAS 3: Application iOS (simulateur ou appareil réel)
-      return 'http://localhost:8080';
-      // Pourquoi localhost ?
-      // Le simulateur iOS partage le réseau avec la machine hôte
-    } else {
-      // CAS 4: Desktop ou autre plateforme
-      return 'http://localhost:8080';
-    }
-  }
-
-  // Le reste de votre configuration...
-}
- */
