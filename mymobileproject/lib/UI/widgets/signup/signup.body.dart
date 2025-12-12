@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mymobileproject/UI/pages/login.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
 import 'package:mymobileproject/UI/widgets/signup/checksignin.btn.dart';
@@ -11,6 +12,9 @@ import 'package:mymobileproject/UI/widgets/signup/roleSection.dart';
 import 'package:mymobileproject/UI/widgets/signup/signup.Btn.dart';
 import 'package:mymobileproject/UI/widgets/signup/usernamesection.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/pageIconTemplate.dart';
+import 'package:mymobileproject/model/role_model.dart';
+import 'package:mymobileproject/provider/user_provider.dart';
+import 'package:provider/provider.dart';
 
 /*
   Widget principal qui organise tous les champs du formulaire d'inscription.
@@ -39,8 +43,11 @@ class _SignupBodyState extends State<SignupBody> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
+  // ⭐ CHANGEMENT : Stockez l'objet Role complet, pas juste le nom
+  Role? _selectedRole;
+
   // État local pour le rôle sélectionné
-  String? _selectedRole;
+  // String? _selectedRole;
 
   @override
   void dispose() {
@@ -57,18 +64,29 @@ class _SignupBodyState extends State<SignupBody> {
 
   void _onSignupSuccess() {
     // Navigation vers l'écran de connexion ou d'accueil
-    Navigator.of(context).pushReplacementNamed('/login');
+    // Navigator.of(context).pushReplacementNamed('/login');
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const LoginPage()));
   }
 
   /* État local pour le rôle:Le rôle sélectionné est un état local temporaire
      Pas besoin de le mettre dans le Provider global
      setState() est parfait pour ça */
-  void _onRoleChanged(String? role) {
+  // ⭐ CHANGEMENT : Accepte un objet Role, pas un String
+  void _onRoleChanged(Role? role) {
     setState(() {
       // ← Besoin de setState pour reconstruire
       _selectedRole = role;
     });
+
     // Vous pouvez aussi stocker le rôle dans le UserProvider si nécessaire
+    // ⭐ IMPORTANT : Transmettez aussi au UserProvider
+    if (role != null) {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.setRole(role);
+      print(
+          '🔄 Rôle transmis au provider: ${role.roleName} (ID: ${role.roleId})');
+    }
   }
 
   @override
@@ -84,26 +102,57 @@ class _SignupBodyState extends State<SignupBody> {
             // Icône de la page
             const PageIconTemplate(iconData: Icons.person_add),
             const SizedBox(height: 5),
-            FirstNameSection(
-              controller: _firstNameController, // PASSAGE ou Injection
+
+            // Sections du formulaire avec passage des contrôleurs
+            // ⭐ AJOUT : Connectez les contrôleurs au provider
+            Consumer<UserProvider>(
+              builder: (context, userProvider, child) {
+                return Column(
+                  children: [
+                    FirstNameSection(
+                      controller: _firstNameController, // PASSAGE ou Injection
+                      onChanged: (value) => userProvider.setFirstname(value),
+                    ),
+                    const SizeboxHeightSession(),
+                    LastNameSection(
+                      controller: _lastNameController,
+                      onChanged: (value) => userProvider.setLastname(value),
+                    ),
+                    const SizeboxHeightSession(),
+                    UsernameSection(
+                      controller: _usernameController,
+                      onChanged: (value) => userProvider.setUsername(value),
+                    ),
+                    const SizeboxHeightSession(),
+                    // ⭐ CHANGEMENT : Passez la valeur sélectionnée
+                    RoleSection(
+                      onRoleChanged: _onRoleChanged,
+                      selectedRole: _selectedRole,
+                    ),
+                    const SizeboxHeightSession(),
+                    EmailSection(
+                      controller: _emailController,
+                      onChanged: (value) => userProvider.setEmail(value),
+                    ),
+                    const SizeboxHeightSession(),
+                    PasswordSection(
+                      controller: _passwordController,
+                      onChanged: (value) => userProvider.setPassword(value),
+                    ),
+                    const SizeboxHeightSession(),
+                    ConfirmPwdSection(
+                      controller: _confirmPasswordController,
+                      onChanged: (value) =>
+                          userProvider.setConfirmPassword(value),
+                    ),
+                    const SizeboxHeightSession(),
+                    // Bouton de soumission (activé/désactivé dynamiquement)
+                    SignupBtn(onSignupSuccess: _onSignupSuccess),
+                    const CheckSigninBtn(),
+                  ],
+                );
+              },
             ),
-            const SizeboxHeightSession(),
-            LastNameSection(controller: _lastNameController),
-            const SizeboxHeightSession(),
-            UsernameSection(controller: _usernameController),
-            const SizeboxHeightSession(),
-            // Section Rôle (chargée dynamiquement)
-            RoleSection(onRoleChanged: _onRoleChanged),
-            const SizeboxHeightSession(),
-            EmailSection(controller: _emailController),
-            const SizeboxHeightSession(),
-            PasswordSection(controller: _passwordController),
-            const SizeboxHeightSession(),
-            ConfirmPwdSection(controller: _confirmPasswordController),
-            const SizeboxHeightSession(),
-            // Bouton de soumission (activé/désactivé dynamiquement)
-            // SignupBtn(onSignupSuccess: _onSignupSuccess),
-            const CheckSigninBtn(),
           ],
         ),
       ),

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/provider/user_provider.dart';
-import 'package:provider/provider.dart'; // Pour accéder au Provider
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/constants.dart';
@@ -17,10 +15,12 @@ import 'package:mymobileproject/constants.dart';
 class FirstNameSection extends StatelessWidget {
   final TextEditingController
       controller; // ← ICI : UTILISATION SEULEMENT(REÇU EN PARAMÈTRE)
+  final ValueChanged<String>? onChanged; // ⭐ NOUVEAU
 
   const FirstNameSection({
     super.key,
     required this.controller, // ← ICI :  ← NE LE CRÉE PAS, LE REÇOIT
+    this.onChanged, // ⭐ NOUVEAU
   });
 
   /* Consumer n'est pas utilisé QUAND ON A BESOIN SEULEMENT D'ÉCRIRE DANS LE PROVIDER */
@@ -53,17 +53,18 @@ class FirstNameSection extends StatelessWidget {
                 Border.all(color: kPrimaryColor, width: 3), // Bordure colorée
           ),
           height: 50, // Hauteur fixe
-          child: TextField(
+          child: TextFormField(
             controller:
                 controller, // ← ICI :UTILISATION: 2. Lier le contrôleur au TextField
             keyboardType: TextInputType.text, // Type de clavier texte
             style: const TextStyle(color: enterTextFieldColor),
-            onChanged: (value) {
+            onChanged: onChanged, // ⭐ UTILISÉ ICI
+            /* (value) {
               // Appel au Provider pour mettre à jour l'état
               // ↓ Seulement un appel pour écrire dans le Provider
               Provider.of<UserProvider>(context, listen: false)
                   .firstname(value); // ← ICI
-            },
+            }, */
             decoration: const InputDecoration(
               border: InputBorder.none, // Pas de bordure interne
               contentPadding: EdgeInsets.only(top: 11), // Padding interne

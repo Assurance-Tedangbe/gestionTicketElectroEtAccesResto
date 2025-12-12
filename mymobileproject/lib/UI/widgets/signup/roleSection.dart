@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/provider/role_privider.dart';
+import 'package:mymobileproject/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
@@ -11,11 +12,14 @@ import 'package:mymobileproject/model/role_model.dart';
   Utilise le RoleProvider pour récupérer la liste des rôles disponibles.
 */
 class RoleSection extends StatelessWidget {
-  final ValueChanged<String?> onRoleChanged; // ← ICI
+  // ⭐ CHANGEMENT : Accepte un objet Role, pas un String
+  final ValueChanged<Role?> onRoleChanged; // ← ICI
+  final Role? selectedRole; // ⭐ NOUVEAU : Pour garder la sélection
 
   const RoleSection({
     super.key,
     required this.onRoleChanged, // ← ICI
+    this.selectedRole, // ⭐ NOUVEAU
   });
 
   /* Consumer est utilisé QUAND ON A BESOIN DE "LIRE" DES DONNÉES DYNAMIQUES
@@ -66,6 +70,7 @@ class RoleSection extends StatelessWidget {
                       )
                     : // Affiche la liste déroulante une fois les données chargées
                     DropdownButtonFormField<Role>(
+                        // ⭐ CHANGEMENT : Utilise la valeur sélectionnée
                         value: roleProvider.roles.isNotEmpty
                             ? roleProvider.roles.first
                             : null,
@@ -81,12 +86,23 @@ class RoleSection extends StatelessWidget {
                           contentPadding: EdgeInsets.only(bottom: 10),
                         ),
                         onChanged: (Role? value) {
+                          onRoleChanged(
+                              value); // ⭐ CHANGEMENT : Passe l'objet Role
+
+                          // ⭐ EN PLUS : Mettez à jour le UserProvider
                           if (value != null) {
-                            onRoleChanged(value.roleName); // ← ICI
+                            final userProvider = Provider.of<UserProvider>(
+                                context,
+                                listen: false);
+                            userProvider.setRole(value);
+                            print(
+                                '✅ Rôle sélectionné: ${value.roleName} (ID: ${value.roleId})');
+                          }
+                          /* onRoleChanged(value.roleName); // ← ICI
                             // Ici, vous pouvez stocker le rôle sélectionné
                             // Ex: Provider.of<UserProvider>(context, listen: false).selectRole(value);
                             print('Rôle sélectionné: ${value.roleName}');
-                          }
+                          } */
                         },
                         items: roleProvider.roles // ← ICI
                             .map<DropdownMenuItem<Role>>((Role role) {

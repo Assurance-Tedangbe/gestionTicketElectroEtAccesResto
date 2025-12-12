@@ -11,10 +11,12 @@ import 'package:mymobileproject/constants.dart';
 */
 class PasswordSection extends StatelessWidget {
   final TextEditingController controller; // ← ICI
+  final ValueChanged<String>? onChanged; // ⭐ NOUVEAU
 
   const PasswordSection({
     super.key,
-    required this.controller, // ← ICI
+    required this.controller,
+    this.onChanged, // ← ICI
   });
 
   /* Consumer est utilisé QUAND ON A BESOIN DE "LIRE" DES DONNÉES DYNAMIQUES
@@ -47,17 +49,18 @@ class PasswordSection extends StatelessWidget {
                 border: Border.all(color: kPrimaryColor, width: 3),
               ),
               height: 50,
-              child: TextField(
+              child: TextFormField(
                 controller: controller, // ← ICI
                 keyboardType:
                     TextInputType.visiblePassword, // Clavier pour mot de passe
                 obscureText: !userProvider
                     .isPasswordVisible, // Masque le texte si false  ← ICI
                 style: const TextStyle(color: enterTextFieldColor),
-                onChanged: (value) {
+                onChanged: onChanged, // ⭐ UTILISÉ ICI
+                /* (value) {
                   // Met à jour le mot de passe dans le Provider
                   userProvider.motdepasse(value); // ← ICI
-                },
+                }, */
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(top: 11),
                   prefixIcon: const Icon(Icons.password, color: kPrimaryColor),

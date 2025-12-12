@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/provider/user_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/constants.dart';
 
 class UsernameSection extends StatelessWidget {
   final TextEditingController controller; // ← ICI
+  final ValueChanged<String>? onChanged; // ⭐ NOUVEAU
 
   const UsernameSection({
     super.key,
-    required this.controller, // ← ICI
+    required this.controller,
+    this.onChanged, // ← ICI
   });
 
 /* Consumer n'est pas utilisé QUAND ON A BESOIN SEULEMENT D'ÉCRIRE DANS LE PROVIDER */
@@ -41,16 +41,17 @@ class UsernameSection extends StatelessWidget {
             border: Border.all(color: kPrimaryColor, width: 3),
           ),
           height: 50,
-          child: TextField(
+          child: TextFormField(
             controller: controller, // ← ICI
             keyboardType: TextInputType.text, // Clavier standard
             style: const TextStyle(color: enterTextFieldColor),
-            onChanged: (value) {
+            onChanged: onChanged, // ⭐ UTILISÉ ICI
+            /* (value) {
               // Met à jour le nom d'utilisateur dans le Provider
               // ↓ Seulement un appel pour écrire dans le Provider
               Provider.of<UserProvider>(context, listen: false)
                   .nomutilisateur(value); // ← ICI
-            },
+            }, */
             decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 11),

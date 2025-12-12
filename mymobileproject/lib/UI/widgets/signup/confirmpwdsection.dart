@@ -11,10 +11,12 @@ import 'package:mymobileproject/constants.dart';
 */
 class ConfirmPwdSection extends StatelessWidget {
   final TextEditingController controller; // ← ICI
+  final ValueChanged<String>? onChanged; // ⭐ NOUVEAU
 
   const ConfirmPwdSection({
     super.key,
     required this.controller, // ← ICI
+    this.onChanged, // ← ICI
   });
 
   /* Consumer est utilisé QUAND ON A BESOIN DE "LIRE" DES DONNÉES DYNAMIQUES
@@ -52,10 +54,11 @@ class ConfirmPwdSection extends StatelessWidget {
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: !userProvider.isPasswordVisible, // ← ICI
                 style: const TextStyle(color: enterTextFieldColor),
-                onChanged: (value) {
+                onChanged: onChanged, // ⭐ UTILISÉ ICI
+                /* (value) {
                   // Met à jour la confirmation dans le Provider
                   userProvider.confirmepwd(value); // ← ICI
-                },
+                }, */
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(top: 11),
                   prefixIcon: const Icon(Icons.password, color: kPrimaryColor),

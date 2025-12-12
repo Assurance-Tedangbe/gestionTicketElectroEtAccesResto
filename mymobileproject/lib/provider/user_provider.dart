@@ -40,7 +40,7 @@ class UserProvider with ChangeNotifier {
   String _password = '';
   String _confirmPassword = '';
   bool _isPasswordVisible = false;
-  late Role _role;
+  Role? _role;
 
   // Specific error messages
   /* String _createUserError = '';
@@ -75,40 +75,61 @@ class UserProvider with ChangeNotifier {
   String get password => _password;
   String get confirmPassword => _confirmPassword;
   bool get isPasswordVisible => _isPasswordVisible;
+  Role? get role => _role;
 
   // ACTIONS - SETTERS
-  void firstname(String value) {
+  void setFirstname(String value) {
     _firstName = value;
     notifyListeners(); // ← Reconstruction automatique du widget
   }
 
-  void lastname(String value) {
+  void setLastname(String value) {
     _lastName = value;
     notifyListeners();
   }
 
-  void nomutilisateur(String value) {
+  void setUsername(String value) {
     _username = value;
     notifyListeners();
   }
 
-  void mail(String value) {
+  void setEmail(String value) {
     _email = value;
     notifyListeners();
   }
 
-  void motdepasse(String value) {
+  void setPassword(String value) {
     _password = value;
     notifyListeners();
   }
 
-  void confirmepwd(String value) {
+  void setConfirmPassword(String value) {
     _confirmPassword = value;
     notifyListeners();
   }
 
   void togglePasswordVisibility() {
     _isPasswordVisible = !_isPasswordVisible;
+    notifyListeners();
+  }
+
+  /* void setRole(Role value) {
+    _role = value;
+    print('✅ Rôle sélectionné: ${role?.roleName}');
+    notifyListeners();
+  } */
+  void setRole(Role value) {
+    print('=== setRole appelé ===');
+    print('Valeur reçue: ${value.roleName} (ID: ${value.roleId})');
+    print('Ancien _role: ${_role?.roleName}');
+
+    _role = value;
+
+    print('Nouveau _role: ${_role?.roleName}');
+    print('Rôle ID: ${_role?.roleId}');
+    print('Rôle est null? ${_role == null}');
+    print('=======================');
+
     notifyListeners();
   }
 
@@ -425,21 +446,103 @@ class UserProvider with ChangeNotifier {
     return null;
   }
 
-  // Méthode pour soumettre l'inscription
   Future<bool> submitSignup() async {
-    if (!isFormValid) return false;
+    print('=== DEBUG submitSignup ===');
+    print('1. _firstName: $_firstName');
+    print('2. _role: $_role');
+    print('3. _role?.roleName: ${_role?.roleName}');
+    print('4. _role?.roleId: ${_role?.roleId}');
+    print('==========================');
 
-    final user = User(
+    if (!isFormValid) {
+      _error = 'Veuillez remplir tous les champs correctement';
+      notifyListeners();
+      return false;
+    }
+
+    // Vérifiez que le rôle est sélectionné
+    if (_role == null) {
+      print("❌ ERREUR CRITIQUE: _role est null dans submitSignup!");
+      print("    Cela signifie que setRole() n'a jamais été appelé");
+      _error = 'Veuillez sélectionner un rôle';
+      notifyListeners();
+      return false;
+    }
+
+    try {
+      final user = User(
+        firstName: _firstName,
+        lastName: _lastName,
+        username: _username,
+        email: _email,
+        password: _password,
+        role: _role!,
+      );
+
+      print('🔄 Création de l\'utilisateur avec rôle: ${_role!.roleName}');
+      print('📋 Rôle assigné: ${_role!.roleName}');
+
+      return await createNewUser(user);
+    } catch (e) {
+      _error = 'Erreur lors de l\'inscription: $e';
+      notifyListeners();
+      return false;
+    }
+  }
+
+  /*  // Méthode pour soumettre l'inscription
+  Future<bool> submitSignup() async {
+    if (!isFormValid) {
+      _error = 'Veuillez remplir tous les champs correctement';
+      notifyListeners();
+      return false;
+    }
+
+    // Vérifiez que le rôle est sélectionné
+    if (_role == null) {
+      print("*****Role choisi : ${_role?.roleName} ");
+      _error = 'Veuillez sélectionner un rôle';
+      notifyListeners();
+      return false;
+    }
+
+    try {
+      final user = User(
+        firstName: _firstName,
+        lastName: _lastName,
+        username: _username,
+        email: _email,
+        password: _password,
+        role: _role!, // ! car on a vérifié qu'il n'est pas null
+      );
+
+      print('🔄 Création de l\'utilisateur: ${user.username}');
+      print('📋 Rôle assigné: ${_role!.roleName}');
+
+      final success = await createNewUser(user);
+
+      if (success) {
+        print('✅ Inscription réussie!');
+        resetForm(); // Réinitialise le formulaire après succès
+      }
+
+      return success;
+    } catch (e) {
+      _error = 'Erreur lors de l\'inscription: $e';
+      notifyListeners();
+      return false;
+    }
+    /*  final user = User(
       firstName: _firstName,
       lastName: _lastName,
       username: _username,
       email: _email,
       password: _password,
-      role: _role,
+      role: _role!, // Utilisez ! car on a vérifié qu'il n'est pas null
     );
 
-    return await createNewUser(user);
-  }
+    return await createNewUser(user); */
+  } */
 
 // Reset du formulaire
   void resetForm() {
@@ -449,6 +552,8 @@ class UserProvider with ChangeNotifier {
     _email = '';
     _password = '';
     _confirmPassword = '';
+    _role = null;
+    _error = '';
     notifyListeners();
   }
 }

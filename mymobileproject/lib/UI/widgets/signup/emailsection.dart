@@ -11,10 +11,12 @@ import 'package:mymobileproject/constants.dart';
 */
 class EmailSection extends StatelessWidget {
   final TextEditingController controller; // ← ICI
+  final ValueChanged<String>? onChanged; // ⭐ NOUVEAU
 
   const EmailSection({
     super.key,
-    required this.controller, // ← ICI
+    required this.controller,
+    this.onChanged, // ← ICI
   });
 
 /* Consumer est utilisé QUAND ON A BESOIN DE "LIRE" DES DONNÉES DYNAMIQUES
@@ -46,15 +48,16 @@ class EmailSection extends StatelessWidget {
                 border: Border.all(color: kPrimaryColor, width: 3),
               ),
               height: 50,
-              child: TextField(
+              child: TextFormField(
                 controller: controller, // ← ICI
                 keyboardType:
                     TextInputType.emailAddress, // Clavier optimisé pour emails
                 style: const TextStyle(color: enterTextFieldColor),
-                onChanged: (value) {
+                onChanged: onChanged, // ⭐ UTILISÉ ICI
+                /* (value) {
                   // Met à jour l'email dans le Provider
                   userProvider.mail(value); // ← ICI
-                },
+                }, */
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   contentPadding: const EdgeInsets.only(top: 10),

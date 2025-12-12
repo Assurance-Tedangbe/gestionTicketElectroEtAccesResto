@@ -1,17 +1,14 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mymobileproject/config/network_config.dart';
-import 'package:mymobileproject/global_variables.dart';
 import 'package:mymobileproject/model/role_model.dart';
 import 'package:mymobileproject/model/user_model.dart';
 
-/* 
-  - Service combiné qui gère :
+/*- Service combiné qui gère :
   - Appels HTTP vers l'API Spring Boot: handles all communication with the API
   - Cache simple des données
   - Logique métier légère
-  - Transformation des données 
-*/
+  - Transformation des données */
 class UserApiService {
   /* Use the IP address of the Android emulator (10.0.2.2)
   or your machine's IP address for other emulators/devices. */
