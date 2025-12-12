@@ -38,7 +38,8 @@ class UserApiService {
   Future<User> createUser(User user) async {
     // I will create a user via POST /api/users and return the created user"
     try {
-      print("New user creation: ${user.username}");
+      print('📤 Envoi de la requête POST pour créer un utilisateur');
+      print('📤 Body: ${json.encode(user.toJson())}');
 
       final response = await http.post(
         // I'm trying to send a POST request:
@@ -48,8 +49,14 @@ class UserApiService {
         body: json.encode(user.toJson()), // Converts User object → JSON string
       );
 
+      print('📥 Response Status: ${response.statusCode}');
+      print('📥 Response Headers: ${response.headers}');
+      print('📥 Response Body (RAW): ${response.body}');
+      print('📥 Response Body Length: ${response.body.length}');
+
+      // Vérifiez différents cas
       if (response.statusCode == 201) {
-        final newUser = User.fromJson(json
+        /*  final newUser = User.fromJson(json
             .decode(response.body)); // Converts the JSON response → User object
 
         print("User created with ID: ${newUser.userId}");
@@ -57,12 +64,40 @@ class UserApiService {
         // Cache update
         _cachedUsers.add(newUser);
 
-        return newUser;
+        return newUser; */
+
+        // Si le corps de réponse est vide (null)
+        if (response.body.isEmpty) {
+          print('⚠️ API a répondu avec un corps vide (null)');
+          // Retournez l'utilisateur envoyé avec un ID par défaut
+          return User(
+            userId: 0, // ID temporaire
+            firstName: user.firstName,
+            lastName: user.lastName,
+            username: user.username,
+            email: user.email,
+            password: user.password,
+            role: user.role,
+          );
+        }
+
+        try {
+          // Essayez de parser le JSON
+          final Map<String, dynamic> jsonResponse = json.decode(response.body);
+          print('✅ JSON parsé avec succès: $jsonResponse');
+          return User.fromJson(jsonResponse);
+        } catch (e) {
+          print('❌ Erreur de parsing JSON: $e');
+          // Fallback : retournez l'utilisateur original
+          return user;
+        }
       } else {
-        throw Exception('Erreur création utilisateur: ${response.statusCode}');
+        print('❌ Statut HTTP non attendu: ${response.statusCode}');
+        throw Exception(
+            'Erreur création utilisateur - Code HTTP: ${response.statusCode}');
       }
     } catch (e) {
-      print("Erreur création: $e");
+      //  print("❌ Erreur création: $e");
       throw Exception('Erreur réseau: $e');
     }
   }
