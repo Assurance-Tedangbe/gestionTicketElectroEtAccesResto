@@ -16,6 +16,8 @@ class UserApiService {
   //static const String baseUrl = 'http://localhost:8080/api/users';
   // Utilisez NetworkConfig.baseUrl
   final baseUrl = '${NetworkConfig.baseUrl}/api/users';
+  final authUrl =
+      '${NetworkConfig.baseUrl}/api/auth'; // URL pour l'authentification
   // String baseUrl = "${GlobalData.host}/api/users";
 
   // Configure HTTP headers for all requests
@@ -54,18 +56,7 @@ class UserApiService {
       print('📥 Response Body (RAW): ${response.body}');
       print('📥 Response Body Length: ${response.body.length}');
 
-      // Vérifiez différents cas
       if (response.statusCode == 201) {
-        /*  final newUser = User.fromJson(json
-            .decode(response.body)); // Converts the JSON response → User object
-
-        print("User created with ID: ${newUser.userId}");
-
-        // Cache update
-        _cachedUsers.add(newUser);
-
-        return newUser; */
-
         // Si le corps de réponse est vide (null)
         if (response.body.isEmpty) {
           print('⚠️ API a répondu avec un corps vide (null)');
@@ -83,9 +74,14 @@ class UserApiService {
 
         try {
           // Essayez de parser le JSON
-          final Map<String, dynamic> jsonResponse = json.decode(response.body);
-          print('✅ JSON parsé avec succès: $jsonResponse');
-          return User.fromJson(jsonResponse);
+          final Map<String, dynamic> newUser = json.decode(
+              response.body); // Converts the JSON response → User object
+
+          print('✅ JSON parsé avec succès: $newUser');
+
+          _cachedUsers.add(User.fromJson(newUser));
+
+          return User.fromJson(newUser);
         } catch (e) {
           print('❌ Erreur de parsing JSON: $e');
           // Fallback : retournez l'utilisateur original
@@ -100,6 +96,116 @@ class UserApiService {
       //  print("❌ Erreur création: $e");
       throw Exception('Erreur réseau: $e');
     }
+  }
+
+  // ⭐ NOUVEAU : Méthode de connexion
+  // -------------------------
+  // LOGIN USER (POST /api/auth/login)
+  // -------------------------
+  Future<User> login(String username, String password) async {
+    try {
+      print('🔐 Tentative de connexion pour: $username');
+
+      final response = await http.post(
+        Uri.parse('$authUrl/login'), // ⭐ Ajustez l'URL selon votre API
+        headers: headers,
+        body: json.encode({
+          'username': username,
+          'password': password,
+        }),
+      );
+
+      print('📥 Login Response Status: ${response.statusCode}');
+      print('📥 Login Response Body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+
+        // ⭐ Ajustez selon la réponse de votre API
+        // Si votre API retourne directement un objet User
+        if (responseData.containsKey('userId')) {
+          final user = User.fromJson(responseData);
+          print('✅ Connexion réussie, utilisateur: ${user.username}');
+          return user;
+        }
+        // Si votre API retourne un token et des infos utilisateur séparément
+        else if (responseData.containsKey('token') &&
+            responseData.containsKey('user')) {
+          final token = responseData['token'] as String;
+          final userData = responseData['user'] as Map<String, dynamic>;
+          final user = User.fromJson(userData);
+
+          // ⭐ Vous pourriez stocker le token pour les futures requêtes
+          // _saveToken(token);
+
+          print(
+              '✅ Connexion réussie avec token, utilisateur: ${user.username}');
+          return user;
+        }
+        // Si votre API a un format différent
+        else {
+          print(
+              '⚠️ Format de réponse non reconnu, tentative d\'extraction des données utilisateur');
+
+          // Essayez de créer un utilisateur avec les données disponibles
+          final user = User(
+            userId: responseData['id'] ?? responseData['userId'] ?? 0,
+            username: responseData['username'] ?? username,
+            email: responseData['email'] ?? '',
+            firstName:
+                responseData['firstName'] ?? responseData['firstname'] ?? '',
+            lastName:
+                responseData['lastName'] ?? responseData['lastname'] ?? '',
+            password: '', // Ne pas stocker le mot de passe
+            role: Role(
+              roleId: responseData['roleId'] ??
+                  responseData['role']?['roleId'] ??
+                  0,
+              roleName: responseData['roleName'] ??
+                  responseData['role']?['name'] ??
+                  'USER',
+            ),
+          );
+
+          return user;
+        }
+      } else if (response.statusCode == 401) {
+        throw Exception('Identifiants incorrects');
+      } else if (response.statusCode == 404) {
+        throw Exception('Utilisateur non trouvé');
+      } else {
+        throw Exception('Erreur de connexion: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('❌ Erreur lors de la connexion: $e');
+      rethrow;
+    }
+  }
+
+  // ⭐ NOUVEAU : Méthode pour sauvegarder le token (optionnel)
+  void _saveToken(String token) {
+    // Vous pouvez utiliser SharedPreferences pour stocker le token
+    // Exemple avec shared_preferences:
+    // final prefs = await SharedPreferences.getInstance();
+    // await prefs.setString('auth_token', token);
+
+    print('🔐 Token reçu et sauvegardé');
+  }
+
+  // ⭐ NOUVEAU : Méthode pour obtenir les headers avec authentification
+  Future<Map<String, String>> getAuthHeaders() async {
+    final headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    // Si vous avez un token, l'ajouter aux headers
+    // final token = await _getToken();
+    // if (token != null) {
+    //   headers['Authorization'] = 'Bearer $token';
+    // }
+
+    return headers;
   }
 
   // -------------------------

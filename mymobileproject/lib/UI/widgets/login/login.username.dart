@@ -6,34 +6,33 @@ import 'package:mymobileproject/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
 /*
-  Widget pour le champ "Mot de passe" de la page de connexion.
-  Avec fonctionnalité de visibilité/masquage.
+  Widget pour le champ "Nom d'utilisateur" de la page de connexion.
 */
-class LoginPasswordSection extends StatelessWidget {
-  final TextEditingController controller; // ← ICI
-  final ValueChanged<String>? onChanged; // ⭐ UTILISÉ ICI
+class LoginUsernameSection extends StatelessWidget {
+  final TextEditingController controller;
+  final ValueChanged<String>? onChanged;
 
-  const LoginPasswordSection({
+  const LoginUsernameSection({
     super.key,
-    required this.controller,
+    required this.controller, // ← ICI
     this.onChanged,
   });
 
-  /* Consumer est utilisé QUAND ON A BESOIN DE "LIRE" DES DONNÉES DYNAMIQUES
-     ce widgets a besoin d'accéder à des données dynamiques du Provider :
-     userProvider.isPasswordVisible → Changement d'état booléen
-     userProvider.passwordError → Messages d'erreur dynamiques */
+/* Consumer n'est pas utilisé QUAND ON A BESOIN SEULEMENT D'ÉCRIRE DANS LE PROVIDER */
 
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(
-      // Consumer permet de réagir aux changements du Provider // ← ICI
       builder: (context, userProvider, child) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const LoginLabel(text: 'Mot de passe'),
+            const LoginLabel(text: 'Nom d\'utilisateur'),
+
+            // Espacement entre le label et le champ
             const SizeBoxBtwLabelField(),
+
+            // Container stylisé pour le champ de saisie
             Container(
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(
@@ -51,37 +50,22 @@ class LoginPasswordSection extends StatelessWidget {
               height: 60,
               child: TextFormField(
                 controller: controller, // ← ICI
-                keyboardType: TextInputType.visiblePassword,
-                obscureText: !userProvider.isPasswordVisible,
+                keyboardType: TextInputType.text,
                 style: const TextStyle(
                   color: enterTextFieldColor,
                 ),
                 onChanged: onChanged, // ⭐ UTILISÉ ICI
                 decoration: InputDecoration(
+                  border: InputBorder.none,
                   contentPadding: const EdgeInsets.only(top: 14),
-                  prefixIcon: const Icon(Icons.lock, color: kPrimaryColor),
-                  hintText: 'Mot de passe',
+                  prefixIcon: const Icon(Icons.person, color: kPrimaryColor),
+                  hintText: 'Nom d\'utilisateur',
                   hintStyle: const TextStyle(
                     color: kPrimaryColor,
                     fontSize: 12,
                   ),
-
-                  // Bouton pour afficher/masquer le mot de passe
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      // Change l'icône selon l'état de visibilité
-                      userProvider.isPasswordVisible // ← ICI
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                      color: kPrimaryColor,
-                    ),
-                    onPressed: () {
-                      userProvider.togglePasswordVisibility(); // ← ICI
-                    },
-                  ),
-                  border: InputBorder.none,
                   // Affichage des erreurs de validation
-                  errorText: userProvider.loginPasswordError,
+                  errorText: userProvider.loginUsernameError, // ← ICI
                 ),
               ),
             ),
@@ -91,21 +75,21 @@ class LoginPasswordSection extends StatelessWidget {
     );
   }
 }
-/* 
-class LoginPasswordSection extends StatefulWidget {
-  const LoginPasswordSection({super.key});
+
+/* class LoginEmailSection extends StatefulWidget {
+  const LoginEmailSection({super.key});
 
   @override
-  State<LoginPasswordSection> createState() => _LoginPasswordSectionState();
+  State<LoginEmailSection> createState() => _LoginEmailSectionState();
 }
 
-class _LoginPasswordSectionState extends State<LoginPasswordSection> {
+class _LoginEmailSectionState extends State<LoginEmailSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const LoginLabel(text: 'Mot de passe'),
+        const LoginLabel(text: 'Email'),
         const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
@@ -119,29 +103,22 @@ class _LoginPasswordSectionState extends State<LoginPasswordSection> {
               border: Border.all(color: kPrimaryColor, width: 3)),
           height: 60,
           child: const TextField(
-            keyboardType: TextInputType.visiblePassword,
-            obscureText: true,
+            keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: enterTextFieldColor,
             ),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.password, color: kPrimaryColor),
-              hintText: 'Mot de passe',
-              hintStyle: TextStyle(
-                color: kPrimaryColor,
-                fontSize: 12,
-              ),
-              suffixIcon: Icon(
-                Icons.visibility_off,
-                color: kPrimaryColor,
-              ),
-              border: InputBorder.none,
-            ),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(top: 14),
+                prefixIcon: Icon(Icons.email, color: kPrimaryColor),
+                hintText: 'Email',
+                hintStyle: TextStyle(
+                  color: kPrimaryColor,
+                  fontSize: 12,
+                )),
           ),
         )
       ],
     );
   }
-}
- */
+} */

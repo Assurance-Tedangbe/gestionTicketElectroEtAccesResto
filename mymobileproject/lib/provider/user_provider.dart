@@ -32,7 +32,9 @@ class UserProvider with ChangeNotifier {
   bool _isUpdatingPassword = false; // Password change in progress
   bool _isAddRoleToUser = false; // Adding role to user in progress
   bool _isRemoveRoleFromUser = false; // Remove role from user in progress
+  bool _isLoggingIn = false; // Connexion en cours
 
+  // State for signup form
   String _firstName = '';
   String _lastName = '';
   String _username = '';
@@ -42,12 +44,10 @@ class UserProvider with ChangeNotifier {
   bool _isPasswordVisible = false;
   Role? _role;
 
-  // Specific error messages
-  /* String _createUserError = '';
-  String _updateUserError = '';
-  String _deleteUserError = '';
-  String _updatePasswordError = '';
-  String _manageRoleError = ''; */
+  // Connexion state
+  String _loginUsername = '';
+  String _loginPassword = '';
+  String? _authToken; // Pour stocker le token JWT si votre API l'utilise
 
   UserProvider(this._service);
 
@@ -67,7 +67,9 @@ class UserProvider with ChangeNotifier {
   bool get isUpdatingPassword => _isUpdatingPassword;
   bool get isAddRoleToUser => _isAddRoleToUser;
   bool get isRemoveRoleFromUser => _isRemoveRoleFromUser;
+  bool get isLoggingIn => _isLoggingIn;
 
+  // Signup Getters
   String get firstName => _firstName;
   String get lastName => _lastName;
   String get username => _username;
@@ -77,7 +79,12 @@ class UserProvider with ChangeNotifier {
   bool get isPasswordVisible => _isPasswordVisible;
   Role? get role => _role;
 
-  // ACTIONS - SETTERS
+  // Connexion getters
+  String get loginUsername => _loginUsername;
+  String get loginPassword => _loginPassword;
+  String? get authToken => _authToken;
+
+  // setters for signup form
   void setFirstname(String value) {
     _firstName = value;
     notifyListeners(); // ← Reconstruction automatique du widget
@@ -113,11 +120,6 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  /* void setRole(Role value) {
-    _role = value;
-    print('✅ Rôle sélectionné: ${role?.roleName}');
-    notifyListeners();
-  } */
   void setRole(Role value) {
     print('=== setRole appelé ===');
     print('Valeur reçue: ${value.roleName} (ID: ${value.roleId})');
@@ -128,19 +130,20 @@ class UserProvider with ChangeNotifier {
     print('Nouveau _role: ${_role?.roleName}');
     print('Rôle ID: ${_role?.roleId}');
     print('Rôle est null? ${_role == null}');
-    print('=======================');
 
     notifyListeners();
   }
 
-  // Getters for specific errors
-  /* String get createUserError => _createUserError;
-  String get updateUserError => _updateUserError;
-  String get deleteUserError => _deleteUserError;
-  String get updatePasswordError => _updatePasswordError;
-  String get manageRoleError => _manageRoleError; */
+  // Connexion setters
+  void setLoginUsername(String value) {
+    _loginUsername = value;
+    notifyListeners();
+  }
 
-  // === MÉTHODES D'ACTION - Gestion complète des états ===
+  void setLoginPassword(String value) {
+    _loginPassword = value;
+    notifyListeners();
+  }
 
   // Load all users from the service
   Future<void> loadAllUsers({bool forceRefresh = false}) async {
@@ -183,17 +186,11 @@ class UserProvider with ChangeNotifier {
       _users.add(newUser); // If it works, add the new user to my local list
 
       _error = ''; // Clears errors
-      // _isCreatingUser = false;
-      // _isLoading = false; // Stops loading
-      //   notifyListeners(); // Notifies the UI
       print(" User created successfully: ${newUser.username}");
       return true; // Success
     } catch (e) {
       _error = 'Error creation: ${e.toString()}';
       print("Erreur createNewUser: $e");
-      // _isCreatingUser = false;
-      // _isLoading = false;
-      // notifyListeners();
       return false; // Failure
     } finally {
       _isCreatingUser = false;
@@ -377,14 +374,11 @@ class UserProvider with ChangeNotifier {
       _error = '';
       print("✅ Role $roleId removed from user $userId");
 
-      //  _isLoading = false;
-      //  notifyListeners();
       return true;
     } catch (e) {
       _error = 'Error removing role: ${e.toString()}';
       print(" Error removeRoleFromUser: $e");
-      //  _isLoading = false;
-      //  notifyListeners();
+
       return false;
     } finally {
       _isRemoveRoleFromUser = false;
@@ -417,7 +411,7 @@ class UserProvider with ChangeNotifier {
     await loadAllUsers(forceRefresh: true);
   }
 
-  // ajoutez ces méthodes :
+  // necessary for signup form
 
   // Validation
   bool get isFormValid =>
@@ -463,7 +457,6 @@ class UserProvider with ChangeNotifier {
     // Vérifiez que le rôle est sélectionné
     if (_role == null) {
       print("❌ ERREUR CRITIQUE: _role est null dans submitSignup!");
-      print("    Cela signifie que setRole() n'a jamais été appelé");
       _error = 'Veuillez sélectionner un rôle';
       notifyListeners();
       return false;
@@ -480,7 +473,6 @@ class UserProvider with ChangeNotifier {
       );
 
       print('🔄 Création de l\'utilisateur avec rôle: ${_role!.roleName}');
-      print('📋 Rôle assigné: ${_role!.roleName}');
 
       return await createNewUser(user);
     } catch (e) {
@@ -490,61 +482,7 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  /*  // Méthode pour soumettre l'inscription
-  Future<bool> submitSignup() async {
-    if (!isFormValid) {
-      _error = 'Veuillez remplir tous les champs correctement';
-      notifyListeners();
-      return false;
-    }
-
-    // Vérifiez que le rôle est sélectionné
-    if (_role == null) {
-      print("*****Role choisi : ${_role?.roleName} ");
-      _error = 'Veuillez sélectionner un rôle';
-      notifyListeners();
-      return false;
-    }
-
-    try {
-      final user = User(
-        firstName: _firstName,
-        lastName: _lastName,
-        username: _username,
-        email: _email,
-        password: _password,
-        role: _role!, // ! car on a vérifié qu'il n'est pas null
-      );
-
-      print('🔄 Création de l\'utilisateur: ${user.username}');
-      print('📋 Rôle assigné: ${_role!.roleName}');
-
-      final success = await createNewUser(user);
-
-      if (success) {
-        print('✅ Inscription réussie!');
-        resetForm(); // Réinitialise le formulaire après succès
-      }
-
-      return success;
-    } catch (e) {
-      _error = 'Erreur lors de l\'inscription: $e';
-      notifyListeners();
-      return false;
-    }
-    /*  final user = User(
-      firstName: _firstName,
-      lastName: _lastName,
-      username: _username,
-      email: _email,
-      password: _password,
-      role: _role!, // Utilisez ! car on a vérifié qu'il n'est pas null
-    );
-
-    return await createNewUser(user); */
-  } */
-
-// Reset du formulaire
+  // Reset du formulaire
   void resetForm() {
     _firstName = '';
     _lastName = '';
@@ -556,7 +494,102 @@ class UserProvider with ChangeNotifier {
     _error = '';
     notifyListeners();
   }
+
+  // necessary for login form
+
+  // Validation pour la connexion
+  bool get isLoginFormValid =>
+      _loginUsername.isNotEmpty &&
+      _loginPassword
+          .isNotEmpty; /* &&
+      loginUsernameError == null &&
+      loginPasswordError == null; */
+
+  String? get loginUsernameError {
+    if (_loginUsername.isEmpty) {
+      return 'Le nom d\'utilisateur est requis';
+    }
+    return null;
+  }
+
+  String? get loginPasswordError {
+    if (_loginPassword.isEmpty) {
+      return 'Le mot de passe est requis';
+    }
+    return null;
+  }
+
+  void resetLoginForm() {
+    _loginUsername = '';
+    _loginPassword = '';
+    _error = '';
+    notifyListeners();
+  }
+
+  Future<bool> submitLogin() async {
+    print('=== DEBUG submitLogin ===');
+    print('1. loginUsername: $_loginUsername');
+    print('2. loginPassword: $_loginPassword');
+    print('3. isLoginFormValid: $isLoginFormValid');
+    print('==========================');
+
+    if (!isLoginFormValid) {
+      _error = 'Veuillez remplir tous les champs';
+      notifyListeners();
+      return false;
+    }
+
+    _isLoggingIn = true;
+    _error = '';
+    notifyListeners();
+
+    try {
+      print('🔄 Tentative de connexion avec: $_loginUsername');
+
+      // Appel au service de connexion
+      final user = await _service.login(_loginUsername, _loginPassword);
+
+      _currentUser = user;
+      _isLoggingIn = false;
+      _error = '';
+      notifyListeners();
+
+      print('✅ Connexion réussie: ${user.username}');
+      print('   ID: ${user.userId}');
+      print('   Email: ${user.email}');
+      print('   Rôle: ${user.role?.roleName}');
+
+      // Réinitialise le formulaire de connexion
+      resetLoginForm();
+
+      return true;
+    } catch (e) {
+      _isLoggingIn = false;
+      _error = 'Erreur de connexion: ${e.toString()}';
+      notifyListeners();
+
+      print('❌ Erreur de connexion: $e');
+      return false;
+    }
+  }
+
+  Future<void> logout() async {
+    try {
+      // Optionnel: Appeler l'API pour invalider le token
+      // await _service.logout();
+    } catch (e) {
+      print('Erreur lors de la déconnexion: $e');
+    } finally {
+      _currentUser = null;
+      _authToken = null;
+      resetLoginForm();
+      notifyListeners();
+
+      print('✅ Déconnexion réussie');
+    }
+  }
 }
+
 
 /* 
    RÉSUMÉ DU PATTERN GÉNÉRAL
