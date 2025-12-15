@@ -9,7 +9,10 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: AppBar(title: const Text(_title)),
+        appBar: AppBar(
+          title: const Text(_title),
+          //  centerTitle: true,
+        ),
         body: const SignupBody());
   }
 }

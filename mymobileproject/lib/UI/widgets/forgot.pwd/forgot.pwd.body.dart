@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/forgot.pwd/gotoreset.pwd.btn.dart';
-import 'package:mymobileproject/UI/widgets/login/login.emailsection.dart';
+import 'package:mymobileproject/UI/widgets/login/login.username.dart';
 
 class ForgotPwdBody extends StatelessWidget {
   const ForgotPwdBody({super.key});
@@ -15,7 +15,7 @@ class ForgotPwdBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(height: size.height * 0.2),
-          LoginEmailSection(),
+          // LoginUsernameSection(),
           const GoToResetPwdBtn(),
         ],
       ),

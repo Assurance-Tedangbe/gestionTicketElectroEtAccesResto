@@ -31,7 +31,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  http: ^1.1.0
+  provider: ^6.1.1
+  dio: ^5.3.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -100,3 +102,17 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  
+  # ============ CONFIGURATION DU SERVEUR ============
+server:
+  port: 8080  # Port d'écoute
+  # NE PAS AJOUTER: address: 0.0.0.0
+  # Spring Boot écoute déjà sur toutes les interfaces par défaut
+
+  # ============ LOGGING ============
+logging:
+  level:
+    org.springframework.web: DEBUG  # Logs détaillés des requêtes HTTP
+    org.springframework.web.cors: DEBUG  # Logs CORS
+    sn.estm.managingrestauranttickets: DEBUG  # Remplacez par votre package
+    root: INFO

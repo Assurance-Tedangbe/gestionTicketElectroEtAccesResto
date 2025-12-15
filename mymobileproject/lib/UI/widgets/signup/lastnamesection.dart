@@ -3,24 +3,22 @@ import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/constants.dart';
 
-class UsernameSection extends StatelessWidget {
+class LastNameSection extends StatelessWidget {
   final TextEditingController controller; // ← ICI
   final ValueChanged<String>? onChanged; // ⭐ NOUVEAU
 
-  const UsernameSection({
-    super.key,
-    required this.controller,
-    this.onChanged, // ← ICI
-  });
+  const LastNameSection(
+      {super.key, required this.controller, this.onChanged // ← ICI
+      });
 
-/* Consumer n'est pas utilisé QUAND ON A BESOIN SEULEMENT D'ÉCRIRE DANS LE PROVIDER */
+  /* Consumer n'est pas utilisé QUAND ON A BESOIN SEULEMENT D'ÉCRIRE DANS LE PROVIDER */
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(text: "Nom d'utilisateur"),
+        const Label(text: 'Nom'),
 
         // Espacement entre le label et le champ
         const SizeBoxBtwLabelField(),
@@ -50,7 +48,7 @@ class UsernameSection extends StatelessWidget {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 11),
               prefixIcon: Icon(Icons.person, color: kPrimaryColor),
-              hintText: 'Nom d\'utilisateur',
+              hintText: 'Nom',
               hintStyle: TextStyle(color: kPrimaryColor, fontSize: 12),
             ),
           ),

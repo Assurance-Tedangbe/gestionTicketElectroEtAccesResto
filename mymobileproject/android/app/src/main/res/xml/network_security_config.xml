@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- 
+    Configuration de sécurité réseau pour Android
+    Nécessaire pour Android 9+ (API 28) qui bloque HTTP par défaut
+    -->
+    
+    <!-- ============ SECTION 1: CONFIGURATION DE BASE ============ -->
+    <base-config cleartextTrafficPermitted="true">
+        <!-- cleartextTrafficPermitted="true": Autorise le trafic HTTP non chiffré -->
+        <trust-anchors>
+            <!-- Autorise les certificats système et utilisateur -->
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+    
+    <!-- ============ SECTION 2: DOMAINES SPÉCIFIQUES ============ -->
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- Configuration spécifique pour les domaines de développement -->
+        
+        <!-- Localhost (pour émulateur et tests) -->
+        <domain includeSubdomains="true">localhost</domain>
+        
+        <!-- Adresse spéciale de l'émulateur Android -->
+        <!-- L'émulateur Android utilise 10.0.2.2 pour accéder à l'hôte -->
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        
+        <!-- Localhost alternatif -->
+        <domain includeSubdomains="true">127.0.0.1</domain>
+        
+        <!-- Toutes interfaces -->
+        <domain includeSubdomains="true">0.0.0.0</domain>
+        
+        <!-- Réseaux locaux courants -->
+        <domain includeSubdomains="true">192.168.0.0/16</domain>  <!-- 192.168.x.x -->
+        <domain includeSubdomains="true">172.16.0.0/12</domain>   <!-- 172.16.x.x à 172.31.x.x -->
+        <domain includeSubdomains="true">10.0.0.0/8</domain>      <!-- 10.x.x.x -->
+    </domain-config>
+</network-security-config>

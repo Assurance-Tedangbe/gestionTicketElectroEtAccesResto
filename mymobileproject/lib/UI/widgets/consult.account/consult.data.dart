@@ -1,12 +1,199 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
-import 'package:http/http.dart' as http;
 import 'package:mymobileproject/UI/widgets/consult.account/dataConsultBack.dart';
-import 'dart:convert';
 import 'package:mymobileproject/UI/widgets/home/stat.label.dart';
 import 'package:mymobileproject/constants.dart';
+import 'package:mymobileproject/model/user_model.dart';
+import 'package:mymobileproject/provider/user_provider.dart';
+import 'package:provider/provider.dart';
 
-class ConsultData extends StatefulWidget {
+/*
+  Page d'affichage des informations du compte consulté.
+*/
+class ConsultData extends StatelessWidget {
+  static const String _title = 'Informations sur le compte';
+
+  const ConsultData({super.key});
+
+  // Méthode pour masquer le mot de passe
+  String _maskPassword(String password) {
+    if (password.isEmpty) return '********';
+    return '*' * password.length;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+        title: const Text(_title),
+        backgroundColor: kPrimaryColor,
+      ),
+      body: Consumer<UserProvider>(
+        builder: (context, userProvider, child) {
+          final user = userProvider.currentUser;
+
+          return Background(
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  // Carte principale des informations
+                  Container(
+                    alignment: Alignment.center,
+                    width: size.width * 0.9,
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: textContainerColor,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: boxshadowColor,
+                          blurRadius: 10,
+                          offset: Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        // Icône utilisateur
+                        const Icon(
+                          Icons.account_circle,
+                          size: 80,
+                          color: kPrimaryColor,
+                        ),
+                        const SizedBox(height: 20),
+
+                        if (user == null)
+                          const Center(
+                            child: Text(
+                              'Aucune donnée utilisateur disponible',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                              ),
+                            ),
+                          )
+                        else
+                          _buildUserInfo(user),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 30),
+
+                  // Bouton de retour
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      // Réinitialiser l'utilisateur courant si nécessaire
+                      userProvider.clearCurrentUser();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: kPrimaryColor,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 40,
+                        vertical: 15,
+                      ),
+                    ),
+                    child: const Text(
+                      'Retour',
+                      style: TextStyle(
+                        color: kSecondColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  // Widget pour construire les informations utilisateur
+  Widget _buildUserInfo(User user) {
+    return Column(
+      children: <Widget>[
+        // ID utilisateur
+        _buildInfoRow('ID', user.userId?.toString() ?? 'N/A'),
+        const Divider(color: Colors.grey),
+
+        // Nom complet
+        _buildInfoRow(
+          'Nom complet',
+          '${user.firstName} ${user.lastName}'.trim(),
+        ),
+        const Divider(color: Colors.grey),
+
+        // Nom d'utilisateur
+        _buildInfoRow('Nom d\'utilisateur', user.username),
+        const Divider(color: Colors.grey),
+
+        // Email
+        _buildInfoRow('Email', user.email),
+        const Divider(color: Colors.grey),
+
+        // Mot de passe (masqué)
+        _buildInfoRow(
+          'Mot de passe',
+          _maskPassword(user.password),
+          isPassword: true,
+        ),
+        const Divider(color: Colors.grey),
+
+        // Rôle
+        _buildInfoRow(
+          'Rôle',
+          user.role?.roleName ?? 'Non défini',
+        ),
+      ],
+    );
+  }
+
+  // Widget pour une ligne d'information
+  Widget _buildInfoRow(String label, String value, {bool isPassword = false}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            flex: 2,
+            child: Text(
+              label,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: kThirdColor,
+                fontSize: 16,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Text(
+              value,
+              style: TextStyle(
+                color: isPassword ? Colors.grey : kThirdColor,
+                fontSize: 16,
+                fontStyle: isPassword ? FontStyle.italic : FontStyle.normal,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/* class ConsultData extends StatefulWidget {
   const ConsultData({super.key});
 
   @override
@@ -199,4 +386,4 @@ class _ConsultDataState extends State<ConsultData> {
               ]),
         )));
   }
-}
+} */
