@@ -346,21 +346,23 @@ class UserApiService {
       ); // GET /api/users/username/{username} to find a user by username"
 
       if (response.statusCode == 200) {
-        return User.fromJson(json.decode(response.body));
+        final Map<String, dynamic> userData = json.decode(response.body);
+        return User.fromJson(userData);
+        /*  return User.fromJson(json.decode(response.body)); */
       } else if (response.statusCode == 404) {
         throw Exception('Utilisateur non trouvé');
       } else {
         throw Exception(
-            'Erreur récupération utilisateur: ${response.statusCode}');
+            'Erreur récupération utilisateur(serveur): ${response.statusCode}');
       }
     } catch (e) {
       throw Exception('Erreur réseau: $e');
     }
   }
 
-  // -------------------------
-  // 5. UPDATE USER (PUT /api/users/{userId})
-  // -------------------------
+// -------------------------
+// 5. UPDATE USER (PUT /api/users/{userId})
+// -------------------------
   Future<User> updateUser(User user) async {
     try {
       print("Update user with ID: ${user.userId}");
@@ -392,10 +394,10 @@ class UserApiService {
     }
   }
 
-  // -------------------------
-  // 6. UPDATE PASSWORD (PUT /api/users/password/{userId})
-  // without cahe
-  // -------------------------
+// -------------------------
+// 6. UPDATE PASSWORD (PUT /api/users/password/{userId})
+// without cahe
+// -------------------------
   Future<void> updatePassword(int userId, String newPassword) async {
     try {
       final response = await http.put(
@@ -416,9 +418,9 @@ class UserApiService {
     }
   }
 
-  // -------------------------
-  // 7. DELETE USER (DELETE /api/users/{userId})
-  // -------------------------
+// -------------------------
+// 7. DELETE USER (DELETE /api/users/{userId})
+// -------------------------
   Future<void> deleteUser(int userId) async {
     try {
       print("Deleting user with ID: $userId");
@@ -444,10 +446,10 @@ class UserApiService {
     }
   }
 
-  // -------------------------
-  // 8. ADD ROLE TO USER (PUT /api/users/{userId}/roles/{roleId})
-  // without cahe
-  // -------------------------
+// -------------------------
+// 8. ADD ROLE TO USER (PUT /api/users/{userId}/roles/{roleId})
+// without cahe
+// -------------------------
   Future<void> addRoleToUser(int userId, int roleId) async {
     print("Add role : $roleId to user : $userId");
 
@@ -467,10 +469,10 @@ class UserApiService {
     }
   }
 
-  // -------------------------
-  // 9. REMOVE ROLE FROM USER (DELETE /api/users/{userId}/roles/{roleId})
-  // without cahe
-  // -------------------------
+// -------------------------
+// 9. REMOVE ROLE FROM USER (DELETE /api/users/{userId}/roles/{roleId})
+// without cahe
+// -------------------------
   Future<void> removeRoleFromUser(int userId, int roleId) async {
     print("Remove role : $roleId from user : $userId");
     try {
@@ -489,9 +491,9 @@ class UserApiService {
     }
   }
 
-  // === MÉTHODES UTILITAIRES AVEC LOGIQUE MÉTIER LÉGÈRE ===
+// === MÉTHODES UTILITAIRES AVEC LOGIQUE MÉTIER LÉGÈRE ===
 
-  // Searching for users in the local cache
+// Searching for users in the local cache
   List<User> searchUsers(String query) {
     print("searching for users with query: $query");
 
@@ -509,7 +511,7 @@ class UserApiService {
         .toList();
   }
 
-  // Basic validation of user data
+// Basic validation of user data
   void validateUserData(User user) {
     if (user.username.length < 3) {
       throw Exception(
@@ -531,7 +533,7 @@ class UserApiService {
     }
   }
 
-  // Clear the cache (useful for forcing a refresh)
+// Clear the cache (useful for forcing a refresh)
   void clearCache() {
     print("Clearing the cache");
     _cachedUsers.clear();

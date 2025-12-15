@@ -49,6 +49,10 @@ class UserProvider with ChangeNotifier {
   String _loginPassword = '';
   String? _authToken; // Pour stocker le token JWT si votre API l'utilise
 
+  // Consult form state
+  String _consultUsername = '';
+  bool _isConsultingUser = false;
+
   UserProvider(this._service);
 
   // === GETTERS - Accès contrôlé à l'état ===
@@ -83,6 +87,11 @@ class UserProvider with ChangeNotifier {
   String get loginUsername => _loginUsername;
   String get loginPassword => _loginPassword;
   String? get authToken => _authToken;
+
+  // Getters pour le formulaire de consultation
+  String get consultUsername => _consultUsername;
+  bool get isConsultingUser => _isConsultingUser;
+  bool get isConsultFormValid => _consultUsername.isNotEmpty;
 
   // setters for signup form
   void setFirstname(String value) {
@@ -142,6 +151,12 @@ class UserProvider with ChangeNotifier {
 
   void setLoginPassword(String value) {
     _loginPassword = value;
+    notifyListeners();
+  }
+
+  // Consult form setters
+  void setConsultUsername(String value) {
+    _consultUsername = value;
     notifyListeners();
   }
 
@@ -412,7 +427,6 @@ class UserProvider with ChangeNotifier {
   }
 
   // necessary for signup form
-
   // Validation
   bool get isFormValid =>
       _firstName.isNotEmpty &&
@@ -587,6 +601,45 @@ class UserProvider with ChangeNotifier {
 
       print('✅ Déconnexion réussie');
     }
+  }
+
+  // for Consult form
+  Future<bool> submitConsult() async {
+    if (!isConsultFormValid) {
+      _error = 'Veuillez saisir un nom d\'utilisateur';
+      notifyListeners();
+      return false;
+    }
+
+    _isConsultingUser = true;
+    _error = '';
+    notifyListeners();
+
+    try {
+      print('🔍 Consultation du compte pour: $_consultUsername');
+
+      // Appel au service pour récupérer l'utilisateur
+      final user = await _service.getUserByUsername(_consultUsername);
+
+      _currentUser = user;
+      _isConsultingUser = false;
+      _error = '';
+      notifyListeners();
+
+      print('✅ Compte trouvé: ${user.username}');
+      return true;
+    } catch (e) {
+      _isConsultingUser = false;
+      _error = 'Utilisateur non trouvé ou erreur de connexion';
+      notifyListeners();
+
+      print('❌ Erreur lors de la consultation: $e');
+      return false;
+    }
+  }
+
+  String? get consultUsernameError {
+    return _consultUsername.isEmpty ? 'Le nom d\'utilisateur est requis' : null;
   }
 }
 
