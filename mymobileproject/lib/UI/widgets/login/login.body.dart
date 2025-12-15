@@ -8,7 +8,6 @@ import 'package:mymobileproject/UI/widgets/login/login.username.dart';
 import 'package:mymobileproject/UI/widgets/login/login.passwordsection.dart';
 import 'package:mymobileproject/UI/widgets/login/rememberme.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/pageIconTemplate.dart';
-import 'package:mymobileproject/constants.dart';
 import 'package:mymobileproject/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -62,11 +61,6 @@ class _LoginBodyState extends State<LoginBody> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const PageIconTemplate(iconData: Icons.lock_open),
-            Icon(
-              Icons.lock_open,
-              color: kPrimaryColor,
-              size: 70,
-            ),
             const SizedBox(height: 15),
             Consumer<UserProvider>(
               builder: (context, userProvider, child) {

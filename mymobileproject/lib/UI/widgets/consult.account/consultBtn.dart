@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/widgets/consult.account/consult.data.dart';
 import 'package:mymobileproject/constants.dart';
 import 'package:mymobileproject/provider/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +34,7 @@ class ConsultBtn extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Compte trouvé avec succès !'),
-                          backgroundColor: Colors.green,
+                          backgroundColor: validateBtnColor,
                         ),
                       );
 
@@ -46,7 +45,7 @@ class ConsultBtn extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(userProvider.error),
-                          backgroundColor: Colors.red,
+                          backgroundColor: errorColor,
                         ),
                       );
                     }
@@ -55,7 +54,7 @@ class ConsultBtn extends StatelessWidget {
               backgroundColor: userProvider.isConsultFormValid &&
                       !userProvider.isConsultingUser
                   ? kPrimaryColor
-                  : Colors.grey,
+                  : borderColor,
               shape: const BeveledRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
               ),

@@ -72,25 +72,3 @@ class _ConsultBodyState extends State<ConsultBody> {
     );
   }
 }
-
-/* class ConsultBody extends StatelessWidget {
-  const ConsultBody({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Background(
-      child: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            StudentAccountNumber(),
-            SizeboxTemplate(),
-            ConsultBtn()
-          ],
-        ),
-      ),
-    );
-  }
-} */
