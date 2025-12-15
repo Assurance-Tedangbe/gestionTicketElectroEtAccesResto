@@ -44,12 +44,6 @@ class LastNameSection extends StatelessWidget {
             keyboardType: TextInputType.text, // Clavier standard
             style: const TextStyle(color: enterTextFieldColor),
             onChanged: onChanged, // ⭐ UTILISÉ ICI
-            /* (value) {
-              // Met à jour le nom dans le Provider
-              // ↓ Seulement un appel pour écrire dans le Provider
-              Provider.of<UserProvider>(context, listen: false)
-                  .lastname(value); // ← ICI
-            }, */
             decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 11),

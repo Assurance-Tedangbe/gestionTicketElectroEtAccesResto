@@ -60,35 +60,6 @@ class SignupBtn extends StatelessWidget {
                       );
                     }
                   },
-            /*
-                  onPressed: userProvider.isCreatingUser || !userProvider.isFormValid
-                ? null
-                : () async {
-                    // Crée un objet User avec les données du formulaire
-                    final user = User(
-                      fullName: userProvider.fullName,
-                      username: userProvider.username,
-                      email: userProvider.email,
-                      password: userProvider.password,
-                      // Ajouter d'autres champs nécessaires ici
-                    );
-                    
-                    // Appelle le Provider pour créer l'utilisateur
-                    final success = await userProvider.createNewUser(user);
-                    
-                    if (success) {
-                      // Affiche un message de succès
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Compte créé avec succès !'),
-                          backgroundColor: Colors.green,
-                        ),
-                      );
-                      
-                      // Navigation vers l'écran de connexion
-                      Navigator.of(context).pushReplacementNamed('/login');
-                    } else {
-                      // Affiche le message d'erreur */
             style: ElevatedButton.styleFrom(
               // Change la couleur selon l'état de validation
               backgroundColor: // ← ICI
@@ -114,32 +85,3 @@ class SignupBtn extends StatelessWidget {
     );
   }
 }
-
-/* 
-class SignupBtn extends StatefulWidget {
-  const SignupBtn({super.key});
-
-  @override
-  State<SignupBtn> createState() => _SignupBtnState();
-}
-
-class _SignupBtnState extends State<SignupBtn> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.symmetric(vertical: 25),
-        width: double.infinity,
-        height: 90,
-        child: ElevatedButton(
-          onPressed: () => print('Signup pressed'),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: kPrimaryColor,
-            shape: const BeveledRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5))),
-            textStyle: const TextStyle(
-                color: kSecondColor, fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          child: const Text('Créer un compte'),
-        ));
-  }
-} */

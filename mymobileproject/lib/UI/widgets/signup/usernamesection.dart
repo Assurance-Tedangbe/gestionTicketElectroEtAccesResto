@@ -46,12 +46,6 @@ class UsernameSection extends StatelessWidget {
             keyboardType: TextInputType.text, // Clavier standard
             style: const TextStyle(color: enterTextFieldColor),
             onChanged: onChanged, // ⭐ UTILISÉ ICI
-            /* (value) {
-              // Met à jour le nom d'utilisateur dans le Provider
-              // ↓ Seulement un appel pour écrire dans le Provider
-              Provider.of<UserProvider>(context, listen: false)
-                  .nomutilisateur(value); // ← ICI
-            }, */
             decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 11),
@@ -65,47 +59,3 @@ class UsernameSection extends StatelessWidget {
     );
   }
 }
-
-/* class UsernameSection extends StatefulWidget {
-  const UsernameSection({super.key});
-
-  @override
-  State<UsernameSection> createState() => _UsernameSectionState();
-}
-
-class _UsernameSectionState extends State<UsernameSection> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Label(text: "Nom d'utilisateur"),
-        const SizeBoxBtwLabelField(),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-              color: kSecondColor,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: const [
-                BoxShadow(
-                    color: boxshadowColor, blurRadius: 6, offset: Offset(0, 2))
-              ],
-              border: Border.all(color: kPrimaryColor, width: 3)),
-          height: 50,
-          child: const TextField(
-            keyboardType: TextInputType.text,
-            style: TextStyle(
-              color: enterTextFieldColor,
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 11),
-                prefixIcon: Icon(Icons.person, color: kPrimaryColor),
-                hintText: 'Nom d\'utilisateur',
-                hintStyle: TextStyle(color: kPrimaryColor, fontSize: 12)),
-          ),
-        )
-      ],
-    );
-  }
-} */
