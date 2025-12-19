@@ -641,6 +641,13 @@ class UserProvider with ChangeNotifier {
   String? get consultUsernameError {
     return _consultUsername.isEmpty ? 'Le nom d\'utilisateur est requis' : null;
   }
+
+  // Méthode pour filtrer par rôle
+  List<User> getUsersByRole(String roleName) {
+    return _users.where((user) {
+      return user.role?.roleName?.toUpperCase() == roleName.toUpperCase();
+    }).toList();
+  }
 }
 
 

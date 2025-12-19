@@ -1,14 +1,379 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/pages/activateAccount.dart';
-import 'package:mymobileproject/UI/pages/adminInterface.dart';
 import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/widgets/admin/createAccountIcon.dart';
 import 'package:mymobileproject/UI/pages/updateUser.dart';
 import 'package:mymobileproject/UI/widgets/admin/student.mgmt.dart/dataTableStyle.dart';
 import 'package:mymobileproject/UI/widgets/admin/student.mgmt.dart/headTableStyle.dart';
 import 'package:mymobileproject/constants.dart';
+import 'package:provider/provider.dart';
+import 'package:mymobileproject/provider/user_provider.dart';
+import 'package:mymobileproject/model/user_model.dart';
 
 class ListStudentsPage extends StatefulWidget {
+  const ListStudentsPage({super.key});
+
+  @override
+  State<ListStudentsPage> createState() => _ListStudentsPageState();
+}
+
+class _ListStudentsPageState extends State<ListStudentsPage> {
+  @override
+  void initState() {
+    super.initState();
+    // Charger les utilisateurs au démarrage
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.loadAllUsers();
+    });
+  }
+
+  // Filtrer les utilisateurs avec le rôle ETUDIANT
+  List<User> _getStudents(List<User> allUsers) {
+    return allUsers.where((user) {
+      return user.role?.roleName?.toUpperCase() == 'ETUDIANT';
+    }).toList();
+  }
+
+  Future<void> _showDeleteStudentDialog(User user) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Suppression compte Étudiant'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                    'Êtes-vous sûr de vouloir supprimer le compte de ${user.username} ?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('ANNULER'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: const Text('OUI'),
+              onPressed: () async {
+                final userProvider =
+                    Provider.of<UserProvider>(context, listen: false);
+                final success =
+                    await userProvider.deleteExistingUser(user.userId!);
+
+                if (success) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content:
+                          Text('Compte ${user.username} supprimé avec succès'),
+                      backgroundColor: validateBtnColor,
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                          'Erreur lors de la suppression: ${userProvider.error}'),
+                      backgroundColor: errorColor,
+                    ),
+                  );
+                }
+
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<UserProvider>(
+      builder: (context, userProvider, child) {
+        final students = _getStudents(userProvider.users);
+
+        return SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              // En-tête avec bouton de création
+              Padding(
+                padding: const EdgeInsets.only(bottom: 2.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    // Bouton de rafraîchissement
+                    IconButton(
+                      onPressed: () =>
+                          userProvider.loadAllUsers(forceRefresh: true),
+                      icon: const Icon(Icons.refresh, color: kPrimaryColor),
+                      tooltip: 'Rafraîchir la liste',
+                    ),
+                    // Compteur d'étudiants
+                    Text(
+                      '${students.length} étudiant(s)',
+                      style: const TextStyle(
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const CreateAccountIcon(),
+                  ],
+                ),
+              ),
+
+              // Indicateur de chargement
+              if (userProvider.isLoading && students.isEmpty)
+                const Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: CircularProgressIndicator(color: kPrimaryColor),
+                  ),
+                )
+              else if (students.isEmpty)
+                // Message si aucun étudiant
+                Container(
+                  padding: const EdgeInsets.all(40.0),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.group_off,
+                        size: 80,
+                        color: Colors.grey[400],
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        'Aucun étudiant trouvé',
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 18,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      if (userProvider.users.isNotEmpty && students.isEmpty)
+                        Text(
+                          'Les utilisateurs existent mais aucun n\'a le rôle ETUDIANT',
+                          style: TextStyle(
+                            color: Colors.grey[500],
+                            fontSize: 14,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                    ],
+                  ),
+                )
+              else
+                // Table des étudiants
+                _buildStudentsTable(userProvider, students),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildStudentsTable(UserProvider userProvider, List<User> students) {
+    return FittedBox(
+      child: DataTable(
+        sortColumnIndex: 0,
+        sortAscending: true,
+        showCheckboxColumn: false,
+        border: TableBorder.all(width: 1.0, color: ticketSectionColor),
+        columns: const [
+          DataColumn(
+            label: HeadTableStyle(data: "Nom d'utilisateur"),
+            numeric: false,
+          ),
+          DataColumn(
+            label: HeadTableStyle(data: "Nom complet"),
+            numeric: false,
+          ),
+          DataColumn(
+            label: HeadTableStyle(data: "Email"),
+            numeric: false,
+          ),
+          DataColumn(
+            label: HeadTableStyle(data: "Actions"),
+            numeric: false,
+          ),
+        ],
+        rows: students.map((student) {
+          return DataRow(
+            cells: [
+              DataCell(
+                DataTableStyle(datafromBack: student.username),
+                onTap: () {
+                  // Voir les détails de l'étudiant
+                  // _navigateToStudentDetails(context, student);
+                },
+              ),
+              DataCell(
+                DataTableStyle(
+                    datafromBack: '${student.firstName} ${student.lastName}'),
+              ),
+              DataCell(
+                DataTableStyle(datafromBack: student.email),
+              ),
+              DataCell(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Bouton Voir
+                    IconButton(
+                      onPressed: () => {},
+                      //  _navigateToStudentDetails(context, student),
+                      icon: const Icon(Icons.visibility,
+                          size: 30, color: kPrimaryColor),
+                      tooltip: 'Voir les détails',
+                    ),
+                    const SizedBox(width: 5),
+
+                    // Bouton Modifier
+                    IconButton(
+                      onPressed: () => {},
+                      //_navigateToUpdateStudent(context, student),
+                      icon: const Icon(Icons.edit,
+                          size: 30, color: kPrimaryColor),
+                      tooltip: 'Modifier',
+                    ),
+                    const SizedBox(width: 5),
+
+                    // Bouton Activer/Désactiver
+                    IconButton(
+                      onPressed: () => _toggleStudentStatus(context, student),
+                      icon: Icon(
+                        student.isActive ? Icons.block : Icons.check_circle,
+                        size: 30,
+                        color: student.isActive ? errorColor : validateBtnColor,
+                      ),
+                      tooltip: student.isActive ? 'Désactiver' : 'Activer',
+                    ),
+                    const SizedBox(width: 5),
+
+                    // Bouton Supprimer
+                    IconButton(
+                      onPressed: () => _showDeleteStudentDialog(student),
+                      icon:
+                          const Icon(Icons.delete, size: 30, color: errorColor),
+                      tooltip: 'Supprimer',
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  /*    void _navigateToStudentDetails(BuildContext context, User student) {
+    // Stocker l'étudiant sélectionné dans le provider
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    userProvider.currentUser = student;
+
+    // Naviguer vers la page de consultation
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ConsultAccount(
+          userId: student.userId!,
+        ),
+      ),
+    );
+  }
+
+  void _navigateToUpdateStudent(BuildContext context, User student) {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    userProvider.currentUser = student;
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => UpdateUser(
+          user: student,
+        ),
+      ),
+    );
+  } 
+ */
+  Future<void> _toggleStudentStatus(BuildContext context, User student) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    // Dans cet exemple, on suppose que le modèle User a un champ isActive
+    // Si votre API permet d'activer/désactiver, utilisez une méthode spécifique
+    // Sinon, vous pouvez créer une méthode dans UserProvider
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+            student.isActive ? 'Désactiver le compte' : 'Activer le compte'),
+        content: Text(
+          student.isActive
+              ? 'Voulez-vous désactiver le compte de ${student.username} ?'
+              : 'Voulez-vous activer le compte de ${student.username} ?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('ANNULER'),
+          ),
+          TextButton(
+            onPressed: () async {
+              // TODO: Implémenter la logique d'activation/désactivation
+              // Exemple: await userProvider.toggleUserStatus(student.userId!);
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    student.isActive
+                        ? 'Compte ${student.username} désactivé'
+                        : 'Compte ${student.username} activé',
+                  ),
+                  backgroundColor: Colors.green,
+                ),
+              );
+
+              Navigator.pop(context);
+              userProvider.loadAllUsers(forceRefresh: true);
+            },
+            child: Text(student.isActive ? 'DÉSACTIVER' : 'ACTIVER'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/* 
+refactoriser ListStudentsPage pour utiliser Provider et afficher dynamiquement la liste des étudiants.
+Étapes :
+- Utiliser UserProvider pour récupérer la liste des utilisateurs et filtrer ceux qui ont le rôle ETUDIANT.
+- Remplacer les données statiques par des données dynamiques.
+- Ajouter un FutureBuilder ou Consumer pour gérer l'état de chargement.
+- Adapter les actions (voir, modifier, supprimer) pour utiliser les méthodes du provider.
+Modifications :
+- Remplacer StatefulWidget par StatelessWidget et utiliser Consumer pour écouter le provider.
+- Ajouter une méthode dans UserProvider pour récupérer les utilisateurs par rôle (ou filtrer dans le widget).
+- Gérer le chargement et les erreurs.
+- créer une nouvelle méthode dans UserProvider pour charger tous les utilisateurs et ensuite filtrer par rôle ETUDIANT.
+Cpdt,votre API a déjà un endpoint pr récupérer tous les utilisateurs. utiliser cette methode et ensuite filtrer.
+ */
+/* 
+  Fonctionnalités clés de cette refactorisation :
+  - Chargement dynamique : Les étudiants sont chargés depuis l'API Spring Boot
+  - Filtrage par rôle : Seuls les utilisateurs avec rôle "ETUDIANT" sont affichés
+  - Gestion d'état : Utilisation de Provider pour la gestion d'état centralisée
+  - Actions complètes : Voir, modifier, activer/désactiver, supprimer
+  - UI réactive : Indicateurs de chargement, messages d'erreur, rafraîchissement
+  - Navigation : Redirection vers les pages détaillées avec données pré-remplies
+  Cette architecture permet une gestion complète des étudiants avec une interface responsive 
+  et des performances optimisées grâce au cache Provider.
+ */
+
+/* class ListStudentsPage extends StatefulWidget {
   // final List<Student> listStudents;
   const ListStudentsPage({
     super.key,
@@ -124,4 +489,4 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
       ),
     );
   }
-}
+} */

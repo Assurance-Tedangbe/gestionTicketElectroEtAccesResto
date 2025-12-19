@@ -63,8 +63,7 @@ class _SignupBodyState extends State<SignupBody> {
   }
 
   void _onSignupSuccess() {
-    // Navigation vers l'écran de connexion ou d'accueil
-    // Navigator.of(context).pushReplacementNamed('/login');
+    // Navigation vers la page de connexion après inscription réussie
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => const LoginPage()));
   }
