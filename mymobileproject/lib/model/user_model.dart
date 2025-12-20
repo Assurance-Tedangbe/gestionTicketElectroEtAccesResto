@@ -8,9 +8,9 @@ class User {
   final String firstName;
   final String lastName;
   final Role role; //final Role? role;
-  final bool isActive;
+/*   final bool isActive;
   final DateTime? createdAt;
-  final DateTime? updatedAt;
+  final DateTime? updatedAt; */
 
   User({
     this.userId,
@@ -20,9 +20,9 @@ class User {
     required this.firstName,
     required this.lastName,
     required this.role,
-    this.isActive = true, // Par défaut actif
+    /*  this.isActive = true, // Par défaut actif
     this.createdAt,
-    this.updatedAt,
+    this.updatedAt, */
   });
 
   // JSON -> User
@@ -36,13 +36,13 @@ class User {
       lastName: json['lastName'],
       role: Role.fromJson(json[
           'roleDTO']), // role: json['role'] != null ? Role.fromJson(json['role']) : null,
-      isActive: json['isActive'] ?? true,
+      /*  isActive: json['isActive'] ?? true,
       createdAt: json['createdAt'] != null
           ? DateTime.parse(json['createdAt'] as String)
           : null,
       updatedAt: json['updatedAt'] != null
           ? DateTime.parse(json['updatedAt'] as String)
-          : null,
+          : null, */
     );
   }
 

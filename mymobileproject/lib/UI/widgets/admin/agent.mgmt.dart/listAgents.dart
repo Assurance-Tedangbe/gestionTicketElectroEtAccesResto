@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/pages/activateAccount.dart';
 import 'package:mymobileproject/UI/pages/adminInterface.dart';
 import 'package:mymobileproject/UI/pages/updateUser.dart';
 import 'package:mymobileproject/UI/widgets/admin/createAccountIcon.dart';
@@ -8,10 +7,8 @@ import 'package:mymobileproject/UI/widgets/admin/student.mgmt.dart/headTableStyl
 import 'package:mymobileproject/constants.dart';
 
 class ListAgentsPage extends StatefulWidget {
-//   final List<Agent> listAgents;
   const ListAgentsPage({
     super.key,
-//  required this.listAgents,
   });
 
   @override
@@ -75,22 +72,12 @@ class _ListAgentsPageState extends State<ListAgentsPage> {
                   DataColumn(label: HeadTableStyle(data: "Actions")),
                 ],
                 rows: [
-                  // this brackets are just for test by not included in dynamic view
-                  // listStudents
-                  //   .map((data) =>
                   DataRow(cells: [
                     const DataCell(DataTableStyle(datafromBack: 'Tedangbe')),
                     const DataCell(
                         DataTableStyle(datafromBack: 'tedangbek@gmail.com')),
                     DataCell(Row(
                       children: [
-                        /* IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ConsultAccount()));
-                            },
-                            icon: const Icon(Icons.visibility,size: 45)),*/
                         IconButton(
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
@@ -98,20 +85,11 @@ class _ListAgentsPageState extends State<ListAgentsPage> {
                             },
                             icon: const Icon(Icons.update, size: 45)),
                         IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ActivateAccount()));
-                            },
-                            icon: const Icon(Icons.no_accounts, size: 45)),
-                        IconButton(
                             onPressed: _showDeleteAgentDialog,
                             icon: const Icon(Icons.delete, size: 45)),
                       ],
                     )),
                   ])
-                  //   )
-                  //   .toList(),
                 ]),
           ),
         ],

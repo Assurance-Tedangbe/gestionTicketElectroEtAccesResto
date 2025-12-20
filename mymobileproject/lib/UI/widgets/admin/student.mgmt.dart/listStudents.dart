@@ -241,7 +241,7 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
                     ),
                     const SizedBox(width: 5),
 
-                    // Bouton Activer/Désactiver
+                    /*  // Bouton Activer/Désactiver
                     IconButton(
                       onPressed: () => _toggleStudentStatus(context, student),
                       icon: Icon(
@@ -251,7 +251,7 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
                       ),
                       tooltip: student.isActive ? 'Désactiver' : 'Activer',
                     ),
-                    const SizedBox(width: 5),
+                    const SizedBox(width: 5), */
 
                     // Bouton Supprimer
                     IconButton(
@@ -298,7 +298,8 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
     );
   } 
  */
-  Future<void> _toggleStudentStatus(BuildContext context, User student) async {
+
+  /*  Future<void> _toggleStudentStatus(BuildContext context, User student) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     // Dans cet exemple, on suppose que le modèle User a un champ isActive
@@ -344,7 +345,7 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
         ],
       ),
     );
-  }
+  } */
 }
 
 /* 

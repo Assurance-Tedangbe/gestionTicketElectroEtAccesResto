@@ -540,6 +540,23 @@ class UserApiService {
     _lastFetchTime = null;
     print("🗑️ Cache utilisateurs vidé");
   }
+
+  /*Future<Map> logout() async {
+    try {
+      String urlLogin = 'http://10.0.2.2:8000/logout/';
+      http.Response response = await http.get(
+        Uri.parse(urlLogin),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+      );
+
+      return json.decode(response.body);
+    } catch (e) {
+      return {'error_message': "Un problème est survenu, veuillez réessayer"};
+    }
+  }*/
 }
 
   /* 
