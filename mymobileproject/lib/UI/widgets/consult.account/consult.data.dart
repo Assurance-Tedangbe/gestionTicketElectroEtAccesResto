@@ -8,15 +8,38 @@ import 'package:provider/provider.dart';
 /*
   Page d'affichage des informations du compte consulté.
 */
-class ConsultData extends StatelessWidget {
+/* class ConsultData extends StatelessWidget {
+  static const String _title = 'Informations sur le compte';
+  final int userId;
+
+  const ConsultData({super.key, required this.userId}); */
+class ConsultData extends StatefulWidget {
+  // static const String _title = 'Informations sur le compte';
+  final int userId;
+
+  const ConsultData({super.key, required this.userId});
+
+  @override
+  State<ConsultData> createState() => _ConsultDataState();
+}
+
+class _ConsultDataState extends State<ConsultData> {
   static const String _title = 'Informations sur le compte';
 
-  const ConsultData({super.key});
+  @override
+  void initState() {
+    super.initState();
+    // Charger l'utilisateur au démarrage
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.loadUserById(widget.userId);
+    });
+  }
 
   // Méthode pour masquer le mot de passe
   String _maskPassword(String password) {
     if (password.isEmpty) return '********';
-    return '*' * password.length;
+    return '*' * password.length; // Afficher 8 étoiles pour la sécurité
   }
 
   @override
@@ -33,7 +56,14 @@ class ConsultData extends StatelessWidget {
          sans avoir besoin d'un FutureBuilder supplémentaire.  */
       body: Consumer<UserProvider>(
         builder: (context, userProvider, child) {
+          if (userProvider.isLoading && userProvider.currentUser == null) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
           final user = userProvider.currentUser; // ← Données déjà disponibles
+
           // Pas besoin de FutureBuilder car les données sont déjà dans le Provider
           return Background(
             child: SingleChildScrollView(

@@ -8,11 +8,12 @@ import 'package:provider/provider.dart';
   Dynamiquement activé/désactivé selon la validation du formulaire.
 */
 class ConsultBtn extends StatelessWidget {
-  final VoidCallback onConsultSuccess;
+  // final VoidCallback onConsultSuccess;
+  final void Function(int userId) onConsultSuccess; // ← Correction ici
 
   const ConsultBtn({
     super.key,
-    required this.onConsultSuccess,
+    required this.onConsultSuccess, // ← Correction ici
   });
 
   @override
@@ -30,7 +31,7 @@ class ConsultBtn extends StatelessWidget {
                 : () async {
                     final success = await userProvider.submitConsult();
                     if (success) {
-                      // Afficher un message de succès
+                      /* // Afficher un message de succès
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Compte trouvé avec succès !'),
@@ -39,7 +40,19 @@ class ConsultBtn extends StatelessWidget {
                       );
 
                       // Navigation
-                      onConsultSuccess();
+                      onConsultSuccess(); */
+                      // Récupérer l'ID de l'utilisateur courant
+                      final userId = userProvider.currentUser?.userId;
+                      if (userId != null) {
+                        onConsultSuccess(userId); // ← Appel avec userId
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Erreur: ID utilisateur non trouvé'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
                     } else {
                       // Afficher l'erreur
                       ScaffoldMessenger.of(context).showSnackBar(

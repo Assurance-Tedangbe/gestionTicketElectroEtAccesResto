@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/pages/consultAccount.dart';
 import 'package:mymobileproject/UI/widgets/admin/createAccountIcon.dart';
 import 'package:mymobileproject/UI/pages/updateUser.dart';
 import 'package:mymobileproject/UI/widgets/admin/student.mgmt.dart/dataTableStyle.dart';
 import 'package:mymobileproject/UI/widgets/admin/student.mgmt.dart/headTableStyle.dart';
+import 'package:mymobileproject/UI/widgets/consult.account/consult.data.dart';
 import 'package:mymobileproject/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:mymobileproject/provider/user_provider.dart';
@@ -68,6 +68,7 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
                       content:
                           Text('Compte ${user.username} supprimé avec succès'),
                       backgroundColor: validateBtnColor,
+                      duration: const Duration(seconds: 3),
                     ),
                   );
                 } else {
@@ -76,6 +77,7 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
                       content: Text(
                           'Erreur lors de la suppression: ${userProvider.error}'),
                       backgroundColor: errorColor,
+                      duration: const Duration(seconds: 3),
                     ),
                   );
                 }
@@ -207,7 +209,7 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
                 DataTableStyle(datafromBack: student.username),
                 onTap: () {
                   // Voir les détails de l'étudiant
-                  // _navigateToStudentDetails(context, student);
+                  _navigateToStudentDetails(context, student);
                 },
               ),
               DataCell(
@@ -223,8 +225,8 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
                   children: [
                     // Bouton Voir
                     IconButton(
-                      onPressed: () => {},
-                      //  _navigateToStudentDetails(context, student),
+                      onPressed: () =>
+                          {_navigateToStudentDetails(context, student)},
                       icon: const Icon(Icons.visibility,
                           size: 30, color: kPrimaryColor),
                       tooltip: 'Voir les détails',
@@ -234,24 +236,12 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
                     // Bouton Modifier
                     IconButton(
                       onPressed: () => {},
-                      //_navigateToUpdateStudent(context, student),
+                      // _navigateToUpdateStudent(context, student),
                       icon: const Icon(Icons.edit,
                           size: 30, color: kPrimaryColor),
                       tooltip: 'Modifier',
                     ),
                     const SizedBox(width: 5),
-
-                    /*  // Bouton Activer/Désactiver
-                    IconButton(
-                      onPressed: () => _toggleStudentStatus(context, student),
-                      icon: Icon(
-                        student.isActive ? Icons.block : Icons.check_circle,
-                        size: 30,
-                        color: student.isActive ? errorColor : validateBtnColor,
-                      ),
-                      tooltip: student.isActive ? 'Désactiver' : 'Activer',
-                    ),
-                    const SizedBox(width: 5), */
 
                     // Bouton Supprimer
                     IconButton(
@@ -270,79 +260,32 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
     );
   }
 
-  /*    void _navigateToStudentDetails(BuildContext context, User student) {
+  void _navigateToStudentDetails(BuildContext context, User student) {
     // Stocker l'étudiant sélectionné dans le provider
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    userProvider.currentUser = student;
+    userProvider.currentUser =
+        student; // Utilise le setter que nous avons ajouté
 
     // Naviguer vers la page de consultation
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ConsultAccount(
+        builder: (context) => ConsultData(
           userId: student.userId!,
         ),
       ),
     );
   }
 
-  void _navigateToUpdateStudent(BuildContext context, User student) {
+  /*  void _navigateToUpdateStudent(BuildContext context, User student) {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     userProvider.currentUser = student;
+    userProvider.initializeFormWithUser(student); // Pré-remplir le formulaire
 
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => UpdateUser(
-          user: student,
+          userId: student.userId!,
         ),
-      ),
-    );
-  } 
- */
-
-  /*  Future<void> _toggleStudentStatus(BuildContext context, User student) async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-
-    // Dans cet exemple, on suppose que le modèle User a un champ isActive
-    // Si votre API permet d'activer/désactiver, utilisez une méthode spécifique
-    // Sinon, vous pouvez créer une méthode dans UserProvider
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-            student.isActive ? 'Désactiver le compte' : 'Activer le compte'),
-        content: Text(
-          student.isActive
-              ? 'Voulez-vous désactiver le compte de ${student.username} ?'
-              : 'Voulez-vous activer le compte de ${student.username} ?',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('ANNULER'),
-          ),
-          TextButton(
-            onPressed: () async {
-              // TODO: Implémenter la logique d'activation/désactivation
-              // Exemple: await userProvider.toggleUserStatus(student.userId!);
-
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    student.isActive
-                        ? 'Compte ${student.username} désactivé'
-                        : 'Compte ${student.username} activé',
-                  ),
-                  backgroundColor: Colors.green,
-                ),
-              );
-
-              Navigator.pop(context);
-              userProvider.loadAllUsers(forceRefresh: true);
-            },
-            child: Text(student.isActive ? 'DÉSACTIVER' : 'ACTIVER'),
-          ),
-        ],
       ),
     );
   } */

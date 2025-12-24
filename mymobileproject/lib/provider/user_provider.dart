@@ -648,6 +648,87 @@ class UserProvider with ChangeNotifier {
       return user.role?.roleName?.toUpperCase() == roleName.toUpperCase();
     }).toList();
   }
+
+  // **********newedits********** :
+
+// Setter pour currentUser (manquant)
+  set currentUser(User? user) {
+    _currentUser = user;
+    notifyListeners();
+  }
+
+// Getter pour l'utilisateur consulté
+  User? get consultedUser => _currentUser;
+
+// Méthode pour charger un utilisateur pour consultation
+  Future<void> loadUserForConsultation(int userId) async {
+    _isLoading = true;
+    _error = '';
+    notifyListeners();
+
+    try {
+      await _service.getUserById(userId);
+      _error = '';
+    } catch (e) {
+      _error = 'Erreur lors du chargement: ${e.toString()}';
+      print("Error loadUserForConsultation: $e");
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+// Méthode pour mettre à jour un utilisateur avec les données du formulaire
+  Future<bool> updateUserFromForm() async {
+    _isUpdatingUser = true;
+    _error = '';
+    notifyListeners();
+
+    try {
+      if (_currentUser == null) {
+        throw Exception('Aucun utilisateur sélectionné');
+      }
+
+      // Créer un utilisateur mis à jour
+      final updatedUser = User(
+        userId: _currentUser!.userId,
+        username: _username.isNotEmpty ? _username : _currentUser!.username,
+        password: _password.isNotEmpty ? _password : _currentUser!.password,
+        email: _email.isNotEmpty ? _email : _currentUser!.email,
+        firstName: _firstName.isNotEmpty ? _firstName : _currentUser!.firstName,
+        lastName: _lastName.isNotEmpty ? _lastName : _currentUser!.lastName,
+        role: _role ?? _currentUser!.role,
+      );
+
+      // Appeler le service de mise à jour
+      final result = await updateExistingUser(updatedUser);
+
+      if (result) {
+        // Réinitialiser les champs du formulaire
+        resetForm();
+      }
+
+      return result;
+    } catch (e) {
+      _error = 'Erreur lors de la mise à jour: ${e.toString()}';
+      return false;
+    } finally {
+      _isUpdatingUser = false;
+      notifyListeners();
+    }
+  }
+
+// Méthode pour initialiser les champs du formulaire avec les données d'un utilisateur
+  void initializeFormWithUser(User user) {
+    _firstName = user.firstName;
+    _lastName = user.lastName;
+    _username = user.username;
+    _email = user.email;
+    _password = ''; // Ne pas pré-remplir le mot de passe pour la sécurité
+    _confirmPassword = '';
+    _role = user.role;
+    notifyListeners();
+  }
 }
 
 
