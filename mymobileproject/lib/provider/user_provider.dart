@@ -59,7 +59,6 @@ class UserProvider with ChangeNotifier {
   String _updateUsername = '';
   String _updateEmail = '';
   String _updatePassword = '';
-  //String _updateConfirmPassword = '';
   Role? _updateRole;
 
   UserProvider(this._service);
@@ -736,18 +735,12 @@ class UserProvider with ChangeNotifier {
       _updateUsername.isNotEmpty &&
       _updateEmail.isNotEmpty &&
       _updatePassword.isNotEmpty &&
-      _updatePassword.length >= 6
-      //  (_updatePassword.isEmpty || _updatePassword == _updateConfirmPassword)
-      ;
+      _updatePassword.length >= 6;
 
   String? get updatePasswordError {
     if (_updatePassword.isNotEmpty && _updatePassword.length < 6) {
       return 'Le mot de passe doit contenir au moins 6 caractères';
     }
-    /*  if (_updateConfirmPassword.isNotEmpty &&
-        _updatePassword != _updateConfirmPassword) {
-      return 'Les mots de passe ne correspondent pas';
-    } */
     return null;
   }
 
@@ -764,9 +757,8 @@ class UserProvider with ChangeNotifier {
     _updateLastName = user.lastName;
     _updateUsername = user.username;
     _updateEmail = user.email;
-    _updatePassword = user.password;
-    // _updatePassword = ''; // Ne pas pré-remplir le mot de passe pour la sécurité
-    // _updateConfirmPassword = '';
+    // _updatePassword = user.password;
+    _updatePassword = ''; // Ne pas pré-remplir le mot de passe pour la sécurité
     _updateRole = user.role;
 
     // Si vous voulez conserver l'utilisateur courant pour la mise à jour
@@ -793,6 +785,18 @@ class UserProvider with ChangeNotifier {
         throw Exception('Aucun utilisateur sélectionné pour la modification');
       }
 
+      // Gestion spéciale du mot de passe
+      String finalPassword;
+      if (_updatePassword.isEmpty || _updatePassword == '********') {
+        // Garder l'ancien mot de passe
+        finalPassword = _currentUser!.password;
+        print('🔄 Mot de passe inchangé');
+      } else {
+        // Utiliser le nouveau mot de passe
+        finalPassword = _updatePassword;
+        print('🔄 Mot de passe mis à jour');
+      }
+
       // Créez l'objet User mis à jour
       final updatedUser = User(
         userId: _currentUser!.userId,
@@ -800,23 +804,12 @@ class UserProvider with ChangeNotifier {
         lastName: _updateLastName,
         username: _updateUsername,
         email: _updateEmail,
-        // Si le mot de passe est vide, conservez l'ancien, sinon mettez à jour
-        password: _updatePassword.isNotEmpty
+        password: finalPassword,
+        /*  _updatePassword.isNotEmpty
             ? _updatePassword
-            : _currentUser!.password,
+            : _currentUser!.password, */
         role: _updateRole ?? _currentUser!.role,
       );
-
-      /* // Créer un utilisateur mis à jour
-      final updatedUser = User(
-        userId: _currentUser!.userId,
-        username: _username.isNotEmpty ? _username : _currentUser!.username,
-        password: _password.isNotEmpty ? _password : _currentUser!.password,
-        email: _email.isNotEmpty ? _email : _currentUser!.email,
-        firstName: _firstName.isNotEmpty ? _firstName : _currentUser!.firstName,
-        lastName: _lastName.isNotEmpty ? _lastName : _currentUser!.lastName,
-        role: _role ?? _currentUser!.role,
-      ); */
 
       // Appelez le service de mise à jour
       final success = await updateExistingUser(updatedUser);
@@ -844,7 +837,6 @@ class UserProvider with ChangeNotifier {
     _updateUsername = '';
     _updateEmail = '';
     _updatePassword = '';
-    // _updateConfirmPassword = '';
     _updateRole = null;
     _error = '';
     notifyListeners();

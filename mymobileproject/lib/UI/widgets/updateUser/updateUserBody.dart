@@ -28,8 +28,6 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  /* final TextEditingController _confirmPasswordController =
-      TextEditingController(); */
 
   Role? _selectedRole;
 
@@ -62,7 +60,6 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
     _usernameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    // _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -125,12 +122,6 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
                       onChanged: (value) =>
                           userProvider.setUpdatePassword(value),
                     ),
-                    /* const SizeboxHeightSession(),
-                    UpdateConfirmPasswordSection(
-                      controller: _confirmPasswordController,
-                      onChanged: (value) =>
-                          userProvider.setUpdateConfirmPassword(value),
-                    ), */
                     const SizeboxHeightSession(),
                     UpdateUserBtn(
                       onUpdateSuccess: () {
