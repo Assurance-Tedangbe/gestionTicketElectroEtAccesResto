@@ -472,8 +472,6 @@ class UserApiService {
     }
   }
 
-// === MÉTHODES UTILITAIRES AVEC LOGIQUE MÉTIER LÉGÈRE ===
-
 // Searching for users in the local cache
   List<User> searchUsers(String query) {
     print("searching for users with query: $query");
@@ -514,12 +512,19 @@ class UserApiService {
     }
   }
 
-// Clear the cache (useful for forcing a refresh)
+  // Clear the cache (useful for forcing a refresh)
   void clearCache() {
     print("Clearing the cache");
     _cachedUsers.clear();
     _lastFetchTime = null;
     print("🗑️ Cache utilisateurs vidé");
+  }
+
+  // Dans UserApiService, ajoutez cette méthode pour forcer le rafraîchissement du cache
+  void invalidateUserCache(int userId) {
+    // Retirer l'utilisateur du cache pour forcer une nouvelle récupération
+    _cachedUsers.removeWhere((user) => user.userId == userId);
+    print('🗑️ Cache invalidé pour l\'utilisateur ID: $userId');
   }
 }
 

@@ -3,11 +3,11 @@ import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/constants.dart';
 
-class UpdateUsername extends StatelessWidget {
+class UpdateFirstName extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String>? onChanged;
 
-  const UpdateUsername({
+  const UpdateFirstName({
     super.key,
     required this.controller,
     this.onChanged,
@@ -18,7 +18,7 @@ class UpdateUsername extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(text: "Nom d'utilisateur"),
+        const Label(text: 'Prénom'),
         const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
@@ -46,7 +46,7 @@ class UpdateUsername extends StatelessWidget {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 11),
               prefixIcon: Icon(Icons.person, color: kPrimaryColor),
-              hintText: "Nom d'utilisateur",
+              hintText: 'Prénom',
               hintStyle: TextStyle(color: kPrimaryColor, fontSize: 12),
             ),
           ),
@@ -56,20 +56,21 @@ class UpdateUsername extends StatelessWidget {
   }
 }
 
-/* class UpdateUsername extends StatefulWidget {
-  const UpdateUsername({super.key});
+/* 
+class UpdateFirstName extends StatefulWidget {
+  const UpdateFirstName({super.key});
 
   @override
-  State<UpdateUsername> createState() => _UpdateUsernameState();
+  State<UpdateFirstName> createState() => _UpdateFirstNameState();
 }
 
-class _UpdateUsernameState extends State<UpdateUsername> {
+class _UpdateFirstNameState extends State<UpdateFirstName> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(text: "Nom d'utilisateur"),
+        const Label(text: 'Prénom'),
         const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
@@ -91,11 +92,12 @@ class _UpdateUsernameState extends State<UpdateUsername> {
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 11),
                 prefixIcon: Icon(Icons.person, color: kPrimaryColor),
-                hintText: 'Nom d\'utilisateur',
+                hintText: 'Prénom',
                 hintStyle: TextStyle(color: kPrimaryColor, fontSize: 12)),
           ),
         )
       ],
     );
   }
-} */
+}
+ */

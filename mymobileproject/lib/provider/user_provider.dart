@@ -53,6 +53,15 @@ class UserProvider with ChangeNotifier {
   String _consultUsername = '';
   bool _isConsultingUser = false;
 
+// variables d'état pour le formulaire de modification
+  String _updateFirstName = '';
+  String _updateLastName = '';
+  String _updateUsername = '';
+  String _updateEmail = '';
+  String _updatePassword = '';
+  //String _updateConfirmPassword = '';
+  Role? _updateRole;
+
   UserProvider(this._service);
 
   // === GETTERS - Accès contrôlé à l'état ===
@@ -92,6 +101,18 @@ class UserProvider with ChangeNotifier {
   String get consultUsername => _consultUsername;
   bool get isConsultingUser => _isConsultingUser;
   bool get isConsultFormValid => _consultUsername.isNotEmpty;
+
+  // Getter pour la modification
+  String get updateFirstName => _updateFirstName;
+  String get updateLastName => _updateLastName;
+  String get updateUsername => _updateUsername;
+  String get updateEmail => _updateEmail;
+  String get updatePassword => _updatePassword;
+  // String get updateConfirmPassword => _updateConfirmPassword;
+  Role? get updateRole => _updateRole;
+
+// Getter pour l'utilisateur consulté
+  User? get consultedUser => _currentUser;
 
   // setters for signup form
   void setFirstname(String value) {
@@ -157,6 +178,48 @@ class UserProvider with ChangeNotifier {
   // Consult form setters
   void setConsultUsername(String value) {
     _consultUsername = value;
+    notifyListeners();
+  }
+
+  // Setter pour currentUser (manquant)
+  set currentUser(User? user) {
+    _currentUser = user;
+    notifyListeners();
+  }
+
+// Setters pour le formulaire de modification
+  void setUpdateFirstName(String value) {
+    _updateFirstName = value;
+    notifyListeners();
+  }
+
+  void setUpdateLastName(String value) {
+    _updateLastName = value;
+    notifyListeners();
+  }
+
+  void setUpdateUsername(String value) {
+    _updateUsername = value;
+    notifyListeners();
+  }
+
+  void setUpdateEmail(String value) {
+    _updateEmail = value;
+    notifyListeners();
+  }
+
+  void setUpdatePassword(String value) {
+    _updatePassword = value;
+    notifyListeners();
+  }
+
+  /* void setUpdateConfirmPassword(String value) {
+    _updateConfirmPassword = value;
+    notifyListeners();
+  } */
+
+  void setUpdateRole(Role value) {
+    _updateRole = value;
     notifyListeners();
   }
 
@@ -402,8 +465,6 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  // === MÉTHODES UTILITAIRES ===
-
   // Searching for users (uses the service's local cache)
   List<User> searchUsers(String query) {
     return _service.searchUsers(query);
@@ -426,7 +487,7 @@ class UserProvider with ChangeNotifier {
     await loadAllUsers(forceRefresh: true);
   }
 
-  // necessary for signup form
+  /* ******** FOR SIGNUP FORM ******** */
   // Validation
   bool get isFormValid =>
       _firstName.isNotEmpty &&
@@ -496,7 +557,7 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  // Reset du formulaire
+  // Reset du formulaire d'inscription
   void resetForm() {
     _firstName = '';
     _lastName = '';
@@ -509,7 +570,7 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // necessary for login form
+  /* ******** FOR LOGIN FORM ******** */
 
   // Validation pour la connexion
   bool get isLoginFormValid =>
@@ -603,7 +664,7 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  // for Consult form
+  /* ******** FOR CONSULT FORM ******** */
   Future<bool> submitConsult() async {
     if (!isConsultFormValid) {
       _error = 'Veuillez saisir un nom d\'utilisateur';
@@ -649,17 +710,6 @@ class UserProvider with ChangeNotifier {
     }).toList();
   }
 
-  // **********newedits********** :
-
-// Setter pour currentUser (manquant)
-  set currentUser(User? user) {
-    _currentUser = user;
-    notifyListeners();
-  }
-
-// Getter pour l'utilisateur consulté
-  User? get consultedUser => _currentUser;
-
 // Méthode pour charger un utilisateur pour consultation
   Future<void> loadUserForConsultation(int userId) async {
     _isLoading = true;
@@ -678,6 +728,128 @@ class UserProvider with ChangeNotifier {
     }
   }
 
+/* ******** FOR EDIT USER FORM ******** */
+// Validation pour le formulaire de modification
+  bool get isUpdateFormValid =>
+      _updateFirstName.isNotEmpty &&
+      _updateLastName.isNotEmpty &&
+      _updateUsername.isNotEmpty &&
+      _updateEmail.isNotEmpty &&
+      _updatePassword.isNotEmpty &&
+      _updatePassword.length >= 6
+      //  (_updatePassword.isEmpty || _updatePassword == _updateConfirmPassword)
+      ;
+
+  String? get updatePasswordError {
+    if (_updatePassword.isNotEmpty && _updatePassword.length < 6) {
+      return 'Le mot de passe doit contenir au moins 6 caractères';
+    }
+    /*  if (_updateConfirmPassword.isNotEmpty &&
+        _updatePassword != _updateConfirmPassword) {
+      return 'Les mots de passe ne correspondent pas';
+    } */
+    return null;
+  }
+
+  String? get updateEmailError {
+    if (_updateEmail.isNotEmpty && !_updateEmail.contains('@')) {
+      return 'Email invalide';
+    }
+    return null;
+  }
+
+// Méthode pour pré-remplir les champs avec les données de l'utilisateur
+  void prefillUpdateForm(User user) {
+    _updateFirstName = user.firstName;
+    _updateLastName = user.lastName;
+    _updateUsername = user.username;
+    _updateEmail = user.email;
+    _updatePassword = user.password;
+    // _updatePassword = ''; // Ne pas pré-remplir le mot de passe pour la sécurité
+    // _updateConfirmPassword = '';
+    _updateRole = user.role;
+
+    // Si vous voulez conserver l'utilisateur courant pour la mise à jour
+    _currentUser = user;
+
+    notifyListeners();
+  }
+
+// Méthode pour soumettre la mise à jour
+  Future<bool> submitUpdate() async {
+    if (!isUpdateFormValid) {
+      _error = 'Veuillez remplir tous les champs correctement';
+      notifyListeners();
+      return false;
+    }
+
+    _isUpdatingUser = true;
+    _error = '';
+    notifyListeners();
+
+    try {
+      // Utilisez l'ID de l'utilisateur courant
+      if (_currentUser == null) {
+        throw Exception('Aucun utilisateur sélectionné pour la modification');
+      }
+
+      // Créez l'objet User mis à jour
+      final updatedUser = User(
+        userId: _currentUser!.userId,
+        firstName: _updateFirstName,
+        lastName: _updateLastName,
+        username: _updateUsername,
+        email: _updateEmail,
+        // Si le mot de passe est vide, conservez l'ancien, sinon mettez à jour
+        password: _updatePassword.isNotEmpty
+            ? _updatePassword
+            : _currentUser!.password,
+        role: _updateRole ?? _currentUser!.role,
+      );
+
+      /* // Créer un utilisateur mis à jour
+      final updatedUser = User(
+        userId: _currentUser!.userId,
+        username: _username.isNotEmpty ? _username : _currentUser!.username,
+        password: _password.isNotEmpty ? _password : _currentUser!.password,
+        email: _email.isNotEmpty ? _email : _currentUser!.email,
+        firstName: _firstName.isNotEmpty ? _firstName : _currentUser!.firstName,
+        lastName: _lastName.isNotEmpty ? _lastName : _currentUser!.lastName,
+        role: _role ?? _currentUser!.role,
+      ); */
+
+      // Appelez le service de mise à jour
+      final success = await updateExistingUser(updatedUser);
+
+      if (success) {
+        // Réinitialisez le formulaire
+        resetUpdateForm();
+      }
+
+      return success;
+    } catch (e) {
+      _error = 'Erreur lors de la modification: ${e.toString()}';
+      notifyListeners();
+      return false;
+    } finally {
+      _isUpdatingUser = false;
+      notifyListeners();
+    }
+  }
+
+// Réinitialiser le formulaire de modification
+  void resetUpdateForm() {
+    _updateFirstName = '';
+    _updateLastName = '';
+    _updateUsername = '';
+    _updateEmail = '';
+    _updatePassword = '';
+    // _updateConfirmPassword = '';
+    _updateRole = null;
+    _error = '';
+    notifyListeners();
+  }
+/* 
 // Méthode pour mettre à jour un utilisateur avec les données du formulaire
   Future<bool> updateUserFromForm() async {
     _isUpdatingUser = true;
@@ -717,20 +889,8 @@ class UserProvider with ChangeNotifier {
       notifyListeners();
     }
   }
-
-// Méthode pour initialiser les champs du formulaire avec les données d'un utilisateur
-  void initializeFormWithUser(User user) {
-    _firstName = user.firstName;
-    _lastName = user.lastName;
-    _username = user.username;
-    _email = user.email;
-    _password = ''; // Ne pas pré-remplir le mot de passe pour la sécurité
-    _confirmPassword = '';
-    _role = user.role;
-    notifyListeners();
-  }
+ */
 }
-
 
 /* 
    RÉSUMÉ DU PATTERN GÉNÉRAL

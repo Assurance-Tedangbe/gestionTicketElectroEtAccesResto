@@ -226,7 +226,7 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
                     // Bouton Voir
                     IconButton(
                       onPressed: () =>
-                          {_navigateToStudentDetails(context, student)},
+                          _navigateToStudentDetails(context, student),
                       icon: const Icon(Icons.visibility,
                           size: 30, color: kPrimaryColor),
                       tooltip: 'Voir les détails',
@@ -235,8 +235,8 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
 
                     // Bouton Modifier
                     IconButton(
-                      onPressed: () => {},
-                      // _navigateToUpdateStudent(context, student),
+                      onPressed: () =>
+                          _navigateToUpdateStudent(context, student),
                       icon: const Icon(Icons.edit,
                           size: 30, color: kPrimaryColor),
                       tooltip: 'Modifier',
@@ -276,10 +276,10 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
     );
   }
 
-  /*  void _navigateToUpdateStudent(BuildContext context, User student) {
+  void _navigateToUpdateStudent(BuildContext context, User student) {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     userProvider.currentUser = student;
-    userProvider.initializeFormWithUser(student); // Pré-remplir le formulaire
+    userProvider.prefillUpdateForm(student); // Pré-remplir le formulaire
 
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -288,7 +288,7 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
         ),
       ),
     );
-  } */
+  }
 }
 
 /* 

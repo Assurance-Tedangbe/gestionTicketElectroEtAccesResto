@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
 import 'package:mymobileproject/UI/widgets/home/sizeboxHeightSession.dart';
-import 'package:mymobileproject/UI/widgets/updateUser/updateConfirmPassword.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/updateEmail.dart';
-import 'package:mymobileproject/UI/widgets/updateUser/updateFullName.dart';
+import 'package:mymobileproject/UI/widgets/updateUser/updateFirstName.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/pageIconTemplate.dart';
+import 'package:mymobileproject/UI/widgets/updateUser/updateLastName.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/updatePassword.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/updateRole.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/updateUserBtn.dart';
 import 'package:mymobileproject/UI/widgets/updateUser/updateUsername.dart';
+import 'package:mymobileproject/constants.dart';
+import 'package:mymobileproject/model/role_model.dart';
 import 'package:mymobileproject/provider/user_provider.dart';
 import 'package:provider/provider.dart';
-/*
+
 class UpdateUserBody extends StatefulWidget {
   const UpdateUserBody({super.key});
 
@@ -20,56 +22,59 @@ class UpdateUserBody extends StatefulWidget {
 }
 
 class _UpdateUserBodyState extends State<UpdateUserBody> {
-  late TextEditingController _firstNameController;
-  late TextEditingController _lastNameController;
-  late TextEditingController _usernameController;
-  late TextEditingController _emailController;
+  // Contrôleurs pour les champs
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  /* final TextEditingController _confirmPasswordController =
+      TextEditingController(); */
+
+  Role? _selectedRole;
 
   @override
   void initState() {
     super.initState();
-
-    // Initialiser les contrôleurs
-    _firstNameController = TextEditingController();
-    _lastNameController = TextEditingController();
-    _usernameController = TextEditingController();
-    _emailController = TextEditingController();
-
-    // Charger l'utilisateur et initialiser les champs
+    // Pré-remplir les champs avec les données de l'utilisateur courant
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _loadUserAndInitializeForm();
-    });
-  }
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      final user = userProvider.currentUser;
 
-  void _loadUserAndInitializeForm() async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-
-    // Charger l'utilisateur
-    await userProvider.loadUserById(widget.userId);
-
-    final user = userProvider.currentUser;
-    if (user != null) {
-      // Pré-remplir les champs
-      setState(() {
+      if (user != null) {
         _firstNameController.text = user.firstName;
         _lastNameController.text = user.lastName;
         _usernameController.text = user.username;
         _emailController.text = user.email;
-      });
+        _passwordController.text = user.password;
+        _selectedRole = user.role;
 
-      // Initialiser le formulaire dans le provider
-      userProvider.initializeFormWithUser(user);
-    }
+        // Pré-remplir aussi dans le provider
+        userProvider.prefillUpdateForm(user);
+      }
+    });
   }
 
   @override
   void dispose() {
-    // Nettoyer les contrôleurs
     _firstNameController.dispose();
     _lastNameController.dispose();
     _usernameController.dispose();
     _emailController.dispose();
+    _passwordController.dispose();
+    // _confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  void _onRoleChanged(Role? role) {
+    setState(() {
+      _selectedRole = role;
+    });
+
+    if (role != null) {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.setUpdateRole(role);
+    }
   }
 
   @override
@@ -83,37 +88,74 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
           children: <Widget>[
             const PageIconTemplate(iconData: Icons.update),
             const SizedBox(height: 5),
-
-            // Champs pré-remplis avec contrôleurs
-            UpdateFullName(controller: _firstNameController),
-            const SizeboxHeightSession(),
-
-            UpdateUsername(controller: _usernameController),
-            const SizeboxHeightSession(),
-
-            // Le rôle (peut être changé)
-            const UpdateRole(),
-            const SizeboxHeightSession(),
-
-            UpdateEmail(controller: _emailController),
-            const SizeboxHeightSession(),
-
-            // Mot de passe (laisser vide par défaut pour ne pas le changer)
-            const UpdatePassword(),
-            const SizeboxHeightSession(),
-
-            const UpdateConfirmPassword(),
-
-            // Bouton de mise à jour
-            UpdateUserBtn(userId: widget.userId),
+            Consumer<UserProvider>(
+              builder: (context, userProvider, child) {
+                return Column(
+                  children: [
+                    UpdateFirstName(
+                      controller: _firstNameController,
+                      onChanged: (value) =>
+                          userProvider.setUpdateFirstName(value),
+                    ),
+                    const SizeboxHeightSession(),
+                    UpdateLastName(
+                      controller: _lastNameController,
+                      onChanged: (value) =>
+                          userProvider.setUpdateLastName(value),
+                    ),
+                    const SizeboxHeightSession(),
+                    UpdateUsername(
+                      controller: _usernameController,
+                      onChanged: (value) =>
+                          userProvider.setUpdateUsername(value),
+                    ),
+                    const SizeboxHeightSession(),
+                    UpdateRole(
+                      onRoleChanged: _onRoleChanged,
+                      selectedRole: _selectedRole,
+                    ),
+                    const SizeboxHeightSession(),
+                    UpdateEmail(
+                      controller: _emailController,
+                      onChanged: (value) => userProvider.setUpdateEmail(value),
+                    ),
+                    const SizeboxHeightSession(),
+                    UpdatePassword(
+                      controller: _passwordController,
+                      onChanged: (value) =>
+                          userProvider.setUpdatePassword(value),
+                    ),
+                    /* const SizeboxHeightSession(),
+                    UpdateConfirmPasswordSection(
+                      controller: _confirmPasswordController,
+                      onChanged: (value) =>
+                          userProvider.setUpdateConfirmPassword(value),
+                    ), */
+                    const SizeboxHeightSession(),
+                    UpdateUserBtn(
+                      onUpdateSuccess: () {
+                        // Navigation après succès
+                        Navigator.of(context).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Compte modifié avec succès !'),
+                            backgroundColor: validateBtnColor,
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
+            ),
           ],
         ),
       ),
     );
   }
-} */
+}
 
-class UpdateUserBody extends StatefulWidget {
+/* class UpdateUserBody extends StatefulWidget {
   const UpdateUserBody({super.key});
 
   @override
@@ -132,7 +174,9 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
         children: <Widget>[
           PageIconTemplate(iconData: Icons.update),
           SizedBox(height: 5),
-          UpdateFullName(),
+          UpdateFirstName(),
+          SizeboxHeightSession(),
+          UpdateLastName(),
           SizeboxHeightSession(),
           UpdateUsername(),
           SizeboxHeightSession(),
@@ -141,11 +185,11 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
           UpdateEmail(),
           SizeboxHeightSession(),
           UpdatePassword(),
-          SizeboxHeightSession(),
-          UpdateConfirmPassword(),
+          // SizeboxHeightSession(),
+          // UpdateConfirmPassword(),
           UpdateUserBtn()
         ],
       ),
     ));
   }
-}
+} */
