@@ -3,7 +3,9 @@ import 'package:mymobileproject/UI/widgets/updateUser/updateUserBody.dart';
 
 class UpdateUser extends StatelessWidget {
   static const String _title = 'Modifier un utilisateur';
-  const UpdateUser({super.key});
+  // Vous pouvez garder ce paramètre si vous voulez passer l'ID
+  final int? userId;
+  const UpdateUser({super.key, this.userId});
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-import 'user_model.dart';
+/* import 'user_model.dart';
 
 class Account {
   final int? accountId; // null si nouveau compte
@@ -94,3 +94,4 @@ class Account {
     );
   } */
 }
+ */

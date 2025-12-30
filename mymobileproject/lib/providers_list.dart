@@ -30,9 +30,9 @@ List<ChangeNotifierProvider> getProviders() {
     ChangeNotifierProvider<TicketProvider>(
       create: (context) => TicketProvider(TicketApiService()),
     ),
-    ChangeNotifierProvider<AccountProvider>(
+    /* ChangeNotifierProvider<AccountProvider>(
       create: (context) => AccountProvider(AccountApiService()),
-    ),
+    ), */
     ChangeNotifierProvider<MenuProvider>(
       create: (context) => MenuProvider(MenuApiService()),
     ),

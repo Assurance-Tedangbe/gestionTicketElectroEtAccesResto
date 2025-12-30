@@ -72,9 +72,9 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider<TicketProvider>(
         create: (context) => TicketProvider(TicketApiService()),
       ),
-      ChangeNotifierProvider<AccountProvider>(
+      /*  ChangeNotifierProvider<AccountProvider>(
         create: (context) => AccountProvider(AccountApiService()),
-      ),
+      ), */
       ChangeNotifierProvider<MenuProvider>(
         create: (context) => MenuProvider(MenuApiService()),
       ),
@@ -114,8 +114,8 @@ class RootView extends StatelessWidget {
         "/manage-agents": (context) => const ManageAgent(),
         "/manage-porters": (context) => const ManagePorter(),
         "/scanQR": (context) => const ScanQR(),
-        "/activate-account": (context) => const ActivateAccount(),
-        "/deactivate-account": (context) => const DeactivateAccount(),
+        //  "/activate-account": (context) => const ActivateAccount(),
+        //  "/deactivate-account": (context) => const DeactivateAccount(),
         "/student": (context) => const StudentInterface(),
         "/ticket": (context) => const BuyTicket(),
         "/transfert-ticket": (context) => const TransfertTicket(),

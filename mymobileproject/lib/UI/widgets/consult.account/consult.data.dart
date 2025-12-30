@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mymobileproject/UI/widgets/background.dart';
-import 'package:mymobileproject/UI/widgets/consult.account/dataConsultBack.dart';
-import 'package:mymobileproject/UI/widgets/home/stat.label.dart';
 import 'package:mymobileproject/constants.dart';
 import 'package:mymobileproject/model/user_model.dart';
 import 'package:mymobileproject/provider/user_provider.dart';
@@ -10,15 +8,38 @@ import 'package:provider/provider.dart';
 /*
   Page d'affichage des informations du compte consulté.
 */
-class ConsultData extends StatelessWidget {
+/* class ConsultData extends StatelessWidget {
+  static const String _title = 'Informations sur le compte';
+  final int userId;
+
+  const ConsultData({super.key, required this.userId}); */
+class ConsultData extends StatefulWidget {
+  // static const String _title = 'Informations sur le compte';
+  final int userId;
+
+  const ConsultData({super.key, required this.userId});
+
+  @override
+  State<ConsultData> createState() => _ConsultDataState();
+}
+
+class _ConsultDataState extends State<ConsultData> {
   static const String _title = 'Informations sur le compte';
 
-  const ConsultData({super.key});
+  @override
+  void initState() {
+    super.initState();
+    // Charger l'utilisateur au démarrage
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.loadUserById(widget.userId);
+    });
+  }
 
   // Méthode pour masquer le mot de passe
   String _maskPassword(String password) {
     if (password.isEmpty) return '********';
-    return '*' * password.length;
+    return '*' * password.length; // Afficher 8 étoiles pour la sécurité
   }
 
   @override
@@ -31,10 +52,19 @@ class ConsultData extends StatelessWidget {
         title: const Text(_title),
         backgroundColor: kPrimaryColor,
       ),
+      /* nous pouvons directement utiliser userProvider.currentUser 
+         sans avoir besoin d'un FutureBuilder supplémentaire.  */
       body: Consumer<UserProvider>(
         builder: (context, userProvider, child) {
-          final user = userProvider.currentUser;
+          if (userProvider.isLoading && userProvider.currentUser == null) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
 
+          final user = userProvider.currentUser; // ← Données déjà disponibles
+
+          // Pas besoin de FutureBuilder car les données sont déjà dans le Provider
           return Background(
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -73,7 +103,7 @@ class ConsultData extends StatelessWidget {
                             child: Text(
                               'Aucune donnée utilisateur disponible',
                               style: TextStyle(
-                                color: Colors.grey,
+                                color: borderColor,
                                 fontSize: 16,
                               ),
                             ),
@@ -124,22 +154,21 @@ class ConsultData extends StatelessWidget {
       children: <Widget>[
         // ID utilisateur
         _buildInfoRow('ID', user.userId?.toString() ?? 'N/A'),
-        const Divider(color: Colors.grey),
+        const Divider(color: borderColor),
 
         // Nom complet
         _buildInfoRow(
           'Nom complet',
           '${user.firstName} ${user.lastName}'.trim(),
         ),
-        const Divider(color: Colors.grey),
+        const Divider(color: borderColor),
 
         // Nom d'utilisateur
         _buildInfoRow('Nom d\'utilisateur', user.username),
-        const Divider(color: Colors.grey),
-
+        const Divider(color: borderColor),
         // Email
         _buildInfoRow('Email', user.email),
-        const Divider(color: Colors.grey),
+        const Divider(color: borderColor),
 
         // Mot de passe (masqué)
         _buildInfoRow(
@@ -147,7 +176,7 @@ class ConsultData extends StatelessWidget {
           _maskPassword(user.password),
           isPassword: true,
         ),
-        const Divider(color: Colors.grey),
+        const Divider(color: borderColor),
 
         // Rôle
         _buildInfoRow(
@@ -181,7 +210,7 @@ class ConsultData extends StatelessWidget {
             child: Text(
               value,
               style: TextStyle(
-                color: isPassword ? Colors.grey : kThirdColor,
+                color: isPassword ? borderColor : kThirdColor,
                 fontSize: 16,
                 fontStyle: isPassword ? FontStyle.italic : FontStyle.normal,
               ),
@@ -193,7 +222,23 @@ class ConsultData extends StatelessWidget {
   }
 }
 
-/* class ConsultData extends StatefulWidget {
+/*
+Procedure:
+Supposons que nous ayons dans UserProvider une méthode pour rechercher un utilisateur par son nom d'utilisateur.
+
+Étape 1 : Transformer StudentAccountNumber en StatelessWidget (renommé en UsernameSection pour la consultation)
+Étape 2 : Réécrire ConsultBody en StatefulWidget avec un contrôleur pour le champ nom d'utilisateur.
+Étape 3 : Réécrire ConsultBtn pour qu'il déclenche la recherche de l'utilisateur via le Provider.
+Étape 4 : Modifier ConsultData pour qu'elle affiche les données de l'utilisateur stockées dans le Provider.
+
+Cependant, notez que la consultation peut être faite par n'importe quel utilisateur (peut-être sans être connecté) ?
+Si c'est le cas, nous n'avons pas besoin de token. Sinon, il faudra peut-être un token pour consulter.
+
+Pour l'instant, supposons que nous voulons juste consulter un compte par le nom d'utilisateur, sans authentification.
+*/
+
+/* 
+class ConsultData extends StatefulWidget {
   const ConsultData({super.key});
 
   @override

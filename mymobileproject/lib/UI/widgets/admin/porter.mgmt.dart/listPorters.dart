@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mymobileproject/UI/pages/activateAccount.dart';
 import 'package:mymobileproject/UI/pages/adminInterface.dart';
 import 'package:mymobileproject/UI/pages/updateUser.dart';
 import 'package:mymobileproject/UI/widgets/admin/createAccountIcon.dart';
@@ -8,10 +7,8 @@ import 'package:mymobileproject/UI/widgets/admin/student.mgmt.dart/headTableStyl
 import 'package:mymobileproject/constants.dart';
 
 class ListPortersPage extends StatefulWidget {
-  //final List<Porter> listPorters;
   const ListPortersPage({
     super.key,
-    //  required this.listPorters,
   });
 
   @override
@@ -75,9 +72,6 @@ class _ListPortersPageState extends State<ListPortersPage> {
                   DataColumn(label: HeadTableStyle(data: "Actions")),
                 ],
                 rows: [
-                  // this brackets are just for test by not included in dynamic view
-                  // listStudents
-                  //   .map((data) =>
                   DataRow(cells: [
                     const DataCell(DataTableStyle(datafromBack: 'Tedangbe')),
                     const DataCell(
@@ -91,20 +85,11 @@ class _ListPortersPageState extends State<ListPortersPage> {
                             },
                             icon: const Icon(Icons.update, size: 45)),
                         IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ActivateAccount()));
-                            },
-                            icon: const Icon(Icons.no_accounts, size: 45)),
-                        IconButton(
                             onPressed: _showDeletePorterDialog,
                             icon: const Icon(Icons.delete, size: 45)),
                       ],
                     )),
                   ])
-                  //   )
-                  //   .toList(),
                 ]),
           ),
         ],

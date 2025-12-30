@@ -34,7 +34,7 @@ class LoginBtn extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Connexion réussie !'),
-                              backgroundColor: Colors.green,
+                              backgroundColor: validateBtnColor,
                             ),
                           );
 
@@ -45,7 +45,7 @@ class LoginBtn extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(userProvider.error),
-                              backgroundColor: Colors.red,
+                              backgroundColor: errorColor,
                             ),
                           );
                         }
@@ -54,7 +54,7 @@ class LoginBtn extends StatelessWidget {
               backgroundColor:
                   userProvider.isLoginFormValid && !userProvider.isLoggingIn
                       ? kPrimaryColor
-                      : Colors.grey,
+                      : borderColor,
               shape: const BeveledRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
               ),

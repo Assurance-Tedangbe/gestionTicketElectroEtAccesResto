@@ -28,12 +28,12 @@ class _ConsultBodyState extends State<ConsultBody> {
     super.dispose();
   }
 
-  void _onConsultSuccess() {
+  /* void _onConsultSuccess() {
     // Navigation vers la page d'affichage des données
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => const ConsultData()),
+      MaterialPageRoute(builder: (context) => ConsultData()),
     );
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,15 @@ class _ConsultBodyState extends State<ConsultBody> {
                     //const SizedBox(height: 20),
                     const SizeboxTemplate(),
                     ConsultBtn(
-                      onConsultSuccess: _onConsultSuccess,
+                      // onConsultSuccess: _onConsultSuccess,
+                      onConsultSuccess: (int userId) {
+                        // Naviguer vers ConsultData avec l'ID de l'utilisateur
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ConsultData(userId: userId),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 );
@@ -72,25 +80,3 @@ class _ConsultBodyState extends State<ConsultBody> {
     );
   }
 }
-
-/* class ConsultBody extends StatelessWidget {
-  const ConsultBody({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Background(
-      child: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            StudentAccountNumber(),
-            SizeboxTemplate(),
-            ConsultBtn()
-          ],
-        ),
-      ),
-    );
-  }
-} */

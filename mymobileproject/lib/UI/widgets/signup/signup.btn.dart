@@ -41,7 +41,7 @@ class SignupBtn extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Compte créé avec succès !'),
-                          backgroundColor: Colors.green,
+                          backgroundColor: validateBtnColor,
                         ),
                       );
 
@@ -55,7 +55,7 @@ class SignupBtn extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(userProvider.error),
-                          backgroundColor: Colors.red,
+                          backgroundColor: errorColor,
                         ),
                       );
                     }
@@ -65,7 +65,7 @@ class SignupBtn extends StatelessWidget {
               backgroundColor: // ← ICI
                   userProvider.isFormValid && !userProvider.isCreatingUser
                       ? kPrimaryColor
-                      : Colors.grey,
+                      : borderColor,
               shape: const BeveledRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
               ),

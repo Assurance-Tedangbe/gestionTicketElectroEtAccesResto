@@ -3,11 +3,11 @@ import 'package:mymobileproject/UI/widgets/transfert/transfert.credit/label.dart
 import 'package:mymobileproject/UI/widgets/updateUser/SizeboxBtwLabelField.dart';
 import 'package:mymobileproject/constants.dart';
 
-class UpdateUsername extends StatelessWidget {
+class UpdateLastName extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String>? onChanged;
 
-  const UpdateUsername({
+  const UpdateLastName({
     super.key,
     required this.controller,
     this.onChanged,
@@ -18,7 +18,7 @@ class UpdateUsername extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(text: "Nom d'utilisateur"),
+        const Label(text: 'Nom'),
         const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
@@ -46,7 +46,7 @@ class UpdateUsername extends StatelessWidget {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 11),
               prefixIcon: Icon(Icons.person, color: kPrimaryColor),
-              hintText: "Nom d'utilisateur",
+              hintText: 'Nom',
               hintStyle: TextStyle(color: kPrimaryColor, fontSize: 12),
             ),
           ),
@@ -56,20 +56,20 @@ class UpdateUsername extends StatelessWidget {
   }
 }
 
-/* class UpdateUsername extends StatefulWidget {
-  const UpdateUsername({super.key});
+/* class UpdateLastName extends StatefulWidget {
+  const UpdateLastName({super.key});
 
   @override
-  State<UpdateUsername> createState() => _UpdateUsernameState();
+  State<UpdateLastName> createState() => _UpdateLastNameState();
 }
 
-class _UpdateUsernameState extends State<UpdateUsername> {
+class _UpdateLastNameState extends State<UpdateLastName> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Label(text: "Nom d'utilisateur"),
+        const Label(text: 'Nom'),
         const SizeBoxBtwLabelField(),
         Container(
           alignment: Alignment.centerLeft,
@@ -91,7 +91,7 @@ class _UpdateUsernameState extends State<UpdateUsername> {
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 11),
                 prefixIcon: Icon(Icons.person, color: kPrimaryColor),
-                hintText: 'Nom d\'utilisateur',
+                hintText: 'Nom',
                 hintStyle: TextStyle(color: kPrimaryColor, fontSize: 12)),
           ),
         )

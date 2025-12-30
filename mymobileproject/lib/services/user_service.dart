@@ -10,23 +10,14 @@ import 'package:mymobileproject/model/user_model.dart';
   - Logique métier légère
   - Transformation des données */
 class UserApiService {
-  /* Use the IP address of the Android emulator (10.0.2.2)
-  or your machine's IP address for other emulators/devices. */
-  //static const String baseUrl = 'http://10.0.2.2:8080/api/users';
-  //static const String baseUrl = 'http://localhost:8080/api/users';
-  // Utilisez NetworkConfig.baseUrl
   final baseUrl = '${NetworkConfig.baseUrl}/api/users';
   final authUrl =
       '${NetworkConfig.baseUrl}/api/auth'; // URL pour l'authentification
-  // String baseUrl = "${GlobalData.host}/api/users";
 
   // Configure HTTP headers for all requests
   static final Map<String, String> headers = {
     'Content-Type': 'application/json', // Tells the server "I'm sending JSON"
     'Accept': 'application/json', // Tells the server "I want to receive JSON"
-
-    /* Add an Authorization header here if you are using Spring Security
-      'Authorization': 'Bearer your_jwt_token', */
   };
 
   // === CACHE SIMPLE INTÉGRÉ ===
@@ -180,16 +171,6 @@ class UserApiService {
       print('❌ Erreur lors de la connexion: $e');
       rethrow;
     }
-  }
-
-  // ⭐ NOUVEAU : Méthode pour sauvegarder le token (optionnel)
-  void _saveToken(String token) {
-    // Vous pouvez utiliser SharedPreferences pour stocker le token
-    // Exemple avec shared_preferences:
-    // final prefs = await SharedPreferences.getInstance();
-    // await prefs.setString('auth_token', token);
-
-    print('🔐 Token reçu et sauvegardé');
   }
 
   // ⭐ NOUVEAU : Méthode pour obtenir les headers avec authentification
@@ -491,8 +472,6 @@ class UserApiService {
     }
   }
 
-// === MÉTHODES UTILITAIRES AVEC LOGIQUE MÉTIER LÉGÈRE ===
-
 // Searching for users in the local cache
   List<User> searchUsers(String query) {
     print("searching for users with query: $query");
@@ -533,12 +512,19 @@ class UserApiService {
     }
   }
 
-// Clear the cache (useful for forcing a refresh)
+  // Clear the cache (useful for forcing a refresh)
   void clearCache() {
     print("Clearing the cache");
     _cachedUsers.clear();
     _lastFetchTime = null;
     print("🗑️ Cache utilisateurs vidé");
+  }
+
+  // Dans UserApiService, ajoutez cette méthode pour forcer le rafraîchissement du cache
+  void invalidateUserCache(int userId) {
+    // Retirer l'utilisateur du cache pour forcer une nouvelle récupération
+    _cachedUsers.removeWhere((user) => user.userId == userId);
+    print('🗑️ Cache invalidé pour l\'utilisateur ID: $userId');
   }
 }
 
