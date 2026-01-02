@@ -841,47 +841,6 @@ class UserProvider with ChangeNotifier {
     _error = '';
     notifyListeners();
   }
-/* 
-// Méthode pour mettre à jour un utilisateur avec les données du formulaire
-  Future<bool> updateUserFromForm() async {
-    _isUpdatingUser = true;
-    _error = '';
-    notifyListeners();
-
-    try {
-      if (_currentUser == null) {
-        throw Exception('Aucun utilisateur sélectionné');
-      }
-
-      // Créer un utilisateur mis à jour
-      final updatedUser = User(
-        userId: _currentUser!.userId,
-        username: _username.isNotEmpty ? _username : _currentUser!.username,
-        password: _password.isNotEmpty ? _password : _currentUser!.password,
-        email: _email.isNotEmpty ? _email : _currentUser!.email,
-        firstName: _firstName.isNotEmpty ? _firstName : _currentUser!.firstName,
-        lastName: _lastName.isNotEmpty ? _lastName : _currentUser!.lastName,
-        role: _role ?? _currentUser!.role,
-      );
-
-      // Appeler le service de mise à jour
-      final result = await updateExistingUser(updatedUser);
-
-      if (result) {
-        // Réinitialiser les champs du formulaire
-        resetForm();
-      }
-
-      return result;
-    } catch (e) {
-      _error = 'Erreur lors de la mise à jour: ${e.toString()}';
-      return false;
-    } finally {
-      _isUpdatingUser = false;
-      notifyListeners();
-    }
-  }
- */
 }
 
 /* 

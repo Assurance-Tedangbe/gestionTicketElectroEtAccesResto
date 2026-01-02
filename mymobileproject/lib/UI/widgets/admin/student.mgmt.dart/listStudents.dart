@@ -46,6 +46,14 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
               children: <Widget>[
                 Text(
                     'Êtes-vous sûr de vouloir supprimer le compte de ${user.username} ?'),
+                const SizedBox(height: 10),
+                const Text(
+                  '⚠️ Cette action est irréversible !',
+                  style: TextStyle(
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           ),
@@ -55,7 +63,7 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
               onPressed: () => Navigator.of(context).pop(),
             ),
             TextButton(
-              child: const Text('OUI'),
+              child: const Text('SUPPRIMER'),
               onPressed: () async {
                 final userProvider =
                     Provider.of<UserProvider>(context, listen: false);
@@ -412,13 +420,6 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
                                   builder: (context) => const UpdateUser()));
                             },
                             icon: const Icon(Icons.update, size: 45)),
-                        IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ActivateAccount()));
-                            },
-                            icon: const Icon(Icons.no_accounts, size: 45)),
                         IconButton(
                             onPressed: _showDeleteStudentDialog,
                             icon: const Icon(Icons.delete, size: 45)),

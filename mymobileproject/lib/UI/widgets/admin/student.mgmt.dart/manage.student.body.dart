@@ -12,7 +12,7 @@ class ManageStudentsBody extends StatelessWidget {
       child: SizedBox(
         height: size.height,
         width: size.width,
-        child: Column(children: [
+        child: const Column(children: [
           ListStudentsPage(),
         ]),
       ),
