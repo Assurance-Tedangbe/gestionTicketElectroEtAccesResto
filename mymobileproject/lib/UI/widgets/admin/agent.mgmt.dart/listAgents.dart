@@ -138,30 +138,26 @@ class _ListAgentsPageState extends State<ListAgentsPage> {
             children: [
               // En-tête avec bouton de création et compteur
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                padding: const EdgeInsets.only(bottom: 2.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Row(
-                      children: [
-                        // Bouton de rafraîchissement
-                        IconButton(
-                          onPressed: () =>
-                              userProvider.loadAllUsers(forceRefresh: true),
-                          icon: const Icon(Icons.refresh, color: kPrimaryColor),
-                          tooltip: 'Rafraîchir la liste',
-                        ),
-                        // Compteur d'agents
-                        Text(
-                          '${agents.length} agent(s)',
-                          style: const TextStyle(
-                            color: kPrimaryColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
+                    // Bouton de rafraîchissement
+                    IconButton(
+                      onPressed: () =>
+                          userProvider.loadAllUsers(forceRefresh: true),
+                      icon: const Icon(Icons.refresh, color: kPrimaryColor),
+                      tooltip: 'Rafraîchir la liste',
+                    ),
+
+                    // Compteur d'agents
+                    Text(
+                      '${agents.length} agent(s)',
+                      style: const TextStyle(
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
                     const CreateAccountIcon(),
                   ],
@@ -183,7 +179,7 @@ class _ListAgentsPageState extends State<ListAgentsPage> {
                   child: Column(
                     children: [
                       Icon(
-                        Icons.person_off,
+                        Icons.group_off,
                         size: 80,
                         color: Colors.grey[400],
                       ),
@@ -242,10 +238,11 @@ class _ListAgentsPageState extends State<ListAgentsPage> {
           sortColumnIndex: 0,
           sortAscending: true,
           showCheckboxColumn: false,
-          headingRowHeight: 50,
+          border: TableBorder.all(width: 1.0, color: ticketSectionColor),
+          /* headingRowHeight: 50,
           dataRowHeight: 60,
           horizontalMargin: 16,
-          columnSpacing: 24,
+          columnSpacing: 24, */
           columns: const [
             DataColumn(
               label: HeadTableStyle(data: "Nom d'utilisateur"),
@@ -269,7 +266,7 @@ class _ListAgentsPageState extends State<ListAgentsPage> {
               cells: [
                 DataCell(
                   Tooltip(
-                    message: 'Cliquer pour voir les détails',
+                    message: 'Voir les détails',
                     child: DataTableStyle(datafromBack: agent.username),
                   ),
                   onTap: () => _navigateToAgentDetails(context, agent),
@@ -294,7 +291,7 @@ class _ListAgentsPageState extends State<ListAgentsPage> {
                           onPressed: () =>
                               _navigateToAgentDetails(context, agent),
                           icon: const Icon(Icons.visibility,
-                              size: 24, color: kPrimaryColor),
+                              size: 30, color: kPrimaryColor),
                           padding: const EdgeInsets.all(6),
                         ),
                       ),
@@ -307,7 +304,7 @@ class _ListAgentsPageState extends State<ListAgentsPage> {
                           onPressed: () =>
                               _navigateToUpdateAgent(context, agent),
                           icon: const Icon(Icons.edit,
-                              size: 24, color: kPrimaryColor),
+                              size: 30, color: kPrimaryColor),
                           padding: const EdgeInsets.all(6),
                         ),
                       ),
@@ -319,7 +316,7 @@ class _ListAgentsPageState extends State<ListAgentsPage> {
                         child: IconButton(
                           onPressed: () => _showDeleteAgentDialog(agent),
                           icon: const Icon(Icons.delete,
-                              size: 24, color: kPrimaryColor),
+                              size: 30, color: kPrimaryColor),
                           padding: const EdgeInsets.all(6),
                         ),
                       ),
@@ -334,98 +331,3 @@ class _ListAgentsPageState extends State<ListAgentsPage> {
     );
   }
 }
-
-/* class ListAgentsPage extends StatefulWidget {
-  const ListAgentsPage({
-    super.key,
-  });
-
-  @override
-  State<ListAgentsPage> createState() => _ListAgentsPageState();
-}
-
-class _ListAgentsPageState extends State<ListAgentsPage> {
-  Future<void> _showDeleteAgentDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Suppression compte Agent'),
-          content: const SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Etes-vous sûr de vouloir supprimer ce compte'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('ANNULER'),
-              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const AdminInterface())),
-            ),
-            TextButton(
-              child: const Text('OUI'),
-              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const AdminInterface())),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(bottom: 2.0),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  CreateAccountIcon(),
-                ]),
-          ),
-          FittedBox(
-            child: DataTable(
-                sortColumnIndex: 1,
-                showCheckboxColumn: false,
-                border: TableBorder.all(width: 1.0, color: ticketSectionColor),
-                columns: const [
-                  DataColumn(label: HeadTableStyle(data: "Nom d'utilisateur")),
-                  DataColumn(label: HeadTableStyle(data: "Email")),
-                  DataColumn(label: HeadTableStyle(data: "Actions")),
-                ],
-                rows: [
-                  DataRow(cells: [
-                    const DataCell(DataTableStyle(datafromBack: 'Tedangbe')),
-                    const DataCell(
-                        DataTableStyle(datafromBack: 'tedangbek@gmail.com')),
-                    DataCell(Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const UpdateUser()));
-                            },
-                            icon: const Icon(Icons.update, size: 45)),
-                        IconButton(
-                            onPressed: _showDeleteAgentDialog,
-                            icon: const Icon(Icons.delete, size: 45)),
-                      ],
-                    )),
-                  ])
-                ]),
-          ),
-        ],
-      ),
-    );
-  }
-}
- */
-
-

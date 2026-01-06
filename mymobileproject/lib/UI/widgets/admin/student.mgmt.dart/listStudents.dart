@@ -122,12 +122,14 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
                       icon: const Icon(Icons.refresh, color: kPrimaryColor),
                       tooltip: 'Rafraîchir la liste',
                     ),
+
                     // Compteur d'étudiants
                     Text(
                       '${students.length} étudiant(s)',
                       style: const TextStyle(
                         color: kPrimaryColor,
                         fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                     ),
                     const CreateAccountIcon(),
@@ -165,13 +167,23 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
                       const SizedBox(height: 10),
                       if (userProvider.users.isNotEmpty && students.isEmpty)
                         Text(
-                          'Les utilisateurs existent mais aucun n\'a le rôle ETUDIANT',
+                          'Les utilisateurs existent mais aucun n\'a le rôle ETUDIANT.',
                           style: TextStyle(
                             color: Colors.grey[500],
                             fontSize: 14,
                           ),
                           textAlign: TextAlign.center,
                         ),
+                      const SizedBox(height: 20),
+                      ElevatedButton.icon(
+                        onPressed: () =>
+                            userProvider.loadAllUsers(forceRefresh: true),
+                        icon: const Icon(Icons.refresh),
+                        label: const Text('Rafraîchir'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kPrimaryColor,
+                        ),
+                      ),
                     ],
                   ),
                 )
@@ -186,86 +198,97 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
   }
 
   Widget _buildStudentsTable(UserProvider userProvider, List<User> students) {
-    return FittedBox(
-      child: DataTable(
-        sortColumnIndex: 0,
-        sortAscending: true,
-        showCheckboxColumn: false,
-        border: TableBorder.all(width: 1.0, color: ticketSectionColor),
-        columns: const [
-          DataColumn(
-            label: HeadTableStyle(data: "Nom d'utilisateur"),
-            numeric: false,
-          ),
-          DataColumn(
-            label: HeadTableStyle(data: "Nom complet"),
-            numeric: false,
-          ),
-          DataColumn(
-            label: HeadTableStyle(data: "Email"),
-            numeric: false,
-          ),
-          DataColumn(
-            label: HeadTableStyle(data: "Actions"),
-            numeric: false,
-          ),
-        ],
-        rows: students.map((student) {
-          return DataRow(
-            cells: [
-              DataCell(
-                DataTableStyle(datafromBack: student.username),
-                onTap: () {
-                  // Voir les détails de l'étudiant
-                  _navigateToStudentDetails(context, student);
-                },
+    return Container(
+        margin: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: ticketSectionColor, width: 1.0),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: DataTable(
+            sortColumnIndex: 0,
+            sortAscending: true,
+            showCheckboxColumn: false,
+            border: TableBorder.all(width: 1.0, color: ticketSectionColor),
+            columns: const [
+              DataColumn(
+                label: HeadTableStyle(data: "Nom d'utilisateur"),
+                numeric: false,
               ),
-              DataCell(
-                DataTableStyle(
-                    datafromBack: '${student.firstName} ${student.lastName}'),
+              DataColumn(
+                label: HeadTableStyle(data: "Nom complet"),
+                numeric: false,
               ),
-              DataCell(
-                DataTableStyle(datafromBack: student.email),
+              DataColumn(
+                label: HeadTableStyle(data: "Email"),
+                numeric: false,
               ),
-              DataCell(
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Bouton Voir
-                    IconButton(
-                      onPressed: () =>
-                          _navigateToStudentDetails(context, student),
-                      icon: const Icon(Icons.visibility,
-                          size: 30, color: kPrimaryColor),
-                      tooltip: 'Voir les détails',
-                    ),
-                    const SizedBox(width: 5),
-
-                    // Bouton Modifier
-                    IconButton(
-                      onPressed: () =>
-                          _navigateToUpdateStudent(context, student),
-                      icon: const Icon(Icons.edit,
-                          size: 30, color: kPrimaryColor),
-                      tooltip: 'Modifier',
-                    ),
-                    const SizedBox(width: 5),
-
-                    // Bouton Supprimer
-                    IconButton(
-                      onPressed: () => _showDeleteStudentDialog(student),
-                      icon:
-                          const Icon(Icons.delete, size: 30, color: errorColor),
-                      tooltip: 'Supprimer',
-                    ),
-                  ],
-                ),
+              DataColumn(
+                label: HeadTableStyle(data: "Actions"),
+                numeric: false,
               ),
             ],
-          );
-        }).toList(),
-      ),
-    );
+            rows: students.map((student) {
+              return DataRow(
+                cells: [
+                  DataCell(
+                    Tooltip(
+                      message: 'Voir les détails',
+                      child: DataTableStyle(datafromBack: student.username),
+                    ),
+                    onTap: () {
+                      _navigateToStudentDetails(context, student);
+                    },
+                  ),
+                  DataCell(
+                    DataTableStyle(
+                        datafromBack:
+                            '${student.firstName} ${student.lastName}'),
+                  ),
+                  DataCell(
+                    DataTableStyle(datafromBack: student.email),
+                  ),
+                  DataCell(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Bouton Voir les détails
+                        IconButton(
+                          onPressed: () =>
+                              _navigateToStudentDetails(context, student),
+                          icon: const Icon(Icons.visibility,
+                              size: 30, color: kPrimaryColor),
+                          tooltip: 'Voir les détails',
+                        ),
+                        const SizedBox(width: 4),
+
+                        // Bouton Modifier
+                        IconButton(
+                          onPressed: () =>
+                              _navigateToUpdateStudent(context, student),
+                          icon: const Icon(Icons.edit,
+                              size: 30, color: kPrimaryColor),
+                          tooltip: 'Modifier',
+                        ),
+                        const SizedBox(width: 4),
+
+                        // Bouton Supprimer
+                        IconButton(
+                          onPressed: () => _showDeleteStudentDialog(student),
+                          icon: const Icon(Icons.delete,
+                              size: 30, color: kPrimaryColor),
+                          tooltip: 'Supprimer',
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            }).toList(),
+          ),
+        ));
   }
 
   void _navigateToStudentDetails(BuildContext context, User student) {
