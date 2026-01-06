@@ -11,7 +11,7 @@ class ManagePorterBody extends StatelessWidget {
       child: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Column(children: [ListPortersPage()]),
+        child: const Column(children: [ListPortiersPage()]),
       ),
     );
   }

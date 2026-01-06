@@ -11,7 +11,7 @@ class ManageAgentBody extends StatelessWidget {
       child: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Column(children: [
+        child: const Column(children: [
           ListAgentsPage(),
         ]),
       ),
