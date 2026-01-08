@@ -74,7 +74,7 @@ class _HistoricBodyState extends State<HistoricBody> {
                 decoration: BoxDecoration(
                     color: kSecondColor,
                     borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: borderColor, width: 1)),
+                    border: Border.all(color: greyBorderColor, width: 1)),
                 child: TextField(
                     keyboardType: TextInputType.datetime,
                     controller: dateController1,
@@ -117,7 +117,7 @@ class _HistoricBodyState extends State<HistoricBody> {
                 decoration: BoxDecoration(
                     color: kSecondColor,
                     borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: borderColor, width: 1)),
+                    border: Border.all(color: greyBorderColor, width: 1)),
                 child: TextField(
                     keyboardType: TextInputType.datetime,
                     controller: dateController2,
@@ -168,7 +168,7 @@ class _HistoricBodyState extends State<HistoricBody> {
               } else if (state is SearchHistoricErrorState) {
                 return Column(children: [
                   Text(state.errorMessage,
-                      style: const TextStyle(color: errorColor)),
+                      style: const TextStyle(color: redErrorColor)),
                   ElevatedButton(onPressed: () {}, child: const Text('Retry'))
                 ]);
               } else if (state is SearchHistoricSucessState &&

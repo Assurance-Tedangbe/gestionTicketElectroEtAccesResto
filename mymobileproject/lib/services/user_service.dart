@@ -32,7 +32,7 @@ class UserApiService {
     // I will create a user via POST /api/users and return the created user"
     try {
       print('📤 Envoi de la requête POST pour créer un utilisateur');
-      print('📤 Body: ${json.encode(user.toJson())}');
+     // print('📤 Body: ${json.encode(user.toJson())}');
 
       final response = await http.post(
         // I'm trying to send a POST request:
@@ -42,10 +42,10 @@ class UserApiService {
         body: json.encode(user.toJson()), // Converts User object → JSON string
       );
 
-      print('📥 Response Status: ${response.statusCode}');
+      /*print('📥 Response Status: ${response.statusCode}');
       print('📥 Response Headers: ${response.headers}');
       print('📥 Response Body (RAW): ${response.body}');
-      print('📥 Response Body Length: ${response.body.length}');
+      print('📥 Response Body Length: ${response.body.length}');*/
 
       if (response.statusCode == 201) {
         // Si le corps de réponse est vide (null)

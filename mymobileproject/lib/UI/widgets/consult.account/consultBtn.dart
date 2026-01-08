@@ -58,7 +58,7 @@ class ConsultBtn extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(userProvider.error),
-                          backgroundColor: errorColor,
+                          backgroundColor: redErrorColor,
                         ),
                       );
                     }
@@ -67,7 +67,7 @@ class ConsultBtn extends StatelessWidget {
               backgroundColor: userProvider.isConsultFormValid &&
                       !userProvider.isConsultingUser
                   ? kPrimaryColor
-                  : borderColor,
+                  : greyBorderColor,
               shape: const BeveledRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
               ),

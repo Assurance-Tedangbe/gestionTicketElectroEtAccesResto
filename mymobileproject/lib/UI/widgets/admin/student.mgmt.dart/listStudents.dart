@@ -84,7 +84,7 @@ class _ListStudentsPageState extends State<ListStudentsPage> {
                     SnackBar(
                       content: Text(
                           'Erreur lors de la suppression: ${userProvider.error}'),
-                      backgroundColor: errorColor,
+                      backgroundColor: redErrorColor,
                       duration: const Duration(seconds: 3),
                     ),
                   );

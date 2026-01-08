@@ -61,7 +61,6 @@ class TicketProvider with ChangeNotifier {
   TicketProvider(this._service);
   // Le constructeur reçoit une instance de TicketApiService en paramètre (dependency injection)
 
-  // === GETTERS - Accès contrôlé à l'état
   // Les getters permettent un accès en lecture seule aux variables privées
 
   // 🎫 GETTERS PRINCIPAUX
@@ -87,16 +86,26 @@ class TicketProvider with ChangeNotifier {
   bool get isCancelingTransfer => _isCancelingTransfer;
   bool get isDebitingAccount => _isDebitingAccount;
 
-  // === MÉTHODES D'ACTION - OPERATIONS PRINCIPALES: Gestion complète des états
+  // GETTERS POUR LES TICKETS FILTRÉS
+  List<Ticket> get availableTickets => _tickets
+      .where((ticket) => ticket.ticketStatus == TicketStatus.available)
+      .toList();
 
-  // "Charge tous les tickets depuis le service"
+  List<Ticket> get ticketsA => availableTickets
+      .where((ticket) => ticket.ticketType == TicketType.a)
+      .toList();
+
+  List<Ticket> get ticketsB => availableTickets
+      .where((ticket) => ticket.ticketType == TicketType.b)
+      .toList();
+
+  List<Ticket> get selectedTickets =>
+      _tickets.where((ticket) => ticket.isSelected).toList();
+
   /* CHARGE TOUS LES TICKETS DEPUIS L'API
-   * @param forceRefresh : si true, ignore le cache et force le rechargement
-   * @return Future<void> : opération asynchrone qui ne retourne pas de valeur
-   */
+   * @param forceRefresh : si true, ignore le cache et force le rechargement */
   Future<void> loadAllTickets({bool forceRefresh = false}) async {
     // "charge les tickets, cela va prendre du temps (async)"
-    // Début du chargement - mise à jour de l'état
 
     _isLoading = true; // active le chargement
     _error = ''; // efface les erreurs précédentes
@@ -123,22 +132,126 @@ class TicketProvider with ChangeNotifier {
     }
   }
 
-  /*
-   * ➕ CREATION DE NOUVEAUX TICKETS
-   * @param request : DTO contenant les données pour créer les tickets
-   * @return Future<bool> : true si succès, false si échec
-   */
+// Pour gérer la sélection/désélection
+  void toggleTicketSelection(int ticketId) {
+    final index = _tickets.indexWhere((t) => t.ticketId == ticketId);
+    if (index != -1) {
+      _tickets[index] = _tickets[index].copyWith(
+        isSelected: !(_tickets[index].isSelected),
+      );
+      notifyListeners();
+    }
+  }
+
+  void selectAllTicketsA() {
+    for (var ticket in _tickets) {
+      if (ticket.ticketType == TicketType.a &&
+          ticket.ticketStatus == TicketStatus.available) {
+        final index = _tickets.indexWhere((t) => t.ticketId == ticket.ticketId);
+        if (index != -1) {
+          _tickets[index] = _tickets[index].copyWith(isSelected: true);
+        }
+      }
+    }
+    notifyListeners();
+  }
+  /*  void selectAllTicketsA() {
+  bool allSelected = ticketsA.every((t) => t.isSelected);
+  
+  for (var i = 0; i < _tickets.length; i++) {
+    if (_tickets[i].ticketType == TicketType.a && 
+        _tickets[i].ticketStatus == TicketStatus.available) {
+      _tickets[i] = _tickets[i].copyWith(isSelected: !allSelected);
+    }
+  }
+  notifyListeners();
+} */
+
+  void selectAllTicketsB() {
+    for (var ticket in _tickets) {
+      if (ticket.ticketType == TicketType.b &&
+          ticket.ticketStatus == TicketStatus.available) {
+        final index = _tickets.indexWhere((t) => t.ticketId == ticket.ticketId);
+        if (index != -1) {
+          _tickets[index] = _tickets[index].copyWith(isSelected: true);
+        }
+      }
+    }
+    notifyListeners();
+  }
+
+  void clearAllSelections() {
+    for (var i = 0; i < _tickets.length; i++) {
+      if (_tickets[i].isSelected == true) {
+        _tickets[i] = _tickets[i].copyWith(isSelected: false);
+      }
+    }
+    notifyListeners();
+  }
+  /*  void clearAllSelections() {
+  for (var i = 0; i < _tickets.length; i++) {
+    if (_tickets[i].isSelected) {
+      _tickets[i] = _tickets[i].copyWith(isSelected: false);
+    }
+  }
+  notifyListeners();
+} */
+
+// Méthode pour acheter les tickets sélectionnés
+  Future<bool> purchaseSelectedTickets(String buyerName) async {
+    final selected = selectedTickets;
+    if (selected.isEmpty || buyerName.isEmpty) {
+      _error = 'Veuillez sélectionner des tickets et entrer un nom d\'acheteur';
+      notifyListeners();
+      return false;
+    }
+
+    _isPurchasingTickets = true;
+    notifyListeners();
+    try {
+      final ticketIds = selected.map((t) => t.ticketId!).toList();
+      final purchaseRequest = PurchaseTicketsRequestDTO(
+          userDTO: UserDTO(firstName: buyerName, lastName: ''),
+          ticketIds: ticketIds);
+      final success = await _service.purchaseTickets(purchaseRequest);
+      if (success == true) {
+        await loadAllTickets(forceRefresh: true);
+        _error = '';
+        return true;
+      } else {
+        _error = 'Échec de l\'achat des tickets';
+        return false;
+      }
+      /* // Ici, vous implémenterez l'appel API pour acheter les tickets
+      // Par exemple: await _service.purchaseTickets(selectedIds, buyerName);
+
+      // Pour l'instant, simulons le succès
+      await Future.delayed(Duration(seconds: 2));
+
+      // Après achat réussi, recharger les tickets
+      await loadAllTickets(forceRefresh: true);
+
+      _error = '';
+      return true; */
+    } catch (e) {
+      _error = 'Erreur lors de l\'achat: $e';
+      return false;
+    } finally {
+      _isPurchasingTickets = false;
+      notifyListeners();
+    }
+  }
+
+  /*➕ CREATION DE NOUVEAUX TICKETS */
   Future<bool> createNewTickets(
       CreationTicketsRequestDTO creationTicketsRequestDTO) async {
-    // "Je vais créer des tickets et je vous dirai si ça a fonctionné (bool)"
     _isCreatingTickets = true;
     _isLoading = true;
     notifyListeners(); // "démarre le travail et notifie l'interface"
 
     try {
-      // Appel au service pour créer les tickets via l'API
       final newTickets = await _service.createTickets(
-          creationTicketsRequestDTO); // "demande au service de créer ces tickets dans l'API"
+          creationTicketsRequestDTO); // "Appel au service de créer ces tickets dans l'API"
 
       // Ajout des nouveaux tickets à la liste locale
       _tickets.addAll(
@@ -147,7 +260,6 @@ class TicketProvider with ChangeNotifier {
       print("Tickets créés avec succès: ${newTickets.length} tickets");
       return true; // "Succès"
     } catch (e) {
-      // Gestion de l'erreur
       _error = 'Erreur création tickets: ${e.toString()}';
       print("Erreur createNewTickets: $e");
       return false; // "Échec"
@@ -159,11 +271,7 @@ class TicketProvider with ChangeNotifier {
     }
   }
 
-  /*
-   * ✏️ MISE A JOUR D'UN TICKET EXISTANT
-   * @param ticket : le ticket avec les nouvelles données
-   * @return Future<bool> : true si succès, false si échec
-   */
+  /* ✏️ MISE A JOUR D'UN TICKET EXISTANT */
   Future<bool> updateExistingTicket(Ticket ticket) async {
     _isUpdatingTicket = true;
     _isLoading = true;
@@ -202,10 +310,7 @@ class TicketProvider with ChangeNotifier {
   }
 
   /*
-   * 🗑️ SUPPRESSION D'UN TICKET
-   * @param ticketId : l'identifiant du ticket à supprimer
-   * @return Future<bool> : true si succès, false si échec
-   */
+   * 🗑️ SUPPRESSION D'UN TICKET */
   Future<bool> deleteExistingTicket(int ticketId) async {
     _isDeletingTicket = true;
     _isLoading = true;
@@ -233,12 +338,9 @@ class TicketProvider with ChangeNotifier {
     }
   }
 
-  /* Cette méthode retourne void car le résultat est stocké dans _currentTicket */
-  /*
-   * 🔍 CHARGEMENT D'UN TICKET SPECIFIQUE PAR SON ID
-   * @param ticketId : l'identifiant du ticket à charger
-   * Le résultat est stocké dans _currentTicket
-   */
+  /* Cette méthode retourne void car le résultat est stocké dans _currentTicket
+   *  🔍 CHARGEMENT D'UN TICKET SPECIFIQUE PAR SON ID
+   * @param ticketId : l'identifiant du ticket à charger */
   Future<void> loadTicketById(int ticketId) async {
     _isLoading = true;
     _error = '';
@@ -257,6 +359,163 @@ class TicketProvider with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  /* 🛒 ACHAT DE TICKETS
+   * @param request : DTO contenant les infos d'achat */
+  Future<bool> purchaseTickets(
+      PurchaseTicketsRequestDTO purchaseTicketsRequestDTO) async {
+    _isPurchasingTickets = true;
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final purchasedTickets = await _service.purchaseTickets(
+          purchaseTicketsRequestDTO); // "demande à l'API d'acheter les tickets"
+
+      _tickets.addAll(
+          purchasedTickets); // "Ajoute les tickets achetés à la liste locale"
+      _error = '';
+      print("Tickets achetés avec succès: ${purchasedTickets.length} tickets");
+      return true;
+    } catch (e) {
+      _error = 'Erreur achat tickets: ${e.toString()}';
+      print("Erreur purchaseTickets: $e");
+      return false;
+    } finally {
+      _isPurchasingTickets = false;
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  /* 🔄 TRANSFERT DE TICKETS ENTRE UTILISATEURS
+   * @param request : DTO contenant les infos de transfert */
+  Future<bool> transferTickets(
+      TransferTicketsRequestDTO transferTicketsRequestDTO) async {
+    _isTransferringTickets = true;
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      await _service.transferTickets(
+          transferTicketsRequestDTO); // "demande à l'API de transférer les tickets"
+
+      _error = '';
+      print(
+          "Tickets transférés de ${transferTicketsRequestDTO.fromStudentId} vers ${transferTicketsRequestDTO.toStudentId}");
+      return true;
+    } catch (e) {
+      _error = 'Erreur transfert tickets: ${e.toString()}';
+      print("Erreur transferTickets: $e");
+      return false;
+    } finally {
+      _isTransferringTickets = false;
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  /* ↩️ ANNULATION D'UN TRANSFERT DE TICKETS
+   *  @param request : DTO contenant les infos d'annulation */
+  Future<bool> cancelTransferTickets(
+      CancelTransferTicketsRequestDTO cancelTransferTicketsRequestDTO) async {
+    _isCancelingTransfer = true;
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      await _service.cancelTransferTickets(
+          cancelTransferTicketsRequestDTO); // demande à l'API d'annuler le transfert de tickets
+
+      _error = '';
+      print(
+          "Transfert de tickets annulé entre ${cancelTransferTicketsRequestDTO.currentOwnerUserId} et ${cancelTransferTicketsRequestDTO.originalSenderUserId}");
+      return true;
+    } catch (e) {
+      _error = 'Erreur annulation transfert tickets: ${e.toString()}';
+      print("Erreur cancelTransferTickets: $e");
+      return false;
+    } finally {
+      _isCancelingTransfer = false;
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  /* 💳 DEBIT D'UN COMPTE UTILISATEUR
+   * @param request : DTO contenant les infos de débit */
+  Future<bool> debitAccount(
+      DebitAccountRequestDTO debitAccountRequestDTO) async {
+    _isDebitingAccount = true;
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      await _service.debitAccount(
+          debitAccountRequestDTO); // "demande à l'API de débiter le compte"
+
+      _error = '';
+      print("Compte ${debitAccountRequestDTO.studentId} débité");
+      return true;
+    } catch (e) {
+      _error = 'Erreur débit compte: ${e.toString()}';
+      print("Erreur debitAccount: $e");
+      return false;
+    } finally {
+      _isDebitingAccount = false;
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  /*🧹 EFFACEMENT DU MESSAGE D'ERREUR
+   * Nettoie l'erreur courante et notifie l'UI
+   * - Utile pour permettre à l'utilisateur de réessayer après une erreur */
+  void clearError() {
+    _error = '';
+    notifyListeners();
+  }
+
+  /*🧹 EFFACEMENT DU TICKET COURANT
+   * Réinitialise la sélection courante et notifie l'UI */
+  void clearCurrentTicket() {
+    _currentTicket = null;
+    notifyListeners();
+  }
+
+  // 🔄 FORCE LE RAFRAICHISSEMENT DES DONNEES depuis l'API
+  Future<void> refreshData() async {
+    await loadAllTickets(forceRefresh: true);
+  }
+
+  // 📊 OBTENTION DES STATISTIQUES DES TICKETS
+  Map<String, int> getTicketStatistics() {
+    return _service.getTicketStatistics(_tickets);
+  }
+
+  // OBTENTION DES STATISTIQUES FORMATÉES POUR L'UI
+  Map<String, int> getFrenchStatistics() {
+    final stats = getTicketStatistics();
+    return {
+      'Total': stats['total'] ?? 0,
+      'Réservés': stats['booked'] ?? 0,
+      'Disponibles': stats['available'] ?? 0,
+      'Utilisés': stats['used'] ?? 0,
+      'Type A': stats['A'] ?? 0,
+      'Type B': stats['B'] ?? 0,
+    };
+    /*
+      Exple de résultat attendu:
+      {
+        'Total': 150,
+        'Réservés': 80,
+        'Disponibles': 70,
+        'Utilisés': 45,
+        'Type A': 90,
+        'Type B': 60
+      }
+    */
   }
 
   /*
@@ -346,126 +605,6 @@ class TicketProvider with ChangeNotifier {
     }
   }
 
-  /*
-   * 🛒 ACHAT DE TICKETS
-   * @param request : DTO contenant les infos d'achat
-   * @return Future<bool> : true si succès, false si échec
-   */
-  Future<bool> purchaseTickets(
-      PurchaseTicketsRequestDTO purchaseTicketsRequestDTO) async {
-    _isPurchasingTickets = true;
-    _isLoading = true;
-    notifyListeners();
-
-    try {
-      final purchasedTickets = await _service.purchaseTickets(
-          purchaseTicketsRequestDTO); // "demande à l'API d'acheter les tickets"
-
-      _tickets.addAll(
-          purchasedTickets); // "Ajoute les tickets achetés à la liste locale"
-      _error = '';
-      print("Tickets achetés avec succès: ${purchasedTickets.length} tickets");
-      return true;
-    } catch (e) {
-      _error = 'Erreur achat tickets: ${e.toString()}';
-      print("Erreur purchaseTickets: $e");
-      return false;
-    } finally {
-      _isPurchasingTickets = false;
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
-  /*
-   * 🔄 TRANSFERT DE TICKETS ENTRE UTILISATEURS
-   * @param request : DTO contenant les infos de transfert
-   * @return Future<bool> : true si succès, false si échec
-   */
-  Future<bool> transferTickets(
-      TransferTicketsRequestDTO transferTicketsRequestDTO) async {
-    _isTransferringTickets = true;
-    _isLoading = true;
-    notifyListeners();
-
-    try {
-      await _service.transferTickets(
-          transferTicketsRequestDTO); // "demande à l'API de transférer les tickets"
-
-      _error = '';
-      print(
-          "Tickets transférés de ${transferTicketsRequestDTO.fromaccountId} vers ${transferTicketsRequestDTO.toAccountId}");
-      return true;
-    } catch (e) {
-      _error = 'Erreur transfert tickets: ${e.toString()}';
-      print("Erreur transferTickets: $e");
-      return false;
-    } finally {
-      _isTransferringTickets = false;
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
-  /*
-   * ↩️ ANNULATION D'UN TRANSFERT DE TICKETS
-   * @param request : DTO contenant les infos d'annulation
-   * @return Future<bool> : true si succès, false si échec
-   */
-  Future<bool> cancelTransferTickets(
-      CancelTransferTicketsRequestDTO cancelTransferTicketsRequestDTO) async {
-    _isCancelingTransfer = true;
-    _isLoading = true;
-    notifyListeners();
-
-    try {
-      await _service.cancelTransferTickets(
-          cancelTransferTicketsRequestDTO); // "demande à l'API d'annuler le transfert de tickets"
-
-      _error = '';
-      print(
-          "Transfert de tickets annulé entre ${cancelTransferTicketsRequestDTO.currentOwnerAccountId} et ${cancelTransferTicketsRequestDTO.originalSenderAccountId}");
-      return true;
-    } catch (e) {
-      _error = 'Erreur annulation transfert tickets: ${e.toString()}';
-      print("Erreur cancelTransferTickets: $e");
-      return false;
-    } finally {
-      _isCancelingTransfer = false;
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
-  /*
-   * 💳 DEBIT D'UN COMPTE UTILISATEUR
-   * @param request : DTO contenant les infos de débit
-   * @return Future<bool> : true si succès, false si échec
-   */
-  Future<bool> debitAccount(
-      DebitAccountRequestDTO debitAccountRequestDTO) async {
-    _isDebitingAccount = true;
-    _isLoading = true;
-    notifyListeners();
-
-    try {
-      await _service.debitAccount(
-          debitAccountRequestDTO); // "demande à l'API de débiter le compte"
-
-      _error = '';
-      print("Compte ${debitAccountRequestDTO.etudiantAccountId} débité");
-      return true;
-    } catch (e) {
-      _error = 'Erreur débit compte: ${e.toString()}';
-      print("Erreur debitAccount: $e");
-      return false;
-    } finally {
-      _isDebitingAccount = false;
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
   // === MÉTHODES DE RECHERCHE ET FILTRAGE ===
   /* CHARGEMENT DES TICKETS PAR STATUT
    * @param ticketStatus : le statut des tickets à charger
@@ -483,29 +622,6 @@ class TicketProvider with ChangeNotifier {
     } catch (e) {
       _error = 'Erreur chargement tickets par statut: ${e.toString()}';
       print("Erreur loadTicketsByStatus: $e");
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
-  /*
-   * 👤 CHARGEMENT DES TICKETS PAR COMPTE
-   * @param accountId : l'identifiant du compte
-   */
-  Future<void> loadTicketsByAccountId(int accountId) async {
-    _isLoading = true;
-    _error = '';
-    notifyListeners();
-
-    try {
-      _tickets = await _service.getTicketsByAccountId(accountId);
-      _error = '';
-      print(
-          "Tickets chargés par compte $accountId: ${_tickets.length} tickets");
-    } catch (e) {
-      _error = 'Erreur chargement tickets par compte: ${e.toString()}';
-      print("Erreur loadTicketsByAccountId: $e");
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -533,66 +649,6 @@ class TicketProvider with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
-  }
-
-  // === MÉTHODES DE GESTION D'ÉTAT ===
-  /*
-   * 🧹 EFFACEMENT DU MESSAGE D'ERREUR
-   * Nettoie l'erreur courante et notifie l'UI
-   *   - Utile pour permettre à l'utilisateur de réessayer après une erreur
-   */
-  void clearError() {
-    _error = '';
-    notifyListeners();
-  }
-
-  /*
-   * 🧹 EFFACEMENT DU TICKET COURANT
-   * Réinitialise la sélection courante et notifie l'UI
-   *    - Utile quand on quitte un écran de détail
-   */
-  void clearCurrentTicket() {
-    _currentTicket = null;
-    notifyListeners();
-  }
-
-  /*
-   * 🔄 FORCE LE RAFRAICHISSEMENT DES DONNEES
-   * Recharge tous les tickets depuis l'API en ignorant le cache
-   */
-  Future<void> refreshData() async {
-    await loadAllTickets(forceRefresh: true);
-  }
-
-  // === MÉTHODES UTILITAIRES - OPERATIONS LOCALES (POUR L'UI)
-
-  // 📊 OBTENTION DES STATISTIQUES DES TICKETS
-  Map<String, int> getTicketStatistics() {
-    return _service.getTicketStatistics(_tickets);
-  }
-
-  // OBTENTION DES STATISTIQUES FORMATÉES POUR L'UI
-  Map<String, int> getFrenchStatistics() {
-    final stats = getTicketStatistics();
-    return {
-      'Total': stats['total'] ?? 0,
-      'Réservés': stats['booked'] ?? 0,
-      'Disponibles': stats['available'] ?? 0,
-      'Utilisés': stats['used'] ?? 0,
-      'Type A': stats['A'] ?? 0,
-      'Type B': stats['B'] ?? 0,
-    };
-    /*
-      Exple de résultat attendu:
-      {
-        'Total': 150,
-        'Réservés': 80,
-        'Disponibles': 70,
-        'Utilisés': 45,
-        'Type A': 90,
-        'Type B': 60
-      }
-    */
   }
 
   //🔍 RECHERCHE DE TICKETS DANS LE CACHE LOCAL
@@ -691,4 +747,27 @@ class TicketProvider with ChangeNotifier {
   String getTypeDisplayName(TicketType type) {
     return type.displayName; // "a", "b"
   }
+
+  /*
+   * 👤 CHARGEMENT DES TICKETS PAR COMPTE
+   * @param accountId : l'identifiant du compte
+   */
+  /* Future<void> loadTicketsByAccountId(int accountId) async {
+    _isLoading = true;
+    _error = '';
+    notifyListeners();
+
+    try {
+      _tickets = await _service.getTicketsByAccountId(accountId);
+      _error = '';
+      print(
+          "Tickets chargés par compte $accountId: ${_tickets.length} tickets");
+    } catch (e) {
+      _error = 'Erreur chargement tickets par compte: ${e.toString()}';
+      print("Erreur loadTicketsByAccountId: $e");
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  } */
 }
