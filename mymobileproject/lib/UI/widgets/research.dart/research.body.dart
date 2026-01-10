@@ -58,7 +58,7 @@ class _ServiceResearchBodyState extends State<ServiceResearchBody> {
             } else if (state is SearchServicesErrorState) {
               return Column(children: [
                 Text(state.errorMessage,
-                    style: const TextStyle(color: errorColor)),
+                    style: const TextStyle(color: redErrorColor)),
                 ElevatedButton(onPressed: () {}, child: const Text('Retry'))
               ]);
             } else if (state is SearchServicesSucessState &&

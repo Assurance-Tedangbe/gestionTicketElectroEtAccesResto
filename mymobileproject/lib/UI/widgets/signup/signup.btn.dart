@@ -55,7 +55,7 @@ class SignupBtn extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(userProvider.error),
-                          backgroundColor: errorColor,
+                          backgroundColor: redErrorColor,
                         ),
                       );
                     }
@@ -65,7 +65,7 @@ class SignupBtn extends StatelessWidget {
               backgroundColor: // ← ICI
                   userProvider.isFormValid && !userProvider.isCreatingUser
                       ? kPrimaryColor
-                      : borderColor,
+                      : greyBorderColor,
               shape: const BeveledRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
               ),

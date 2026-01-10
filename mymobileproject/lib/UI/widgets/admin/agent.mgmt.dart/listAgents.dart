@@ -94,7 +94,7 @@ class _ListAgentsPageState extends State<ListAgentsPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Erreur lors de la suppression: ${userProvider.error}'),
-          backgroundColor: errorColor,
+          backgroundColor: redErrorColor,
           duration: const Duration(seconds: 3),
         ),
       );

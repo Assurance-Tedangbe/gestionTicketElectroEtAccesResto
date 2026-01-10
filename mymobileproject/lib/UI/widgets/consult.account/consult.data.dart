@@ -103,7 +103,7 @@ class _ConsultDataState extends State<ConsultData> {
                             child: Text(
                               'Aucune donnée utilisateur disponible',
                               style: TextStyle(
-                                color: borderColor,
+                                color: greyBorderColor,
                                 fontSize: 16,
                               ),
                             ),
@@ -154,21 +154,21 @@ class _ConsultDataState extends State<ConsultData> {
       children: <Widget>[
         // ID utilisateur
         _buildInfoRow('ID', user.userId?.toString() ?? 'N/A'),
-        const Divider(color: borderColor),
+        const Divider(color: greyBorderColor),
 
         // Nom complet
         _buildInfoRow(
           'Nom complet',
           '${user.firstName} ${user.lastName}'.trim(),
         ),
-        const Divider(color: borderColor),
+        const Divider(color: greyBorderColor),
 
         // Nom d'utilisateur
         _buildInfoRow('Nom d\'utilisateur', user.username),
-        const Divider(color: borderColor),
+        const Divider(color: greyBorderColor),
         // Email
         _buildInfoRow('Email', user.email),
-        const Divider(color: borderColor),
+        const Divider(color: greyBorderColor),
 
         // Mot de passe (masqué)
         _buildInfoRow(
@@ -176,7 +176,7 @@ class _ConsultDataState extends State<ConsultData> {
           _maskPassword(user.password),
           isPassword: true,
         ),
-        const Divider(color: borderColor),
+        const Divider(color: greyBorderColor),
 
         // Rôle
         _buildInfoRow(
@@ -210,7 +210,7 @@ class _ConsultDataState extends State<ConsultData> {
             child: Text(
               value,
               style: TextStyle(
-                color: isPassword ? borderColor : kThirdColor,
+                color: isPassword ? greyBorderColor : kThirdColor,
                 fontSize: 16,
                 fontStyle: isPassword ? FontStyle.italic : FontStyle.normal,
               ),

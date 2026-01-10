@@ -41,7 +41,7 @@ class UpdateUserBtn extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(userProvider.error),
-                              backgroundColor: errorColor,
+                              backgroundColor: redErrorColor,
                             ),
                           );
                         }

@@ -105,7 +105,7 @@ class _ListPortiersPageState extends State<ListPortiersPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Erreur lors de la suppression: ${userProvider.error}'),
-          backgroundColor: errorColor,
+          backgroundColor: redErrorColor,
           duration: const Duration(seconds: 3),
         ),
       );
@@ -196,7 +196,7 @@ class _ListPortiersPageState extends State<ListPortiersPage> {
                       const Text(
                         'Aucun portier trouvé',
                         style: TextStyle(
-                          color: Colors.grey,
+                          color: greyBorderColor,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -207,7 +207,7 @@ class _ListPortiersPageState extends State<ListPortiersPage> {
                           'Les utilisateurs existent mais aucun n\'a le rôle PORTIER.',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: greyBorderColor,
                             fontSize: 14,
                           ),
                         ),

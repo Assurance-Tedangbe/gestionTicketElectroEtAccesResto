@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:mymobileproject/config/network_config.dart';
 import 'package:mymobileproject/enums/ticket_status.dart';
 import 'package:mymobileproject/enums/ticket_type.dart';
 import 'package:mymobileproject/model/ticket_model.dart';
@@ -11,12 +12,9 @@ import 'package:mymobileproject/model/ticket_model.dart';
   - Logique métier légère
   - Transformation des données 
     ticket_service.dart: role(Communication API): utilise forApi, fromApi, toBackend, fromBackend
-
 */
 class TicketApiService {
-  /* Use the IP address of the Android emulator (10.0.2.2)
-  or your machine's IP address for other emulators/devices. */
-  static const String baseUrl = 'http://10.0.2.2:8080/api/tickets';
+  final baseUrl = '${NetworkConfig.baseUrl}/api/tickets';
 
   // Configure HTTP headers for all requests
   static final Map<String, String> headers = {
@@ -30,52 +28,8 @@ class TicketApiService {
   DateTime? _lastFetchTime; // Dernière récupération
   static const Duration cacheDuration = Duration(minutes: 5); // Durée de cache
 
-  // -------------------------
-  // 1. CREATE TICKETS (POST /api/tickets)
-  // -------------------------
-  Future<List<Ticket>> createTickets(
-      CreationTicketsRequestDTO creationTicketsRequestDTO) async {
-    // "Je vais créer des tickets via POST /api/tickets et retourner les tickets créés"
-    try {
-      print(
-          "Création de nouveaux tickets: ${creationTicketsRequestDTO.countA} de type A et ${creationTicketsRequestDTO.countB} de type B");
-
-      final response = await http.post(
-        // "J'envoie une requête POST :"
-        Uri.parse(baseUrl), // Convertit l'URL string en objet Uri
-        headers: headers, // Utilise les headers configurés
-        body: json.encode(creationTicketsRequestDTO
-            .toJson()), // Convertit la requête → JSON string
-      );
-
-      if (response.statusCode == 201) {
-        final List<dynamic> jsonList = json.decode(response.body);
-
-        /* ICI - La conversion se fait dans Ticket.fromJson()
-           Utilise fromBackend et fromApi via Ticket.fromJson() */
-        final newTickets = jsonList
-            .map((json) => Ticket.fromJson(json))
-            .toList(); // "Convertit la réponse JSON → liste d'objets Ticket"
-
-        print("Tickets créés avec IDs: ${newTickets.map((t) => t.ticketId)}");
-
-        // Mise à jour du cache
-        _cachedTickets.addAll(newTickets);
-
-        return newTickets;
-      } else {
-        throw Exception('Erreur création tickets: ${response.statusCode}');
-      }
-    } catch (e) {
-      print("Erreur création tickets: $e");
-      throw Exception('Erreur réseau: $e');
-    }
-  }
-
-  // -------------------------
-  // 2. READ ALL TICKETS (GET /api/tickets)
-  // -------------------------
-  // Utilise le cache pour éviter les appels API inutiles
+  // 1. READ ALL TICKETS (GET /api/tickets)
+  // Using cache
   Future<List<Ticket>> getAllTickets({bool forceRefresh = false}) async {
     // "Vérifie si le cache est encore valide"
     final now = DateTime.now();
@@ -130,9 +84,47 @@ class TicketApiService {
     }
   }
 
-  // -------------------------
+  // 2. CREATE TICKETS (POST /api/tickets)
+  Future<List<Ticket>> createTickets(
+      CreationTicketsRequestDTO creationTicketsRequestDTO) async {
+    // "Je vais créer des tickets via POST /api/tickets et retourner les tickets créés"
+    try {
+      print(
+          "Création de nouveaux tickets: ${creationTicketsRequestDTO.countA} de type A et ${creationTicketsRequestDTO.countB} de type B");
+
+      final response = await http.post(
+        // "J'envoie une requête POST :"
+        Uri.parse(baseUrl), // Convertit l'URL string en objet Uri
+        headers: headers, // Utilise les headers configurés
+        body: json.encode(creationTicketsRequestDTO
+            .toJson()), // Convertit la requête → JSON string
+      );
+
+      if (response.statusCode == 201) {
+        final List<dynamic> jsonList = json.decode(response.body);
+
+        /* ICI - La conversion se fait dans Ticket.fromJson()
+           Utilise fromBackend et fromApi via Ticket.fromJson() */
+        final newTickets = jsonList
+            .map((json) => Ticket.fromJson(json))
+            .toList(); // "Convertit la réponse JSON → liste d'objets Ticket"
+
+        print("Tickets créés avec IDs: ${newTickets.map((t) => t.ticketId)}");
+
+        // Mise à jour du cache
+        _cachedTickets.addAll(newTickets);
+
+        return newTickets;
+      } else {
+        throw Exception('Erreur création tickets: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Erreur création tickets: $e");
+      throw Exception('Erreur réseau: $e');
+    }
+  }
+
   // 3. READ TICKET BY ID (GET /api/tickets/{ticketId})
-  // -------------------------
   Future<Ticket> getTicketById(int ticketId) async {
     try {
       print("Récupération du ticket via son id: $ticketId");
@@ -153,9 +145,8 @@ class TicketApiService {
           ticketStatus: TicketStatus.available,
           ticketCreationDate: DateTime.now(),
           ticketDescription: '',
-          //  menu: Menu(menuName: '', menuType: '', menuDescription: ''),
           userDTO: UserDTO(firstName: '', lastName: ''),
-          accountDTO: AccountDTO(accountNumber: ''),
+          isSelected: false,
         ),
       );
 
@@ -168,8 +159,6 @@ class TicketApiService {
 
       // Si le ticket n'est pas dans le cache, on fait un appel API
       final response = await http.get(
-        // Construit l'URL pour l'endpoint spécifique
-        // Exemple: http://10.0.2.2:8080/api/tickets/2
         Uri.parse('$baseUrl/$ticketId'),
         headers: headers,
       ); // "GET /api/tickets/{ticketId} pour récupérer un ticket spécifique"
@@ -193,9 +182,7 @@ class TicketApiService {
     }
   }
 
-  // -------------------------
   // 4. UPDATE TICKET (PUT /api/tickets/{ticketId})
-  // -------------------------
   Future<Ticket> updateTicket(Ticket ticket) async {
     try {
       print("Mise à jour du ticket avec ID: ${ticket.ticketId}");
@@ -228,9 +215,7 @@ class TicketApiService {
     }
   }
 
-  // -------------------------
   // 5. DELETE TICKET (DELETE /api/tickets/{ticketId})
-  // -------------------------
   Future<void> deleteTicket(int ticketId) async {
     try {
       print("Suppression du ticket avec ID: $ticketId");
@@ -255,10 +240,119 @@ class TicketApiService {
     }
   }
 
-  // -------------------------
-  // 6. UPDATE TICKET STATUS (PUT /api/tickets/ticketStatus/{ticketId})
+  // 6. PURCHASE TICKETS (POST /api/tickets/{purchase})
+  Future<List<Ticket>> purchaseTickets(
+      PurchaseTicketsRequestDTO purchaseTicketsRequestDTO) async {
+    try {
+      print(
+          "Achat de tickets pour l'utilisateur: ${purchaseTicketsRequestDTO.userDTO.firstName}");
+
+      final response = await http.post(
+        Uri.parse('$baseUrl/purchase'),
+        headers: headers,
+        body: json.encode(purchaseTicketsRequestDTO.toJson()),
+      );
+
+      if (response.statusCode == 201) {
+        final List<dynamic> jsonList = json.decode(response.body);
+
+        // ICI - La conversion se fait dans Ticket.fromJson()
+        final purchasedTickets =
+            jsonList.map((json) => Ticket.fromJson(json)).toList();
+
+        print("Tickets achetés: ${purchasedTickets.length}");
+
+        // Met à jour le cache
+        _cachedTickets.addAll(purchasedTickets);
+
+        return purchasedTickets;
+      } else {
+        throw Exception('Erreur achat tickets: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Erreur lors de l\'achat des tickets: $e");
+
+      throw Exception('Erreur réseau: $e');
+    }
+  }
+
+  // 7. TRANSFER TICKETS (PUT /api/tickets/transferTickets)
   // sans cache
-  // -------------------------
+  Future<void> transferTickets(
+      TransferTicketsRequestDTO transferTicketsRequestDTO) async {
+    try {
+      print(
+          "Transfert de(s) tickets(s) vers toStudentId: ${transferTicketsRequestDTO.toStudentId}");
+
+      final response = await http.put(
+        Uri.parse('$baseUrl/transferTickets'),
+        headers: headers,
+        body: json.encode(transferTicketsRequestDTO.toJson()),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Erreur transfert tickets: ${response.statusCode}');
+      }
+
+      print(
+          "Tickets transférés de ${transferTicketsRequestDTO.fromStudentId} vers ${transferTicketsRequestDTO.toStudentId}");
+    } catch (e) {
+      throw Exception('Erreur réseau: $e');
+    }
+  }
+
+  // 8. CANCEL TRANSFER TICKETS (PUT /api/tickets/cancelTransferTickets)
+  // sans cache
+  Future<void> cancelTransferTickets(
+      CancelTransferTicketsRequestDTO cancelTransferTicketsRequestDTO) async {
+    try {
+      print(
+          "Annuler transfert de(s) tickets(s) pour currentOwnerUserId: ${cancelTransferTicketsRequestDTO.currentOwnerUserId}");
+
+      final response = await http.put(
+        Uri.parse('$baseUrl/cancelTransferTickets'),
+        headers: headers,
+        body: json.encode(cancelTransferTicketsRequestDTO.toJson()),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception(
+            'Erreur annulation transfert tickets: ${response.statusCode}');
+      }
+
+      print(
+          "Transfert de tickets annulé entre ${cancelTransferTicketsRequestDTO.currentOwnerUserId} et ${cancelTransferTicketsRequestDTO.originalSenderUserId}");
+    } catch (e) {
+      throw Exception('Erreur réseau: $e');
+    }
+  }
+
+  // 9. DEBIT ACCOUNT (PUT /api/tickets/debitAccount)
+  // sans cache
+  Future<void> debitAccount(
+      DebitAccountRequestDTO debitAccountRequestDTO) async {
+    try {
+      print(
+          "Debiter le compte dont l'ID est: ${debitAccountRequestDTO.studentId}");
+
+      final response = await http.put(
+        Uri.parse('$baseUrl/debitAccount'),
+        headers: headers,
+        body: json.encode(debitAccountRequestDTO.toJson()),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Erreur débit compte: ${response.statusCode}');
+      }
+
+      print("Compte ${debitAccountRequestDTO.studentId} débité");
+    } catch (e) {
+      throw Exception('Erreur réseau: $e');
+    }
+  }
+
+  // 10. UPDATE TICKET STATUS (PUT /api/tickets/ticketStatus/{ticketId})
+  // sans cache
   Future<void> updateTicketStatus(
       int ticketId, TicketStatus ticketStatus) async {
     try {
@@ -291,9 +385,7 @@ class TicketApiService {
     }
   }
 
-  // -------------------------
-  // 7. BOOK TICKET (PUT /api/tickets/book/{ticketId})
-  // -------------------------
+  // 11. BOOK TICKET (PUT /api/tickets/book/{ticketId})
   Future<void> bookTicket(int ticketId) async {
     try {
       print("Réservation ticket avec ID: $ticketId");
@@ -319,9 +411,7 @@ class TicketApiService {
     }
   }
 
-  // -------------------------
-  // 8. UNBOOK TICKET (PUT /api/tickets/unbook/{ticketId})
-  // -------------------------
+  // 12. UNBOOK TICKET (PUT /api/tickets/unbook/{ticketId})
   Future<void> unbookTicket(int ticketId) async {
     try {
       print("Annuler réservation du ticket avec ID: $ticketId");
@@ -348,9 +438,7 @@ class TicketApiService {
     }
   }
 
-  // -------------------------
-  // 9. READ TICKETS BY STATUS (GET /api/tickets/ticketStatus/{ticketStatus})
-  // -------------------------
+  // 13. READ TICKETS BY STATUS (GET /api/tickets/ticketStatus/{ticketStatus})
   Future<List<Ticket>> getTicketsByStatus(TicketStatus ticketStatus) async {
     try {
       print("Récupération du ticket via son statut: $ticketStatus");
@@ -384,34 +472,7 @@ class TicketApiService {
     }
   }
 
-  // -------------------------
-  // 10. READ TICKETS BY ACCOUNT ID (GET /api/tickets/accountId/{accountId})
-  // -------------------------
-  Future<List<Ticket>> getTicketsByAccountId(int accountId) async {
-    try {
-      print("Récupération des tickets par accountId: $accountId");
-
-      final response = await http.get(
-        Uri.parse('$baseUrl/accountId/$accountId'),
-        headers: headers,
-      );
-
-      if (response.statusCode == 200) {
-        final List<dynamic> jsonList = json.decode(response.body);
-
-        return jsonList.map((json) => Ticket.fromJson(json)).toList();
-      } else {
-        throw Exception(
-            'Erreur récupération tickets par compte: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('Erreur réseau: $e');
-    }
-  }
-
-  // -------------------------
-  // 11. READ TICKETS BY USER ID (GET /api/tickets/userId/{userId})
-  // -------------------------
+  // 14. READ TICKETS BY USER ID (GET /api/tickets/userId/{userId})
   Future<List<Ticket>> getTicketsByUserId(int userId) async {
     try {
       print("Récupération des tickets par usedId: $userId");
@@ -428,125 +489,6 @@ class TicketApiService {
         throw Exception(
             'Erreur récupération tickets par utilisateur: ${response.statusCode}');
       }
-    } catch (e) {
-      throw Exception('Erreur réseau: $e');
-    }
-  }
-
-  // -------------------------
-  // 14. PURCHASE TICKETS (POST /api/tickets/{purchase})
-  // -------------------------
-  Future<List<Ticket>> purchaseTickets(
-      PurchaseTicketsRequestDTO purchaseTicketsRequestDTO) async {
-    try {
-      print(
-          "Achat de tickets pour l'utilisateur: ${purchaseTicketsRequestDTO.userDTO.firstName}");
-
-      final response = await http.post(
-        Uri.parse('$baseUrl/purchase'),
-        headers: headers,
-        body: json.encode(purchaseTicketsRequestDTO.toJson()),
-      );
-
-      if (response.statusCode == 201) {
-        final List<dynamic> jsonList = json.decode(response.body);
-
-        // ICI - La conversion se fait dans Ticket.fromJson()
-        final purchasedTickets =
-            jsonList.map((json) => Ticket.fromJson(json)).toList();
-
-        print("Tickets achetés: ${purchasedTickets.length}");
-
-        // Met à jour le cache
-        _cachedTickets.addAll(purchasedTickets);
-
-        return purchasedTickets;
-      } else {
-        throw Exception('Erreur achat tickets: ${response.statusCode}');
-      }
-    } catch (e) {
-      print("Erreur achat tickets: $e");
-
-      throw Exception('Erreur réseau: $e');
-    }
-  }
-
-  // -------------------------
-  // 15. TRANSFER TICKETS (PUT /api/tickets/transferTickets)
-  // sans cache
-  // -------------------------
-  Future<void> transferTickets(
-      TransferTicketsRequestDTO transferTicketsRequestDTO) async {
-    try {
-      print(
-          "Transfert de(s) tickets(s) vers toAccountID: ${transferTicketsRequestDTO.toAccountId}");
-
-      final response = await http.put(
-        Uri.parse('$baseUrl/transferTickets'),
-        headers: headers,
-        body: json.encode(transferTicketsRequestDTO.toJson()),
-      );
-
-      if (response.statusCode != 200) {
-        throw Exception('Erreur transfert tickets: ${response.statusCode}');
-      }
-
-      print(
-          "Tickets transférés de ${transferTicketsRequestDTO.fromaccountId} vers ${transferTicketsRequestDTO.toAccountId}");
-    } catch (e) {
-      throw Exception('Erreur réseau: $e');
-    }
-  }
-
-  // -------------------------
-  // 16. CANCEL TRANSFER TICKETS (PUT /api/tickets/cancelTransferTickets)
-  // sans cache
-  // -------------------------
-  Future<void> cancelTransferTickets(
-      CancelTransferTicketsRequestDTO cancelTransferTicketsRequestDTO) async {
-    try {
-      print(
-          "Annuler transfert de(s) tickets(s) pour currentOwnerAccountId: ${cancelTransferTicketsRequestDTO.currentOwnerAccountId}");
-
-      final response = await http.put(
-        Uri.parse('$baseUrl/cancelTransferTickets'),
-        headers: headers,
-        body: json.encode(cancelTransferTicketsRequestDTO.toJson()),
-      );
-
-      if (response.statusCode != 200) {
-        throw Exception(
-            'Erreur annulation transfert tickets: ${response.statusCode}');
-      }
-
-      print(
-          "Transfert de tickets annulé entre ${cancelTransferTicketsRequestDTO.currentOwnerAccountId} et ${cancelTransferTicketsRequestDTO.originalSenderAccountId}");
-    } catch (e) {
-      throw Exception('Erreur réseau: $e');
-    }
-  }
-
-  // -------------------------
-  // 17. DEBIT ACCOUNT (PUT /api/tickets/debitAccount)
-  // sans cache
-  // -------------------------
-  Future<void> debitAccount(
-      DebitAccountRequestDTO debitAccountRequestDTO) async {
-    try {
-      print(
-          "Debiter le compte avec ID: ${debitAccountRequestDTO.etudiantAccountId}");
-
-      final response = await http.put(
-        Uri.parse('$baseUrl/debitAccount'),
-        headers: headers,
-        body: json.encode(debitAccountRequestDTO.toJson()),
-      );
-
-      if (response.statusCode != 200) {
-        throw Exception('Erreur débit compte: ${response.statusCode}');
-      }
-
-      print("Compte ${debitAccountRequestDTO.etudiantAccountId} débité");
     } catch (e) {
       throw Exception('Erreur réseau: $e');
     }
@@ -716,9 +658,30 @@ class TicketApiService {
 }
 
   /*
-   // -------------------------
-  // 12. READ TICKETS BY MENU ID AND USER ID (GET /api/tickets/menuId/{menuId}/userId/{userId})
-  // -------------------------
+    // READ TICKETS BY ACCOUNT ID (GET /api/tickets/accountId/{accountId})
+  Future<List<Ticket>> getTicketsByAccountId(int accountId) async {
+    try {
+      print("Récupération des tickets par accountId: $accountId");
+
+      final response = await http.get(
+        Uri.parse('$baseUrl/accountId/$accountId'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic> jsonList = json.decode(response.body);
+
+        return jsonList.map((json) => Ticket.fromJson(json)).toList();
+      } else {
+        throw Exception(
+            'Erreur récupération tickets par compte: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Erreur réseau: $e');
+    }
+  } 
+
+  // READ TICKETS BY MENU ID AND USER ID (GET /api/tickets/menuId/{menuId}/userId/{userId})
   Future<List<Ticket>> getTicketsByMenuIdAndUserId(
       int menuId, String userId) async {
     try {
@@ -739,9 +702,7 @@ class TicketApiService {
     }
   }
 
-  // -------------------------
-  // 13. READ TICKETS BY MENU ID, USER ID AND STATUS (GET /api/tickets/menuId/{menuId}/userId/{userId}/status/{ticketStatus})
-  // -------------------------
+  // READ TICKETS BY MENU ID, USER ID AND STATUS (GET /api/tickets/menuId/{menuId}/userId/{userId}/status/{ticketStatus})
   Future<List<Ticket>> getTicketsByMenuIdAndUserIdAndStatus(
       String menuId, String userId, String ticketStatus) async {
     try {
