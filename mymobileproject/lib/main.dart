@@ -34,7 +34,6 @@ import 'package:mymobileproject/provider/consulter_menu_provider.dart';
 import 'package:mymobileproject/provider/credit_provider.dart';
 import 'package:mymobileproject/provider/debit_provider.dart';
 import 'package:mymobileproject/provider/menu_provider.dart';
-import 'package:mymobileproject/provider/navigation_provider.dart';
 import 'package:mymobileproject/provider/role_privider.dart';
 import 'package:mymobileproject/provider/ticket_provider.dart';
 import 'package:mymobileproject/provider/user_provider.dart';
@@ -87,9 +86,6 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider<CreditProvider>(
         create: (context) => CreditProvider(CreditApiService()),
       ),
-      /*  ChangeNotifierProvider<NavigationProvider>(
-          create: (context) => NavigationProvider()),
-       ChangeNotifierProvider(create: (_) => DebitProvider(DebitApiService())), */
     ], child: const RootView());
   }
 }
